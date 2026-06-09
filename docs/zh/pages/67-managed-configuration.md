@@ -9,11 +9,11 @@ Source: [Managed configuration](https://developers.openai.com/codex/enterprise/m
 
 #### 管理员强制要求 (requirements.toml)
 
-Requirements 会约束安全敏感设置（审批策略、审批审查者、自动审查策略、沙箱模式、网页搜索模式、托管钩子，以及可选的用户可启用哪些 MCP 服务器）。解析配置时（例如来自 `config.toml`、[profile files](https://developers.openai.com/codex/config-advanced#profiles) 或 CLI 配置覆盖），如果某个值与强制规则冲突，Codex 会回退到兼容值并通知用户。如果你配置了 `mcp_servers` 允许列表，只有当 MCP 服务器的名称和身份都匹配已批准条目时，Codex 才会启用该服务器；否则 Codex 会禁用它。
+Requirements 会约束安全敏感设置（审批策略、审批审查者、自动审查策略、沙箱模式、网页搜索模式、托管钩子，以及可选的用户可启用哪些 MCP 服务器）。解析配置时（例如来自 `config.toml`、[profile files](17-advanced-configuration.md#profiles) 或 CLI 配置覆盖），如果某个值与强制规则冲突，Codex 会回退到兼容值并通知用户。如果你配置了 `mcp_servers` 允许列表，只有当 MCP 服务器的名称和身份都匹配已批准条目时，Codex 才会启用该服务器；否则 Codex 会禁用它。
 
-Requirements 也可以通过 `requirements.toml` 中的 `[features]` 表约束 [feature flags](https://developers.openai.com/codex/config-basic/#feature-flags)。注意，功能不一定总是安全敏感，但企业可以按需固定取值。省略的 key 保持不受约束。
+Requirements 也可以通过 `requirements.toml` 中的 `[features]` 表约束 [feature flags](19-config-basics.md#feature-flags)。注意，功能不一定总是安全敏感，但企业可以按需固定取值。省略的 key 保持不受约束。
 
-准确 key 列表请参阅 [Configuration Reference 中的 `requirements.toml` section](https://developers.openai.com/codex/config-reference#requirementstoml)。
+准确 key 列表请参阅 [Configuration Reference 中的 `requirements.toml` section](16-configuration-reference.md#requirementstoml)。
 
 #### 位置和优先级
 
@@ -127,11 +127,11 @@ experimental_network.denied_domains = [
 
 仅当你同时定义管理员拥有的 `allowed_domains`，并希望该允许列表具有排他性时，才使用 `experimental_network.managed_allowed_domains_only = true`。如果它为 `true` 但没有托管允许规则，用户添加的域允许规则不会保持有效。
 
-域语法、本地/私有目的地规则、拒绝优先于允许的行为和 DNS rebinding 限制，与 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security#network-isolation) 中描述的沙箱化网络行为相同。
+域语法、本地/私有目的地规则、拒绝优先于允许的行为和 DNS rebinding 限制，与 [Agent approvals & security](13-agent-approvals-security.md#network-isolation) 中描述的沙箱化网络行为相同。
 
 #### 固定功能标志
 
-你也可以为收到托管 `requirements.toml` 的用户固定 [feature flags](https://developers.openai.com/codex/config-basic/#feature-flags)：
+你也可以为收到托管 `requirements.toml` 的用户固定 [feature flags](19-config-basics.md#feature-flags)：
 
 ```toml
 [features]

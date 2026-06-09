@@ -122,7 +122,7 @@ codex exec "summarize the last release diff"
 
 #### 相关文档
 
-- [Authentication](https://developers.openai.com/codex/auth)
-- [Non-interactive mode](https://developers.openai.com/codex/noninteractive)
-- [Admin setup](https://developers.openai.com/codex/enterprise/admin-setup)
-- [Governance](https://developers.openai.com/codex/enterprise/governance)
+- [Authentication](18-authentication-and-sessions.md)
+- [Non-interactive mode](60-non-interactive-mode.md)
+- [Admin setup](64-admin-setup.md)
+- [Governance](66-governance.md)

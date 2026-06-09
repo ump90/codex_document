@@ -23,7 +23,7 @@ Source: [Prompting](https://developers.openai.com/codex/prompting.md)
 - 当 Codex 能够验证自己的工作时，它会产出更高质量的结果。请包含复现问题、验证功能，以及运行 lint 和 pre-commit 检查的步骤。
 - 当你把复杂工作拆成更小、更聚焦的步骤时，Codex 处理得更好。更小的任务更容易让 Codex 测试，也更容易让你审查。如果你不确定如何拆分任务，请让 Codex 提出计划。
 
-有关提示 Codex 的更多想法，请参阅 [工作流](https://developers.openai.com/codex/workflows)。
+有关提示 Codex 的更多想法，请参阅 [工作流](06-example-workflows.md)。
 
 #### 线程模型
 
@@ -33,14 +33,14 @@ Source: [Prompting](https://developers.openai.com/codex/prompting.md)
 
 线程可以在本地运行，也可以在云端运行：
 
-- **本地线程** 在你的机器上运行。Codex 可以读取和编辑你的文件并运行命令，因此你可以看到发生了什么变化，并使用现有工具。为了降低工作区外意外变更的风险，本地线程会在 [沙箱](https://developers.openai.com/codex/agent-approvals-security) 中运行。
-- **云端线程** 在隔离的 [环境](https://developers.openai.com/codex/cloud/environments) 中运行。Codex 会克隆你的仓库，并检出它正在处理的分支。当你想并行运行工作，或从另一台设备委派任务时，云端线程很有用。若要让云端线程使用你的仓库，请先将代码推送到 GitHub。你也可以 [从本地机器委派任务](https://developers.openai.com/codex/ide/cloud-tasks)，其中会包含你当前的工作状态。
+- **本地线程** 在你的机器上运行。Codex 可以读取和编辑你的文件并运行命令，因此你可以看到发生了什么变化，并使用现有工具。为了降低工作区外意外变更的风险，本地线程会在 [沙箱](13-agent-approvals-security.md) 中运行。
+- **云端线程** 在隔离的 [环境](25-cloud-environments.md) 中运行。Codex 会克隆你的仓库，并检出它正在处理的分支。当你想并行运行工作，或从另一台设备委派任务时，云端线程很有用。若要让云端线程使用你的仓库，请先将代码推送到 GitHub。你也可以 [从本地机器委派任务](32-codex-ide-extension-features.md)，其中会包含你当前的工作状态。
 
 在 Codex app 中，你也可以在不选择项目的情况下开始聊天。聊天不会
 绑定到已保存的仓库或项目文件夹。它们适合用于研究、规划、已连接工具的工作流，或其它 Codex 不应从代码库开始的工作。聊天使用 Codex 管理的 `threads` 目录作为其工作位置，该目录位于你的 Codex
 主目录下。默认位置是 `~/.codex/threads`。
 要更改此状态的基础位置，请设置 `CODEX_HOME`；参见
-[配置和状态位置](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+[配置和状态位置](17-advanced-configuration.md#config-and-state-locations)。
 
 #### 上下文
 
@@ -59,8 +59,8 @@ Goal mode 为 Codex 提供一个持久目标，使其能够跨越更长的
 设置目标后，目标文本既是起始提示，也是
 完成标准。Codex 使用它决定下一步做什么，以及
 任务是否完成。可在 [Codex
-app](https://developers.openai.com/codex/app/commands#set-or-manage-a-goal-with-goal)、[IDE
-扩展](https://developers.openai.com/codex/ide/slash-commands) 或 [CLI](https://developers.openai.com/codex/cli/slash-commands#set-or-view-a-task-goal-with-goal) 中使用 `/goal` 启动 Goal mode。
+app](26-codex-app-commands.md#set-or-manage-a-goal-with-goal)、[IDE
+扩展](34-codex-ide-extension-slash-commands.md) 或 [CLI](39-slash-commands-in-codex-cli.md#set-or-view-a-task-goal-with-goal) 中使用 `/goal` 启动 Goal mode。
 
 如果 `/goal` 没有出现在斜杠命令列表中，请在 `config.toml` 中启用 `features.goals`：
 

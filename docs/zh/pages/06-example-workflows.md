@@ -5,7 +5,7 @@ Source: [Workflows](https://developers.openai.com/codex/workflows.md)
 当你把 Codex 当作拥有明确上下文和清晰“完成”定义的队友时，它的效果最好。
 本页给出 Codex IDE 扩展、Codex CLI 和 Codex cloud 的端到端工作流示例。
 
-如果你刚开始使用 Codex，请先阅读 [提示](https://developers.openai.com/codex/prompting)，然后回到这里查看具体做法。
+如果你刚开始使用 Codex，请先阅读 [提示](07-prompting.md)，然后回到这里查看具体做法。
 
 #### 如何阅读这些示例
 

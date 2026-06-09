@@ -53,7 +53,7 @@ Source: [Codex Pricing](https://developers.openai.com/codex/pricing.md)
 - 仅按 Codex 使用的 token 付费，基于 [API
   定价](https://platform.openai.com/docs/pricing)
 
-[了解更多](https://developers.openai.com/codex/auth)
+[了解更多](18-authentication-and-sessions.md)
 
 **Business**（按量付费）：
 

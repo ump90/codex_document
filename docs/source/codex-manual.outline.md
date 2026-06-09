@@ -92,3 +92,8 @@
   - Subagents (lines 11234-11396)
   - Use Codex with Amazon Bedrock (lines 11397-11542)
   - Windows platform (lines 11543-11725)
+- Supplemental Official Linked Pages (lines 11727-12297)
+  - Maintain Codex account auth in CI/CD (advanced) (lines 11733-12012)
+  - Run a deep security scan (lines 12013-12101)
+  - Scan code changes for security (lines 12102-12187)
+  - Remediate a vulnerability backlog (lines 12188-12297)

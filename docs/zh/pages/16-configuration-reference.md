@@ -8,4 +8,4 @@
 
 Source: [Configuration Reference](https://developers.openai.com/codex/config-reference.md)
 
-请将此页面作为 Codex 配置文件的可搜索参考。有关概念性指导和示例，请先阅读 [配置基础](https://developers.openai.com/codex/config-basic) 和 [高级配置](https://developers.openai.com/codex/config-advanced)。
+请将此页面作为 Codex 配置文件的可搜索参考。有关概念性指导和示例，请先阅读 [配置基础](19-config-basics.md) 和 [高级配置](17-advanced-configuration.md)。

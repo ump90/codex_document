@@ -28,7 +28,7 @@ Codex 会在每个操作系统上使用平台原生的强制执行机制。macOS
 
 在 **macOS** 上，沙盒使用内置的 Seatbelt 框架开箱即用。
 
-在 **Windows** 上，当你在 PowerShell 中运行时，Codex 使用原生 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox)；当你在 WSL2 中运行时，则使用 Linux 沙盒实现。
+在 **Windows** 上，当你在 PowerShell 中运行时，Codex 使用原生 [Windows 沙盒](83-windows-platform.md#windows-sandbox)；当你在 WSL2 中运行时，则使用 Linux 沙盒实现。
 
 在 **Linux 和 WSL2** 上，请先使用包管理器安装 `bubblewrap`：
 
@@ -75,11 +75,11 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
 在 Codex app 和 IDE 中，你可以从编辑器或聊天输入框下方的权限选择器中选择一种模式。该选择器允许你依赖 Codex 的默认权限、切换到完全访问权限，或使用你的自定义配置。
 
-在 CLI 中，使用 [`/permissions`](https://developers.openai.com/codex/cli/slash-commands#update-permissions-with-permissions) 在会话期间切换模式。
+在 CLI 中，使用 [`/permissions`](39-slash-commands-in-codex-cli.md#update-permissions-with-permissions) 在会话期间切换模式。
 
 #### 配置默认值
 
-如果你希望 Codex 每次启动时都采用相同行为，请使用自定义配置。Codex 会将这些默认值存储在本地设置文件 `config.toml` 中。[配置基础](https://developers.openai.com/codex/config-basic) 解释其工作方式，[配置参考](https://developers.openai.com/codex/config-reference) 记录了 `sandbox_mode`、`approval_policy`、`approvals_reviewer` 和 `sandbox_workspace_write.writable_roots` 的确切键。使用这些设置决定 Codex 默认获得多少自主权、可以写入哪些目录、何时应暂停请求审批，以及由谁审核符合条件的审批请求。
+如果你希望 Codex 每次启动时都采用相同行为，请使用自定义配置。Codex 会将这些默认值存储在本地设置文件 `config.toml` 中。[配置基础](19-config-basics.md) 解释其工作方式，[配置参考](16-configuration-reference.md) 记录了 `sandbox_mode`、`approval_policy`、`approvals_reviewer` 和 `sandbox_workspace_write.writable_roots` 的确切键。使用这些设置决定 Codex 默认获得多少自主权、可以写入哪些目录、何时应暂停请求审批，以及由谁审核符合条件的审批请求。
 
 概括来说，常见的沙盒模式包括：
 
@@ -96,14 +96,14 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 当审批是交互式的，你还可以使用 `approvals_reviewer` 选择由谁审核：
 
 - `user`：审批提示显示给用户。这是默认值。
-- `auto_review`：符合条件的审批提示会发送给审核智能体（参见 [自动审核](https://developers.openai.com/codex/concepts/sandboxing/auto-review)）。
+- `auto_review`：符合条件的审批提示会发送给审核智能体（参见 [自动审核](65-auto-review.md)）。
 
 完全访问权限意味着将 `sandbox_mode = "danger-full-access"` 与 `approval_policy = "never"` 搭配使用。相比之下，风险较低的本地自动化预设是将 `sandbox_mode = "workspace-write"` 与 `approval_policy = "on-request"` 搭配使用，或使用对应的 CLI 标志 `--sandbox workspace-write --ask-for-approval on-request`。然后，你可以保留 `approvals_reviewer = "user"` 以进行人工审批，或设置 `approvals_reviewer = "auto_review"` 以进行自动审批审核。
 
 如果你需要 Codex 跨多个目录工作，可写根目录让你可以扩展它能够修改的位置，而无需完全移除沙盒。如果你需要更宽或更窄的信任边界，请调整默认沙盒模式和审批策略，而不是依赖一次性例外。
 
-当某个工作流需要特定例外时，请使用 [规则](https://developers.openai.com/codex/rules)。规则允许你在沙盒之外允许、提示或禁止命令前缀，这通常比大范围扩大访问权限更合适。有关应用中审批和沙盒行为的高层概览，请参阅 [Codex app 功能](https://developers.openai.com/codex/app/features#approvals-and-sandboxing)；有关 IDE 专属设置入口，请参阅 [Codex IDE 扩展设置](https://developers.openai.com/codex/ide/settings)。
+当某个工作流需要特定例外时，请使用 [规则](54-rules.md)。规则允许你在沙盒之外允许、提示或禁止命令前缀，这通常比大范围扩大访问权限更合适。有关应用中审批和沙盒行为的高层概览，请参阅 [Codex app 功能](27-codex-app-features.md#approvals-and-sandboxing)；有关 IDE 专属设置入口，请参阅 [Codex IDE 扩展设置](33-codex-ide-extension-settings.md)。
 
-自动审核在可用时不会改变沙盒边界。它是在该边界上处理审批请求的一种 `approvals_reviewer`，例如沙盒提权、被阻止的网络访问，或仍需审批的有副作用工具调用。已经允许在沙盒内执行的操作会直接运行，无需额外审核。有关审核器生命周期、触发类型、拒绝语义和配置细节，请参阅 [自动审核](https://developers.openai.com/codex/concepts/sandboxing/auto-review)。
+自动审核在可用时不会改变沙盒边界。它是在该边界上处理审批请求的一种 `approvals_reviewer`，例如沙盒提权、被阻止的网络访问，或仍需审批的有副作用工具调用。已经允许在沙盒内执行的操作会直接运行，无需额外审核。有关审核器生命周期、触发类型、拒绝语义和配置细节，请参阅 [自动审核](65-auto-review.md)。
 
-平台细节位于特定平台文档中。有关原生 Windows 设置、行为和故障排除，请参阅 [Windows](https://developers.openai.com/codex/windows)。有关沙盒和审批的管理员要求及组织级约束，请参阅 [智能体审批与安全](https://developers.openai.com/codex/agent-approvals-security)。
+平台细节位于特定平台文档中。有关原生 Windows 设置、行为和故障排除，请参阅 [Windows](83-windows-platform.md)。有关沙盒和审批的管理员要求及组织级约束，请参阅 [智能体审批与安全](13-agent-approvals-security.md)。

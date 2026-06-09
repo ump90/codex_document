@@ -4,7 +4,7 @@ Source: [Codex app](https://developers.openai.com/codex/app.md)
 
 Codex app 是一个专注的桌面体验，用于并行处理 Codex 线程，内置 worktree 支持、自动化和 Git 功能。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](02-codex-pricing.md)的信息。
 
 #### 开始使用
 
@@ -20,7 +20,7 @@ Codex app 可在 macOS 和 Windows 上使用。
 
    下载并安装 Codex app 后，打开它并使用你的 ChatGPT 账户或 OpenAI API key 登录。
 
-   如果使用 OpenAI API key 登录，[某些功能可能不可用](https://developers.openai.com/codex/pricing#feature-availability)。
+   如果使用 OpenAI API key 登录，[某些功能可能不可用](02-codex-pricing.md#feature-availability)。
 
 3. 选择项目
 

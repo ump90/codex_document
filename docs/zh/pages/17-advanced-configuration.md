@@ -2,9 +2,9 @@
 
 Source: [Advanced Configuration](https://developers.openai.com/codex/config-advanced.md)
 
-当你需要对提供商、策略和集成进行更多控制时，请使用这些选项。快速入门请参阅 [配置基础](https://developers.openai.com/codex/config-basic)。
+当你需要对提供商、策略和集成进行更多控制时，请使用这些选项。快速入门请参阅 [配置基础](19-config-basics.md)。
 
-有关项目指导、可复用能力、自定义 slash commands、subagent 工作流和集成的背景信息，请参阅 [自定义](https://developers.openai.com/codex/concepts/customization)。有关配置键，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关项目指导、可复用能力、自定义 slash commands、subagent 工作流和集成的背景信息，请参阅 [自定义](52-customization.md)。有关配置键，请参阅 [配置参考](16-configuration-reference.md)。
 
 #### 配置档
 
@@ -65,9 +65,9 @@ Codex 将本地状态存储在 `CODEX_HOME` 下（默认是 `~/.codex`）。
 - `history.jsonl`（如果启用了历史持久化）
 - 其它按用户保存的状态，例如日志和缓存
 
-有关身份验证细节（包括凭据存储模式），请参阅 [身份验证](https://developers.openai.com/codex/auth)。有关完整配置键列表，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关身份验证细节（包括凭据存储模式），请参阅 [身份验证](18-authentication-and-sessions.md)。有关完整配置键列表，请参阅 [配置参考](16-configuration-reference.md)。
 
-有关签入仓库或系统路径的共享默认值、规则和 skills，请参阅 [团队配置](https://developers.openai.com/codex/enterprise/admin-setup#team-config)。
+有关签入仓库或系统路径的共享默认值、规则和 skills，请参阅 [团队配置](64-admin-setup.md#team-config)。
 
 如果你只需要将内置 OpenAI provider 指向 LLM 代理、路由器或启用了 data residency 的项目，请在 `config.toml` 中设置 `openai_base_url`，而不是定义新 provider。这会更改内置 `openai` provider 的 base URL，而不需要单独的 `model_providers.` 条目。
 
@@ -113,11 +113,11 @@ statusMessage = "Checking Bash command"
 
 如果单个层同时包含 `hooks.json` 和 inline `[hooks]`，Codex 会同时加载并发出警告。每个层优先使用一种表示方式。
 
-有关当前事件列表、输入字段、输出行为和限制，请参阅 [Hooks](https://developers.openai.com/codex/hooks)。
+有关当前事件列表、输入字段、输出行为和限制，请参阅 [Hooks](73-hooks.md)。
 
 #### 智能体角色（`config.toml` 中的 `[agents]`）
 
-有关 subagent 角色配置（`config.toml` 中的 `[agents]`），请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+有关 subagent 角色配置（`config.toml` 中的 `[agents]`），请参阅 [Subagents](81-subagents-2.md)。
 
 #### 项目根目录检测
 
@@ -197,7 +197,7 @@ region = "eu-central-1"
 
 如果省略 `profile`，Codex 会使用标准 AWS 凭据链。将 `region` 设置为应处理请求的受支持 Bedrock region。
 
-有关完整设置流程、身份验证选项、受支持模型和功能可用性，请参阅 [Use Codex with Amazon Bedrock](https://developers.openai.com/codex/amazon-bedrock)。
+有关完整设置流程、身份验证选项、受支持模型和功能可用性，请参阅 [Use Codex with Amazon Bedrock](82-use-codex-with-amazon-bedrock.md)。
 
 #### OSS 模式（本地提供商）
 
@@ -250,9 +250,9 @@ model_context_window = 128000             # Context window size
 
 选择审批严格度（影响 Codex 何时暂停）和沙盒级别（影响文件/网络访问权限）。
 
-有关编辑 `config.toml` 时应牢记的运行细节，请参阅 [常见沙盒和审批组合](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)、[可写根目录中的受保护路径](https://developers.openai.com/codex/agent-approvals-security#protected-paths-in-writable-roots) 和 [网络访问](https://developers.openai.com/codex/agent-approvals-security#network-access)。
+有关编辑 `config.toml` 时应牢记的运行细节，请参阅 [常见沙盒和审批组合](13-agent-approvals-security.md#common-sandbox-and-approval-combinations)、[可写根目录中的受保护路径](13-agent-approvals-security.md#protected-paths-in-writable-roots) 和 [网络访问](13-agent-approvals-security.md#network-access)。
 
-有关同时配置文件系统和网络访问权限的 beta 权限 profile，请参阅 [权限](https://developers.openai.com/codex/permissions)。
+有关同时配置文件系统和网络访问权限的 beta 权限 profile，请参阅 [权限](77-permissions.md)。
 
 你也可以使用细粒度审批策略（`approval_policy = { granular = { ... } }`）来允许或自动拒绝单独的提示类别。当你希望某些场景保持正常交互式审批，但希望其它场景（例如 `request_permissions` 或 skill-script prompts）自动 fail closed 时，这很有用。
 
@@ -289,9 +289,9 @@ Use your organization's automatic review policy.
 
 #### 命名权限配置档
 
-有关内置 profiles、自定义 profile 语法，以及完整文件系统和网络配置模型，请参阅 [Permissions](https://developers.openai.com/codex/permissions)。
+有关内置 profiles、自定义 profile 语法，以及完整文件系统和网络配置模型，请参阅 [Permissions](77-permissions.md)。
 
-有关完整键列表和要求约束，请参阅 [配置参考](https://developers.openai.com/codex/config-reference) 和 [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration)。
+有关完整键列表和要求约束，请参阅 [配置参考](16-configuration-reference.md) 和 [托管配置](67-managed-configuration.md)。
 
 在 workspace-write 模式中，某些环境会让 `.git/` 和 `.codex/` 保持 read-only，即使工作区其余部分可写也是如此。这就是 `git commit` 等命令可能仍需要审批才能在沙盒外运行的原因。如果你希望 Codex 跳过特定命令（例如阻止沙盒外的 `git commit`），请使用 rules。
 
@@ -318,7 +318,7 @@ Patterns 是大小写不敏感的 glob（`*`、`?`、`[A-Z]`）；`ignore_defaul
 
 #### MCP 服务器
 
-配置细节请参阅专门的 [MCP 文档](https://developers.openai.com/codex/mcp)。
+配置细节请参阅专门的 [MCP 文档](53-model-context-protocol.md)。
 
 #### 可观测性和遥测
 
@@ -350,7 +350,7 @@ exporter = { otlp-grpc = {
 }}
 ```
 
-如果 `exporter = "none"`，Codex 会记录事件但不发送任何内容。Exporters 会异步批处理并在 shutdown 时 flush。事件元数据包括服务名、CLI 版本、环境标签、conversation id、模型、沙盒/审批设置，以及按事件记录的字段（参见 [配置参考](https://developers.openai.com/codex/config-reference)）。
+如果 `exporter = "none"`，Codex 会记录事件但不发送任何内容。Exporters 会异步批处理并在 shutdown 时 flush。事件元数据包括服务名、CLI 版本、环境标签、conversation id、模型、沙盒/审批设置，以及按事件记录的字段（参见 [配置参考](16-configuration-reference.md)）。
 
 #### 会发出什么
 

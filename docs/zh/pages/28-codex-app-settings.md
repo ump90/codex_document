@@ -22,7 +22,7 @@ Source: [Codex app settings](https://developers.openai.com/codex/app/settings.md
 
 #### 智能体配置
 
-App 中的 Codex 智能体继承与 IDE 和 CLI extension 相同的配置。使用 app 内控件进行常见设置，或编辑 `config.toml` 进行高级配置。更多细节请参阅 [Codex 安全](https://developers.openai.com/codex/agent-approvals-security) 和 [配置基础](https://developers.openai.com/codex/config-basic)。
+App 中的 Codex 智能体继承与 IDE 和 CLI extension 相同的配置。使用 app 内控件进行常见设置，或编辑 `config.toml` 进行高级配置。更多细节请参阅 [Codex 安全](13-agent-approvals-security.md) 和 [配置基础](19-config-basics.md)。
 
 #### 外观
 
@@ -52,13 +52,13 @@ $hatch-pet create a new pet inspired by my recent projects
 
 #### 集成与 MCP
 
-通过 MCP (Model Context Protocol) 连接外部工具。启用推荐服务器或添加你自己的服务器。如果某个服务器需要 OAuth，app 会启动认证流程。由于 MCP 配置位于 `config.toml`，这些设置也适用于 Codex CLI 和 IDE extension。详情请参阅 [Model Context Protocol 文档](https://developers.openai.com/codex/mcp)。
+通过 MCP (Model Context Protocol) 连接外部工具。启用推荐服务器或添加你自己的服务器。如果某个服务器需要 OAuth，app 会启动认证流程。由于 MCP 配置位于 `config.toml`，这些设置也适用于 Codex CLI 和 IDE extension。详情请参阅 [Model Context Protocol 文档](53-model-context-protocol.md)。
 
 #### 浏览器使用
 
-使用这些设置安装或启用捆绑的 Browser plugin、设置 [Codex Chrome extension](https://developers.openai.com/codex/app/chrome-extension)，并管理允许和阻止的网站。除非你已经允许某个网站，否则 Codex 会在使用前询问。移除被阻止的网站后，Codex 可以在浏览器中使用它之前再次询问。
+使用这些设置安装或启用捆绑的 Browser plugin、设置 [Codex Chrome extension](29-codex-chrome-extension.md)，并管理允许和阻止的网站。除非你已经允许某个网站，否则 Codex 会在使用前询问。移除被阻止的网站后，Codex 可以在浏览器中使用它之前再次询问。
 
-有关浏览器预览、评论和 browser use 工作流，请参阅 [应用内浏览器](https://developers.openai.com/codex/app/browser)。
+有关浏览器预览、评论和 browser use 工作流，请参阅 [应用内浏览器](36-in-app-browser.md)。
 
 #### 计算机使用
 
@@ -68,7 +68,7 @@ $hatch-pet create a new pet inspired by my recent projects
 
 选择 **Friendly**、**Pragmatic** 或 **None** 作为你的默认个性。使用 **None** 禁用个性指令。你可以随时更新此设置。
 
-你也可以添加自己的自定义指令。编辑自定义指令会更新你的 [`AGENTS.md` 中的个人指令](https://developers.openai.com/codex/guides/agents-md)。
+你也可以添加自己的自定义指令。编辑自定义指令会更新你的 [`AGENTS.md` 中的个人指令](50-custom-instructions-with-agents-md.md)。
 
 #### 上下文感知建议
 
@@ -76,7 +76,7 @@ $hatch-pet create a new pet inspired by my recent projects
 
 #### 记忆
 
-在可用时启用 Memories，让 Codex 将过去线程中的有用上下文带入未来工作。有关设置、存储和按线程控制，请参阅 [Memories](https://developers.openai.com/codex/memories)。
+在可用时启用 Memories，让 Codex 将过去线程中的有用上下文带入未来工作。有关设置、存储和按线程控制，请参阅 [Memories](74-memories.md)。
 
 #### 已归档线程
 

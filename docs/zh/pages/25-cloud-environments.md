@@ -12,7 +12,7 @@ Source: [Cloud environments](https://developers.openai.com/codex/cloud/environme
 
 1. Codex 创建容器，并在所选分支或 commit SHA 上 checkout 你的仓库。
 2. Codex 运行你的 setup script，并在恢复缓存容器时运行可选的 maintenance script。
-3. Codex 应用你的互联网访问设置。Setup scripts 会带互联网访问权限运行。智能体互联网访问默认关闭，但如有需要，你可以启用受限或不受限访问。请参阅 [智能体互联网访问](https://developers.openai.com/codex/cloud/internet-access)。
+3. Codex 应用你的互联网访问设置。Setup scripts 会带互联网访问权限运行。智能体互联网访问默认关闭，但如有需要，你可以启用受限或不受限访问。请参阅 [智能体互联网访问](23-agent-internet-access.md)。
 4. 智能体循环运行终端命令。它编辑代码、运行检查，并尝试验证其工作。如果你的仓库包含 `AGENTS.md`，智能体会用它查找项目专属的 lint 和 test 命令。
 5. 智能体完成后，会显示其回答以及它更改过的任何文件的 diff。你可以打开 PR 或提出后续问题。
 
@@ -74,6 +74,6 @@ Codex 会缓存容器状态最多 12 小时，以加速新任务和后续任务�
 
 #### 互联网访问和网络代理
 
-互联网访问在 setup script 阶段可用，用于安装依赖。在智能体阶段，互联网访问默认关闭，但你可以配置受限或不受限访问。请参阅 [智能体互联网访问](https://developers.openai.com/codex/cloud/internet-access)。
+互联网访问在 setup script 阶段可用，用于安装依赖。在智能体阶段，互联网访问默认关闭，但你可以配置受限或不受限访问。请参阅 [智能体互联网访问](23-agent-internet-access.md)。
 
 出于安全和防止滥用目的，环境在 HTTP/HTTPS 网络代理后运行。所有出站互联网流量都会通过此代理。

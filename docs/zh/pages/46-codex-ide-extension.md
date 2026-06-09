@@ -4,7 +4,7 @@ Source: [Codex IDE extension](https://developers.openai.com/codex/ide.md)
 
 Codex 是 OpenAI 的编程代理，可以读取、编辑和运行代码。它帮助你更快地构建、修复 bug，并理解不熟悉的代码。借助 Codex VS Code 扩展，你可以在 IDE 中并排使用 Codex，或将任务委派给 Codex Cloud。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](02-codex-pricing.md)的信息。
 
 #### JetBrains IDE 集成
 
@@ -31,4 +31,4 @@ ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解�
 
 #### 登录
 
-安装扩展后，它会提示你使用 ChatGPT 账户或 API key 登录。你的 ChatGPT 计划包含使用额度，因此无需额外设置即可使用 Codex。可在[定价页面](https://developers.openai.com/codex/pricing)了解更多信息。
+安装扩展后，它会提示你使用 ChatGPT 账户或 API key 登录。你的 ChatGPT 计划包含使用额度，因此无需额外设置即可使用 Codex。可在[定价页面](02-codex-pricing.md)了解更多信息。

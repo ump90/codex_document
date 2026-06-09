@@ -68,7 +68,7 @@ Codex 移动设置支持 macOS 和 Windows 上的 Codex App hosts。你可以从
 
 在 Mac 笔记本上，保持屏幕打开并接入电源时，远程访问可以保持可用。合上屏幕时，还需要连接外接显示器。选择 **Sleep** 仍会停止远程访问。
 
-在 Windows host 上，对于使用 [Computer Use](https://developers.openai.com/codex/app/computer-use) 的任务，请保持会话解锁且可用。Windows 上的 Computer Use 在前台运行，因此远程控制最适合在你将 host desktop 专用于任务时启动或检查工作。
+在 Windows host 上，对于使用 [Computer Use](35-computer-use.md) 的任务，请保持会话解锁且可用。Windows 上的 Computer Use 在前台运行，因此远程控制最适合在你将 host desktop 专用于任务时启动或检查工作。
 
 #### 专用常开计算机
 

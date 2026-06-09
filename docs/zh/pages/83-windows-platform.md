@@ -2,7 +2,7 @@
 
 Source: [Windows](https://developers.openai.com/codex/windows.md)
 
-在 Windows 上使用 Codex，可通过原生 [Codex app](https://developers.openai.com/codex/app/windows)、[CLI](https://developers.openai.com/codex/cli) 或 [IDE extension](https://developers.openai.com/codex/ide)。
+在 Windows 上使用 Codex，可通过原生 [Codex app](41-windows-app.md)、[CLI](45-codex-cli.md) 或 [IDE extension](46-codex-ide-extension.md)。
 
 Windows 上的 Codex app 支持核心工作流，例如并行 agent 线程、worktrees、automations、Git 功能、in-app browser、artifact previews、plugins 和 skills。
 
@@ -29,20 +29,20 @@ sandbox = "elevated" # or "unelevated"
 
 如果两种模式都可用，请使用 `elevated`。如果默认原生 sandbox 在你的环境中无法工作，请在排查设置时使用 `unelevated` 作为 fallback。
 
-企业管理员可以通过 [`requirements.toml`](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml) 约束 Codex 可以使用哪些原生 sandbox 实现：
+企业管理员可以通过 [`requirements.toml`](67-managed-configuration.md#admin-enforced-requirements-requirementstoml) 约束 Codex 可以使用哪些原生 sandbox 实现：
 
 ```toml
 [windows]
 allowed_sandbox_implementations = ["elevated"]
 ```
 
-此示例要求使用 `elevated` sandbox，并阻止用户回退到 `unelevated`。若要允许任一实现，请包含两个值；当未选择模式时，Codex 偏好 `elevated`。有关支持的值，请参阅 [`requirements.toml` 参考](https://developers.openai.com/codex/config-reference#requirementstoml)。
+此示例要求使用 `elevated` sandbox，并阻止用户回退到 `unelevated`。若要允许任一实现，请包含两个值；当未选择模式时，Codex 偏好 `elevated`。有关支持的值，请参阅 [`requirements.toml` 参考](16-configuration-reference.md#requirementstoml)。
 
 默认情况下，两种 sandbox modes 也会使用 private desktop，以提供更强的 UI 隔离。仅当你因兼容性需要旧的 `Winsta0\\Default` 行为时，才设置 `windows.sandbox_private_desktop = false`。
 
 #### 沙盒权限
 
-以 full access mode 运行 Codex 意味着 Codex 不受项目目录限制，并且可能执行会导致数据丢失的意外破坏性操作。为了更安全地自动化，请保留 sandbox boundaries，并为特定例外使用 [rules](https://developers.openai.com/codex/rules)，或将你的 [approval policy 设置为 never](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts)，让 Codex 根据你的 [审批与安全设置](https://developers.openai.com/codex/agent-approvals-security) 尝试在不请求 escalated permissions 的情况下解决问题。
+以 full access mode 运行 Codex 意味着 Codex 不受项目目录限制，并且可能执行会导致数据丢失的意外破坏性操作。为了更安全地自动化，请保留 sandbox boundaries，并为特定例外使用 [rules](54-rules.md)，或将你的 [approval policy 设置为 never](13-agent-approvals-security.md#run-without-approval-prompts)，让 Codex 根据你的 [审批与安全设置](13-agent-approvals-security.md) 尝试在不请求 escalated permissions 的情况下解决问题。
 
 #### Windows 版本矩阵
 

@@ -24,7 +24,7 @@ Source: [Codex Models](https://developers.openai.com/codex/models.md)
 
 #### 配置默认本地模型
 
-Codex CLI 和 IDE extension 使用相同的 `config.toml` [配置文件](https://developers.openai.com/codex/config-basic)。要指定模型，请向配置文件添加 `model` 条目。如果你未指定模型，Codex app、CLI 或 IDE Extension 会默认使用推荐模型。
+Codex CLI 和 IDE extension 使用相同的 `config.toml` [配置文件](19-config-basics.md)。要指定模型，请向配置文件添加 `model` 条目。如果你未指定模型，Codex app、CLI 或 IDE Extension 会默认使用推荐模型。
 
 ```toml
 model = "gpt-5.5"

@@ -12,7 +12,7 @@ Source: [Codex IDE extension settings](https://developers.openai.com/codex/ide/s
 2. 搜索 `Codex` 或设置名称。
 3. 更新值。
 
-Codex IDE 扩展使用 Codex CLI。某些行为（例如默认模型、批准和沙盒设置）请在共享的 `~/.codex/config.toml` 文件中配置，而不是在编辑器设置中配置。请参阅 [Config basics](https://developers.openai.com/codex/config-basic)。
+Codex IDE 扩展使用 Codex CLI。某些行为（例如默认模型、批准和沙盒设置）请在共享的 `~/.codex/config.toml` 文件中配置，而不是在编辑器设置中配置。请参阅 [Config basics](19-config-basics.md)。
 
 该扩展也会遵循 VS Code 内置的聊天字体设置，用于 Codex 对话界面。
 

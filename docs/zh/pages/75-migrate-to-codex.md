@@ -27,14 +27,14 @@ Codex 会同时检查你的用户级设置和当前项目。用户级设置来�
 
 | 检测到的设置                          | Codex 目标位置                         |
 | ------------------------------------- | -------------------------------------- |
-| 说明文件                              | [`AGENTS.md`](https://developers.openai.com/codex/guides/agents-md) |
-| `settings.json`                       | [`config.toml`](https://developers.openai.com/codex/config-basic)   |
-| Skills                                | [Codex skills](https://developers.openai.com/codex/skills)          |
+| 说明文件                              | [`AGENTS.md`](50-custom-instructions-with-agents-md.md) |
+| `settings.json`                       | [`config.toml`](19-config-basics.md)   |
+| Skills                                | [Codex skills](48-agent-skills.md)          |
 | 最近 30 天的会话                      | Codex 线程和项目                       |
-| MCP server 配置                       | [Codex MCP 配置](https://developers.openai.com/codex/mcp)           |
-| Hooks                                 | [Codex hooks](https://developers.openai.com/codex/hooks)            |
-| 斜杠命令                              | [Codex skills](https://developers.openai.com/codex/skills)          |
-| Subagents                             | [Codex agents](https://developers.openai.com/codex/subagents)       |
+| MCP server 配置                       | [Codex MCP 配置](53-model-context-protocol.md)           |
+| Hooks                                 | [Codex hooks](73-hooks.md)            |
+| 斜杠命令                              | [Codex skills](48-agent-skills.md)          |
+| Subagents                             | [Codex agents](81-subagents-2.md)       |
 
 #### 在新线程中完成剩余设置
 
@@ -56,4 +56,4 @@ Codex 会同时检查你的用户级设置和当前项目。用户级设置来�
 
 #### 切换之后
 
-导入完成后，打开你的某个已迁移项目，并从那里继续。如果你刚开始使用 Codex，请参阅 [快速入门](https://developers.openai.com/codex/quickstart) 了解其余设置流程。
+导入完成后，打开你的某个已迁移项目，并从那里继续。如果你刚开始使用 Codex，请参阅 [快速入门](04-quickstart.md) 了解其余设置流程。

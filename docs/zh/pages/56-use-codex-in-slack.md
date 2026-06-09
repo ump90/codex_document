@@ -6,7 +6,7 @@ Source: [Use Codex in Slack](https://developers.openai.com/codex/integrations/sl
 
 #### 设置 Slack 应用
 
-1. 设置 [Codex cloud tasks](https://developers.openai.com/codex/cloud)。你需要 Plus、Pro、Business、Enterprise 或 Edu 计划（参见 [ChatGPT pricing](https://chatgpt.com/pricing)）、已连接的 GitHub 账户，以及至少一个[环境](https://developers.openai.com/codex/cloud/environments)。
+1. 设置 [Codex cloud tasks](47-codex-web.md)。你需要 Plus、Pro、Business、Enterprise 或 Edu 计划（参见 [ChatGPT pricing](https://chatgpt.com/pricing)）、已连接的 GitHub 账户，以及至少一个[环境](25-cloud-environments.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/connectors)，为你的工作区安装 Slack app。根据你的 Slack 工作区政策，可能需要管理员批准安装。
 3. 将 `@Codex` 添加到频道。如果尚未添加，在你提及时 Slack 会提示你。
 
@@ -33,7 +33,7 @@ Source: [Use Codex in Slack](https://developers.openai.com/codex/integrations/sl
 
 当你提及 `@Codex` 时，Codex 会接收你的消息和线程历史，以理解请求并创建任务。
 数据处理遵循 OpenAI 的 [Privacy Policy](https://openai.com/privacy)、[Terms of Use](https://openai.com/terms/) 和其他适用的 [policies](https://openai.com/policies)。
-有关安全的更多信息，请参阅 Codex [security documentation](https://developers.openai.com/codex/agent-approvals-security)。
+有关安全的更多信息，请参阅 Codex [security documentation](13-agent-approvals-security.md)。
 
 Codex 使用大语言模型，可能会出错。请始终审查答案和 diff。
 

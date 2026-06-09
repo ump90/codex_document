@@ -59,7 +59,7 @@ Computer Use 是单独情况。Computer Use 的 app 审批仍会
 和
 [policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
 该策略可按企业使用 `guardian_policy_config` 自定义，或
-按用户使用本地 [`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes) 自定义。
+按用户使用本地 [`\[auto_review\].policy`](17-advanced-configuration.md#approval-policies-and-sandbox-modes) 自定义。
 
 #### 审查代理会看到什么
 
@@ -107,13 +107,13 @@ Codex 会为该确切操作注入开发者作用域的审批标记。
 #### 配置
 
 设置详情请参阅
-[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration#configure-automatic-review-policy)。
+[Managed configuration](67-managed-configuration.md#configure-automatic-review-policy)。
 
 默认审查策略位于开源 Codex 仓库：
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
 企业可以使用托管要求中的
 `guardian_policy_config` 替换其租户特定部分。个人用户也可以在其 `config.toml` 中设置本地
-[`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)，
+[`\[auto_review\].policy`](17-advanced-configuration.md#approval-policies-and-sandbox-modes)，
 但托管要求优先级更高：
 
 ```toml
@@ -135,8 +135,8 @@ YOUR POLICY GOES HERE
 实践中，杠杆最高的变更是：
 
 - 为你有意使用的临时目录或相邻仓库添加狭窄的
-  [`writable_roots`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)。
-- 添加窄作用域的 [prefix rules](https://developers.openai.com/codex/rules)。相比 `["python"]` 或 `["curl"]` 等宽泛
+  [`writable_roots`](17-advanced-configuration.md#approval-policies-and-sandbox-modes)。
+- 添加窄作用域的 [prefix rules](54-rules.md)。相比 `["python"]` 或 `["curl"]` 等宽泛
   模式，优先选择精确命令
   前缀，例如 `["cargo", "test"]` 或 `["pnpm", "run", "lint"]`。宽泛规则往往会抹掉
   Auto-review 旨在守护的边界。

@@ -11,7 +11,7 @@ Source: [Codex GitHub Action](https://developers.openai.com/codex/github-action.
 - 将 Codex 驱动的质量检查作为 CI 流水线的一部分，用来阻止不合格变更。
 - 从工作流文件运行可重复的 Codex 任务（代码审查、发布准备、迁移）。
 
-CI 示例请参阅 [Non-interactive mode](https://developers.openai.com/codex/noninteractive)，并在 [openai/codex-action repository](https://github.com/openai/codex-action) 中查看源码。
+CI 示例请参阅 [Non-interactive mode](60-non-interactive-mode.md)，并在 [openai/codex-action repository](https://github.com/openai/codex-action) 中查看源码。
 
 #### 前提条件
 

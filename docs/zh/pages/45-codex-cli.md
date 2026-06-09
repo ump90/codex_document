@@ -5,7 +5,7 @@ Source: [Codex CLI](https://developers.openai.com/codex/cli.md)
 Codex CLI 是 OpenAI 的编程代理，你可以在本地终端中运行它。它可以在所选目录中读取、修改并运行你机器上的代码。
 它是[开源的](https://github.com/openai/codex)，并使用 Rust 构建，以获得速度和效率。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](02-codex-pricing.md)的信息。
 
 #### CLI 设置
 

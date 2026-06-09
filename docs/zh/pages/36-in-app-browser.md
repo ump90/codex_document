@@ -4,7 +4,7 @@ Source: [In-app browser](https://developers.openai.com/codex/app/browser.md)
 
 应用内浏览器让你和 Codex 在一个线程中共享渲染后网页的视图。当你正在构建或调试 Web 应用，并希望预览页面和附加可视化评论时，可以使用它。
 
-它适用于本地开发服务器、基于文件的预览，以及不需要登录的公开页面。对于任何依赖登录状态或浏览器扩展的内容，请使用你的常规浏览器或 [Codex Chrome 扩展](https://developers.openai.com/codex/app/chrome-extension)。
+它适用于本地开发服务器、基于文件的预览，以及不需要登录的公开页面。对于任何依赖登录状态或浏览器扩展的内容，请使用你的常规浏览器或 [Codex Chrome 扩展](29-codex-chrome-extension.md)。
 
 可以从工具栏打开应用内浏览器，也可以通过点击 URL、在浏览器中手动导航，或按 Cmd+Shift+B（Windows 上为 Ctrl+Shift+B）打开。
 
@@ -27,11 +27,11 @@ bug, and fix only the overflowing controls.
 
 除非你已经允许某个网站，否则 Codex 会在使用网站前询问。从允许列表移除网站意味着 Codex 使用前会再次询问；从阻止列表移除网站意味着 Codex 可以再次询问，而不是把它视为已阻止。
 
-对于 Chrome 中已登录的网站，请参阅 [Codex Chrome 扩展](https://developers.openai.com/codex/app/chrome-extension)。
+对于 Chrome 中已登录的网站，请参阅 [Codex Chrome 扩展](29-codex-chrome-extension.md)。
 
 #### 预览页面
 
-1. 在 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal) 中，或通过 [本地环境操作](https://developers.openai.com/codex/app/local-environments#actions) 启动你的应用开发服务器。
+1. 在 [集成终端](27-codex-app-features.md#integrated-terminal) 中，或通过 [本地环境操作](37-local-environments.md#actions) 启动你的应用开发服务器。
 2. 通过点击 URL 或在浏览器中手动导航，打开一个未认证的本地路由、基于文件的页面或公开页面。
 3. 结合代码 diff 审查渲染状态。
 4. 在需要更改的元素或区域上留下浏览器评论。
@@ -80,4 +80,4 @@ it stays inside the chart bounds.
 - 在 Codex 更改代码后审查更新后的路由。
 - 要求 Codex 在使用浏览器前启动或检查开发服务器。
 
-对于仓库变更，请使用 [复查窗格](https://developers.openai.com/codex/app/review) 来检查变更并留下评论。
+对于仓库变更，请使用 [复查窗格](38-review.md) 来检查变更并留下评论。

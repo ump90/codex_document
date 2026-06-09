@@ -34,7 +34,7 @@ printenv CODEX_ACCESS_TOKEN | codex login --with-access-token
 
 OpenAI 会通过你的 OpenAI Platform 账户按标准 API 费率对 API key 使用量计费。请参阅 [API pricing page](https://openai.com/api/pricing/)。
 
-API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace 访问权限或云服务的某些功能会受到限制或不可用。请在 [Feature availability](https://developers.openai.com/codex/pricing#feature-availability) 中按计划比较支持情况。
+API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace 访问权限或云服务的某些功能会受到限制或不可用。请在 [Feature availability](02-codex-pricing.md#feature-availability) 中按计划比较支持情况。
 
 当你使用 API key 登录时，Codex 使用标准 API 价格，而不是包含在 ChatGPT 计划中的额度。
 
@@ -46,7 +46,7 @@ API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace �
 
 访问令牌适用于可信脚本、调度器和私有 CI runner。对于一般 OpenAI API 调用，请继续使用 Platform API key。
 
-有关设置步骤、权限、轮换和撤销指导，请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+有关设置步骤、权限、轮换和撤销指导，请参阅 [Access tokens](63-access-tokens.md)。
 
 #### 保护你的 Codex cloud 账户
 
@@ -103,7 +103,7 @@ forced_chatgpt_workspace_id = "00000000-0000-0000-0000-000000000000"
 
 如果活动凭据与已配置限制不匹配，Codex 会将用户登出并退出。
 
-这些设置通常通过 managed configuration 应用，而不是由每个用户单独设置。请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration)。
+这些设置通常通过 managed configuration 应用，而不是由每个用户单独设置。请参阅 [Managed configuration](67-managed-configuration.md)。
 
 #### 登录诊断
 
@@ -171,7 +171,7 @@ docker exec MY_CONTAINER mkdir -p "$CONTAINER_HOME/.codex"
 docker cp ~/.codex/auth.json MY_CONTAINER:"$CONTAINER_HOME/.codex/auth.json"
 ```
 
-有关在可信 CI/CD runner 上使用同一模式的更高级版本，请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](https://developers.openai.com/codex/auth/ci-cd-auth)。该指南解释了如何让 Codex 在正常运行期间刷新 `auth.json`，并将更新后的文件保留给下一个 job。对于自动化，API key 仍然是推荐的默认选择。
+有关在可信 CI/CD runner 上使用同一模式的更高级版本，请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](84-ci-cd-auth.md)。该指南解释了如何让 Codex 在正常运行期间刷新 `auth.json`，并将更新后的文件保留给下一个 job。对于自动化，API key 仍然是推荐的默认选择。
 
 #### 备用方法：通过 SSH 转发 localhost 回调
 
@@ -187,7 +187,7 @@ ssh -L 1455:localhost:1455 user@remote
 
 #### 替代模型提供商
 
-当你在配置文件中定义 [custom model provider](https://developers.openai.com/codex/config-advanced#custom-model-providers) 时，可以选择以下身份验证方法之一：
+当你在配置文件中定义 [custom model provider](17-advanced-configuration.md#custom-model-providers) 时，可以选择以下身份验证方法之一：
 
 - **OpenAI 身份验证**：设置 `requires_openai_auth = true` 以使用 OpenAI 身份验证。然后你可以使用 ChatGPT 或 API key 登录。当你通过 LLM 代理服务器访问 OpenAI 模型时，这很有用。当 `requires_openai_auth = true` 时，Codex 会忽略 `env_key`。
 - **环境变量身份验证**：设置 `env_key = "<ENV_VARIABLE_NAME>"`，以使用名为 `<ENV_VARIABLE_NAME>` 的本地环境变量中的提供商专用 API key。

@@ -5,7 +5,7 @@ Source: [Subagents](https://developers.openai.com/codex/concepts/subagents.md)
 Codex 可以通过并行生成专门代理来运行子代理工作流，使
 它们可以并发探索、处理或分析工作。
 
-本页解释核心概念和权衡。有关设置、代理配置和示例，请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+本页解释核心概念和权衡。有关设置、代理配置和示例，请参阅 [Subagents](81-subagents-2.md)。
 
 #### 为什么子代理工作流有帮助
 
@@ -87,4 +87,4 @@ Review this branch with parallel subagents. Spawn one subagent for security risk
 - **`medium`**：大多数代理的平衡默认值。
 - **`low`**：当任务直接且速度最重要时使用。
 
-更高推理强度会增加响应时间和 token 使用量，但它可以提升复杂工作的质量。详情请参阅 [Models](https://developers.openai.com/codex/models)、[Config basics](https://developers.openai.com/codex/config-basic) 和 [Configuration Reference](https://developers.openai.com/codex/config-reference)。
+更高推理强度会增加响应时间和 token 使用量，但它可以提升复杂工作的质量。详情请参阅 [Models](20-model-selection.md)、[Config basics](19-config-basics.md) 和 [Configuration Reference](16-configuration-reference.md)。

@@ -115,3 +115,10 @@
 - [将 Codex 与 Amazon Bedrock 配合使用](pages/82-use-codex-with-amazon-bedrock.md)
 - [Windows 平台](pages/83-windows-platform.md)
 
+### 补充官方链接页面
+
+- [在 CI/CD 中维护 Codex 账户认证（高级）](pages/84-ci-cd-auth.md)
+- [运行深度安全扫描](pages/85-run-a-deep-security-scan.md)
+- [扫描代码变更中的安全问题](pages/86-scan-code-changes-for-security.md)
+- [修复漏洞积压项](pages/87-remediate-vulnerability-backlog.md)
+

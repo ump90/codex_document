@@ -2,7 +2,7 @@
 
 Source: [Best practices](https://developers.openai.com/codex/learn/best-practices.md)
 
-如果你刚开始使用 Codex 或编程代理，本指南会帮助你更快获得更好的结果。它涵盖让 Codex 在 [CLI](https://developers.openai.com/codex/cli)、[IDE 扩展](https://developers.openai.com/codex/ide) 和 [Codex app](https://developers.openai.com/codex/app) 中更有效的核心习惯，从提示和规划，到验证、MCP、技能和自动化。
+如果你刚开始使用 Codex 或编程代理，本指南会帮助你更快获得更好的结果。它涵盖让 Codex 在 [CLI](45-codex-cli.md)、[IDE 扩展](46-codex-ide-extension.md) 和 [Codex app](44-codex-app.md) 中更有效的核心习惯，从提示和规划，到验证、MCP、技能和自动化。
 
 当你少把 Codex 当成一次性助手，而更多把它当成一个会被你配置并随时间改进的队友时，它的效果最好。
 
@@ -10,7 +10,7 @@ Source: [Best practices](https://developers.openai.com/codex/learn/best-practice
 
 #### 良好起步：上下文和提示
 
-即使你的提示并不完美，Codex 也已经足够强大，可以提供实际帮助。你通常可以用很少的设置把一个困难问题交给它，并获得不错的结果。清晰的 [提示](https://developers.openai.com/codex/prompting) 并不是获得价值的前提，但它确实会让结果更可靠，尤其是在更大的代码库或更高风险的任务中。
+即使你的提示并不完美，Codex 也已经足够强大，可以提供实际帮助。你通常可以用很少的设置把一个困难问题交给它，并获得不错的结果。清晰的 [提示](07-prompting.md) 并不是获得价值的前提，但它确实会让结果更可靠，尤其是在更大的代码库或更高风险的任务中。
 
 如果你在大型或复杂仓库中工作，最大的提升来自于给 Codex 正确的任务上下文，并清楚说明你想完成的事情结构。
 
@@ -46,7 +46,7 @@ Source: [Best practices](https://developers.openai.com/codex/learn/best-practice
 
 #### 用 `AGENTS.md` 复用指导
 
-一旦某种提示模式有效，下一步就是停止手动重复它。这正是 [AGENTS.md](https://developers.openai.com/codex/guides/agents-md) 的用途。
+一旦某种提示模式有效，下一步就是停止手动重复它。这正是 [AGENTS.md](50-custom-instructions-with-agents-md.md) 的用途。
 
 可以把 `AGENTS.md` 看作面向代理的开放格式 README。它会自动加载进上下文，也是记录你和团队希望 Codex 在仓库中如何工作的最佳位置。
 
@@ -80,13 +80,13 @@ CLI 中的 `/init` 斜杠命令是在当前目录脚手架生成初始 `AGENTS.m
 - 将仓库特定行为保存在 `.codex/config.toml`
 - 仅在一次性场景中使用命令行覆盖（如果你使用 CLI）
 
-[`config.toml`](https://developers.openai.com/codex/config-basic) 是定义持久偏好的位置，例如 MCP 服务器、多代理设置和功能开关。特定配置档案的覆盖项位于单独的 `$CODEX_HOME/profile-name.config.toml` 文件中。
+[`config.toml`](19-config-basics.md) 是定义持久偏好的位置，例如 MCP 服务器、多代理设置和功能开关。特定配置档案的覆盖项位于单独的 `$CODEX_HOME/profile-name.config.toml` 文件中。
 
 Codex 自带操作系统级沙箱，并有两个你可以控制的关键旋钮。Approval mode（审批模式）决定 Codex 何时需要在运行命令前请求你的许可，sandbox mode（沙箱模式）决定 Codex 是否可以在目录中读写，以及代理可以访问哪些文件。
 
 如果你刚开始使用编码代理，请从默认权限开始。默认保持审批和沙箱严格，然后只在需求明确后，为可信仓库或特定工作流放宽权限。
 
-请注意，CLI、IDE 和 Codex app 共享同一套配置层。可在 [示例配置](https://developers.openai.com/codex/config-sample) 页面了解更多。
+请注意，CLI、IDE 和 Codex app 共享同一套配置层。可在 [示例配置](21-sample-configuration.md) 页面了解更多。
 
 尽早为真实环境配置 Codex。许多质量问题实际上是设置问题，例如工作目录错误、缺少写权限、模型默认值错误，或缺少工具和连接器。
 
@@ -104,7 +104,7 @@ Codex 可以为你完成这个循环，但前提是它知道“好”的标准�
 - 确认最终行为符合请求
 - 审查 diff 中的 bug、回归或风险模式
 
-在 Codex app 中切换 diff 面板，可以直接在本地 [审查变更](https://developers.openai.com/codex/app/review)。点击特定行即可提供反馈，该反馈会作为上下文传入下一轮 Codex。
+在 Codex app 中切换 diff 面板，可以直接在本地 [审查变更](38-review.md)。点击特定行即可提供反馈，该反馈会作为上下文传入下一轮 Codex。
 
 这里一个有用的选项是斜杠命令 `/review`，它提供几种代码审查方式：
 
@@ -117,4 +117,4 @@ Codex 可以为你完成这个循环，但前提是它知道“好”的标准�
 
 Codex 不应该只是生成代码。通过正确说明，它也可以帮助 **测试代码、检查代码并审查代码**。
 
-如果你使用 GitHub Cloud，可以设置 Codex 为你的 PR 运行 [代码审查](https://developers.openai.com/codex/integrations/github)。在 OpenAI，Codex 会审查 100% 的 PR。你可以启用自动审查，也可以在 @Codex 时让 Codex 响应式审查。
+如果你使用 GitHub Cloud，可以设置 Codex 为你的 PR 运行 [代码审查](49-codex-code-review-in-github.md)。在 OpenAI，Codex 会审查 100% 的 PR。你可以启用自动审查，也可以在 @Codex 时让 Codex 响应式审查。

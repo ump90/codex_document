@@ -12,7 +12,7 @@ Codex 在启动时构建一条指令链（每次运行一次；在 TUI 中通常
 2. **项目范围：** 从项目根目录（通常是 Git 根目录）开始，Codex 会向下遍历到你的当前工作目录。如果 Codex 找不到项目根目录，它只检查当前目录。在路径上的每个目录中，它会依次检查 `AGENTS.override.md`、`AGENTS.md`，以及 `project_doc_fallback_filenames` 中的任何后备文件名。Codex 每个目录最多包含一个文件。
 3. **合并顺序：** Codex 从根目录向下拼接文件，并用空行连接。离当前目录更近的文件会覆盖较早的指南，因为它们在合并后的提示中出现得更晚。
 
-Codex 会跳过空文件，并在合并后的大小达到 `project_doc_max_bytes` 定义的限制时停止添加文件（默认 32 KiB）。有关这些选项的详情，请参阅 [Project instructions discovery](https://developers.openai.com/codex/config-advanced#project-instructions-discovery)。当达到上限时，可以提高限制，或把说明拆分到嵌套目录中。
+Codex 会跳过空文件，并在合并后的大小达到 `project_doc_max_bytes` 定义的限制时停止添加文件（默认 32 KiB）。有关这些选项的详情，请参阅 [Project instructions discovery](17-advanced-configuration.md#project-instructions-discovery)。当达到上限时，可以提高限制，或把说明拆分到嵌套目录中。
 
 #### 创建全局指南
 
@@ -128,4 +128,4 @@ CODEX_HOME=$(pwd)/.codex codex exec "List active instruction sources"
 #### 后续步骤
 
 - 访问官方 [AGENTS.md](https://agents.md) 网站了解更多信息。
-- 查看 [Prompting Codex](https://developers.openai.com/codex/prompting)，了解与持久指南搭配良好的对话模式。
+- 查看 [提示 Codex](07-prompting.md)，了解与持久指南搭配良好的对话模式。

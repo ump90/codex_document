@@ -111,6 +111,13 @@
 - [将 Codex 与 Amazon Bedrock 配合使用](zh/pages/82-use-codex-with-amazon-bedrock.md)
 - [Windows 平台](zh/pages/83-windows-platform.md)
 
+### 补充官方链接页面
+
+- [在 CI/CD 中维护 Codex 账户认证（高级）](zh/pages/84-ci-cd-auth.md)
+- [运行深度安全扫描](zh/pages/85-run-a-deep-security-scan.md)
+- [扫描代码变更中的安全问题](zh/pages/86-scan-code-changes-for-security.md)
+- [修复漏洞积压项](zh/pages/87-remediate-vulnerability-backlog.md)
+
 ---
 
 ### Codex
@@ -184,7 +191,7 @@ Source: [Codex Pricing](https://developers.openai.com/codex/pricing.md)
 - 仅按 Codex 使用的 token 付费，基于 [API
   定价](https://platform.openai.com/docs/pricing)
 
-[了解更多](https://developers.openai.com/codex/auth)
+[了解更多](zh/pages/18-authentication-and-sessions.md)
 
 **Business**（按量付费）：
 
@@ -250,7 +257,7 @@ Codex 如何在工作、线程、提示、速度和多代理协作中进行推�
 
 Source: [Best practices](https://developers.openai.com/codex/learn/best-practices.md)
 
-如果你刚开始使用 Codex 或编程代理，本指南会帮助你更快获得更好的结果。它涵盖让 Codex 在 [CLI](https://developers.openai.com/codex/cli)、[IDE 扩展](https://developers.openai.com/codex/ide) 和 [Codex app](https://developers.openai.com/codex/app) 中更有效的核心习惯，从提示和规划，到验证、MCP、技能和自动化。
+如果你刚开始使用 Codex 或编程代理，本指南会帮助你更快获得更好的结果。它涵盖让 Codex 在 [CLI](zh/pages/45-codex-cli.md)、[IDE 扩展](zh/pages/46-codex-ide-extension.md) 和 [Codex app](zh/pages/44-codex-app.md) 中更有效的核心习惯，从提示和规划，到验证、MCP、技能和自动化。
 
 当你少把 Codex 当成一次性助手，而更多把它当成一个会被你配置并随时间改进的队友时，它的效果最好。
 
@@ -258,7 +265,7 @@ Source: [Best practices](https://developers.openai.com/codex/learn/best-practice
 
 #### 良好起步：上下文和提示
 
-即使你的提示并不完美，Codex 也已经足够强大，可以提供实际帮助。你通常可以用很少的设置把一个困难问题交给它，并获得不错的结果。清晰的 [提示](https://developers.openai.com/codex/prompting) 并不是获得价值的前提，但它确实会让结果更可靠，尤其是在更大的代码库或更高风险的任务中。
+即使你的提示并不完美，Codex 也已经足够强大，可以提供实际帮助。你通常可以用很少的设置把一个困难问题交给它，并获得不错的结果。清晰的 [提示](zh/pages/07-prompting.md) 并不是获得价值的前提，但它确实会让结果更可靠，尤其是在更大的代码库或更高风险的任务中。
 
 如果你在大型或复杂仓库中工作，最大的提升来自于给 Codex 正确的任务上下文，并清楚说明你想完成的事情结构。
 
@@ -294,7 +301,7 @@ Source: [Best practices](https://developers.openai.com/codex/learn/best-practice
 
 #### 用 `AGENTS.md` 复用指导
 
-一旦某种提示模式有效，下一步就是停止手动重复它。这正是 [AGENTS.md](https://developers.openai.com/codex/guides/agents-md) 的用途。
+一旦某种提示模式有效，下一步就是停止手动重复它。这正是 [AGENTS.md](zh/pages/50-custom-instructions-with-agents-md.md) 的用途。
 
 可以把 `AGENTS.md` 看作面向代理的开放格式 README。它会自动加载进上下文，也是记录你和团队希望 Codex 在仓库中如何工作的最佳位置。
 
@@ -328,13 +335,13 @@ CLI 中的 `/init` 斜杠命令是在当前目录脚手架生成初始 `AGENTS.m
 - 将仓库特定行为保存在 `.codex/config.toml`
 - 仅在一次性场景中使用命令行覆盖（如果你使用 CLI）
 
-[`config.toml`](https://developers.openai.com/codex/config-basic) 是定义持久偏好的位置，例如 MCP 服务器、多代理设置和功能开关。特定配置档案的覆盖项位于单独的 `$CODEX_HOME/profile-name.config.toml` 文件中。
+[`config.toml`](zh/pages/19-config-basics.md) 是定义持久偏好的位置，例如 MCP 服务器、多代理设置和功能开关。特定配置档案的覆盖项位于单独的 `$CODEX_HOME/profile-name.config.toml` 文件中。
 
 Codex 自带操作系统级沙箱，并有两个你可以控制的关键旋钮。Approval mode（审批模式）决定 Codex 何时需要在运行命令前请求你的许可，sandbox mode（沙箱模式）决定 Codex 是否可以在目录中读写，以及代理可以访问哪些文件。
 
 如果你刚开始使用编码代理，请从默认权限开始。默认保持审批和沙箱严格，然后只在需求明确后，为可信仓库或特定工作流放宽权限。
 
-请注意，CLI、IDE 和 Codex app 共享同一套配置层。可在 [示例配置](https://developers.openai.com/codex/config-sample) 页面了解更多。
+请注意，CLI、IDE 和 Codex app 共享同一套配置层。可在 [示例配置](zh/pages/21-sample-configuration.md) 页面了解更多。
 
 尽早为真实环境配置 Codex。许多质量问题实际上是设置问题，例如工作目录错误、缺少写权限、模型默认值错误，或缺少工具和连接器。
 
@@ -352,7 +359,7 @@ Codex 可以为你完成这个循环，但前提是它知道“好”的标准�
 - 确认最终行为符合请求
 - 审查 diff 中的 bug、回归或风险模式
 
-在 Codex app 中切换 diff 面板，可以直接在本地 [审查变更](https://developers.openai.com/codex/app/review)。点击特定行即可提供反馈，该反馈会作为上下文传入下一轮 Codex。
+在 Codex app 中切换 diff 面板，可以直接在本地 [审查变更](zh/pages/38-review.md)。点击特定行即可提供反馈，该反馈会作为上下文传入下一轮 Codex。
 
 这里一个有用的选项是斜杠命令 `/review`，它提供几种代码审查方式：
 
@@ -365,7 +372,7 @@ Codex 可以为你完成这个循环，但前提是它知道“好”的标准�
 
 Codex 不应该只是生成代码。通过正确说明，它也可以帮助 **测试代码、检查代码并审查代码**。
 
-如果你使用 GitHub Cloud，可以设置 Codex 为你的 PR 运行 [代码审查](https://developers.openai.com/codex/integrations/github)。在 OpenAI，Codex 会审查 100% 的 PR。你可以启用自动审查，也可以在 @Codex 时让 Codex 响应式审查。
+如果你使用 GitHub Cloud，可以设置 Codex 为你的 PR 运行 [代码审查](zh/pages/49-codex-code-review-in-github.md)。在 OpenAI，Codex 会审查 100% 的 PR。你可以启用自动审查，也可以在 @Codex 时让 Codex 响应式审查。
 
 ### 示例工作流
 
@@ -374,7 +381,7 @@ Source: [Workflows](https://developers.openai.com/codex/workflows.md)
 当你把 Codex 当作拥有明确上下文和清晰“完成”定义的队友时，它的效果最好。
 本页给出 Codex IDE 扩展、Codex CLI 和 Codex cloud 的端到端工作流示例。
 
-如果你刚开始使用 Codex，请先阅读 [提示](https://developers.openai.com/codex/prompting)，然后回到这里查看具体做法。
+如果你刚开始使用 Codex，请先阅读 [提示](zh/pages/07-prompting.md)，然后回到这里查看具体做法。
 
 #### 如何阅读这些示例
 
@@ -555,7 +562,7 @@ Source: [Prompting](https://developers.openai.com/codex/prompting.md)
 - 当 Codex 能够验证自己的工作时，它会产出更高质量的结果。请包含复现问题、验证功能，以及运行 lint 和 pre-commit 检查的步骤。
 - 当你把复杂工作拆成更小、更聚焦的步骤时，Codex 处理得更好。更小的任务更容易让 Codex 测试，也更容易让你审查。如果你不确定如何拆分任务，请让 Codex 提出计划。
 
-有关提示 Codex 的更多想法，请参阅 [工作流](https://developers.openai.com/codex/workflows)。
+有关提示 Codex 的更多想法，请参阅 [工作流](zh/pages/06-example-workflows.md)。
 
 #### 线程模型
 
@@ -565,14 +572,14 @@ Source: [Prompting](https://developers.openai.com/codex/prompting.md)
 
 线程可以在本地运行，也可以在云端运行：
 
-- **本地线程** 在你的机器上运行。Codex 可以读取和编辑你的文件并运行命令，因此你可以看到发生了什么变化，并使用现有工具。为了降低工作区外意外变更的风险，本地线程会在 [沙箱](https://developers.openai.com/codex/agent-approvals-security) 中运行。
-- **云端线程** 在隔离的 [环境](https://developers.openai.com/codex/cloud/environments) 中运行。Codex 会克隆你的仓库，并检出它正在处理的分支。当你想并行运行工作，或从另一台设备委派任务时，云端线程很有用。若要让云端线程使用你的仓库，请先将代码推送到 GitHub。你也可以 [从本地机器委派任务](https://developers.openai.com/codex/ide/cloud-tasks)，其中会包含你当前的工作状态。
+- **本地线程** 在你的机器上运行。Codex 可以读取和编辑你的文件并运行命令，因此你可以看到发生了什么变化，并使用现有工具。为了降低工作区外意外变更的风险，本地线程会在 [沙箱](zh/pages/13-agent-approvals-security.md) 中运行。
+- **云端线程** 在隔离的 [环境](zh/pages/25-cloud-environments.md) 中运行。Codex 会克隆你的仓库，并检出它正在处理的分支。当你想并行运行工作，或从另一台设备委派任务时，云端线程很有用。若要让云端线程使用你的仓库，请先将代码推送到 GitHub。你也可以 [从本地机器委派任务](zh/pages/32-codex-ide-extension-features.md)，其中会包含你当前的工作状态。
 
 在 Codex app 中，你也可以在不选择项目的情况下开始聊天。聊天不会
 绑定到已保存的仓库或项目文件夹。它们适合用于研究、规划、已连接工具的工作流，或其它 Codex 不应从代码库开始的工作。聊天使用 Codex 管理的 `threads` 目录作为其工作位置，该目录位于你的 Codex
 主目录下。默认位置是 `~/.codex/threads`。
 要更改此状态的基础位置，请设置 `CODEX_HOME`；参见
-[配置和状态位置](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+[配置和状态位置](zh/pages/17-advanced-configuration.md#config-and-state-locations)。
 
 #### 上下文
 
@@ -591,8 +598,8 @@ Goal mode 为 Codex 提供一个持久目标，使其能够跨越更长的
 设置目标后，目标文本既是起始提示，也是
 完成标准。Codex 使用它决定下一步做什么，以及
 任务是否完成。可在 [Codex
-app](https://developers.openai.com/codex/app/commands#set-or-manage-a-goal-with-goal)、[IDE
-扩展](https://developers.openai.com/codex/ide/slash-commands) 或 [CLI](https://developers.openai.com/codex/cli/slash-commands#set-or-view-a-task-goal-with-goal) 中使用 `/goal` 启动 Goal mode。
+app](zh/pages/26-codex-app-commands.md#set-or-manage-a-goal-with-goal)、[IDE
+扩展](zh/pages/34-codex-ide-extension-slash-commands.md) 或 [CLI](zh/pages/39-slash-commands-in-codex-cli.md#set-or-view-a-task-goal-with-goal) 中使用 `/goal` 启动 Goal mode。
 
 如果 `/goal` 没有出现在斜杠命令列表中，请在 `config.toml` 中启用 `features.goals`：
 
@@ -721,7 +728,7 @@ Codex Security 与语言无关。实践中，性能取决于模型对仓库所�
 
 #### 项目需要构建后才能扫描吗？
 
-不需要。Codex Security 可以在没有编译步骤的情况下，基于仓库和提交上下文产生发现。在自动验证期间，如果这有助于复现问题，它可能会尝试在容器中构建项目。环境设置细节请参见 [Codex cloud 环境](https://developers.openai.com/codex/cloud/environments)。
+不需要。Codex Security 可以在没有编译步骤的情况下，基于仓库和提交上下文产生发现。在自动验证期间，如果这有助于复现问题，它可能会尝试在容器中构建项目。环境设置细节请参见 [Codex cloud 环境](zh/pages/25-cloud-environments.md)。
 
 #### Codex Security 如何减少误报并避免破坏性补丁？
 
@@ -733,7 +740,7 @@ Codex Security 使用两个阶段。首先，模型对可能的问题进行排�
 
 #### 什么是威胁模型？
 
-威胁模型是仓库在扫描时的安全上下文。它将简洁的项目概述与攻击面细节结合起来，例如入口点、信任边界、认证假设和高风险组件。更多细节请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+威胁模型是仓库在扫描时的安全上下文。它将简洁的项目概述与攻击面细节结合起来，例如入口点、信任边界、认证假设和高风险组件。更多细节请参见 [改进威胁模型](zh/pages/12-improving-the-threat-model.md)。
 
 #### 威胁模型如何生成？
 
@@ -745,7 +752,7 @@ Codex Security 会提示模型总结仓库架构和安全入口点、对仓库�
 
 #### 我可以编辑威胁模型吗？
 
-可以。Codex Security 会创建初始威胁模型，你可以随着架构、风险和业务上下文变化而更新它。编辑工作流请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+可以。Codex Security 会创建初始威胁模型，你可以随着架构、风险和业务上下文变化而更新它。编辑工作流请参见 [改进威胁模型](zh/pages/12-improving-the-threat-model.md)。
 
 ### Codex Security 插件
 
@@ -755,7 +762,7 @@ Codex Security 插件为 Codex 添加安全审查工作流，用于你有授权�
 
 本页介绍在你的 Codex 线程中运行的可安装插件。对于
 通过 Codex Web 扫描已连接 GitHub 仓库的研究预览版产品，
-请参见 [Codex Security](https://developers.openai.com/codex/security)。
+请参见 [Codex Security](zh/pages/71-codex-security.md)。
 
 #### 安装插件
 
@@ -853,13 +860,13 @@ Codex Security 插件为 Codex 添加安全审查工作流，用于你有授权�
   尤其是在陌生仓库中。
 - 合并前审查每个建议补丁和验证结果。
 - 使用插件时，保留仓库说明和审批策略。
-  详情请参见 [代理审批和安全](https://developers.openai.com/codex/agent-approvals-security)。
+  详情请参见 [代理审批和安全](zh/pages/13-agent-approvals-security.md)。
 
 #### 探索安全用例
 
-- [运行深度安全扫描](https://developers.openai.com/codex/use-cases/deep-security-scan)
-- [扫描代码变更中的安全问题](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security)
-- [修复漏洞积压](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)
+- [运行深度安全扫描](zh/pages/85-run-a-deep-security-scan.md)
+- [扫描代码变更中的安全问题](zh/pages/86-scan-code-changes-for-security.md)
+- [修复漏洞积压](zh/pages/87-remediate-vulnerability-backlog.md)
 
 ### Codex Security 设置
 
@@ -868,11 +875,11 @@ Source: [Codex Security setup](https://developers.openai.com/codex/security/setu
 本页会带你完成从初始访问到在 Codex Security 中审查发现并创建修复 pull request 的流程。
 
 请先确认你已经设置 Codex Cloud。如果还没有，请参见 [Codex
-Cloud](https://developers.openai.com/codex/cloud) 开始。
+Cloud](zh/pages/47-codex-web.md) 开始。
 
 #### 1. 访问和环境
 
-Codex Security 会扫描通过 [Codex Cloud](https://developers.openai.com/codex/cloud) 连接的 GitHub 仓库。
+Codex Security 会扫描通过 [Codex Cloud](zh/pages/47-codex-web.md) 连接的 GitHub 仓库。
 
 - 确认你的工作区有权访问 Codex Security。
 - 确认你要扫描的仓库在 Codex Cloud 中可用。
@@ -920,7 +927,7 @@ Codex Security 会先从最新提交向后扫描仓库。它使用这种方式�
 初始发现出现后，重新查看该模型，使扫描指导始终与当前优先事项一致。
 保持其最新有助于 Codex Security 产生更好的建议。
 
-关于威胁模型及其如何影响严重性和分诊的更深入解释，请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+关于威胁模型及其如何影响严重性和分诊的更深入解释，请参见 [改进威胁模型](zh/pages/12-improving-the-threat-model.md)。
 
 #### 5. 审查发现并打补丁
 
@@ -948,9 +955,9 @@ Codex Security 会先从最新提交向后扫描仓库。它使用这种方式�
 
 #### 安全设置参考
 
-- [Codex Security](https://developers.openai.com/codex/security) 提供产品概览。
-- [FAQ](https://developers.openai.com/codex/security/faq) 覆盖常见问题。
-- [改进威胁模型](https://developers.openai.com/codex/security/threat-model) 解释如何改进扫描上下文和发现优先级。
+- [Codex Security](zh/pages/71-codex-security.md) 提供产品概览。
+- [FAQ](zh/pages/09-codex-security-faq.md) 覆盖常见问题。
+- [改进威胁模型](zh/pages/12-improving-the-threat-model.md) 解释如何改进扫描上下文和发现优先级。
 
 ### 改进威胁模型
 
@@ -991,9 +998,9 @@ Codex Security 会根据代码创建第一版草稿。如果发现结果感觉�
 
 #### 威胁模型参考
 
-- [Codex Security 设置](https://developers.openai.com/codex/security/setup) 覆盖仓库设置和发现审查。
-- [Codex Security](https://developers.openai.com/codex/security) 提供产品概览。
-- [FAQ](https://developers.openai.com/codex/security/faq) 覆盖常见问题。
+- [Codex Security 设置](zh/pages/11-codex-security-setup.md) 覆盖仓库设置和发现审查。
+- [Codex Security](zh/pages/71-codex-security.md) 提供产品概览。
+- [FAQ](zh/pages/09-codex-security-faq.md) 覆盖常见问题。
 
 ### 智能体审批和安全
 
@@ -1003,12 +1010,12 @@ Codex 帮助保护你的代码和数据，并降低滥用风险。
 
 本页介绍如何安全地操作 Codex，包括沙箱、审批
 和网络访问。如果你正在寻找 Codex Security，即用于
-扫描已连接 GitHub 仓库的产品，请参见 [Codex Security](https://developers.openai.com/codex/security)。
+扫描已连接 GitHub 仓库的产品，请参见 [Codex Security](zh/pages/71-codex-security.md)。
 
 默认情况下，代理运行时会关闭网络访问。在本地，Codex 使用由操作系统强制执行的沙箱，限制它可以接触的内容（通常限于当前工作区），并配合审批策略来控制它在执行操作前何时必须停下来询问你。
 
 关于沙箱如何在 Codex app、IDE
-扩展和 CLI 中工作的高层解释，请参见 [沙箱](https://developers.openai.com/codex/concepts/sandboxing)。
+扩展和 CLI 中工作的高层解释，请参见 [沙箱](zh/pages/15-sandbox.md)。
 如需更广泛的企业安全概览，请参见 [Codex 安全白皮书](https://trust.openai.com/?itemUid=382f924d-54f3-43a8-a9df-c39e6c959958&source=click)。
 
 #### 沙箱和审批
@@ -1076,7 +1083,7 @@ codex \
 管理员管理的 `experimental_network` requirements 独立于用户
 功能开关。它们可以配置并启动沙箱网络，而无需
 `features.network_proxy`，但当活动
-沙箱保持网络关闭时，它们不会开启网络访问。参见 [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration#configure-network-access-requirements)
+沙箱保持网络关闭时，它们不会开启网络访问。参见 [托管配置](zh/pages/67-managed-configuration.md#configure-network-access-requirements)
 了解管理员侧 `requirements.toml` 的形状。
 
 #### 网络策略
@@ -1201,7 +1208,7 @@ approvals_reviewer = "auto_review"
 
 完整审查器生命周期、触发条件、配置优先级
 和失败行为请参见
-[Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review)。
+[Auto-review](zh/pages/65-auto-review.md)。
 
 审查器只评估已经需要审批的动作，例如沙箱
 提权、被阻止的网络请求、`request_permissions` 提示，或
@@ -1220,7 +1227,7 @@ approvals_reviewer = "auto_review"
 租户特定部分。
 本地 `[auto_review].policy` 文本也受支持，但托管 requirements
 优先。设置细节请参见
-[托管配置](https://developers.openai.com/codex/enterprise/managed-configuration#configure-automatic-review-policy)。
+[托管配置](zh/pages/67-managed-configuration.md#configure-automatic-review-policy)。
 
 在 Codex app 中，这些审查会显示为自动审查项，其状态
 例如 Reviewing、Approved、Denied、Aborted 或 Timed out。它们还可以
@@ -1303,7 +1310,7 @@ Codex 会在每个操作系统上使用平台原生的强制执行机制。macOS
 
 在 **macOS** 上，沙盒使用内置的 Seatbelt 框架开箱即用。
 
-在 **Windows** 上，当你在 PowerShell 中运行时，Codex 使用原生 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox)；当你在 WSL2 中运行时，则使用 Linux 沙盒实现。
+在 **Windows** 上，当你在 PowerShell 中运行时，Codex 使用原生 [Windows 沙盒](zh/pages/83-windows-platform.md#windows-sandbox)；当你在 WSL2 中运行时，则使用 Linux 沙盒实现。
 
 在 **Linux 和 WSL2** 上，请先使用包管理器安装 `bubblewrap`：
 
@@ -1350,11 +1357,11 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
 在 Codex app 和 IDE 中，你可以从编辑器或聊天输入框下方的权限选择器中选择一种模式。该选择器允许你依赖 Codex 的默认权限、切换到完全访问权限，或使用你的自定义配置。
 
-在 CLI 中，使用 [`/permissions`](https://developers.openai.com/codex/cli/slash-commands#update-permissions-with-permissions) 在会话期间切换模式。
+在 CLI 中，使用 [`/permissions`](zh/pages/39-slash-commands-in-codex-cli.md#update-permissions-with-permissions) 在会话期间切换模式。
 
 #### 配置默认值
 
-如果你希望 Codex 每次启动时都采用相同行为，请使用自定义配置。Codex 会将这些默认值存储在本地设置文件 `config.toml` 中。[配置基础](https://developers.openai.com/codex/config-basic) 解释其工作方式，[配置参考](https://developers.openai.com/codex/config-reference) 记录了 `sandbox_mode`、`approval_policy`、`approvals_reviewer` 和 `sandbox_workspace_write.writable_roots` 的确切键。使用这些设置决定 Codex 默认获得多少自主权、可以写入哪些目录、何时应暂停请求审批，以及由谁审核符合条件的审批请求。
+如果你希望 Codex 每次启动时都采用相同行为，请使用自定义配置。Codex 会将这些默认值存储在本地设置文件 `config.toml` 中。[配置基础](zh/pages/19-config-basics.md) 解释其工作方式，[配置参考](zh/pages/16-configuration-reference.md) 记录了 `sandbox_mode`、`approval_policy`、`approvals_reviewer` 和 `sandbox_workspace_write.writable_roots` 的确切键。使用这些设置决定 Codex 默认获得多少自主权、可以写入哪些目录、何时应暂停请求审批，以及由谁审核符合条件的审批请求。
 
 概括来说，常见的沙盒模式包括：
 
@@ -1371,17 +1378,17 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 当审批是交互式的，你还可以使用 `approvals_reviewer` 选择由谁审核：
 
 - `user`：审批提示显示给用户。这是默认值。
-- `auto_review`：符合条件的审批提示会发送给审核智能体（参见 [自动审核](https://developers.openai.com/codex/concepts/sandboxing/auto-review)）。
+- `auto_review`：符合条件的审批提示会发送给审核智能体（参见 [自动审核](zh/pages/65-auto-review.md)）。
 
 完全访问权限意味着将 `sandbox_mode = "danger-full-access"` 与 `approval_policy = "never"` 搭配使用。相比之下，风险较低的本地自动化预设是将 `sandbox_mode = "workspace-write"` 与 `approval_policy = "on-request"` 搭配使用，或使用对应的 CLI 标志 `--sandbox workspace-write --ask-for-approval on-request`。然后，你可以保留 `approvals_reviewer = "user"` 以进行人工审批，或设置 `approvals_reviewer = "auto_review"` 以进行自动审批审核。
 
 如果你需要 Codex 跨多个目录工作，可写根目录让你可以扩展它能够修改的位置，而无需完全移除沙盒。如果你需要更宽或更窄的信任边界，请调整默认沙盒模式和审批策略，而不是依赖一次性例外。
 
-当某个工作流需要特定例外时，请使用 [规则](https://developers.openai.com/codex/rules)。规则允许你在沙盒之外允许、提示或禁止命令前缀，这通常比大范围扩大访问权限更合适。有关应用中审批和沙盒行为的高层概览，请参阅 [Codex app 功能](https://developers.openai.com/codex/app/features#approvals-and-sandboxing)；有关 IDE 专属设置入口，请参阅 [Codex IDE 扩展设置](https://developers.openai.com/codex/ide/settings)。
+当某个工作流需要特定例外时，请使用 [规则](zh/pages/54-rules.md)。规则允许你在沙盒之外允许、提示或禁止命令前缀，这通常比大范围扩大访问权限更合适。有关应用中审批和沙盒行为的高层概览，请参阅 [Codex app 功能](zh/pages/27-codex-app-features.md#approvals-and-sandboxing)；有关 IDE 专属设置入口，请参阅 [Codex IDE 扩展设置](zh/pages/33-codex-ide-extension-settings.md)。
 
-自动审核在可用时不会改变沙盒边界。它是在该边界上处理审批请求的一种 `approvals_reviewer`，例如沙盒提权、被阻止的网络访问，或仍需审批的有副作用工具调用。已经允许在沙盒内执行的操作会直接运行，无需额外审核。有关审核器生命周期、触发类型、拒绝语义和配置细节，请参阅 [自动审核](https://developers.openai.com/codex/concepts/sandboxing/auto-review)。
+自动审核在可用时不会改变沙盒边界。它是在该边界上处理审批请求的一种 `approvals_reviewer`，例如沙盒提权、被阻止的网络访问，或仍需审批的有副作用工具调用。已经允许在沙盒内执行的操作会直接运行，无需额外审核。有关审核器生命周期、触发类型、拒绝语义和配置细节，请参阅 [自动审核](zh/pages/65-auto-review.md)。
 
-平台细节位于特定平台文档中。有关原生 Windows 设置、行为和故障排除，请参阅 [Windows](https://developers.openai.com/codex/windows)。有关沙盒和审批的管理员要求及组织级约束，请参阅 [智能体审批与安全](https://developers.openai.com/codex/agent-approvals-security)。
+平台细节位于特定平台文档中。有关原生 Windows 设置、行为和故障排除，请参阅 [Windows](zh/pages/83-windows-platform.md)。有关沙盒和审批的管理员要求及组织级约束，请参阅 [智能体审批与安全](zh/pages/13-agent-approvals-security.md)。
 
 ## 配置、身份验证和模型
 
@@ -1393,15 +1400,15 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
 Source: [Configuration Reference](https://developers.openai.com/codex/config-reference.md)
 
-请将此页面作为 Codex 配置文件的可搜索参考。有关概念性指导和示例，请先阅读 [配置基础](https://developers.openai.com/codex/config-basic) 和 [高级配置](https://developers.openai.com/codex/config-advanced)。
+请将此页面作为 Codex 配置文件的可搜索参考。有关概念性指导和示例，请先阅读 [配置基础](zh/pages/19-config-basics.md) 和 [高级配置](zh/pages/17-advanced-configuration.md)。
 
 ### 高级配置
 
 Source: [Advanced Configuration](https://developers.openai.com/codex/config-advanced.md)
 
-当你需要对提供商、策略和集成进行更多控制时，请使用这些选项。快速入门请参阅 [配置基础](https://developers.openai.com/codex/config-basic)。
+当你需要对提供商、策略和集成进行更多控制时，请使用这些选项。快速入门请参阅 [配置基础](zh/pages/19-config-basics.md)。
 
-有关项目指导、可复用能力、自定义 slash commands、subagent 工作流和集成的背景信息，请参阅 [自定义](https://developers.openai.com/codex/concepts/customization)。有关配置键，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关项目指导、可复用能力、自定义 slash commands、subagent 工作流和集成的背景信息，请参阅 [自定义](zh/pages/52-customization.md)。有关配置键，请参阅 [配置参考](zh/pages/16-configuration-reference.md)。
 
 #### 配置档
 
@@ -1462,9 +1469,9 @@ Codex 将本地状态存储在 `CODEX_HOME` 下（默认是 `~/.codex`）。
 - `history.jsonl`（如果启用了历史持久化）
 - 其它按用户保存的状态，例如日志和缓存
 
-有关身份验证细节（包括凭据存储模式），请参阅 [身份验证](https://developers.openai.com/codex/auth)。有关完整配置键列表，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关身份验证细节（包括凭据存储模式），请参阅 [身份验证](zh/pages/18-authentication-and-sessions.md)。有关完整配置键列表，请参阅 [配置参考](zh/pages/16-configuration-reference.md)。
 
-有关签入仓库或系统路径的共享默认值、规则和 skills，请参阅 [团队配置](https://developers.openai.com/codex/enterprise/admin-setup#team-config)。
+有关签入仓库或系统路径的共享默认值、规则和 skills，请参阅 [团队配置](zh/pages/64-admin-setup.md#team-config)。
 
 如果你只需要将内置 OpenAI provider 指向 LLM 代理、路由器或启用了 data residency 的项目，请在 `config.toml` 中设置 `openai_base_url`，而不是定义新 provider。这会更改内置 `openai` provider 的 base URL，而不需要单独的 `model_providers.` 条目。
 
@@ -1510,11 +1517,11 @@ statusMessage = "Checking Bash command"
 
 如果单个层同时包含 `hooks.json` 和 inline `[hooks]`，Codex 会同时加载并发出警告。每个层优先使用一种表示方式。
 
-有关当前事件列表、输入字段、输出行为和限制，请参阅 [Hooks](https://developers.openai.com/codex/hooks)。
+有关当前事件列表、输入字段、输出行为和限制，请参阅 [Hooks](zh/pages/73-hooks.md)。
 
 #### 智能体角色（`config.toml` 中的 `[agents]`）
 
-有关 subagent 角色配置（`config.toml` 中的 `[agents]`），请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+有关 subagent 角色配置（`config.toml` 中的 `[agents]`），请参阅 [Subagents](zh/pages/81-subagents-2.md)。
 
 #### 项目根目录检测
 
@@ -1594,7 +1601,7 @@ region = "eu-central-1"
 
 如果省略 `profile`，Codex 会使用标准 AWS 凭据链。将 `region` 设置为应处理请求的受支持 Bedrock region。
 
-有关完整设置流程、身份验证选项、受支持模型和功能可用性，请参阅 [Use Codex with Amazon Bedrock](https://developers.openai.com/codex/amazon-bedrock)。
+有关完整设置流程、身份验证选项、受支持模型和功能可用性，请参阅 [Use Codex with Amazon Bedrock](zh/pages/82-use-codex-with-amazon-bedrock.md)。
 
 #### OSS 模式（本地提供商）
 
@@ -1647,9 +1654,9 @@ model_context_window = 128000             # Context window size
 
 选择审批严格度（影响 Codex 何时暂停）和沙盒级别（影响文件/网络访问权限）。
 
-有关编辑 `config.toml` 时应牢记的运行细节，请参阅 [常见沙盒和审批组合](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)、[可写根目录中的受保护路径](https://developers.openai.com/codex/agent-approvals-security#protected-paths-in-writable-roots) 和 [网络访问](https://developers.openai.com/codex/agent-approvals-security#network-access)。
+有关编辑 `config.toml` 时应牢记的运行细节，请参阅 [常见沙盒和审批组合](zh/pages/13-agent-approvals-security.md#common-sandbox-and-approval-combinations)、[可写根目录中的受保护路径](zh/pages/13-agent-approvals-security.md#protected-paths-in-writable-roots) 和 [网络访问](zh/pages/13-agent-approvals-security.md#network-access)。
 
-有关同时配置文件系统和网络访问权限的 beta 权限 profile，请参阅 [权限](https://developers.openai.com/codex/permissions)。
+有关同时配置文件系统和网络访问权限的 beta 权限 profile，请参阅 [权限](zh/pages/77-permissions.md)。
 
 你也可以使用细粒度审批策略（`approval_policy = { granular = { ... } }`）来允许或自动拒绝单独的提示类别。当你希望某些场景保持正常交互式审批，但希望其它场景（例如 `request_permissions` 或 skill-script prompts）自动 fail closed 时，这很有用。
 
@@ -1686,9 +1693,9 @@ Use your organization's automatic review policy.
 
 #### 命名权限配置档
 
-有关内置 profiles、自定义 profile 语法，以及完整文件系统和网络配置模型，请参阅 [Permissions](https://developers.openai.com/codex/permissions)。
+有关内置 profiles、自定义 profile 语法，以及完整文件系统和网络配置模型，请参阅 [Permissions](zh/pages/77-permissions.md)。
 
-有关完整键列表和要求约束，请参阅 [配置参考](https://developers.openai.com/codex/config-reference) 和 [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration)。
+有关完整键列表和要求约束，请参阅 [配置参考](zh/pages/16-configuration-reference.md) 和 [托管配置](zh/pages/67-managed-configuration.md)。
 
 在 workspace-write 模式中，某些环境会让 `.git/` 和 `.codex/` 保持 read-only，即使工作区其余部分可写也是如此。这就是 `git commit` 等命令可能仍需要审批才能在沙盒外运行的原因。如果你希望 Codex 跳过特定命令（例如阻止沙盒外的 `git commit`），请使用 rules。
 
@@ -1715,7 +1722,7 @@ Patterns 是大小写不敏感的 glob（`*`、`?`、`[A-Z]`）；`ignore_defaul
 
 #### MCP 服务器
 
-配置细节请参阅专门的 [MCP 文档](https://developers.openai.com/codex/mcp)。
+配置细节请参阅专门的 [MCP 文档](zh/pages/53-model-context-protocol.md)。
 
 #### 可观测性和遥测
 
@@ -1747,7 +1754,7 @@ exporter = { otlp-grpc = {
 }}
 ```
 
-如果 `exporter = "none"`，Codex 会记录事件但不发送任何内容。Exporters 会异步批处理并在 shutdown 时 flush。事件元数据包括服务名、CLI 版本、环境标签、conversation id、模型、沙盒/审批设置，以及按事件记录的字段（参见 [配置参考](https://developers.openai.com/codex/config-reference)）。
+如果 `exporter = "none"`，Codex 会记录事件但不发送任何内容。Exporters 会异步批处理并在 shutdown 时 flush。事件元数据包括服务名、CLI 版本、环境标签、conversation id、模型、沙盒/审批设置，以及按事件记录的字段（参见 [配置参考](zh/pages/16-configuration-reference.md)）。
 
 #### 会发出什么
 
@@ -1797,7 +1804,7 @@ printenv CODEX_ACCESS_TOKEN | codex login --with-access-token
 
 OpenAI 会通过你的 OpenAI Platform 账户按标准 API 费率对 API key 使用量计费。请参阅 [API pricing page](https://openai.com/api/pricing/)。
 
-API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace 访问权限或云服务的某些功能会受到限制或不可用。请在 [Feature availability](https://developers.openai.com/codex/pricing#feature-availability) 中按计划比较支持情况。
+API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace 访问权限或云服务的某些功能会受到限制或不可用。请在 [Feature availability](zh/pages/02-codex-pricing.md#feature-availability) 中按计划比较支持情况。
 
 当你使用 API key 登录时，Codex 使用标准 API 价格，而不是包含在 ChatGPT 计划中的额度。
 
@@ -1809,7 +1816,7 @@ API key 身份验证支持本地 Codex 工作流，但依赖 ChatGPT workspace �
 
 访问令牌适用于可信脚本、调度器和私有 CI runner。对于一般 OpenAI API 调用，请继续使用 Platform API key。
 
-有关设置步骤、权限、轮换和撤销指导，请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+有关设置步骤、权限、轮换和撤销指导，请参阅 [Access tokens](zh/pages/63-access-tokens.md)。
 
 #### 保护你的 Codex cloud 账户
 
@@ -1866,7 +1873,7 @@ forced_chatgpt_workspace_id = "00000000-0000-0000-0000-000000000000"
 
 如果活动凭据与已配置限制不匹配，Codex 会将用户登出并退出。
 
-这些设置通常通过 managed configuration 应用，而不是由每个用户单独设置。请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration)。
+这些设置通常通过 managed configuration 应用，而不是由每个用户单独设置。请参阅 [Managed configuration](zh/pages/67-managed-configuration.md)。
 
 #### 登录诊断
 
@@ -1934,7 +1941,7 @@ docker exec MY_CONTAINER mkdir -p "$CONTAINER_HOME/.codex"
 docker cp ~/.codex/auth.json MY_CONTAINER:"$CONTAINER_HOME/.codex/auth.json"
 ```
 
-有关在可信 CI/CD runner 上使用同一模式的更高级版本，请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](https://developers.openai.com/codex/auth/ci-cd-auth)。该指南解释了如何让 Codex 在正常运行期间刷新 `auth.json`，并将更新后的文件保留给下一个 job。对于自动化，API key 仍然是推荐的默认选择。
+有关在可信 CI/CD runner 上使用同一模式的更高级版本，请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](zh/pages/84-ci-cd-auth.md)。该指南解释了如何让 Codex 在正常运行期间刷新 `auth.json`，并将更新后的文件保留给下一个 job。对于自动化，API key 仍然是推荐的默认选择。
 
 #### 备用方法：通过 SSH 转发 localhost 回调
 
@@ -1950,7 +1957,7 @@ ssh -L 1455:localhost:1455 user@remote
 
 #### 替代模型提供商
 
-当你在配置文件中定义 [custom model provider](https://developers.openai.com/codex/config-advanced#custom-model-providers) 时，可以选择以下身份验证方法之一：
+当你在配置文件中定义 [custom model provider](zh/pages/17-advanced-configuration.md#custom-model-providers) 时，可以选择以下身份验证方法之一：
 
 - **OpenAI 身份验证**：设置 `requires_openai_auth = true` 以使用 OpenAI 身份验证。然后你可以使用 ChatGPT 或 API key 登录。当你通过 LLM 代理服务器访问 OpenAI 模型时，这很有用。当 `requires_openai_auth = true` 时，Codex 会忽略 `env_key`。
 - **环境变量身份验证**：设置 `env_key = "<ENV_VARIABLE_NAME>"`，以使用名为 `<ENV_VARIABLE_NAME>` 的本地环境变量中的提供商专用 API key。
@@ -1971,8 +1978,8 @@ Codex 将用户级配置存储在 `~/.codex/config.toml`。要将设置限定到
 CLI 和 IDE extension 共享相同的配置层。你可以使用这些配置来：
 
 - 设置默认模型和提供商。
-- 配置 [审批策略和沙盒设置](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)。
-- 配置 [MCP servers](https://developers.openai.com/codex/mcp)。
+- 配置 [审批策略和沙盒设置](zh/pages/13-agent-approvals-security.md#sandbox-and-approvals)。
+- 配置 [MCP servers](zh/pages/53-model-context-protocol.md)。
 
 #### 配置优先级
 
@@ -1980,18 +1987,18 @@ Codex 按以下顺序解析值（优先级从高到低）：
 
 1. CLI 标志和 `--config` 覆盖
 2. 项目配置文件：`.codex/config.toml`，按从项目根目录到当前工作目录的顺序排列（最近者优先；仅限可信项目）
-3. 使用 `--profile profile-name` 选择的 [Profile](https://developers.openai.com/codex/config-advanced#profiles) 文件（`~/.codex/profile-name.config.toml`）
+3. 使用 `--profile profile-name` 选择的 [Profile](zh/pages/17-advanced-configuration.md#profiles) 文件（`~/.codex/profile-name.config.toml`）
 4. 用户配置：`~/.codex/config.toml`
 5. 系统配置（如果存在）：Unix 上的 `/etc/codex/config.toml`
 6. 内置默认值
 
-使用该优先级在 `config.toml` 中设置共享默认值，并让 [profile 文件](https://developers.openai.com/codex/config-advanced#profiles) 专注于不同的值。
+使用该优先级在 `config.toml` 中设置共享默认值，并让 [profile 文件](zh/pages/17-advanced-configuration.md#profiles) 专注于不同的值。
 
 如果你将项目标记为 untrusted，Codex 会跳过项目范围 `.codex/` 层，包括项目本地配置、hooks 和 rules。用户和系统配置仍会加载，包括用户/全局 hooks 和 rules。
 
-有关通过 `-c`/`--config` 进行一次性覆盖（包括 TOML 引号规则），请参阅 [高级配置](https://developers.openai.com/codex/config-advanced#one-off-overrides-from-the-cli)。
+有关通过 `-c`/`--config` 进行一次性覆盖（包括 TOML 引号规则），请参阅 [高级配置](zh/pages/17-advanced-configuration.md#one-off-overrides-from-the-cli)。
 
-在托管机器上，你的组织还可以通过 `requirements.toml` 强制执行约束（例如，不允许 `approval_policy = "never"` 或 `sandbox_mode = "danger-full-access"`）。请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Admin-enforced requirements](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml)。
+在托管机器上，你的组织还可以通过 `requirements.toml` 强制执行约束（例如，不允许 `approval_policy = "never"` 或 `sandbox_mode = "danger-full-access"`）。请参阅 [Managed configuration](zh/pages/67-managed-configuration.md) 和 [Admin-enforced requirements](zh/pages/67-managed-configuration.md#admin-enforced-requirements-requirementstoml)。
 
 #### 常见配置选项
 
@@ -2013,7 +2020,7 @@ model = "gpt-5.5"
 approval_policy = "on-request"
 ```
 
-有关 `untrusted`、`on-request` 和 `never` 的行为差异，请参阅 [不显示审批提示运行](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts) 和 [常见沙盒和审批组合](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)。
+有关 `untrusted`、`on-request` 和 `never` 的行为差异，请参阅 [不显示审批提示运行](zh/pages/13-agent-approvals-security.md#run-without-approval-prompts) 和 [常见沙盒和审批组合](zh/pages/13-agent-approvals-security.md#common-sandbox-and-approval-combinations)。
 
 #### 沙盒级别
 
@@ -2023,11 +2030,11 @@ approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 ```
 
-有关逐模式行为（包括受保护的 `.git`/`.codex` 路径和网络默认值），请参阅 [沙盒和审批](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)、[可写根目录中的受保护路径](https://developers.openai.com/codex/agent-approvals-security#protected-paths-in-writable-roots) 和 [网络访问](https://developers.openai.com/codex/agent-approvals-security#network-access)。
+有关逐模式行为（包括受保护的 `.git`/`.codex` 路径和网络默认值），请参阅 [沙盒和审批](zh/pages/13-agent-approvals-security.md#sandbox-and-approvals)、[可写根目录中的受保护路径](zh/pages/13-agent-approvals-security.md#protected-paths-in-writable-roots) 和 [网络访问](zh/pages/13-agent-approvals-security.md#network-access)。
 
 #### 权限配置档
 
-Codex 还支持用于可复用文件系统和网络策略的命名权限 profiles。内置 profiles 为 `:read-only`、`:workspace` 和 `:danger-full-access`。自定义 profiles 使用 `[permissions.]` 表和匹配的 `default_permissions` 值。请参阅 [Permissions](https://developers.openai.com/codex/permissions)。
+Codex 还支持用于可复用文件系统和网络策略的命名权限 profiles。内置 profiles 为 `:read-only`、`:workspace` 和 `:danger-full-access`。自定义 profiles 使用 `[permissions.]` 表和匹配的 `default_permissions` 值。请参阅 [Permissions](zh/pages/77-permissions.md)。
 
 #### Windows 沙盒模式
 
@@ -2041,7 +2048,7 @@ sandbox = "elevated"   # Recommended
 
 #### 网页搜索模式
 
-Codex 默认为本地任务启用 web search，并从 web search cache 提供结果。该缓存是 OpenAI 维护的 Web 结果索引，因此 cached mode 会返回预先索引的结果，而不是抓取实时页面。这降低了暴露于任意实时内容中 prompt injection 的风险，但你仍应将 Web 结果视为不可信。如果你使用 `--yolo` 或其他 [full access 沙盒设置](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)，web search 默认使用实时结果。使用 `web_search` 选择模式：
+Codex 默认为本地任务启用 web search，并从 web search cache 提供结果。该缓存是 OpenAI 维护的 Web 结果索引，因此 cached mode 会返回预先索引的结果，而不是抓取实时页面。这降低了暴露于任意实时内容中 prompt injection 的风险，但你仍应将 Web 结果视为不可信。如果你使用 `--yolo` 或其他 [full access 沙盒设置](zh/pages/13-agent-approvals-security.md#common-sandbox-and-approval-combinations)，web search 默认使用实时结果。使用 `web_search` 选择模式：
 
 - `"cached"`（默认）从 web search cache 提供结果。
 - `"live"` 从 Web 获取最新数据（等同于 `--search`）。
@@ -2124,9 +2131,9 @@ shell_snapshot = true           # Speed up repeated commands
 | -------------------- | :-------------------: | ------------ | ---------------------------------------------------------------------------------------- |
 | `apps`               |         false         | Experimental | 启用 ChatGPT Apps/connectors 支持                                                   |
 | `codex_git_commit`   |         false         | Experimental | 启用 Codex 生成的 git commits 和 commit attribution trailers                       |
-| `hooks`              |         true          | Stable       | 启用来自 `hooks.json` 或 inline `[hooks]` 的 lifecycle hooks。参见 [Hooks](https://developers.openai.com/codex/hooks)。 |
+| `hooks`              |         true          | Stable       | 启用来自 `hooks.json` 或 inline `[hooks]` 的 lifecycle hooks。参见 [Hooks](zh/pages/73-hooks.md)。 |
 | `fast_mode`          |         true          | Stable       | 启用 Fast mode 选择和 `service_tier = "fast"` 路径                          |
-| `memories`           |         false         | Stable       | 启用 [Memories](https://developers.openai.com/codex/memories)                                                       |
+| `memories`           |         false         | Stable       | 启用 [Memories](zh/pages/74-memories.md)                                                       |
 | `multi_agent`        |         true          | Stable       | 启用 subagent 协作工具                                                      |
 | `personality`        |         true          | Stable       | 启用 personality 选择控制                                                    |
 | `shell_snapshot`     |         true          | Stable       | 为你的 shell environment 创建快照，以加速重复命令                            |
@@ -2137,11 +2144,11 @@ shell_snapshot = true           # Speed up repeated commands
 | `web_search_cached`  |         false         | Deprecated   | 旧版开关，在未设置时映射到 `web_search = "cached"`                            |
 | `web_search_request` |         false         | Deprecated   | 旧版开关，在未设置时映射到 `web_search = "live"`                              |
 
-Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](https://developers.openai.com/codex/feature-maturity) 了解如何解释这些标签。
+Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](zh/pages/03-feature-maturity.md) 了解如何解释这些标签。
 
 省略 feature keys 以保留其默认值。
 
-有关 lifecycle hook 配置，请参阅 [Hooks](https://developers.openai.com/codex/hooks)。
+有关 lifecycle hook 配置，请参阅 [Hooks](zh/pages/73-hooks.md)。
 
 #### 启用功能
 
@@ -2176,7 +2183,7 @@ Source: [Codex Models](https://developers.openai.com/codex/models.md)
 
 #### 配置默认本地模型
 
-Codex CLI 和 IDE extension 使用相同的 `config.toml` [配置文件](https://developers.openai.com/codex/config-basic)。要指定模型，请向配置文件添加 `model` 条目。如果你未指定模型，Codex app、CLI 或 IDE Extension 会默认使用推荐模型。
+Codex CLI 和 IDE extension 使用相同的 `config.toml` [配置文件](zh/pages/19-config-basics.md)。要指定模型，请向配置文件添加 `model` 条目。如果你未指定模型，Codex app、CLI 或 IDE Extension 会默认使用推荐模型。
 
 ```toml
 model = "gpt-5.5"
@@ -2204,11 +2211,11 @@ Source: [Sample Configuration](https://developers.openai.com/codex/config-sample
 
 有关解释和指导，请参阅：
 
-- [配置基础](https://developers.openai.com/codex/config-basic)
-- [高级配置](https://developers.openai.com/codex/config-advanced)
-- [配置参考](https://developers.openai.com/codex/config-reference)
-- [沙盒和审批](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)
-- [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration)
+- [配置基础](zh/pages/19-config-basics.md)
+- [高级配置](zh/pages/17-advanced-configuration.md)
+- [配置参考](zh/pages/16-configuration-reference.md)
+- [沙盒和审批](zh/pages/13-agent-approvals-security.md#sandbox-and-approvals)
+- [托管配置](zh/pages/67-managed-configuration.md)
 
 请将下面的片段用作参考。只将你需要的键和章节复制到 `~/.codex/config.toml`（或项目范围的 `.codex/config.toml`），然后根据你的设置调整值。
 
@@ -3306,7 +3313,7 @@ Source: [Command line options](https://developers.openai.com/codex/cli/reference
 
 本页列出每个已记录的 Codex CLI 命令和标志。使用交互式表格按键或说明搜索。每个部分都会指出该选项是 stable 还是 experimental，并标出有风险的组合。
 
-CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传入的任何 `-c key=value` 覆盖都会在该次调用中优先。更多信息请参阅 [Config basics](https://developers.openai.com/codex/config-basic#configuration-precedence)。
+CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传入的任何 `-c key=value` 覆盖都会在该次调用中优先。更多信息请参阅 [Config basics](zh/pages/19-config-basics.md#configuration-precedence)。
 
 #### 全局标志
 
@@ -3336,32 +3343,32 @@ CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传�
 
 #### 命令概览
 
-Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](https://developers.openai.com/codex/feature-maturity) 了解如何解释这些标签。
+Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](zh/pages/03-feature-maturity.md) 了解如何解释这些标签。
 
 | Key                                                                                                     | Maturity       | Default | Details                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------- | -------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [`codex`](https://developers.openai.com/codex/cli/reference#codex-interactive)                                                       | `stable`       |         | 启动 terminal UI。接受上面的全局标志，以及可选提示词或图像附件。                                    |
-| [`codex app`](https://developers.openai.com/codex/cli/reference#codex-app)                                                           | `stable`       |         | 在 macOS 或 Windows 上启动 Codex desktop app。在 macOS 上，Codex 可以打开工作区路径；在 Windows 上，Codex 会打印要打开的路径。 |
-| [`codex app-server`](https://developers.openai.com/codex/cli/reference#codex-app-server)                                             | `experimental` |         | 启动 Codex app server，用于通过 stdio、WebSocket 或 Unix socket 进行本地开发或调试。                                 |
-| [`codex apply`](https://developers.openai.com/codex/cli/reference#codex-apply)                                                       | `stable`       |         | 将 Codex Cloud task 生成的最新 diff 应用到你的本地 working tree。Alias：`codex a`。                                     |
-| [`codex cloud`](https://developers.openai.com/codex/cli/reference#codex-cloud)                                                       | `experimental` |         | 从终端浏览或执行 Codex Cloud tasks，而不打开 TUI。Alias：`codex cloud-tasks`。                              |
-| [`codex completion`](https://developers.openai.com/codex/cli/reference#codex-completion)                                             | `stable`       |         | 为 Bash、Zsh、Fish 或 PowerShell 生成 shell completion scripts。                                                                   |
-| [`codex debug app-server send-message-v2`](https://developers.openai.com/codex/cli/reference#codex-debug-app-server-send-message-v2) | `experimental` |         | 通过内置 test client 发送单条 V2 message 来调试 app-server。                                                       |
-| [`codex debug models`](https://developers.openai.com/codex/cli/reference#codex-debug-models)                                         | `experimental` |         | 打印 Codex 看到的原始 model catalog，包括只检查捆绑 catalog 的选项。                                        |
-| [`codex doctor`](https://developers.openai.com/codex/cli/reference#codex-doctor)                                                     | `stable`       |         | 为本地安装、配置、身份验证、运行时、Git、终端、app-server 和线程清单问题生成诊断报告。                 |
-| [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)                                                         | `stable`       |         | 非交互式运行 Codex。Alias：`codex e`。将结果流式输出到 stdout 或 JSONL，并可选择恢复之前的会话。               |
-| [`codex execpolicy`](https://developers.openai.com/codex/cli/reference#codex-execpolicy)                                             | `experimental` |         | 评估 execpolicy rule files，并查看某个命令会被允许、提示还是阻止。                                        |
-| [`codex features`](https://developers.openai.com/codex/cli/reference#codex-features)                                                 | `stable`       |         | 列出 feature flags，并在 `config.toml` 中持久启用或禁用它们。                                                            |
-| [`codex fork`](https://developers.openai.com/codex/cli/reference#codex-fork)                                                         | `stable`       |         | 将之前的交互式会话 fork 为新的线程，同时保留原 transcript。                                              |
-| [`codex login`](https://developers.openai.com/codex/cli/reference#codex-login)                                                       | `stable`       |         | 使用 ChatGPT OAuth、device auth、API key 或通过 stdin 管道传入的 access token 对 Codex 进行身份验证。                                   |
-| [`codex logout`](https://developers.openai.com/codex/cli/reference#codex-logout)                                                     | `stable`       |         | 移除已存储的身份验证凭据。                                                                                               |
-| [`codex mcp`](https://developers.openai.com/codex/cli/reference#codex-mcp)                                                           | `experimental` |         | 管理 Model Context Protocol servers（list、add、remove、authenticate）。                                                                |
-| [`codex mcp-server`](https://developers.openai.com/codex/cli/reference#codex-mcp-server)                                             | `experimental` |         | 通过 stdio 将 Codex 本身作为 MCP server 运行。当另一个 agent 使用 Codex 时很有用。                                                 |
-| [`codex plugin marketplace`](https://developers.openai.com/codex/cli/reference#codex-plugin-marketplace)                             | `experimental` |         | 从 Git 或本地源 add、list、upgrade 或 remove plugin marketplaces。                                                            |
-| [`codex remote-control`](https://developers.openai.com/codex/cli/reference#codex-remote-control)                                     | `experimental` |         | 确保本地 app-server daemon 正在运行并启用了 remote-control 支持。                                                      |
-| [`codex resume`](https://developers.openai.com/codex/cli/reference#codex-resume)                                                     | `stable`       |         | 按 ID 继续之前的交互式会话，或恢复最近的对话。                                                   |
-| [`codex sandbox`](https://developers.openai.com/codex/cli/reference#codex-sandbox)                                                   | `experimental` |         | 在 Codex 提供的 macOS、Linux 或 Windows 沙盒中运行任意命令。                                                        |
-| [`codex update`](https://developers.openai.com/codex/cli/reference#codex-update)                                                     | `stable`       |         | 当已安装版本支持 self-update 时，检查并应用 Codex CLI update。                                                 |
+| [`codex`](zh/pages/22-cli-command-reference.md#codex-interactive)                                                       | `stable`       |         | 启动 terminal UI。接受上面的全局标志，以及可选提示词或图像附件。                                    |
+| [`codex app`](zh/pages/22-cli-command-reference.md#codex-app)                                                           | `stable`       |         | 在 macOS 或 Windows 上启动 Codex desktop app。在 macOS 上，Codex 可以打开工作区路径；在 Windows 上，Codex 会打印要打开的路径。 |
+| [`codex app-server`](zh/pages/22-cli-command-reference.md#codex-app-server)                                             | `experimental` |         | 启动 Codex app server，用于通过 stdio、WebSocket 或 Unix socket 进行本地开发或调试。                                 |
+| [`codex apply`](zh/pages/22-cli-command-reference.md#codex-apply)                                                       | `stable`       |         | 将 Codex Cloud task 生成的最新 diff 应用到你的本地 working tree。Alias：`codex a`。                                     |
+| [`codex cloud`](zh/pages/22-cli-command-reference.md#codex-cloud)                                                       | `experimental` |         | 从终端浏览或执行 Codex Cloud tasks，而不打开 TUI。Alias：`codex cloud-tasks`。                              |
+| [`codex completion`](zh/pages/22-cli-command-reference.md#codex-completion)                                             | `stable`       |         | 为 Bash、Zsh、Fish 或 PowerShell 生成 shell completion scripts。                                                                   |
+| [`codex debug app-server send-message-v2`](zh/pages/22-cli-command-reference.md#codex-debug-app-server-send-message-v2) | `experimental` |         | 通过内置 test client 发送单条 V2 message 来调试 app-server。                                                       |
+| [`codex debug models`](zh/pages/22-cli-command-reference.md#codex-debug-models)                                         | `experimental` |         | 打印 Codex 看到的原始 model catalog，包括只检查捆绑 catalog 的选项。                                        |
+| [`codex doctor`](zh/pages/22-cli-command-reference.md#codex-doctor)                                                     | `stable`       |         | 为本地安装、配置、身份验证、运行时、Git、终端、app-server 和线程清单问题生成诊断报告。                 |
+| [`codex exec`](zh/pages/22-cli-command-reference.md#codex-exec)                                                         | `stable`       |         | 非交互式运行 Codex。Alias：`codex e`。将结果流式输出到 stdout 或 JSONL，并可选择恢复之前的会话。               |
+| [`codex execpolicy`](zh/pages/22-cli-command-reference.md#codex-execpolicy)                                             | `experimental` |         | 评估 execpolicy rule files，并查看某个命令会被允许、提示还是阻止。                                        |
+| [`codex features`](zh/pages/22-cli-command-reference.md#codex-features)                                                 | `stable`       |         | 列出 feature flags，并在 `config.toml` 中持久启用或禁用它们。                                                            |
+| [`codex fork`](zh/pages/22-cli-command-reference.md#codex-fork)                                                         | `stable`       |         | 将之前的交互式会话 fork 为新的线程，同时保留原 transcript。                                              |
+| [`codex login`](zh/pages/22-cli-command-reference.md#codex-login)                                                       | `stable`       |         | 使用 ChatGPT OAuth、device auth、API key 或通过 stdin 管道传入的 access token 对 Codex 进行身份验证。                                   |
+| [`codex logout`](zh/pages/22-cli-command-reference.md#codex-logout)                                                     | `stable`       |         | 移除已存储的身份验证凭据。                                                                                               |
+| [`codex mcp`](zh/pages/22-cli-command-reference.md#codex-mcp)                                                           | `experimental` |         | 管理 Model Context Protocol servers（list、add、remove、authenticate）。                                                                |
+| [`codex mcp-server`](zh/pages/22-cli-command-reference.md#codex-mcp-server)                                             | `experimental` |         | 通过 stdio 将 Codex 本身作为 MCP server 运行。当另一个 agent 使用 Codex 时很有用。                                                 |
+| [`codex plugin marketplace`](zh/pages/22-cli-command-reference.md#codex-plugin-marketplace)                             | `experimental` |         | 从 Git 或本地源 add、list、upgrade 或 remove plugin marketplaces。                                                            |
+| [`codex remote-control`](zh/pages/22-cli-command-reference.md#codex-remote-control)                                     | `experimental` |         | 确保本地 app-server daemon 正在运行并启用了 remote-control 支持。                                                      |
+| [`codex resume`](zh/pages/22-cli-command-reference.md#codex-resume)                                                     | `stable`       |         | 按 ID 继续之前的交互式会话，或恢复最近的对话。                                                   |
+| [`codex sandbox`](zh/pages/22-cli-command-reference.md#codex-sandbox)                                                   | `experimental` |         | 在 Codex 提供的 macOS、Linux 或 Windows 沙盒中运行任意命令。                                                        |
+| [`codex update`](zh/pages/22-cli-command-reference.md#codex-update)                                                     | `stable`       |         | 当已安装版本支持 self-update 时，检查并应用 Codex CLI update。                                                 |
 
 #### 命令详情
 
@@ -3635,11 +3642,11 @@ yarnpkg.com
 
 Source: [Automations](https://developers.openai.com/codex/app/automations.md)
 
-在后台自动执行重复任务。Codex 会将发现添加到收件箱；如果没有要报告的内容，则自动归档任务。你可以将自动化与 [skills](https://developers.openai.com/codex/skills) 结合，用于更复杂的任务。
+在后台自动执行重复任务。Codex 会将发现添加到收件箱；如果没有要报告的内容，则自动归档任务。你可以将自动化与 [skills](zh/pages/48-agent-skills.md) 结合，用于更复杂的任务。
 
 对于限定到项目的自动化，运行本地 Codex app 的机器必须开机，Codex 必须正在运行，并且在自动化计划运行时，所选项目仍必须在磁盘上可用。
 
-在 Git 仓库中，你可以选择自动化在你的本地项目中运行，还是在新的 [worktree](https://developers.openai.com/codex/app/worktrees) 上运行。两种选项都会在后台运行。Worktree 会将自动化更改与未完成的本地工作分开，而在本地项目中运行可能会修改你仍在处理的文件。在非版本控制项目中，自动化会直接在项目目录中运行。
+在 Git 仓库中，你可以选择自动化在你的本地项目中运行，还是在新的 [worktree](zh/pages/42-worktrees.md) 上运行。两种选项都会在后台运行。Worktree 会将自动化更改与未完成的本地工作分开，而在本地项目中运行可能会修改你仍在处理的文件。在非版本控制项目中，自动化会直接在项目目录中运行。
 
 你也可以将模型和推理强度保持为默认设置，或者在想要更精确控制自动化运行方式时显式选择它们。
 
@@ -3651,11 +3658,11 @@ Source: [Automations](https://developers.openai.com/codex/app/automations.md)
 
 独立自动化会按计划启动新的运行，并在 Triage 中报告结果。当每次运行应保持独立，或一个自动化应跨一个或多个项目运行时，请使用它们。如果需要自定义节奏，请选择自定义计划并输入 cron 语法。
 
-对于 Git 仓库，每个自动化可以在你的本地项目中运行，也可以在专用后台 [worktree](https://developers.openai.com/codex/app/features#worktree-support) 上运行。当你想把自动化更改与未完成的本地工作隔离时，请使用 worktree。当你希望自动化直接在主 checkout 中工作时，请使用本地模式，但要记住它可能会更改你正在主动编辑的文件。在非版本控制项目中，自动化直接在项目目录中运行。你可以让同一个自动化在多个项目上运行。
+对于 Git 仓库，每个自动化可以在你的本地项目中运行，也可以在专用后台 [worktree](zh/pages/27-codex-app-features.md#worktree-support) 上运行。当你想把自动化更改与未完成的本地工作隔离时，请使用 worktree。当你希望自动化直接在主 checkout 中工作时，请使用本地模式，但要记住它可能会更改你正在主动编辑的文件。在非版本控制项目中，自动化直接在项目目录中运行。你可以让同一个自动化在多个项目上运行。
 
-自动化使用你的默认沙盒设置。在 read-only 模式下，如果工具调用需要修改文件、访问网络或使用你计算机上的应用，则会失败。启用 full access 时，后台自动化会带来更高风险。你可以在 [设置](https://developers.openai.com/codex/app/settings) 中调整沙盒设置，并使用 [规则](https://developers.openai.com/codex/rules) 有选择地将命令加入允许列表。
+自动化使用你的默认沙盒设置。在 read-only 模式下，如果工具调用需要修改文件、访问网络或使用你计算机上的应用，则会失败。启用 full access 时，后台自动化会带来更高风险。你可以在 [设置](zh/pages/28-codex-app-settings.md) 中调整沙盒设置，并使用 [规则](zh/pages/54-rules.md) 有选择地将命令加入允许列表。
 
-自动化可以使用 Codex 可用的相同插件和 skills。为使自动化易于维护并可在团队间共享，请使用 [skills](https://developers.openai.com/codex/skills) 定义动作，并提供工具和上下文。你可以在自动化中使用 `$skill-name` 显式触发某个 skill。
+自动化可以使用 Codex 可用的相同插件和 skills。为使自动化易于维护并可在团队间共享，请使用 [skills](zh/pages/48-agent-skills.md) 定义动作，并提供工具和上下文。你可以在自动化中使用 `$skill-name` 显式触发某个 skill。
 
 #### 让 Codex 创建或更新自动化
 
@@ -3704,10 +3711,10 @@ Skills 也可以创建或更新自动化。例如，用于看护 pull request �
 自动化会无人值守运行，并使用你的默认沙盒设置。
 
 - 如果你的沙盒模式是 **read-only**，当工具调用需要修改文件、访问网络，或使用你计算机上的应用时会失败。请考虑将沙盒设置更新为 workspace write。
-- 如果你的沙盒模式是 **workspace-write**，当工具调用需要修改工作区外部的文件、访问网络，或使用你计算机上的应用时会失败。你可以使用 [规则](https://developers.openai.com/codex/rules) 有选择地将命令加入允许列表，使其在沙盒外运行。
-- 如果你的沙盒模式是 **full access**，后台自动化会带来更高风险，因为 Codex 可能在不询问的情况下更改文件、运行命令并访问网络。请考虑将沙盒设置更新为 workspace write，并使用 [规则](https://developers.openai.com/codex/rules) 有选择地定义智能体可以用 full access 运行哪些命令。
+- 如果你的沙盒模式是 **workspace-write**，当工具调用需要修改工作区外部的文件、访问网络，或使用你计算机上的应用时会失败。你可以使用 [规则](zh/pages/54-rules.md) 有选择地将命令加入允许列表，使其在沙盒外运行。
+- 如果你的沙盒模式是 **full access**，后台自动化会带来更高风险，因为 Codex 可能在不询问的情况下更改文件、运行命令并访问网络。请考虑将沙盒设置更新为 workspace write，并使用 [规则](zh/pages/54-rules.md) 有选择地定义智能体可以用 full access 运行哪些命令。
 
-如果你处于托管环境，管理员可以使用管理员强制要求限制这些行为。例如，他们可以禁止 `approval_policy = "never"`，或约束允许的沙盒模式。请参阅 [管理员强制要求 (`requirements.toml`)](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml)。
+如果你处于托管环境，管理员可以使用管理员强制要求限制这些行为。例如，他们可以禁止 `approval_policy = "never"`，或约束允许的沙盒模式。请参阅 [管理员强制要求 (`requirements.toml`)](zh/pages/67-managed-configuration.md#admin-enforced-requirements-requirementstoml)。
 
 当你的组织策略允许时，自动化使用 `approval_policy = "never"`。如果管理员要求不允许 `approval_policy = "never"`，自动化会回退到你所选模式的审批行为。
 
@@ -3725,7 +3732,7 @@ Source: [Cloud environments](https://developers.openai.com/codex/cloud/environme
 
 1. Codex 创建容器，并在所选分支或 commit SHA 上 checkout 你的仓库。
 2. Codex 运行你的 setup script，并在恢复缓存容器时运行可选的 maintenance script。
-3. Codex 应用你的互联网访问设置。Setup scripts 会带互联网访问权限运行。智能体互联网访问默认关闭，但如有需要，你可以启用受限或不受限访问。请参阅 [智能体互联网访问](https://developers.openai.com/codex/cloud/internet-access)。
+3. Codex 应用你的互联网访问设置。Setup scripts 会带互联网访问权限运行。智能体互联网访问默认关闭，但如有需要，你可以启用受限或不受限访问。请参阅 [智能体互联网访问](zh/pages/23-agent-internet-access.md)。
 4. 智能体循环运行终端命令。它编辑代码、运行检查，并尝试验证其工作。如果你的仓库包含 `AGENTS.md`，智能体会用它查找项目专属的 lint 和 test 命令。
 5. 智能体完成后，会显示其回答以及它更改过的任何文件的 diff。你可以打开 PR 或提出后续问题。
 
@@ -3787,7 +3794,7 @@ Codex 会缓存容器状态最多 12 小时，以加速新任务和后续任务�
 
 #### 互联网访问和网络代理
 
-互联网访问在 setup script 阶段可用，用于安装依赖。在智能体阶段，互联网访问默认关闭，但你可以配置受限或不受限访问。请参阅 [智能体互联网访问](https://developers.openai.com/codex/cloud/internet-access)。
+互联网访问在 setup script 阶段可用，用于安装依赖。在智能体阶段，互联网访问默认关闭，但你可以配置受限或不受限访问。请参阅 [智能体互联网访问](zh/pages/23-agent-internet-access.md)。
 
 出于安全和防止滥用目的，环境在 HTTP/HTTPS 网络代理后运行。所有出站互联网流量都会通过此代理。
 
@@ -3839,7 +3846,7 @@ Slash commands 让你无需离开线程输入框即可控制 Codex。可用命�
 1. 在线程输入框中输入 `/`。
 2. 从列表中选择命令，或继续输入以过滤（例如 `/status`）。
 
-你也可以通过在线程输入框中输入 `$` 显式调用 skills。请参阅 [Skills](https://developers.openai.com/codex/skills)。
+你也可以通过在线程输入框中输入 `$` 显式调用 skills。请参阅 [Skills](zh/pages/48-agent-skills.md)。
 
 已启用的 skills 也会出现在 slash command 列表中。
 
@@ -3869,7 +3876,7 @@ goals = true
 
 当 goal 处于活动状态时，app 会在输入框上方显示进度。使用该进度行中的按钮暂停或恢复目标、编辑目标文本，或清除目标，而不是输入另一个 slash command。Goal 运行时，你仍可以用后续消息继续引导 Codex。
 
-有关编写有效目标的指导，请参阅 [Goal mode](https://developers.openai.com/codex/prompting#goal-mode)。
+有关编写有效目标的指导，请参阅 [目标模式](zh/pages/07-prompting.md#goal-mode)。
 
 #### 深度链接
 
@@ -3935,7 +3942,7 @@ Codex app 注册了 `codex://` URL scheme，因此链接可以直接打开 app �
 
 #### 插件
 
-Plugin links 会根据你是在打开插件、从 marketplace 安装，还是使用本地 `marketplace.json` 而采用不同形式。有关插件基础，请参阅 [Plugins](https://developers.openai.com/codex/plugins)。有关本地或仓库 marketplace 设置，请参阅 [Build plugins](https://developers.openai.com/codex/plugins/build#build-your-own-curated-plugin-list)。
+Plugin links 会根据你是在打开插件、从 marketplace 安装，还是使用本地 `marketplace.json` 而采用不同形式。有关插件基础，请参阅 [Plugins](zh/pages/78-plugins.md)。有关本地或仓库 marketplace 设置，请参阅 [Build plugins](zh/pages/69-build-plugins.md#build-your-own-curated-plugin-list)。
 
 #### 插件详情
 
@@ -3956,7 +3963,7 @@ Codex 生成的 plugin links 也可以包含这些查询参数。手写链接时
 
 #### 本地插件
 
-有关本地或仓库 marketplace 设置，请参阅 [Build plugins](https://developers.openai.com/codex/plugins/build#build-your-own-curated-plugin-list)。
+有关本地或仓库 marketplace 设置，请参阅 [Build plugins](zh/pages/69-build-plugins.md#build-your-own-curated-plugin-list)。
 
 | Deep link                           | 打开                                                 |
 | ----------------------------------- | ---------------------------------------------------- |
@@ -3983,8 +3990,8 @@ Codex 生成的 plugin links 也可以包含这些查询参数。手写链接时
 
 #### App 命令参考
 
-- [Features](https://developers.openai.com/codex/app/features)
-- [Settings](https://developers.openai.com/codex/app/settings)
+- [Features](zh/pages/27-codex-app-features.md)
+- [Settings](zh/pages/28-codex-app-settings.md)
 
 ### Codex 应用功能
 
@@ -4002,29 +4009,29 @@ Codex app 是专注于并行处理 Codex 线程的桌面体验，内置 worktree
 
 当你的 Codex 桌面 app 中可用时，你可以要求 Codex 管理本地项目或 worktree 中的线程。例如，要求它查找相关线程、继续现有线程，或固定或归档一个线程。要创建独立的后台线程，请明确提出该请求：`Create a separate background thread in a worktree for this project to update the tests.`
 
-如果你使用过 [Codex CLI](https://developers.openai.com/codex/cli)，项目就像是在特定目录中启动会话。
+如果你使用过 [Codex CLI](zh/pages/45-codex-cli.md)，项目就像是在特定目录中启动会话。
 
-如果你在包含两个或更多应用或软件包的单个仓库中工作，请将不同项目拆分为单独的 app 项目，使 [沙盒](https://developers.openai.com/codex/agent-approvals-security) 只包含该项目的文件。
+如果你在包含两个或更多应用或软件包的单个仓库中工作，请将不同项目拆分为单独的 app 项目，使 [沙盒](zh/pages/13-agent-approvals-security.md) 只包含该项目的文件。
 
 #### 技能支持
 
-Codex app 支持与 CLI 和 IDE Extension 相同的 [agent skills](https://developers.openai.com/codex/skills)。你也可以点击侧边栏中的 Skills，查看和探索团队在不同项目中创建的新 skills。
+Codex app 支持与 CLI 和 IDE Extension 相同的 [agent skills](zh/pages/48-agent-skills.md)。你也可以点击侧边栏中的 Skills，查看和探索团队在不同项目中创建的新 skills。
 
 #### 自动化
 
-你还可以将 skills 与 [自动化](https://developers.openai.com/codex/app/automations) 结合，以执行日常任务，例如评估遥测中的错误并提交修复，或创建近期代码库变更报告。对于应保持在一个线程中的持续工作，请使用 [线程自动化](https://developers.openai.com/codex/app/automations#thread-automations)。
+你还可以将 skills 与 [自动化](zh/pages/24-automations.md) 结合，以执行日常任务，例如评估遥测中的错误并提交修复，或创建近期代码库变更报告。对于应保持在一个线程中的持续工作，请使用 [线程自动化](zh/pages/24-automations.md#thread-automations)。
 
 #### 模式
 
 每个线程都在所选模式中运行。启动线程时，你可以选择：
 
 - **Local**：直接在当前项目目录中工作。
-- **Worktree**：在 Git worktree 中隔离更改。[Learn more](https://developers.openai.com/codex/app/worktrees)。
+- **Worktree**：在 Git worktree 中隔离更改。[Learn more](zh/pages/42-worktrees.md)。
 - **Cloud**：在已配置的云环境中远程运行。
 
 **Local** 和 **Worktree** 线程都会在你的计算机上运行。
 
-有关完整术语表和概念，请浏览 [概念部分](https://developers.openai.com/codex/prompting)。
+有关完整术语表和概念，请浏览 [概念部分](zh/pages/07-prompting.md)。
 
 #### 内置 Git 工具
 
@@ -4044,7 +4051,7 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 自动化会在 Git 仓库的专用后台 worktree 中运行，在非版本控制项目中则直接在项目目录中运行。
 
-[了解如何在 Codex app 中使用 worktrees。](https://developers.openai.com/codex/app/worktrees)
+[了解如何在 Codex app 中使用 worktrees。](zh/pages/42-worktrees.md)
 
 #### 集成终端
 
@@ -4059,7 +4066,7 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 - `pnpm test` 或 `npm test`
 - `pnpm run lint` 或类似项目命令
 
-如果你定期运行某个任务，可以在 [本地环境](https://developers.openai.com/codex/app/local-environments) 中定义一个 **action**，以向 Codex app 窗口顶部添加快捷按钮。
+如果你定期运行某个任务，可以在 [本地环境](zh/pages/37-local-environments.md) 中定义一个 **action**，以向 Codex app 窗口顶部添加快捷按钮。
 
 请注意，Cmd+K 会在 Codex app 中打开命令面板。它不会清空终端。要清空终端，请使用 Ctrl+L。
 
@@ -4067,7 +4074,7 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 在 Windows 上，Codex 可以在 PowerShell 中原生运行并使用原生 Windows 沙盒，而不要求 WSL 或虚拟机。这让你可以继续使用 Windows 原生工作流，同时保留有边界的权限。
 
-[了解更多 Windows 设置和沙盒信息](https://developers.openai.com/codex/app/windows)。
+[了解更多 Windows 设置和沙盒信息](zh/pages/41-windows-app.md)。
 
 #### 语音听写
 
@@ -4081,17 +4088,17 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 #### 应用内浏览器
 
-使用 [应用内浏览器](https://developers.openai.com/codex/app/browser) 在迭代 Web app 时预览、审查和评论本地开发服务器、基于文件的预览，以及不需要登录的公开页面。
+使用 [应用内浏览器](zh/pages/36-in-app-browser.md) 在迭代 Web app 时预览、审查和评论本地开发服务器、基于文件的预览，以及不需要登录的公开页面。
 
 应用内浏览器不支持身份验证流程、已登录页面、你的常规浏览器 profile、cookies、扩展或现有标签页。
 
 使用浏览器评论标记页面上的特定元素或区域，然后要求 Codex 处理该反馈。
 
-当你希望 Codex 直接操作页面时，请对本地开发服务器和基于文件的页面使用 [browser use](https://developers.openai.com/codex/app/browser#browser-use)。你可以从设置管理 Browser plugin、允许的网站和阻止的网站。
+当你希望 Codex 直接操作页面时，请对本地开发服务器和基于文件的页面使用 [browser use](zh/pages/36-in-app-browser.md#browser-use)。你可以从设置管理 Browser plugin、允许的网站和阻止的网站。
 
 #### 计算机使用
 
-[Computer use](https://developers.openai.com/codex/app/computer-use) 通过查看、点击和输入，帮助 Codex 操作 macOS 或 Windows 应用。这对于测试桌面应用、检查浏览器或模拟器流程、处理无法作为插件使用的数据源、更改 app 设置，以及复现仅 GUI 可见的 bug 很有用。
+[Computer use](zh/pages/35-computer-use.md) 通过查看、点击和输入，帮助 Codex 操作 macOS 或 Windows 应用。这对于测试桌面应用、检查浏览器或模拟器流程、处理无法作为插件使用的数据源、更改 app 设置，以及复现仅 GUI 可见的 bug 很有用。
 
 由于 computer use 可能影响项目工作区外部的应用和系统状态，请保持任务范围狭窄，并在继续前审查权限提示。
 
@@ -4109,7 +4116,7 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 #### 与 IDE 扩展同步
 
-如果你已在编辑器中安装 [Codex IDE Extension](https://developers.openai.com/codex/ide)，当 Codex app 和 IDE Extension 位于同一项目时，它们会自动同步。
+如果你已在编辑器中安装 [Codex IDE Extension](zh/pages/46-codex-ide-extension.md)，当 Codex app 和 IDE Extension 位于同一项目时，它们会自动同步。
 
 同步后，你会在 Codex app 输入框中看到 **IDE context** 选项。启用 "Auto context" 后，Codex app 会跟踪你正在查看的文件，因此你可以间接引用它们（例如，“What's this file about?”）。你也可以在 IDE Extension 中看到 Codex app 中运行的线程，反之亦然。
 
@@ -4119,7 +4126,7 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 自动化也可以附加到单个线程。这些线程自动化是周期性唤醒，会保留线程上下文，使 Codex 可以检查长时间运行的工作、轮询来源获取新信息，或继续跟进循环。将它们用于应按计划持续回到同一对话的心跳式自动化。
 
-当下一次运行依赖当前对话时，请使用线程自动化。当你希望 Codex 为一个或多个项目启动新的周期性任务时，请使用独立自动化或项目 [自动化](https://developers.openai.com/codex/app/automations)。
+当下一次运行依赖当前对话时，请使用线程自动化。当你希望 Codex 为一个或多个项目启动新的周期性任务时，请使用独立自动化或项目 [自动化](zh/pages/24-automations.md)。
 
 #### 审批和沙盒
 
@@ -4134,17 +4141,17 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 如果你的任务需要跨多个仓库或目录工作，优先打开单独项目或使用 worktree，而不是要求 Codex 在项目根目录外四处操作。
 
-如果你的工作区中可用 [自动审核](https://developers.openai.com/codex/agent-approvals-security#automatic-approval-reviews)，你可以从权限选择器中选择它。它保持相同的沙盒边界，但会通过已配置的审核策略路由符合条件的审批请求，而不是等待你。
+如果你的工作区中可用 [自动审核](zh/pages/13-agent-approvals-security.md#automatic-approval-reviews)，你可以从权限选择器中选择它。它保持相同的沙盒边界，但会通过已配置的审核策略路由符合条件的审批请求，而不是等待你。
 
-有关高层概览，请参阅 [沙盒](https://developers.openai.com/codex/concepts/sandboxing)。有关配置细节，请参阅 [智能体审批与安全文档](https://developers.openai.com/codex/agent-approvals-security)。
+有关高层概览，请参阅 [沙盒](zh/pages/15-sandbox.md)。有关配置细节，请参阅 [智能体审批与安全文档](zh/pages/13-agent-approvals-security.md)。
 
 #### MCP 支持
 
-Codex app、CLI 和 IDE Extension 共享 [Model Context Protocol (MCP)](https://developers.openai.com/codex/mcp) 设置。如果你已经在其中一个界面配置了 MCP 服务器，其它界面会自动采用这些配置。要配置新服务器，请打开 app 设置中的 MCP 部分，并启用推荐服务器或向配置添加新服务器。
+Codex app、CLI 和 IDE Extension 共享 [Model Context Protocol (MCP)](zh/pages/53-model-context-protocol.md) 设置。如果你已经在其中一个界面配置了 MCP 服务器，其它界面会自动采用这些配置。要配置新服务器，请打开 app 设置中的 MCP 部分，并启用推荐服务器或向配置添加新服务器。
 
 #### 网页搜索
 
-Codex 自带第一方 web search 工具。对于 Codex app 中的本地任务，Codex 默认启用 web search，并从 web search cache 提供结果。如果你将沙盒配置为 [full access](https://developers.openai.com/codex/agent-approvals-security)，web search 默认使用实时结果。请参阅 [配置基础](https://developers.openai.com/codex/config-basic)，了解如何禁用 web search 或切换到获取最新数据的实时结果。
+Codex 自带第一方 web search 工具。对于 Codex app 中的本地任务，Codex 默认启用 web search，并从 web search cache 提供结果。如果你将沙盒配置为 [full access](zh/pages/13-agent-approvals-security.md)，web search 默认使用实时结果。请参阅 [配置基础](zh/pages/19-config-basics.md)，了解如何禁用 web search 或切换到获取最新数据的实时结果。
 
 #### 图像生成
 
@@ -4152,7 +4159,7 @@ Codex 自带第一方 web search 工具。对于 Codex app 中的本地任务，
 
 你可以用自然语言提出请求，也可以通过在提示词中包含 `$imagegen` 来显式调用图像生成 skill。
 
-内置图像生成使用 `gpt-image-2`，计入你的通用 Codex 用量限制，并且平均消耗包含额度的速度比不带图像生成的类似轮次快 3-5 倍，具体取决于图像质量和尺寸。详情请参阅 [定价](https://developers.openai.com/codex/pricing#image-generation-usage-limits)。有关提示技巧和模型细节，请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图像生成使用 `gpt-image-2`，计入你的通用 Codex 用量限制，并且平均消耗包含额度的速度比不带图像生成的类似轮次快 3-5 倍，具体取决于图像质量和尺寸。详情请参阅 [定价](zh/pages/02-codex-pricing.md#image-generation-usage-limits)。有关提示技巧和模型细节，请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图像生成，请在你的环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图像，这样将按 API 定价计费。
 
@@ -4180,7 +4187,7 @@ Source: [Codex app settings](https://developers.openai.com/codex/app/settings.md
 
 #### 智能体配置
 
-App 中的 Codex 智能体继承与 IDE 和 CLI extension 相同的配置。使用 app 内控件进行常见设置，或编辑 `config.toml` 进行高级配置。更多细节请参阅 [Codex 安全](https://developers.openai.com/codex/agent-approvals-security) 和 [配置基础](https://developers.openai.com/codex/config-basic)。
+App 中的 Codex 智能体继承与 IDE 和 CLI extension 相同的配置。使用 app 内控件进行常见设置，或编辑 `config.toml` 进行高级配置。更多细节请参阅 [Codex 安全](zh/pages/13-agent-approvals-security.md) 和 [配置基础](zh/pages/19-config-basics.md)。
 
 #### 外观
 
@@ -4210,13 +4217,13 @@ $hatch-pet create a new pet inspired by my recent projects
 
 #### 集成与 MCP
 
-通过 MCP (Model Context Protocol) 连接外部工具。启用推荐服务器或添加你自己的服务器。如果某个服务器需要 OAuth，app 会启动认证流程。由于 MCP 配置位于 `config.toml`，这些设置也适用于 Codex CLI 和 IDE extension。详情请参阅 [Model Context Protocol 文档](https://developers.openai.com/codex/mcp)。
+通过 MCP (Model Context Protocol) 连接外部工具。启用推荐服务器或添加你自己的服务器。如果某个服务器需要 OAuth，app 会启动认证流程。由于 MCP 配置位于 `config.toml`，这些设置也适用于 Codex CLI 和 IDE extension。详情请参阅 [Model Context Protocol 文档](zh/pages/53-model-context-protocol.md)。
 
 #### 浏览器使用
 
-使用这些设置安装或启用捆绑的 Browser plugin、设置 [Codex Chrome extension](https://developers.openai.com/codex/app/chrome-extension)，并管理允许和阻止的网站。除非你已经允许某个网站，否则 Codex 会在使用前询问。移除被阻止的网站后，Codex 可以在浏览器中使用它之前再次询问。
+使用这些设置安装或启用捆绑的 Browser plugin、设置 [Codex Chrome extension](zh/pages/29-codex-chrome-extension.md)，并管理允许和阻止的网站。除非你已经允许某个网站，否则 Codex 会在使用前询问。移除被阻止的网站后，Codex 可以在浏览器中使用它之前再次询问。
 
-有关浏览器预览、评论和 browser use 工作流，请参阅 [应用内浏览器](https://developers.openai.com/codex/app/browser)。
+有关浏览器预览、评论和 browser use 工作流，请参阅 [应用内浏览器](zh/pages/36-in-app-browser.md)。
 
 #### 计算机使用
 
@@ -4226,7 +4233,7 @@ $hatch-pet create a new pet inspired by my recent projects
 
 选择 **Friendly**、**Pragmatic** 或 **None** 作为你的默认个性。使用 **None** 禁用个性指令。你可以随时更新此设置。
 
-你也可以添加自己的自定义指令。编辑自定义指令会更新你的 [`AGENTS.md` 中的个人指令](https://developers.openai.com/codex/guides/agents-md)。
+你也可以添加自己的自定义指令。编辑自定义指令会更新你的 [`AGENTS.md` 中的个人指令](zh/pages/50-custom-instructions-with-agents-md.md)。
 
 #### 上下文感知建议
 
@@ -4234,7 +4241,7 @@ $hatch-pet create a new pet inspired by my recent projects
 
 #### 记忆
 
-在可用时启用 Memories，让 Codex 将过去线程中的有用上下文带入未来工作。有关设置、存储和按线程控制，请参阅 [Memories](https://developers.openai.com/codex/memories)。
+在可用时启用 Memories，让 Codex 将过去线程中的有用上下文带入未来工作。有关设置、存储和按线程控制，请参阅 [Memories](zh/pages/74-memories.md)。
 
 #### 已归档线程
 
@@ -4246,7 +4253,7 @@ Source: [Codex Chrome extension](https://developers.openai.com/codex/app/chrome-
 
 Codex Chrome 扩展让 Codex 可以使用 Chrome 来完成需要你已登录浏览器状态的浏览器任务。当 Codex 需要读取或操作 LinkedIn、Salesforce、Gmail 或内部工具等网站时，可以使用它。
 
-对于本地开发服务器、基于文件的预览，以及不需要登录的公开页面，请优先使用 [应用内浏览器](https://developers.openai.com/codex/app/browser)。应用内浏览器会把预览和验证工作保留在 Codex 内部，而不会使用你的 Chrome 个人资料。
+对于本地开发服务器、基于文件的预览，以及不需要登录的公开页面，请优先使用 [应用内浏览器](zh/pages/36-in-app-browser.md)。应用内浏览器会把预览和验证工作保留在 Codex 内部，而不会使用你的 Chrome 个人资料。
 
 Codex 也可以根据任务需要在工具之间切换：有专用集成时使用插件，需要已登录浏览器上下文时使用 Chrome，处理 localhost 时使用应用内浏览器。
 
@@ -4431,7 +4438,7 @@ export CODEX_REMOTE_TOKEN="$(cat "$TOKEN_FILE")"
 codex --remote wss://remote-host:4500 --remote-auth-token-env CODEX_REMOTE_TOKEN
 ```
 
-对于 Codex app 中的 SSH 远程项目，请使用 [Remote connections](https://developers.openai.com/codex/remote-connections)。对于托管的远程控制客户端，`codex remote-control` 会启动启用了远程控制支持的 app-server 进程。
+对于 Codex app 中的 SSH 远程项目，请使用 [Remote connections](zh/pages/79-remote-connections.md)。对于托管的远程控制客户端，`codex remote-control` 会启动启用了远程控制支持的 app-server 进程。
 
 #### 模型和推理
 
@@ -4443,7 +4450,7 @@ codex --remote wss://remote-host:4500 --remote-auth-token-env CODEX_REMOTE_TOKEN
 codex --model gpt-5.5
 ```
 
-[了解 Codex 中可用的模型](https://developers.openai.com/codex/models)。
+[了解 Codex 中可用的模型](zh/pages/20-model-selection.md)。
 
 #### 功能标志
 
@@ -4459,7 +4466,7 @@ codex features disable shell_snapshot
 
 #### 子智能体
 
-使用 Codex subagent workflows 来并行化更大的任务。关于设置、角色配置（`config.toml` 中的 `[agents]`）和示例，请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+使用 Codex subagent workflows 来并行化更大的任务。关于设置、角色配置（`config.toml` 中的 `[agents]`）和示例，请参阅 [Subagents](zh/pages/81-subagents-2.md)。
 
 只有在你明确要求时，Codex 才会生成 subagent。由于每个 subagent 都会执行自己的模型和工具工作，subagent 工作流会比可比的单智能体运行消耗更多 token。
 
@@ -4483,7 +4490,7 @@ Codex 接受 PNG 和 JPEG 等常见格式。对于两张或更多图片，请使
 
 你可以使用自然语言请求，也可以在提示中包含 `$imagegen` 来显式调用图片生成技能。
 
-内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](https://developers.openai.com/codex/pricing#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](zh/pages/02-codex-pricing.md#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图片生成，请在环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图片，这样会适用 API 价格。
 
@@ -4506,7 +4513,7 @@ TUI 会对带围栏的 Markdown 代码块和文件 diff 做语法高亮，让代
 
 #### 网页搜索
 
-Codex 随附第一方网页搜索工具。对于 Codex CLI 中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你使用 `--yolo` 或其他[完全访问沙盒设置](https://developers.openai.com/codex/agent-approvals-security)，网页搜索默认使用实时结果。要获取最新数据，请为单次运行传递 `--search`，或在 [Config basics](https://developers.openai.com/codex/config-basic) 中设置 `web_search = "live"`。你也可以设置 `web_search = "disabled"` 来关闭该工具。
+Codex 随附第一方网页搜索工具。对于 Codex CLI 中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你使用 `--yolo` 或其他[完全访问沙盒设置](zh/pages/13-agent-approvals-security.md)，网页搜索默认使用实时结果。要获取最新数据，请为单次运行传递 `--search`，或在 [Config basics](zh/pages/19-config-basics.md) 中设置 `web_search = "live"`。你也可以设置 `web_search = "disabled"` 来关闭该工具。
 
 每当 Codex 查找内容时，你会在转录记录或 `codex exec --json` 输出中看到 `web_search` 项。
 
@@ -4561,7 +4568,7 @@ codex exec "fix the CI failure"
 
 #### 使用 Codex 云
 
-`codex cloud` 命令让你无需离开终端即可分流并启动 [Codex cloud 任务](https://developers.openai.com/codex/cloud)。不带参数运行它可打开交互式选择器，浏览活动或已完成的任务，并将变更应用到你的本地项目。
+`codex cloud` 命令让你无需离开终端即可分流并启动 [Codex cloud 任务](zh/pages/47-codex-web.md)。不带参数运行它可打开交互式选择器，浏览活动或已完成的任务，并将变更应用到你的本地项目。
 
 你也可以直接从终端启动任务：
 
@@ -4577,7 +4584,7 @@ codex cloud exec --env ENV_ID "Summarize open bugs"
 
 斜杠命令让你可以快速访问专用工作流，例如 `/review`、`/fork`、`/side`，或你自己的可复用提示。Codex 随附一组精选内置命令，你也可以为团队特定任务或个人快捷方式创建自定义命令。
 
-请参阅 [slash commands guide](https://developers.openai.com/codex/guides/slash-commands)，浏览内置命令目录、了解如何编写自定义命令，以及它们在磁盘上的位置。
+请参阅 [slash commands guide](zh/pages/39-slash-commands-in-codex-cli.md)，浏览内置命令目录、了解如何编写自定义命令，以及它们在磁盘上的位置。
 
 #### 提示编辑器
 
@@ -4589,7 +4596,7 @@ codex cloud exec --env ENV_ID "Summarize open bugs"
 
 通过配置 Model Context Protocol server，将 Codex 连接到更多工具。可在 `~/.codex/config.toml` 中添加 STDIO 或 streaming HTTP server，或使用 `codex mcp` CLI 命令管理它们；Codex 会在会话开始时自动启动它们，并把它们的工具与内置工具一起暴露出来。当你需要在另一个智能体内使用 Codex 时，甚至可以将 Codex 本身作为 MCP server 运行。
 
-请参阅 [Model Context Protocol](https://developers.openai.com/codex/mcp)，了解示例配置、支持的 auth flows 和更详细指南。
+请参阅 [Model Context Protocol](zh/pages/53-model-context-protocol.md)，了解示例配置、支持的 auth flows 和更详细指南。
 
 ### Codex IDE 扩展命令
 
@@ -4671,7 +4678,7 @@ Codex 扩展让预览云端变更变得直接。你可以要求后续任务在�
 
 #### 网页搜索
 
-Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你将沙盒配置为 [full access](https://developers.openai.com/codex/agent-approvals-security)，网页搜索默认使用实时结果。请参阅 [Config basics](https://developers.openai.com/codex/config-basic)，了解如何禁用网页搜索或切换到会抓取最新数据的实时结果。
+Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你将沙盒配置为 [full access](zh/pages/13-agent-approvals-security.md)，网页搜索默认使用实时结果。请参阅 [Config basics](zh/pages/19-config-basics.md)，了解如何禁用网页搜索或切换到会抓取最新数据的实时结果。
 
 每当 Codex 查找内容时，你会在转录记录或 `codex exec --json` 输出中看到 `web_search` 项。
 
@@ -4687,13 +4694,13 @@ Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任
 
 你可以用自然语言请求，也可以在提示中包含 `$imagegen` 来显式调用图片生成技能。
 
-内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](https://developers.openai.com/codex/pricing#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](zh/pages/02-codex-pricing.md#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图片生成，请在环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图片，这样会适用 API 价格。
 
 #### IDE 功能参考
 
-- [Codex IDE extension settings](https://developers.openai.com/codex/ide/settings)
+- [Codex IDE extension settings](zh/pages/33-codex-ide-extension-settings.md)
 
 ### Codex IDE 扩展设置
 
@@ -4709,7 +4716,7 @@ Source: [Codex IDE extension settings](https://developers.openai.com/codex/ide/s
 2. 搜索 `Codex` 或设置名称。
 3. 更新值。
 
-Codex IDE 扩展使用 Codex CLI。某些行为（例如默认模型、批准和沙盒设置）请在共享的 `~/.codex/config.toml` 文件中配置，而不是在编辑器设置中配置。请参阅 [Config basics](https://developers.openai.com/codex/config-basic)。
+Codex IDE 扩展使用 Codex CLI。某些行为（例如默认模型、批准和沙盒设置）请在共享的 `~/.codex/config.toml` 文件中配置，而不是在编辑器设置中配置。请参阅 [Config basics](zh/pages/19-config-basics.md)。
 
 该扩展也会遵循 VS Code 内置的聊天字体设置，用于 Codex 对话界面。
 
@@ -4792,13 +4799,13 @@ Source: [Computer Use](https://developers.openai.com/codex/app/computer-use.md)
 - 在 macOS 上，在你继续处理其他事情时，在后台运行范围明确的任务。
 - 执行跨多个应用的工作流。
 
-对于你在本地构建的 Web 应用，请优先使用 [应用内浏览器](https://developers.openai.com/codex/app/browser)。
+对于你在本地构建的 Web 应用，请优先使用 [应用内浏览器](zh/pages/36-in-app-browser.md)。
 
 #### Windows 前台使用
 
 在 Windows 上，计算机使用运行在活动桌面上。它无法在你继续使用同一个 Windows 会话时在后台操作，因此在任务运行时，预计 Codex 会移动指针、输入并接管前台。
 
-对于你离开后仍应继续的 Windows 任务，请保持 Windows 设备解锁并连接互联网。使用手机上的 [远程控制](https://developers.openai.com/codex/remote-connections) 查看进度或发送后续指令，或在 Windows 虚拟机中运行 Codex app，这样计算机使用会接管 VM 而不是你的主桌面。
+对于你离开后仍应继续的 Windows 任务，请保持 Windows 设备解锁并连接互联网。使用手机上的 [远程控制](zh/pages/79-remote-connections.md) 查看进度或发送后续指令，或在 Windows 虚拟机中运行 Codex app，这样计算机使用会接管 VM 而不是你的主桌面。
 
 #### 启动计算机使用任务
 
@@ -4880,7 +4887,7 @@ Source: [In-app browser](https://developers.openai.com/codex/app/browser.md)
 
 应用内浏览器让你和 Codex 在一个线程中共享渲染后网页的视图。当你正在构建或调试 Web 应用，并希望预览页面和附加可视化评论时，可以使用它。
 
-它适用于本地开发服务器、基于文件的预览，以及不需要登录的公开页面。对于任何依赖登录状态或浏览器扩展的内容，请使用你的常规浏览器或 [Codex Chrome 扩展](https://developers.openai.com/codex/app/chrome-extension)。
+它适用于本地开发服务器、基于文件的预览，以及不需要登录的公开页面。对于任何依赖登录状态或浏览器扩展的内容，请使用你的常规浏览器或 [Codex Chrome 扩展](zh/pages/29-codex-chrome-extension.md)。
 
 可以从工具栏打开应用内浏览器，也可以通过点击 URL、在浏览器中手动导航，或按 Cmd+Shift+B（Windows 上为 Ctrl+Shift+B）打开。
 
@@ -4903,11 +4910,11 @@ bug, and fix only the overflowing controls.
 
 除非你已经允许某个网站，否则 Codex 会在使用网站前询问。从允许列表移除网站意味着 Codex 使用前会再次询问；从阻止列表移除网站意味着 Codex 可以再次询问，而不是把它视为已阻止。
 
-对于 Chrome 中已登录的网站，请参阅 [Codex Chrome 扩展](https://developers.openai.com/codex/app/chrome-extension)。
+对于 Chrome 中已登录的网站，请参阅 [Codex Chrome 扩展](zh/pages/29-codex-chrome-extension.md)。
 
 #### 预览页面
 
-1. 在 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal) 中，或通过 [本地环境操作](https://developers.openai.com/codex/app/local-environments#actions) 启动你的应用开发服务器。
+1. 在 [集成终端](zh/pages/27-codex-app-features.md#integrated-terminal) 中，或通过 [本地环境操作](zh/pages/37-local-environments.md#actions) 启动你的应用开发服务器。
 2. 通过点击 URL 或在浏览器中手动导航，打开一个未认证的本地路由、基于文件的页面或公开页面。
 3. 结合代码 diff 审查渲染状态。
 4. 在需要更改的元素或区域上留下浏览器评论。
@@ -4956,7 +4963,7 @@ it stays inside the chart bounds.
 - 在 Codex 更改代码后审查更新后的路由。
 - 要求 Codex 在使用浏览器前启动或检查开发服务器。
 
-对于仓库变更，请使用 [复查窗格](https://developers.openai.com/codex/app/review) 来检查变更并留下评论。
+对于仓库变更，请使用 [复查窗格](zh/pages/38-review.md) 来检查变更并留下评论。
 
 ### 本地环境
 
@@ -4985,7 +4992,7 @@ npm run build
 
 #### 操作
 
-使用操作定义常见任务，例如启动应用的开发服务器或运行测试套件。这些操作会显示在 Codex app 顶栏中，便于快速访问。操作会在 app 的 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal) 中运行。
+使用操作定义常见任务，例如启动应用的开发服务器或运行测试套件。这些操作会显示在 Codex app 顶栏中，便于快速访问。操作会在 app 的 [集成终端](zh/pages/27-codex-app-features.md#integrated-terminal) 中运行。
 
 操作有助于避免重复输入常见命令，例如触发项目构建或启动开发服务器。对于一次性的快速调试，你可以直接使用集成终端。
 
@@ -5024,7 +5031,7 @@ Source: [Review](https://developers.openai.com/codex/app/review.md)
 
 #### 浏览复查窗格
 
-- 点击文件名通常会在你选择的编辑器中打开该文件。你可以在 [settings](https://developers.openai.com/codex/app/settings) 中选择默认编辑器。
+- 点击文件名通常会在你选择的编辑器中打开该文件。你可以在 [settings](zh/pages/28-codex-app-settings.md) 中选择默认编辑器。
 - 点击文件名背景会展开或折叠 diff。
 - 按住 Cmd 时点击单行，会在你选择的编辑器中打开该行。
 - 如果你满意某项变更，可以[暂存变更或还原你不喜欢的变更](#staging-and-reverting-files)。
@@ -5063,7 +5070,7 @@ Codex 会将内联评论视为复查指导。留下评论后，发送一条后�
 4. 在复查窗格中检查生成的 diff。
 5. 准备好后，将变更暂存、提交并推送到 PR 分支。
 
-对于 GitHub 触发的审查，请参阅 [Use Codex in GitHub](https://developers.openai.com/codex/integrations/github)。
+对于 GitHub 触发的审查，请参阅 [Use Codex in GitHub](zh/pages/49-codex-code-review-in-github.md)。
 
 #### 暂存和还原文件
 
@@ -5285,7 +5292,7 @@ Source: [Troubleshooting](https://developers.openai.com/codex/app/troubleshootin
 
 如果你只想查看上一次 Codex 回合的变更，请将 diff 窗格切换到 "Last turn changes" 视图。
 
-[进一步了解如何使用复查窗格](https://developers.openai.com/codex/app/review)。
+[进一步了解如何使用复查窗格](zh/pages/38-review.md)。
 
 #### 从侧边栏移除项目
 
@@ -5301,7 +5308,7 @@ Source: [Troubleshooting](https://developers.openai.com/codex/app/troubleshootin
 
 #### 代码无法在工作树上运行
 
-工作树会在不同目录中创建，并且只继承签入 Git 的文件。根据你管理项目依赖和工具链的方式，你可能必须使用 [本地环境](https://developers.openai.com/codex/app/local-environments) 在工作树上运行一些设置脚本。或者，你也可以在常规本地项目中检出这些变更。查看 [工作树文档](https://developers.openai.com/codex/app/worktrees) 了解更多信息。
+工作树会在不同目录中创建，并且只继承签入 Git 的文件。根据你管理项目依赖和工具链的方式，你可能必须使用 [本地环境](zh/pages/37-local-environments.md) 在工作树上运行一些设置脚本。或者，你也可以在常规本地项目中检出这些变更。查看 [工作树文档](zh/pages/42-worktrees.md) 了解更多信息。
 
 #### 应用没有识别队友共享的本地环境
 
@@ -5382,13 +5389,13 @@ Codex 会为复查窗格、集成终端，以及 app 内显示的任何其他代
 
 Source: [Windows](https://developers.openai.com/codex/app/windows.md)
 
-[Codex app for Windows](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 为跨项目工作、运行并行智能体线程和审查结果提供一个统一界面。Windows app 支持核心工作流，例如工作树、自动化、Git 功能、应用内浏览器、工件预览、插件和技能。它使用 PowerShell 和 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox) 在 Windows 上原生运行，或者你也可以将它配置为在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行。
+[Codex app for Windows](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 为跨项目工作、运行并行智能体线程和审查结果提供一个统一界面。Windows app 支持核心工作流，例如工作树、自动化、Git 功能、应用内浏览器、工件预览、插件和技能。它使用 PowerShell 和 [Windows 沙盒](zh/pages/83-windows-platform.md#windows-sandbox) 在 Windows 上原生运行，或者你也可以将它配置为在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行。
 
 #### 下载和更新 Codex app
 
 从 [Microsoft Store](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 下载 Codex app。
 
-然后按照 [快速入门](https://developers.openai.com/codex/quickstart?setup=app) 开始使用。
+然后按照 [快速入门](zh/pages/04-quickstart.md) 开始使用。
 
 要更新 app，请打开 Microsoft Store，前往 **Downloads**，并点击 **Check for updates**。之后 Store 会安装最新版本。
 
@@ -5402,9 +5409,9 @@ winget install Codex -s msstore
 
 #### 原生沙盒
 
-当智能体在 PowerShell 中运行时，Windows 上的 Codex app 支持原生 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox)；当你在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行智能体时，则使用 Linux 沙盒。要在任一模式中应用沙盒保护，请在向 Codex 发送消息前，在 Composer 中将沙盒权限设置为 **Default permissions**。
+当智能体在 PowerShell 中运行时，Windows 上的 Codex app 支持原生 [Windows 沙盒](zh/pages/83-windows-platform.md#windows-sandbox)；当你在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行智能体时，则使用 Linux 沙盒。要在任一模式中应用沙盒保护，请在向 Codex 发送消息前，在 Composer 中将沙盒权限设置为 **Default permissions**。
 
-以完全访问模式运行 Codex 意味着 Codex 不受项目目录限制，并可能执行非预期的破坏性操作，从而导致数据丢失。请保留沙盒边界，并使用 [rules](https://developers.openai.com/codex/rules) 进行有针对性的例外设置，或根据你的 [批准和安全设置](https://developers.openai.com/codex/agent-approvals-security)，将 [批准策略设置为 never](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts)，让 Codex 尝试在不请求升级权限的情况下解决问题。
+以完全访问模式运行 Codex 意味着 Codex 不受项目目录限制，并可能执行非预期的破坏性操作，从而导致数据丢失。请保留沙盒边界，并使用 [rules](zh/pages/54-rules.md) 进行有针对性的例外设置，或根据你的 [批准和安全设置](zh/pages/13-agent-approvals-security.md)，将 [批准策略设置为 never](zh/pages/13-agent-approvals-security.md#run-without-approval-prompts)，让 Codex 尝试在不请求升级权限的情况下解决问题。
 
 #### 按你的开发设置自定义
 
@@ -5447,7 +5454,7 @@ Codex `0.114` 支持 WSL1。从 Codex `0.115` 开始，Linux 沙盒移至 `bubbl
 - **.NET SDK**：当你想构建原生 Windows 应用时很有用。
 - **GitHub CLI**：驱动 Codex app 中 GitHub 特定功能。
 
-使用默认 Windows 包管理器 `winget` 安装它们，方法是将以下内容粘贴到 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal)，或要求 Codex 安装它们：
+使用默认 Windows 包管理器 `winget` 安装它们，方法是将以下内容粘贴到 [集成终端](zh/pages/27-codex-app-features.md#integrated-terminal)，或要求 Codex 安装它们：
 
 ```powershell
 winget install --id Git.Git
@@ -5489,7 +5496,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 #### Windows 上的本地环境脚本
 
-如果你的 [本地环境](https://developers.openai.com/codex/app/local-environments) 使用跨平台命令，例如 `npm` 脚本，你可以为每个平台保留一个共享设置脚本或一组操作。
+如果你的 [本地环境](zh/pages/37-local-environments.md) 使用跨平台命令，例如 `npm` 脚本，你可以为每个平台保留一个共享设置脚本或一组操作。
 
 如果需要 Windows 特定行为，请创建 Windows 专用设置脚本或 Windows 专用操作。
 
@@ -5530,7 +5537,7 @@ export CODEX_HOME=/mnt/c/Users//.codex
 
 Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 
-在 Codex app 中，工作树让 Codex 可以在同一项目中运行多个相互独立的任务，而不会彼此干扰。对于 Git 仓库，[自动化](https://developers.openai.com/codex/app/automations) 会在专用后台工作树上运行，因此不会与你正在进行的工作冲突。在未使用版本控制的项目中，自动化会直接在项目目录中运行。你也可以手动在工作树上启动线程，并使用 Handoff 在线程的 Local 和 Worktree 之间移动。
+在 Codex app 中，工作树让 Codex 可以在同一项目中运行多个相互独立的任务，而不会彼此干扰。对于 Git 仓库，[自动化](zh/pages/24-automations.md) 会在专用后台工作树上运行，因此不会与你正在进行的工作冲突。在未使用版本控制的项目中，自动化会直接在项目目录中运行。你也可以手动在工作树上启动线程，并使用 Handoff 在线程的 Local 和 Worktree 之间移动。
 
 #### 什么是工作树
 
@@ -5555,7 +5562,7 @@ Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 1.  选择 "Worktree"
 
     在新线程视图中，在输入区下方选择 **Worktree**。
-    也可以选择一个 [本地环境](https://developers.openai.com/codex/app/local-environments)，为工作树运行设置脚本。
+    也可以选择一个 [本地环境](zh/pages/37-local-environments.md)，为工作树运行设置脚本。
 
 2.  选择起始分支
 
@@ -5577,7 +5584,7 @@ Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 
 实践中有两种常见路径：
 
-1. [只在工作树上工作](#option-1-working-on-the-worktree)。当你可以直接在工作树上验证变更时，这条路径最合适，例如你已经使用 [本地环境设置脚本](https://developers.openai.com/codex/app/local-environments) 安装了依赖和工具。
+1. [只在工作树上工作](#option-1-working-on-the-worktree)。当你可以直接在工作树上验证变更时，这条路径最合适，例如你已经使用 [本地环境设置脚本](zh/pages/37-local-environments.md) 安装了依赖和工具。
 2. [将线程 hand off 到 Local](#option-2-handing-a-thread-off-to-local)。当你希望把线程带到前台时使用，例如你想在常用 IDE 中检查变更，或只能运行一个应用实例。
 
 #### 选项 1：在工作树上工作
@@ -5736,7 +5743,7 @@ Source: [Codex app](https://developers.openai.com/codex/app.md)
 
 Codex app 是一个专注的桌面体验，用于并行处理 Codex 线程，内置 worktree 支持、自动化和 Git 功能。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](zh/pages/02-codex-pricing.md)的信息。
 
 #### 开始使用
 
@@ -5752,7 +5759,7 @@ Codex app 可在 macOS 和 Windows 上使用。
 
    下载并安装 Codex app 后，打开它并使用你的 ChatGPT 账户或 OpenAI API key 登录。
 
-   如果使用 OpenAI API key 登录，[某些功能可能不可用](https://developers.openai.com/codex/pricing#feature-availability)。
+   如果使用 OpenAI API key 登录，[某些功能可能不可用](zh/pages/02-codex-pricing.md#feature-availability)。
 
 3. 选择项目
 
@@ -5781,7 +5788,7 @@ Source: [Codex CLI](https://developers.openai.com/codex/cli.md)
 Codex CLI 是 OpenAI 的编程代理，你可以在本地终端中运行它。它可以在所选目录中读取、修改并运行你机器上的代码。
 它是[开源的](https://github.com/openai/codex)，并使用 Rust 构建，以获得速度和效率。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](zh/pages/02-codex-pricing.md)的信息。
 
 #### CLI 设置
 
@@ -5801,7 +5808,7 @@ Source: [Codex IDE extension](https://developers.openai.com/codex/ide.md)
 
 Codex 是 OpenAI 的编程代理，可以读取、编辑和运行代码。它帮助你更快地构建、修复 bug，并理解不熟悉的代码。借助 Codex VS Code 扩展，你可以在 IDE 中并排使用 Codex，或将任务委派给 Codex Cloud。
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。
+ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](zh/pages/02-codex-pricing.md)的信息。
 
 #### JetBrains IDE 集成
 
@@ -5828,7 +5835,7 @@ ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解�
 
 #### 登录
 
-安装扩展后，它会提示你使用 ChatGPT 账户或 API key 登录。你的 ChatGPT 计划包含使用额度，因此无需额外设置即可使用 Codex。可在[定价页面](https://developers.openai.com/codex/pricing)了解更多信息。
+安装扩展后，它会提示你使用 ChatGPT 账户或 API key 登录。你的 ChatGPT 计划包含使用额度，因此无需额外设置即可使用 Codex。可在[定价页面](zh/pages/02-codex-pricing.md)了解更多信息。
 
 ### Codex 网页版
 
@@ -5838,7 +5845,7 @@ Source: [Codex web](https://developers.openai.com/codex/cloud.md)
 
 前往 [Codex](https://chatgpt.com/codex) 并连接你的 GitHub 账户。这会让 Codex 能够处理你仓库中的代码，并基于它的工作创建 pull request。
 
-你的 Plus、Pro、Business、Edu 或 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。某些 Enterprise 工作区可能需要先完成[管理员设置](https://developers.openai.com/codex/enterprise/admin-setup)，然后你才能访问 Codex。
+你的 Plus、Pro、Business、Edu 或 Enterprise 计划包含 Codex。了解更多关于[包含内容](zh/pages/02-codex-pricing.md)的信息。某些 Enterprise 工作区可能需要先完成[管理员设置](zh/pages/64-admin-setup.md)，然后你才能访问 Codex。
 
 ---
 
@@ -5864,7 +5871,7 @@ Source: [Agent Skills](https://developers.openai.com/codex/skills.md)
 
 使用 agent skills 为 Codex 扩展特定任务能力。一个 skill 会打包说明、资源和可选脚本，使 Codex 能够可靠地遵循某个工作流。Skills 基于 [open agent skills standard](https://agentskills.io) 构建。
 
-Skills 是可复用工作流的创作格式。Plugins 是 Codex 中可复用 skills 和 app 的可安装分发单元。使用 skills 设计工作流本身；当你希望其他开发者安装它时，再将其打包为 [plugin](https://developers.openai.com/codex/plugins/build)。
+Skills 是可复用工作流的创作格式。Plugins 是 Codex 中可复用 skills 和 app 的可安装分发单元。使用 skills 设计工作流本身；当你希望其他开发者安装它时，再将其打包为 [plugin](zh/pages/69-build-plugins.md)。
 
 Skills 可在 Codex CLI、IDE 扩展和 Codex app 中使用。
 
@@ -5928,11 +5935,11 @@ Codex 会从仓库、用户、管理员和系统位置读取 skills。对于仓�
 
 Codex 支持符号链接的 skill 文件夹，并在扫描这些位置时跟随符号链接目标。
 
-这些位置用于创作和本地发现。当你想把可复用 skills 分发到单个仓库之外，或选择性地把它们与 app 集成捆绑时，请使用 [plugins](https://developers.openai.com/codex/plugins/build)。
+这些位置用于创作和本地发现。当你想把可复用 skills 分发到单个仓库之外，或选择性地把它们与 app 集成捆绑时，请使用 [plugins](zh/pages/69-build-plugins.md)。
 
 #### 使用插件分发技能
 
-直接使用 skill 文件夹最适合本地创作和仓库范围的工作流。如果你想分发一个可复用 skill、把两个或更多 skills 捆绑在一起，或将 skill 与 app 集成一起发布，请将它们打包为 [plugin](https://developers.openai.com/codex/plugins/build)。
+直接使用 skill 文件夹最适合本地创作和仓库范围的工作流。如果你想分发一个可复用 skill、把两个或更多 skills 捆绑在一起，或将 skill 与 app 集成一起发布，请将它们打包为 [plugin](zh/pages/69-build-plugins.md)。
 
 Plugins 可以包含一个或多个 skills。它们还可以选择性地把 app 映射、MCP server 配置和展示资源捆绑到一个包中。
 
@@ -5962,7 +5969,7 @@ enabled = false
 
 #### 可选元数据
 
-添加 `agents/openai.yaml` 可以在 [Codex app](https://developers.openai.com/codex/app) 中配置 UI 元数据、设置调用策略，并声明工具依赖，以便更顺畅地使用该 skill。
+添加 `agents/openai.yaml` 可以在 [Codex app](zh/pages/44-codex-app.md) 中配置 UI 元数据、设置调用策略，并声明工具依赖，以便更顺畅地使用该 skill。
 
 ```yaml
 interface:
@@ -6006,13 +6013,13 @@ Source: [Codex code review in GitHub](https://developers.openai.com/codex/integr
 
 请确保你具备：
 
-- 为要审查的仓库设置了 [Codex cloud](https://developers.openai.com/codex/cloud)。
+- 为要审查的仓库设置了 [Codex cloud](zh/pages/47-codex-web.md)。
 - 能够访问 [Codex code review settings](https://chatgpt.com/codex/settings/code-review)。
 - 如果你希望 Codex 遵循仓库特定的审查指南，请准备一个 `AGENTS.md` 文件。
 
 #### 设置 Codex 代码审查
 
-1. 设置 [Codex cloud](https://developers.openai.com/codex/cloud)。
+1. 设置 [Codex cloud](zh/pages/47-codex-web.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/code-review)。
 3. 为你的仓库开启 **Code review**。
 
@@ -6061,7 +6068,7 @@ Codex 会以该 pull request 作为上下文启动一个云端任务，并且在
 
 #### 给 Codex 其他任务
 
-如果你在评论中提及 `@codex`，但内容不是 `review`，Codex 会使用你的 pull request 作为上下文启动一个[云端任务](https://developers.openai.com/codex/cloud)。
+如果你在评论中提及 `@codex`，但内容不是 `review`，Codex 会使用你的 pull request 作为上下文启动一个[云端任务](zh/pages/47-codex-web.md)。
 
 ```md
 @codex fix the CI failures
@@ -6072,7 +6079,7 @@ Codex 会以该 pull request 作为上下文启动一个云端任务，并且在
 如果 Codex 没有反应或没有发布审查：
 
 - 确认你已在 [Codex settings](https://chatgpt.com/codex/settings/code-review) 中为该仓库开启 **Code review**。
-- 确认该 pull request 属于已设置 [Codex cloud](https://developers.openai.com/codex/cloud) 的仓库。
+- 确认该 pull request 属于已设置 [Codex cloud](zh/pages/47-codex-web.md) 的仓库。
 - 在 pull request 评论中使用准确触发语 `@codex review`。
 - 对于 automatic reviews，请检查你已开启 **Automatic reviews**，并且 pull request 事件与你的审查触发设置匹配。
 
@@ -6090,7 +6097,7 @@ Codex 在启动时构建一条指令链（每次运行一次；在 TUI 中通常
 2. **项目范围：** 从项目根目录（通常是 Git 根目录）开始，Codex 会向下遍历到你的当前工作目录。如果 Codex 找不到项目根目录，它只检查当前目录。在路径上的每个目录中，它会依次检查 `AGENTS.override.md`、`AGENTS.md`，以及 `project_doc_fallback_filenames` 中的任何后备文件名。Codex 每个目录最多包含一个文件。
 3. **合并顺序：** Codex 从根目录向下拼接文件，并用空行连接。离当前目录更近的文件会覆盖较早的指南，因为它们在合并后的提示中出现得更晚。
 
-Codex 会跳过空文件，并在合并后的大小达到 `project_doc_max_bytes` 定义的限制时停止添加文件（默认 32 KiB）。有关这些选项的详情，请参阅 [Project instructions discovery](https://developers.openai.com/codex/config-advanced#project-instructions-discovery)。当达到上限时，可以提高限制，或把说明拆分到嵌套目录中。
+Codex 会跳过空文件，并在合并后的大小达到 `project_doc_max_bytes` 定义的限制时停止添加文件（默认 32 KiB）。有关这些选项的详情，请参阅 [Project instructions discovery](zh/pages/17-advanced-configuration.md#project-instructions-discovery)。当达到上限时，可以提高限制，或把说明拆分到嵌套目录中。
 
 #### 创建全局指南
 
@@ -6206,17 +6213,17 @@ CODEX_HOME=$(pwd)/.codex codex exec "List active instruction sources"
 #### 后续步骤
 
 - 访问官方 [AGENTS.md](https://agents.md) 网站了解更多信息。
-- 查看 [Prompting Codex](https://developers.openai.com/codex/prompting)，了解与持久指南搭配良好的对话模式。
+- 查看 [提示 Codex](zh/pages/07-prompting.md)，了解与持久指南搭配良好的对话模式。
 
 ### 自定义提示
 
 Source: [Custom Prompts](https://developers.openai.com/codex/custom-prompts.md)
 
-Custom prompts 已弃用。请使用 [skills](https://developers.openai.com/codex/skills) 来提供可复用说明，Codex 可以显式或隐式调用这些说明。
+Custom prompts 已弃用。请使用 [skills](zh/pages/48-agent-skills.md) 来提供可复用说明，Codex 可以显式或隐式调用这些说明。
 
 Custom prompts（已弃用）可让你把 Markdown 文件转换为可复用提示，并在 Codex CLI 和 Codex IDE 扩展中作为斜杠命令调用。
 
-Custom prompts 需要显式调用，并位于你的本地 Codex home 目录（例如 `~/.codex`），因此不会通过仓库共享。如果你想共享一个提示（或希望 Codex 隐式调用它），请[使用 skills](https://developers.openai.com/codex/skills)。
+Custom prompts 需要显式调用，并位于你的本地 Codex home 目录（例如 `~/.codex`），因此不会通过仓库共享。如果你想共享一个提示（或希望 Codex 隐式调用它），请[使用 skills](zh/pages/48-agent-skills.md)。
 
 1. 创建 prompts 目录：
 
@@ -6279,12 +6286,12 @@ Source: [Customization](https://developers.openai.com/codex/concepts/customizati
 在 Codex 中，customization 来自几个协同工作的层：
 
 - 用于持久说明的**项目指南（`AGENTS.md`）**
-- 用于保存从以往工作中学到的有用上下文的 **[Memories](https://developers.openai.com/codex/memories)**
+- 用于保存从以往工作中学到的有用上下文的 **[Memories](zh/pages/74-memories.md)**
 - 用于可复用工作流和领域专业知识的 **Skills**
-- 用于访问外部工具和共享系统的 **[MCP](https://developers.openai.com/codex/mcp)**
-- 用于把工作委派给专门 subagents 的 **[Subagents](https://developers.openai.com/codex/concepts/subagents)**
+- 用于访问外部工具和共享系统的 **[MCP](zh/pages/53-model-context-protocol.md)**
+- 用于把工作委派给专门 subagents 的 **[Subagents](zh/pages/68-subagents.md)**
 
-这些层是互补的，而不是相互竞争的。`AGENTS.md` 塑造行为，memories 延续本地上下文，skills 打包可重复流程，[MCP](https://developers.openai.com/codex/mcp) 将 Codex 连接到本地工作区之外的系统。
+这些层是互补的，而不是相互竞争的。`AGENTS.md` 塑造行为，memories 延续本地上下文，skills 打包可重复流程，[MCP](zh/pages/53-model-context-protocol.md) 将 Codex 连接到本地工作区之外的系统。
 
 #### AGENTS 指南
 
@@ -6307,14 +6314,14 @@ Source: [Customization](https://developers.openai.com/codex/concepts/customizati
 - **阅读过多**：如果它找到了正确文件，但读取了太多文档，请添加路由指南（优先查看哪些目录/文件）。
 - **重复出现的 PR 反馈**：如果你不止一次留下相同反馈，请将其固化。
 - **在 GitHub 中**：在 pull request 评论中，用请求标记 `@codex`（例如 `@codex add this to AGENTS.md`），把更新委派给云端任务。
-- **自动化漂移检查**：使用 [automations](https://developers.openai.com/codex/app/automations) 运行重复检查（例如每天），查找指南缺口，并建议要添加到 `AGENTS.md` 的内容。
+- **自动化漂移检查**：使用 [automations](zh/pages/24-automations.md) 运行重复检查（例如每天），查找指南缺口，并建议要添加到 `AGENTS.md` 的内容。
 
 将 `AGENTS.md` 与执行这些规则的基础设施搭配使用：pre-commit hooks、linters 和 type checkers 会在你看到问题之前捕获它们，因此系统会更善于防止重复错误。
 
 Codex 可以从多个位置加载指南：Codex home 目录中的全局文件（面向你作为开发者）以及团队可以签入的仓库特定文件。离工作目录更近的文件优先级更高。
 使用全局文件来塑造 Codex 与你的沟通方式（例如审查风格、详细程度和默认值），并让仓库文件专注于团队和代码库规则。
 
-[Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md)
+[Custom instructions with AGENTS.md](zh/pages/50-custom-instructions-with-agents-md.md)
 
 #### 技能
 
@@ -6322,11 +6329,11 @@ Skills 为 Codex 提供可复用能力，用于可重复工作流。
 Skills 通常最适合可复用工作流，因为它们支持更丰富的说明、脚本和参考资料，同时能跨任务复用。
 Skills 会被加载并对代理可见（至少其元数据可见），因此 Codex 可以发现并隐式选择它们。这让丰富工作流可用，同时不会在一开始就膨胀上下文。
 
-使用 skill 文件夹在本地创作和迭代工作流。如果该工作流已有 plugin，请优先安装它，以复用经过验证的设置。当你想在团队之间分发自己的工作流，或把它与 app 集成捆绑时，请将其打包为 [plugin](https://developers.openai.com/codex/plugins/build)。Skills 仍是创作格式；plugins 是可安装的分发单元。
+使用 skill 文件夹在本地创作和迭代工作流。如果该工作流已有 plugin，请优先安装它，以复用经过验证的设置。当你想在团队之间分发自己的工作流，或把它与 app 集成捆绑时，请将其打包为 [plugin](zh/pages/69-build-plugins.md)。Skills 仍是创作格式；plugins 是可安装的分发单元。
 
 一个 skill 通常是一个 `SKILL.md` 文件，加上可选脚本、参考资料和资源。
 
-skill 目录可以包含一个 `scripts/` 文件夹，其中放置 Codex 作为工作流一部分调用的 CLI 脚本（例如为数据设定初始值或运行校验）。当工作流需要外部系统（issue tracker、设计工具、文档服务器）时，请将 skill 与 [MCP](https://developers.openai.com/codex/mcp) 搭配使用。
+skill 目录可以包含一个 `scripts/` 文件夹，其中放置 Codex 作为工作流一部分调用的 CLI 脚本（例如为数据设定初始值或运行校验）。当工作流需要外部系统（issue tracker、设计工具、文档服务器）时，请将 skill 与 [MCP](zh/pages/53-model-context-protocol.md) 搭配使用。
 
 示例 `SKILL.md`：
 
@@ -6363,7 +6370,7 @@ Codex 对 skills 使用渐进式披露：
 
 Skills 可以被显式调用；当任务匹配 skill 描述时，Codex 也可以隐式选择它们。清晰的 skill 描述会提高触发可靠性。
 
-[Agent Skills](https://developers.openai.com/codex/skills)
+[Agent Skills](zh/pages/48-agent-skills.md)
 
 #### MCP
 
@@ -6390,27 +6397,27 @@ MCP servers 可以暴露：
 
 - skill 定义工作流，并指定要使用的 MCP 工具
 
-[Model Context Protocol](https://developers.openai.com/codex/mcp)
+[Model Context Protocol](zh/pages/53-model-context-protocol.md)
 
 #### 子智能体
 
 你可以创建具有不同角色的不同 agents，并提示它们以不同方式使用工具。例如，一个 agent 可能运行特定测试命令和配置，而另一个 agent 拥有用于获取生产日志进行调试的 MCP servers。每个 subagent 都保持专注，并使用适合其工作的工具。
 
-[Subagent concepts](https://developers.openai.com/codex/concepts/subagents)
+[Subagent concepts](zh/pages/68-subagents.md)
 
 #### 技能与 MCP 配合使用
 
 Skills 加 MCP 是这些能力组合在一起的地方：skills 定义可重复工作流，MCP 将它们连接到外部工具和系统。
-如果某个 skill 依赖 MCP，请在 `agents/openai.yaml` 中声明该依赖，以便 Codex 能自动安装和连接它（参见 [Agent Skills](https://developers.openai.com/codex/skills)）。
+如果某个 skill 依赖 MCP，请在 `agents/openai.yaml` 中声明该依赖，以便 Codex 能自动安装和连接它（参见 [Agent Skills](zh/pages/48-agent-skills.md)）。
 
 #### 后续步骤
 
 按以下顺序构建：
 
-1. 使用 [Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md)，让 Codex 遵循你的仓库约定。添加 pre-commit hooks 和 linters 来执行这些规则。
-2. 当已有可复用工作流时，安装一个 [plugin](https://developers.openai.com/codex/plugins)。否则，创建一个 [skill](https://developers.openai.com/codex/skills)，并在想共享时把它打包为 plugin。
-3. 当工作流需要外部系统（Linear、GitHub、文档服务器、设计工具）时，使用 [MCP](https://developers.openai.com/codex/mcp)。
-4. 当你准备把嘈杂或专门任务委派给 subagents 时，使用 [Subagents](https://developers.openai.com/codex/subagents)。
+1. 使用 [Custom instructions with AGENTS.md](zh/pages/50-custom-instructions-with-agents-md.md)，让 Codex 遵循你的仓库约定。添加 pre-commit hooks 和 linters 来执行这些规则。
+2. 当已有可复用工作流时，安装一个 [plugin](zh/pages/78-plugins.md)。否则，创建一个 [skill](zh/pages/48-agent-skills.md)，并在想共享时把它打包为 plugin。
+3. 当工作流需要外部系统（Linear、GitHub、文档服务器、设计工具）时，使用 [MCP](zh/pages/53-model-context-protocol.md)。
+4. 当你准备把嘈杂或专门任务委派给 subagents 时，使用 [Subagents](zh/pages/81-subagents-2.md)。
 
 ### 模型上下文协议（MCP）
 
@@ -6618,13 +6625,13 @@ Rules 是实验性的，可能会变化。
 
 3. 重启 Codex。
 
-Codex 会在启动时扫描每个活动配置层下的 `rules/`，包括 [Team Config](https://developers.openai.com/codex/enterprise/admin-setup#team-config) 位置，以及位于 `~/.codex/rules/` 的用户层。项目本地 `/.codex/rules/` 只有在项目 `.codex/` 层受信任时才会加载。
+Codex 会在启动时扫描每个活动配置层下的 `rules/`，包括 [Team Config](zh/pages/64-admin-setup.md#team-config) 位置，以及位于 `~/.codex/rules/` 的用户层。项目本地 `/.codex/rules/` 只有在项目 `.codex/` 层受信任时才会加载。
 
 当你在 TUI 中把命令添加到允许列表时，Codex 会写入用户层的 `~/.codex/rules/default.rules`，使未来运行可以跳过提示。
 
 启用 Smart approvals（默认）时，Codex 可能会在升级权限请求期间为你提出 `prefix_rule`。接受前请仔细审查建议的 prefix。
 
-管理员还可以从 [`requirements.toml`](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml) 强制执行限制性 `prefix_rule` 条目。
+管理员还可以从 [`requirements.toml`](zh/pages/67-managed-configuration.md#admin-enforced-requirements-requirementstoml) 强制执行限制性 `prefix_rule` 条目。
 
 #### 理解规则字段
 
@@ -6715,13 +6722,13 @@ Source: [Use Codex in Linear](https://developers.openai.com/codex/integrations/l
 
 使用 Linear 中的 Codex，可以从 issue 委派工作。将 issue 分配给 Codex，或在评论中提及 `@Codex`，Codex 会创建云端任务，并回复进度和结果。
 
-Linear 中的 Codex 可在付费计划中使用（参见 [Pricing](https://developers.openai.com/codex/pricing)）。
+Linear 中的 Codex 可在付费计划中使用（参见 [Pricing](zh/pages/02-codex-pricing.md)）。
 
 如果你使用 Enterprise 计划，请让你的 ChatGPT 工作区管理员在 [workspace settings](https://chatgpt.com/admin/settings) 中开启 Codex 云端任务，并在 [connector settings](https://chatgpt.com/admin/ca) 中启用 **Codex for Linear**。
 
 #### 设置 Linear 集成
 
-1. 在 [Codex](https://chatgpt.com/codex) 中连接 GitHub，并为你希望 Codex 处理的仓库创建一个[环境](https://developers.openai.com/codex/cloud/environments)，以设置 [Codex cloud tasks](https://developers.openai.com/codex/cloud)。
+1. 在 [Codex](https://chatgpt.com/codex) 中连接 GitHub，并为你希望 Codex 处理的仓库创建一个[环境](zh/pages/25-cloud-environments.md)，以设置 [Codex cloud tasks](zh/pages/47-codex-web.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/connectors)，为你的工作区安装 **Codex for Linear**。
 3. 通过在 Linear issue 的评论线程中提及 `@Codex` 来关联你的 Linear 账户。
 
@@ -6771,7 +6778,7 @@ Linear 会自动把进入 triage 的新 issue 分配给 Codex。
 
 当你提及 `@Codex` 或将 issue 分配给它时，Codex 会接收你的 issue 内容，以理解请求并创建任务。
 数据处理遵循 OpenAI 的 [Privacy Policy](https://openai.com/privacy)、[Terms of Use](https://openai.com/terms/) 和其他适用的 [policies](https://openai.com/policies)。
-有关安全的更多信息，请参阅 [Codex security documentation](https://developers.openai.com/codex/agent-approvals-security)。
+有关安全的更多信息，请参阅 [Codex security documentation](zh/pages/13-agent-approvals-security.md)。
 
 Codex 使用大语言模型，可能会出错。请始终审查答案和 diff。
 
@@ -6820,7 +6827,7 @@ Source: [Use Codex in Slack](https://developers.openai.com/codex/integrations/sl
 
 #### 设置 Slack 应用
 
-1. 设置 [Codex cloud tasks](https://developers.openai.com/codex/cloud)。你需要 Plus、Pro、Business、Enterprise 或 Edu 计划（参见 [ChatGPT pricing](https://chatgpt.com/pricing)）、已连接的 GitHub 账户，以及至少一个[环境](https://developers.openai.com/codex/cloud/environments)。
+1. 设置 [Codex cloud tasks](zh/pages/47-codex-web.md)。你需要 Plus、Pro、Business、Enterprise 或 Edu 计划（参见 [ChatGPT pricing](https://chatgpt.com/pricing)）、已连接的 GitHub 账户，以及至少一个[环境](zh/pages/25-cloud-environments.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/connectors)，为你的工作区安装 Slack app。根据你的 Slack 工作区政策，可能需要管理员批准安装。
 3. 将 `@Codex` 添加到频道。如果尚未添加，在你提及时 Slack 会提示你。
 
@@ -6847,7 +6854,7 @@ Source: [Use Codex in Slack](https://developers.openai.com/codex/integrations/sl
 
 当你提及 `@Codex` 时，Codex 会接收你的消息和线程历史，以理解请求并创建任务。
 数据处理遵循 OpenAI 的 [Privacy Policy](https://openai.com/privacy)、[Terms of Use](https://openai.com/terms/) 和其他适用的 [policies](https://openai.com/policies)。
-有关安全的更多信息，请参阅 Codex [security documentation](https://developers.openai.com/codex/agent-approvals-security)。
+有关安全的更多信息，请参阅 Codex [security documentation](zh/pages/13-agent-approvals-security.md)。
 
 Codex 使用大语言模型，可能会出错。请始终审查答案和 diff。
 
@@ -6869,7 +6876,7 @@ Codex 使用大语言模型，可能会出错。请始终审查答案和 diff。
 
 Source: [Codex App Server](https://developers.openai.com/codex/app-server.md)
 
-Codex app-server 是 Codex 用来驱动富客户端的接口（例如 Codex VS Code 扩展）。当你希望在自己的产品中进行深度集成时，可以使用它来处理身份验证、对话历史、审批以及流式代理事件。app-server 的实现已在 Codex GitHub 仓库中开源（[openai/codex/codex-rs/app-server](https://github.com/openai/codex/tree/main/codex-rs/app-server)）。开源 Codex 组件的完整列表请参阅 [Open Source](https://developers.openai.com/codex/open-source) 页面。
+Codex app-server 是 Codex 用来驱动富客户端的接口（例如 Codex VS Code 扩展）。当你希望在自己的产品中进行深度集成时，可以使用它来处理身份验证、对话历史、审批以及流式代理事件。app-server 的实现已在 Codex GitHub 仓库中开源（[openai/codex/codex-rs/app-server](https://github.com/openai/codex/tree/main/codex-rs/app-server)）。开源 Codex 组件的完整列表请参阅 [Open Source](zh/pages/76-open-source.md) 页面。
 
 如果你要自动化作业或在 CI 中运行 Codex，请改用
 Codex SDK。
@@ -7100,7 +7107,7 @@ Source: [Codex GitHub Action](https://developers.openai.com/codex/github-action.
 - 将 Codex 驱动的质量检查作为 CI 流水线的一部分，用来阻止不合格变更。
 - 从工作流文件运行可重复的 Codex 任务（代码审查、发布准备、迁移）。
 
-CI 示例请参阅 [Non-interactive mode](https://developers.openai.com/codex/noninteractive)，并在 [openai/codex-action repository](https://github.com/openai/codex-action) 中查看源码。
+CI 示例请参阅 [Non-interactive mode](zh/pages/60-non-interactive-mode.md)，并在 [openai/codex-action repository](https://github.com/openai/codex-action) 中查看源码。
 
 #### 前提条件
 
@@ -7352,7 +7359,7 @@ Source: [Non-interactive mode](https://developers.openai.com/codex/noninteractiv
 非交互模式允许你从脚本中运行 Codex（例如持续集成 (CI) 作业），而无需打开交互式 TUI。
 你可以用 `codex exec` 调用它。
 
-有关各个标志的详细信息，请参阅 [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)。
+有关各个标志的详细信息，请参阅 [`codex exec`](zh/pages/22-cli-command-reference.md#codex-exec)。
 
 #### 何时使用 `codex exec`
 
@@ -7432,7 +7439,7 @@ Item 类型包括代理消息、推理、命令执行、文件变更、MCP 工�
 {"type":"turn.completed","usage":{"input_tokens":24763,"cached_input_tokens":24448,"output_tokens":122,"reasoning_output_tokens":0}}
 ```
 
-如果你只需要最终消息，请使用 `-o`/`--output-last-message` 将其写入文件。这会把最终消息写入文件，同时仍然打印到 `stdout`（详情见 [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)）。
+如果你只需要最终消息，请使用 `-o`/`--output-last-message` 将其写入文件。这会把最终消息写入文件，同时仍然打印到 `stdout`（详情见 [`codex exec`](zh/pages/22-cli-command-reference.md#codex-exec)）。
 
 #### 使用 schema 创建结构化输出
 
@@ -7479,7 +7486,7 @@ codex exec "Extract project metadata" \
 
 #### 使用 API key 身份验证
 
-对于 GitHub Actions，请使用 [Codex GitHub Action](https://developers.openai.com/codex/github-action)，而不是自行安装和验证 CLI。该 action 通过安装 Codex、启动 Responses API 代理，并用可配置的安全策略运行 Codex，来减少 API key 暴露。
+对于 GitHub Actions，请使用 [Codex GitHub Action](zh/pages/58-codex-github-action.md)，而不是自行安装和验证 CLI。该 action 通过安装 Codex、启动 Responses API 代理，并用可配置的安全策略运行 Codex，来减少 API key 暴露。
 
 不要在会 checkout 或运行仓库控制代码的工作流中，把 `OPENAI_API_KEY` 或 `CODEX_API_KEY` 设置为作业级环境变量。构建脚本、测试、依赖生命周期钩子，或同一作业中被攻陷的 action，都可以读取这些环境变量。
 
@@ -7510,7 +7517,7 @@ API key 是自动化的合适默认选择，因为它们更容易
 请通过安全存储注入 `auth.json`，在运行器上运行
 Codex，使 Codex 就地刷新它，并在运行之间持久化更新后的文件。
 
-请参阅 [Maintain Codex account auth in CI/CD (advanced)](https://developers.openai.com/codex/auth/ci-cd-auth)。
+请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](zh/pages/84-ci-cd-auth.md)。
 
 #### 恢复非交互会话
 
@@ -7781,7 +7788,7 @@ Codex CLI 远不止可以运行临时任务。通过将 CLI 作为 [Model Contex
 
 开始之前，请确保你具备：
 
-- 本地已安装 [Codex CLI](https://developers.openai.com/codex/cli)，因此 `codex` 命令可用。
+- 本地已安装 [Codex CLI](zh/pages/45-codex-cli.md)，因此 `codex` 命令可用。
 - Python 3.10+ 和 `pip`。
 - 如果你想运行上面的 MCP Inspector 示例，需要 Node.js 18+。
 - 本地已保存 OpenAI API key。你可以在 [OpenAI dashboard](https://platform.openai.com/account/api-keys) 中创建或管理 key。
@@ -7923,7 +7930,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 
 本页列出 Codex 会直接读取的稳定公开环境变量。
 它不列出内部开发变量、测试变量，或你通过
-[`env_key`](https://developers.openai.com/codex/config-advanced#custom-model-providers)
+[`env_key`](zh/pages/17-advanced-configuration.md#custom-model-providers)
 自行选择的提供商专用密钥名称。
 
 #### 核心位置
@@ -7934,7 +7941,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 | `CODEX_SQLITE_HOME` | CLI and app-server state                   | `CODEX_HOME` | 设置 SQLite 后端状态的存储位置。`sqlite_home` 配置选项优先级更高。相对路径会从当前工作目录解析。           |
 
 有关 `CODEX_HOME` 下存储文件的更多信息，请参阅
-[Config and state locations](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+[Config and state locations](zh/pages/17-advanced-configuration.md#config-and-state-locations)。
 
 #### 安装器变量
 
@@ -7967,13 +7974,13 @@ $env:CODEX_NON_INTERACTIVE=1; irm https://chatgpt.com/codex/install.ps1 | iex
 | `SSL_CERT_FILE`        | HTTPS, login, and WebSocket clients | 当未设置 `CODEX_CA_CERTIFICATE` 时的备用 PEM CA 包路径。                                                                                                         |
 
 对于提供商 API key，请在模型提供商
-配置中设置 [`env_key`](https://developers.openai.com/codex/config-advanced#custom-model-providers)。
+配置中设置 [`env_key`](zh/pages/17-advanced-configuration.md#custom-model-providers)。
 Codex 会读取该配置指定名称的变量，因此变量
 名称本身并不是固定的 Codex 环境变量。
 
 有关自动化密钥处理，请参阅
-[Use API key auth](https://developers.openai.com/codex/noninteractive#use-api-key-auth)。
-有关访问令牌设置，请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+[Use API key auth](zh/pages/60-non-interactive-mode.md#use-api-key-auth)。
+有关访问令牌设置，请参阅 [Access tokens](zh/pages/63-access-tokens.md)。
 
 #### 诊断
 
@@ -8121,10 +8128,10 @@ codex exec "summarize the last release diff"
 
 #### 相关文档
 
-- [Authentication](https://developers.openai.com/codex/auth)
-- [Non-interactive mode](https://developers.openai.com/codex/noninteractive)
-- [Admin setup](https://developers.openai.com/codex/enterprise/admin-setup)
-- [Governance](https://developers.openai.com/codex/enterprise/governance)
+- [Authentication](zh/pages/18-authentication-and-sessions.md)
+- [Non-interactive mode](zh/pages/60-non-interactive-mode.md)
+- [Admin setup](zh/pages/64-admin-setup.md)
+- [Governance](zh/pages/66-governance.md)
 
 ### 管理员设置
 
@@ -8132,7 +8139,7 @@ Source: [Admin Setup](https://developers.openai.com/codex/enterprise/admin-setup
 
 本指南面向希望为其工作区设置 Codex 的 ChatGPT Enterprise 管理员。
 
-请将本页用作逐步推出指南。有关详细的策略、配置、自动化和监控信息，请使用链接页面：[Authentication](https://developers.openai.com/codex/auth)、[Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)、[Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)、[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Governance](https://developers.openai.com/codex/enterprise/governance)。
+请将本页用作逐步推出指南。有关详细的策略、配置、自动化和监控信息，请使用链接页面：[Authentication](zh/pages/18-authentication-and-sessions.md)、[Agent approvals & security](zh/pages/13-agent-approvals-security.md)、[Access tokens](zh/pages/63-access-tokens.md)、[Managed configuration](zh/pages/67-managed-configuration.md) 和 [Governance](zh/pages/66-governance.md)。
 
 #### 企业级安全和隐私
 
@@ -8145,7 +8152,7 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 - 静态数据加密 (AES-256) 和传输中加密 (TLS 1.2+)
 - 通过 ChatGPT Compliance API 进行审计日志记录
 
-安全控制和运行时保护请参阅 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。更多详情请参考 [Zero Data Retention (ZDR)](https://platform.openai.com/docs/guides/your-data#zero-data-retention)。
+安全控制和运行时保护请参阅 [Agent approvals & security](zh/pages/13-agent-approvals-security.md)。更多详情请参考 [Zero Data Retention (ZDR)](https://platform.openai.com/docs/guides/your-data#zero-data-retention)。
 更广泛的企业安全概览请参阅 [Codex security white paper](https://trust.openai.com/?itemUid=382f924d-54f3-43a8-a9df-c39e6c959958&source=click)。
 
 #### 前提条件：确定负责人和推出策略
@@ -8159,7 +8166,7 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 决定你将使用哪些 Codex 使用界面：
 
 - **Codex local:** 包括 Codex app、CLI 和 IDE extension。代理在开发者电脑上的沙箱中运行。
-- **Codex cloud:** 包括托管 Codex 功能（包括 Codex cloud、iOS、Code Review，以及由 [Slack integration](https://developers.openai.com/codex/integrations/slack) 或 [Linear integration](https://developers.openai.com/codex/integrations/linear) 创建的任务）。代理在托管容器中远程运行，并访问你的代码库。
+- **Codex cloud:** 包括托管 Codex 功能（包括 Codex cloud、iOS、Code Review，以及由 [Slack integration](zh/pages/56-use-codex-in-slack.md) 或 [Linear integration](zh/pages/55-use-codex-in-linear.md) 创建的任务）。代理在托管容器中远程运行，并访问你的代码库。
 - **Both:** 同时使用 local + cloud。
 
 你可以启用 local、cloud 或两者，并通过工作区设置和基于角色的访问控制 (RBAC) 控制访问。
@@ -8174,19 +8181,19 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 
 对于新的 ChatGPT Enterprise 工作区，Codex local 默认启用。如果
 你不是 ChatGPT 工作区所有者，可以通过
-[安装 Codex](https://developers.openai.com/codex/quickstart) 并使用工作邮箱登录来测试自己是否有访问权限。
+[安装 Codex](zh/pages/04-quickstart.md) 并使用工作邮箱登录来测试自己是否有访问权限。
 
 开启 **Allow members to use Codex Local**。
 
 这将为允许的用户启用 Codex app、CLI 和 IDE extension。
 
-如果成员需要程序化的 Codex local 工作流，也请开启 **Allow members to use Codex access tokens**，或通过自定义角色授予访问令牌权限。工作区所有者和管理员可以使用 **Access token expiration limit** 设置成员为新令牌可选择的最长过期时间。设置和权限详情请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+如果成员需要程序化的 Codex local 工作流，也请开启 **Allow members to use Codex access tokens**，或通过自定义角色授予访问令牌权限。工作区所有者和管理员可以使用 **Access token expiration limit** 设置成员为新令牌可选择的最长过期时间。设置和权限详情请参阅 [Access tokens](zh/pages/63-access-tokens.md)。
 
 如果 Codex Local 开关关闭，尝试使用 Codex app、CLI 或 IDE 的用户会看到以下错误：“403 - Unauthorized. Contact your ChatGPT administrator for access.”
 
 #### 为 Codex CLI 启用设备码身份验证
 
-允许开发者在非交互环境中使用 Codex CLI 时通过设备码登录（例如远程开发机器）。更多详情见 [authentication](https://developers.openai.com/codex/auth/)。
+允许开发者在非交互环境中使用 Codex CLI 时通过设备码登录（例如远程开发机器）。更多详情见 [authentication](zh/pages/18-authentication-and-sessions.md)。
 
 #### Codex 云
 
@@ -8209,7 +8216,7 @@ Codex cloud 需要 **GitHub (cloud-hosted) repositories**。如果你的代码�
 
 Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会发布任务链接。
 
-了解更多请参阅 [Codex in Slack](https://developers.openai.com/codex/integrations/slack)。
+了解更多请参阅 [Codex in Slack](zh/pages/56-use-codex-in-slack.md)。
 
 #### 启用 Codex 代理访问互联网
 
@@ -8217,7 +8224,7 @@ Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会�
 
 此设置允许用户为常见软件依赖域使用允许列表、添加域和受信任站点，并指定允许的 HTTP 方法。
 
-有关互联网访问和运行时控制的安全影响，请参阅 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。
+有关互联网访问和运行时控制的安全影响，请参阅 [Agent approvals & security](zh/pages/13-agent-approvals-security.md)。
 
 #### 步骤 2：设置自定义角色 (RBAC)
 
@@ -8262,7 +8269,7 @@ Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会�
 
 Codex Admin 可以从 Codex [Policies page](https://chatgpt.com/codex/settings/policies) 部署管理员强制执行的 `requirements.toml` 策略。
 
-当你希望对不同组应用不同的本地 Codex 约束，而不先分发设备级文件时，请使用此页面。托管策略使用 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 中描述的同一 `requirements.toml` 格式，因此你可以定义允许的审批策略、沙箱模式、网页搜索行为、网络访问要求、MCP 服务器允许列表、功能固定和限制性命令规则。要禁用 Browser Use、in-app browser 或 Computer Use，请参阅 [Pin feature flags](https://developers.openai.com/codex/enterprise/managed-configuration#pin-feature-flags)。
+当你希望对不同组应用不同的本地 Codex 约束，而不先分发设备级文件时，请使用此页面。托管策略使用 [Managed configuration](zh/pages/67-managed-configuration.md) 中描述的同一 `requirements.toml` 格式，因此你可以定义允许的审批策略、沙箱模式、网页搜索行为、网络访问要求、MCP 服务器允许列表、功能固定和限制性命令规则。要禁用 Browser Use、in-app browser 或 Computer Use，请参阅 [Pin feature flags](zh/pages/67-managed-configuration.md#pin-feature-flags)。
 
 推荐设置：
 
@@ -8319,13 +8326,13 @@ prefix_rules = [
 ]
 ```
 
-你可以单独使用任何示例，也可以将它们组合到某个组的单个托管策略中。确切 key、优先级和更多示例请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。
+你可以单独使用任何示例，也可以将它们组合到某个组的单个托管策略中。确切 key、优先级和更多示例请参阅 [Managed configuration](zh/pages/67-managed-configuration.md) 和 [Agent approvals & security](zh/pages/13-agent-approvals-security.md)。
 
 #### 检查用户策略
 
 使用工作流末尾的策略查询工具来确认哪个托管策略适用于用户。你可以按组检查策略分配，或输入用户 email 检查。
 
-如果你计划限制本地客户端的登录方法或工作区，请参阅 [Authentication](https://developers.openai.com/codex/auth) 中管理员托管的身份验证限制。
+如果你计划限制本地客户端的登录方法或工作区，请参阅 [Authentication](zh/pages/18-authentication-and-sessions.md) 中管理员托管的身份验证限制。
 
 #### 步骤 4：使用团队配置标准化本地配置
 
@@ -8337,11 +8344,11 @@ prefix_rules = [
 
 | Type                                 | Path          | Use it to                                                                    |
 | ------------------------------------ | ------------- | ---------------------------------------------------------------------------- |
-| [Config basics](https://developers.openai.com/codex/config-basic) | `config.toml` | 设置沙箱模式、审批、模型、推理强度等默认值。 |
-| [Rules](https://developers.openai.com/codex/rules)                | `rules/`      | 控制 Codex 可以在沙箱外运行哪些命令。                    |
-| [Skills](https://developers.openai.com/codex/skills)              | `skills/`     | 让你的团队可以使用共享技能。                                   |
+| [Config basics](zh/pages/19-config-basics.md) | `config.toml` | 设置沙箱模式、审批、模型、推理强度等默认值。 |
+| [Rules](zh/pages/54-rules.md)                | `rules/`      | 控制 Codex 可以在沙箱外运行哪些命令。                    |
+| [Skills](zh/pages/48-agent-skills.md)              | `skills/`     | 让你的团队可以使用共享技能。                                   |
 
-位置和优先级请参阅 [Config basics](https://developers.openai.com/codex/config-basic#configuration-precedence)。
+位置和优先级请参阅 [Config basics](zh/pages/19-config-basics.md#configuration-precedence)。
 
 #### 步骤 5：配置 Codex 云使用（如果已启用）
 
@@ -8359,7 +8366,7 @@ prefix_rules = [
 仓库之前，组织所有者必须先为该组织安装
 Codex GitHub App。
 
-更多信息请参阅 [Cloud environments](https://developers.openai.com/codex/cloud/environments)。
+更多信息请参阅 [Cloud environments](zh/pages/25-cloud-environments.md)。
 
 Codex 为每项操作使用短生命周期、最小权限的 GitHub App 安装令牌，并遵循用户现有的 GitHub 仓库权限和分支保护规则。
 
@@ -8424,7 +8431,7 @@ Computer Use 是单独情况。Computer Use 的 app 审批仍会
 和
 [policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
 该策略可按企业使用 `guardian_policy_config` 自定义，或
-按用户使用本地 [`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes) 自定义。
+按用户使用本地 [`\[auto_review\].policy`](zh/pages/17-advanced-configuration.md#approval-policies-and-sandbox-modes) 自定义。
 
 #### 审查代理会看到什么
 
@@ -8472,13 +8479,13 @@ Codex 会为该确切操作注入开发者作用域的审批标记。
 #### 配置
 
 设置详情请参阅
-[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration#configure-automatic-review-policy)。
+[Managed configuration](zh/pages/67-managed-configuration.md#configure-automatic-review-policy)。
 
 默认审查策略位于开源 Codex 仓库：
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
 企业可以使用托管要求中的
 `guardian_policy_config` 替换其租户特定部分。个人用户也可以在其 `config.toml` 中设置本地
-[`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)，
+[`\[auto_review\].policy`](zh/pages/17-advanced-configuration.md#approval-policies-and-sandbox-modes)，
 但托管要求优先级更高：
 
 ```toml
@@ -8500,8 +8507,8 @@ YOUR POLICY GOES HERE
 实践中，杠杆最高的变更是：
 
 - 为你有意使用的临时目录或相邻仓库添加狭窄的
-  [`writable_roots`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)。
-- 添加窄作用域的 [prefix rules](https://developers.openai.com/codex/rules)。相比 `["python"]` 或 `["curl"]` 等宽泛
+  [`writable_roots`](zh/pages/17-advanced-configuration.md#approval-policies-and-sandbox-modes)。
+- 添加窄作用域的 [prefix rules](zh/pages/54-rules.md)。相比 `["python"]` 或 `["curl"]` 等宽泛
   模式，优先选择精确命令
   前缀，例如 `["cargo", "test"]` 或 `["pnpm", "run", "lint"]`。宽泛规则往往会抹掉
   Auto-review 旨在守护的边界。
@@ -8655,11 +8662,11 @@ Source: [Managed configuration](https://developers.openai.com/codex/enterprise/m
 
 #### 管理员强制要求 (requirements.toml)
 
-Requirements 会约束安全敏感设置（审批策略、审批审查者、自动审查策略、沙箱模式、网页搜索模式、托管钩子，以及可选的用户可启用哪些 MCP 服务器）。解析配置时（例如来自 `config.toml`、[profile files](https://developers.openai.com/codex/config-advanced#profiles) 或 CLI 配置覆盖），如果某个值与强制规则冲突，Codex 会回退到兼容值并通知用户。如果你配置了 `mcp_servers` 允许列表，只有当 MCP 服务器的名称和身份都匹配已批准条目时，Codex 才会启用该服务器；否则 Codex 会禁用它。
+Requirements 会约束安全敏感设置（审批策略、审批审查者、自动审查策略、沙箱模式、网页搜索模式、托管钩子，以及可选的用户可启用哪些 MCP 服务器）。解析配置时（例如来自 `config.toml`、[profile files](zh/pages/17-advanced-configuration.md#profiles) 或 CLI 配置覆盖），如果某个值与强制规则冲突，Codex 会回退到兼容值并通知用户。如果你配置了 `mcp_servers` 允许列表，只有当 MCP 服务器的名称和身份都匹配已批准条目时，Codex 才会启用该服务器；否则 Codex 会禁用它。
 
-Requirements 也可以通过 `requirements.toml` 中的 `[features]` 表约束 [feature flags](https://developers.openai.com/codex/config-basic/#feature-flags)。注意，功能不一定总是安全敏感，但企业可以按需固定取值。省略的 key 保持不受约束。
+Requirements 也可以通过 `requirements.toml` 中的 `[features]` 表约束 [feature flags](zh/pages/19-config-basics.md#feature-flags)。注意，功能不一定总是安全敏感，但企业可以按需固定取值。省略的 key 保持不受约束。
 
-准确 key 列表请参阅 [Configuration Reference 中的 `requirements.toml` section](https://developers.openai.com/codex/config-reference#requirementstoml)。
+准确 key 列表请参阅 [Configuration Reference 中的 `requirements.toml` section](zh/pages/16-configuration-reference.md#requirementstoml)。
 
 #### 位置和优先级
 
@@ -8773,11 +8780,11 @@ experimental_network.denied_domains = [
 
 仅当你同时定义管理员拥有的 `allowed_domains`，并希望该允许列表具有排他性时，才使用 `experimental_network.managed_allowed_domains_only = true`。如果它为 `true` 但没有托管允许规则，用户添加的域允许规则不会保持有效。
 
-域语法、本地/私有目的地规则、拒绝优先于允许的行为和 DNS rebinding 限制，与 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security#network-isolation) 中描述的沙箱化网络行为相同。
+域语法、本地/私有目的地规则、拒绝优先于允许的行为和 DNS rebinding 限制，与 [Agent approvals & security](zh/pages/13-agent-approvals-security.md#network-isolation) 中描述的沙箱化网络行为相同。
 
 #### 固定功能标志
 
-你也可以为收到托管 `requirements.toml` 的用户固定 [feature flags](https://developers.openai.com/codex/config-basic/#feature-flags)：
+你也可以为收到托管 `requirements.toml` 的用户固定 [feature flags](zh/pages/19-config-basics.md#feature-flags)：
 
 ```toml
 [features]
@@ -8974,7 +8981,7 @@ Source: [Subagents](https://developers.openai.com/codex/concepts/subagents.md)
 Codex 可以通过并行生成专门代理来运行子代理工作流，使
 它们可以并发探索、处理或分析工作。
 
-本页解释核心概念和权衡。有关设置、代理配置和示例，请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+本页解释核心概念和权衡。有关设置、代理配置和示例，请参阅 [Subagents](zh/pages/81-subagents-2.md)。
 
 #### 为什么子代理工作流有帮助
 
@@ -9056,14 +9063,14 @@ Review this branch with parallel subagents. Spawn one subagent for security risk
 - **`medium`**：大多数代理的平衡默认值。
 - **`low`**：当任务直接且速度最重要时使用。
 
-更高推理强度会增加响应时间和 token 使用量，但它可以提升复杂工作的质量。详情请参阅 [Models](https://developers.openai.com/codex/models)、[Config basics](https://developers.openai.com/codex/config-basic) 和 [Configuration Reference](https://developers.openai.com/codex/config-reference)。
+更高推理强度会增加响应时间和 token 使用量，但它可以提升复杂工作的质量。详情请参阅 [Models](zh/pages/20-model-selection.md)、[Config basics](zh/pages/19-config-basics.md) 和 [Configuration Reference](zh/pages/16-configuration-reference.md)。
 
 ### 构建插件
 
 Source: [Build plugins](https://developers.openai.com/codex/plugins/build.md)
 
 本页面面向插件作者。如果你想在 Codex 中浏览、安装和使用
-插件，请参阅 [Plugins](https://developers.openai.com/codex/plugins)。如果你仍在迭代
+插件，请参阅 [Plugins](zh/pages/78-plugins.md)。如果你仍在迭代
 一个仓库或一个个人工作流，请从本地技能开始。当你想跨团队共享该工作流、捆绑 app 集成或
 MCP 配置、打包生命周期钩子，或发布稳定包时，再构建插件。
 
@@ -9331,7 +9338,7 @@ Codex 作为上下文使用的敏感内容时，请暂停
 Chronicle。要禁用 Chronicle，请返回 **Settings &gt;
 Personalization &gt; Memories** 并关闭 **Chronicle**。
 
-你还可以控制是否在某个线程中使用记忆。[了解更多](https://developers.openai.com/codex/memories#control-memories-per-thread)。
+你还可以控制是否在某个线程中使用记忆。[了解更多](zh/pages/74-memories.md#control-memories-per-thread)。
 
 #### 速率限制
 
@@ -9394,15 +9401,15 @@ Source: [Codex Security](https://developers.openai.com/codex/security/index.md)
 [在 Codex App 中安装插件](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 
 有关安装步骤、支持的技能和审查边界，请参阅
-[Codex Security 插件指南](https://developers.openai.com/codex/security/plugin)。
+[Codex Security 插件指南](zh/pages/10-codex-security-plugin.md)。
 
 #### 探索插件用例
 
-- [运行深度安全扫描](https://developers.openai.com/codex/use-cases/deep-security-scan)，执行召回率更高的全仓库审计。
-- [扫描代码变更的安全性](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security)，在合并拉取请求或分支前扫描代码变更。
-- [修复漏洞积压项](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)，针对已批准的发现进行有边界的修复。
+- [运行深度安全扫描](zh/pages/85-run-a-deep-security-scan.md)，执行召回率更高的全仓库审计。
+- [扫描代码变更的安全性](zh/pages/86-scan-code-changes-for-security.md)，在合并拉取请求或分支前扫描代码变更。
+- [修复漏洞积压项](zh/pages/87-remediate-vulnerability-backlog.md)，针对已批准的发现进行有边界的修复。
 
-该插件在你的 Codex 线程中运行。Codex Security 云端扫描会通过 Codex Web 扫描已连接的 GitHub 仓库。有关 Codex 沙箱、审批、网络控制和管理员设置，请参阅 [Agent 审批与安全](https://developers.openai.com/codex/agent-approvals-security)。
+该插件在你的 Codex 线程中运行。Codex Security 云端扫描会通过 Codex Web 扫描已连接的 GitHub 仓库。有关 Codex 沙箱、审批、网络控制和管理员设置，请参阅 [Agent 审批与安全](zh/pages/13-agent-approvals-security.md)。
 
 #### Codex Security 云
 
@@ -9431,10 +9438,10 @@ Codex Security 面向 ChatGPT Enterprise、Edu、Business 和 Pro 用户开放�
 
 #### 安全概览参考
 
-- [Codex Security 插件指南](https://developers.openai.com/codex/security/plugin) 介绍 Codex 中的本地仓库和差异审查工作流。
-- [Codex Security 云端设置](https://developers.openai.com/codex/security/setup) 介绍设置、扫描和发现审查。
-- [改进威胁模型](https://developers.openai.com/codex/security/threat-model) 说明如何调整范围、攻击面和关键性假设。
-- [FAQ](https://developers.openai.com/codex/security/faq) 涵盖常见产品问题。
+- [Codex Security 插件指南](zh/pages/10-codex-security-plugin.md) 介绍 Codex 中的本地仓库和差异审查工作流。
+- [Codex Security 云端设置](zh/pages/11-codex-security-setup.md) 介绍设置、扫描和发现审查。
+- [改进威胁模型](zh/pages/12-improving-the-threat-model.md) 说明如何调整范围、攻击面和关键性假设。
+- [FAQ](zh/pages/09-codex-security-faq.md) 涵盖常见产品问题。
 
 ### 术语表
 
@@ -9480,7 +9487,7 @@ Codex 会在活动配置层旁边发现以下任一形式的 hooks：
 - `hooks.json`
 - `config.toml` 中的内联 `[hooks]` 表
 
-已安装的插件也可以通过插件 manifest 或默认的 `hooks/hooks.json` 文件打包生命周期配置。有关插件打包规则，请参阅 [构建插件](https://developers.openai.com/codex/plugins/build#bundled-mcp-servers-and-lifecycle-config)。
+已安装的插件也可以通过插件 manifest 或默认的 `hooks/hooks.json` 文件打包生命周期配置。有关插件打包规则，请参阅 [构建插件](zh/pages/69-build-plugins.md#bundled-mcp-servers-and-lifecycle-config)。
 
 实际使用中，四个最有用的位置是：
 
@@ -9669,7 +9676,7 @@ Memories 让 Codex 能把早期线程中的有用上下文带入未来工作。�
 
 请将必需的团队指导放在 `AGENTS.md` 或已检入的文档中。把 memories 视为有帮助的本地记忆层，而不是必须始终适用的规则的唯一来源。
 
-[Chronicle](https://developers.openai.com/codex/memories/chronicle) 可以帮助 Codex 从你的屏幕恢复最近的工作上下文，以逐步构建记忆。
+[Chronicle](zh/pages/70-chronicle.md) 可以帮助 Codex 从你的屏幕恢复最近的工作上下文，以逐步构建记忆。
 
 #### 启用记忆
 
@@ -9682,7 +9689,7 @@ Memories 让 Codex 能把早期线程中的有用上下文带入未来工作。�
 memories = true
 ```
 
-有关 Codex 存储用户级配置的位置以及 Codex 如何加载 `~/.codex/config.toml`，请参阅 [配置基础](https://developers.openai.com/codex/config-basic)。
+有关 Codex 存储用户级配置的位置以及 Codex 如何加载 `~/.codex/config.toml`，请参阅 [配置基础](zh/pages/19-config-basics.md)。
 
 #### 记忆如何工作
 
@@ -9694,7 +9701,7 @@ memories = true
 
 #### 记忆存储
 
-Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~/.codex`。有关 Codex 如何使用 `CODEX_HOME`，请参阅 [配置和状态位置](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~/.codex`。有关 Codex 如何使用 `CODEX_HOME`，请参阅 [配置和状态位置](zh/pages/17-advanced-configuration.md#config-and-state-locations)。
 
 主要 memory 文件位于 `~/.codex/memories/` 下，包含来自先前线程的摘要、持久条目、最近输入和支持证据。
 
@@ -9710,7 +9717,7 @@ Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~
 
 在 Codex app 设置中启用 memories，或在 `config.toml` 的 `[features]` 部分设置 `memories = true`。
 
-有关配置文件位置和 memory 相关设置的完整列表，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关配置文件位置和 memory 相关设置的完整列表，请参阅 [配置参考](zh/pages/16-configuration-reference.md)。
 
 常见的 memory 专用设置包括：
 
@@ -9754,14 +9761,14 @@ Codex 会同时检查你的用户级设置和当前项目。用户级设置来�
 
 | 检测到的设置                          | Codex 目标位置                         |
 | ------------------------------------- | -------------------------------------- |
-| 说明文件                              | [`AGENTS.md`](https://developers.openai.com/codex/guides/agents-md) |
-| `settings.json`                       | [`config.toml`](https://developers.openai.com/codex/config-basic)   |
-| Skills                                | [Codex skills](https://developers.openai.com/codex/skills)          |
+| 说明文件                              | [`AGENTS.md`](zh/pages/50-custom-instructions-with-agents-md.md) |
+| `settings.json`                       | [`config.toml`](zh/pages/19-config-basics.md)   |
+| Skills                                | [Codex skills](zh/pages/48-agent-skills.md)          |
 | 最近 30 天的会话                      | Codex 线程和项目                       |
-| MCP server 配置                       | [Codex MCP 配置](https://developers.openai.com/codex/mcp)           |
-| Hooks                                 | [Codex hooks](https://developers.openai.com/codex/hooks)            |
-| 斜杠命令                              | [Codex skills](https://developers.openai.com/codex/skills)          |
-| Subagents                             | [Codex agents](https://developers.openai.com/codex/subagents)       |
+| MCP server 配置                       | [Codex MCP 配置](zh/pages/53-model-context-protocol.md)           |
+| Hooks                                 | [Codex hooks](zh/pages/73-hooks.md)            |
+| 斜杠命令                              | [Codex skills](zh/pages/48-agent-skills.md)          |
+| Subagents                             | [Codex agents](zh/pages/81-subagents-2.md)       |
 
 #### 在新线程中完成剩余设置
 
@@ -9783,7 +9790,7 @@ Codex 会同时检查你的用户级设置和当前项目。用户级设置来�
 
 #### 切换之后
 
-导入完成后，打开你的某个已迁移项目，并从那里继续。如果你刚开始使用 Codex，请参阅 [快速入门](https://developers.openai.com/codex/quickstart) 了解其余设置流程。
+导入完成后，打开你的某个已迁移项目，并从那里继续。如果你刚开始使用 Codex，请参阅 [快速入门](zh/pages/04-quickstart.md) 了解其余设置流程。
 
 ### 开源
 
@@ -9923,7 +9930,7 @@ Plugins 将 skills、app integrations 和 MCP servers 打包为 Codex 可复用�
 - 安装 Gmail plugin，让 Codex 读取和管理 Gmail。
 - 安装 Google Drive plugin，跨 Drive、Docs、Sheets 和 Slides 工作。
 - 安装 Slack plugin，汇总频道或起草回复。
-- 安装 [Sites](https://developers.openai.com/codex/sites)，创建并部署托管网站、web app 和游戏。
+- 安装 [Sites](zh/pages/80-sites.md)，创建并部署托管网站、web app 和游戏。
 
 一个 plugin 可以包含：
 
@@ -9931,7 +9938,7 @@ Plugins 将 skills、app integrations 和 MCP servers 打包为 Codex 可复用�
 - **Apps:** 与 GitHub、Slack 或 Google Drive 等工具的连接，让 Codex 可以从这些工具读取信息并在其中执行操作。
 - **MCP servers:** 为 Codex 提供更多工具或共享信息的服务，通常来自本地项目之外的系统。
 
-你可以通过 marketplace source 发布 plugins 来分享它们，例如用于项目或团队的 repo marketplace。有关 marketplace 设置、打包和分发指导，请参阅 [构建插件](https://developers.openai.com/codex/plugins/build)。
+你可以通过 marketplace source 发布 plugins 来分享它们，例如用于项目或团队的 repo marketplace。有关 marketplace 设置、打包和分发指导，请参阅 [构建插件](zh/pages/69-build-plugins.md)。
 
 #### 使用和安装插件
 
@@ -9982,7 +9989,7 @@ CLI 插件浏览器会按 marketplace 对 plugins 分组。使用 marketplace �
 
 #### 权限和数据共享如何工作
 
-安装 plugin 会让它的工作流在 Codex 中可用，但你现有的 [审批设置](https://developers.openai.com/codex/agent-approvals-security) 仍然适用。任何已连接的外部服务仍受其自身的身份验证、隐私和数据共享政策约束。
+安装 plugin 会让它的工作流在 Codex 中可用，但你现有的 [审批设置](zh/pages/13-agent-approvals-security.md) 仍然适用。任何已连接的外部服务仍受其自身的身份验证、隐私和数据共享政策约束。
 
 - 打包的 skills 会在你安装 plugin 后立即可用。
 - 如果 plugin 包含 apps，Codex 可能会在设置期间或首次使用时提示你在 ChatGPT 中安装或登录这些 apps。
@@ -10004,11 +10011,11 @@ enabled = false
 
 #### 构建你自己的插件
 
-如果你想创建、测试或分发自己的 plugin，请参阅 [构建插件](https://developers.openai.com/codex/plugins/build)。该页面涵盖本地脚手架、手动 marketplace 设置、工作区分享、plugin manifests 和打包指导。
+如果你想创建、测试或分发自己的 plugin，请参阅 [构建插件](zh/pages/69-build-plugins.md)。该页面涵盖本地脚手架、手动 marketplace 设置、工作区分享、plugin manifests 和打包指导。
 
 #### 插件指南
 
-- [Codex Security plugin](https://developers.openai.com/codex/security/plugin)：扫描已授权代码、确认发现，并准备已审查的修复。
+- [Codex Security plugin](zh/pages/10-codex-security-plugin.md)：扫描已授权代码、确认发现，并准备已审查的修复。
 
 ### 远程连接
 
@@ -10080,7 +10087,7 @@ Codex 移动设置支持 macOS 和 Windows 上的 Codex App hosts。你可以从
 
 在 Mac 笔记本上，保持屏幕打开并接入电源时，远程访问可以保持可用。合上屏幕时，还需要连接外接显示器。选择 **Sleep** 仍会停止远程访问。
 
-在 Windows host 上，对于使用 [Computer Use](https://developers.openai.com/codex/app/computer-use) 的任务，请保持会话解锁且可用。Windows 上的 Computer Use 在前台运行，因此远程控制最适合在你将 host desktop 专用于任务时启动或检查工作。
+在 Windows host 上，对于使用 [Computer Use](zh/pages/35-computer-use.md) 的任务，请保持会话解锁且可用。Windows 上的 Computer Use 在前台运行，因此远程控制最适合在你将 host desktop 专用于任务时启动或检查工作。
 
 #### 专用常开计算机
 
@@ -10227,7 +10234,7 @@ showing me the current site and confirming the deployment URL.
 
 在部署或扩大访问范围前：
 
-- 在 Codex [review pane](https://developers.openai.com/codex/app/review) 中审查 source changes 和任何数据库迁移。
+- 在 Codex [review pane](zh/pages/38-review.md) 中审查 source changes 和任何数据库迁移。
 - 确认 build 成功，并确认所选 saved version 是你想发布的 version。
 - 检查只有预期受众可以访问该 site。
 - 确认你已通过 Sites 配置运行时 secret values，且没有将它们提交到 source files。
@@ -10235,9 +10242,9 @@ showing me the current site and confirming the deployment URL.
 
 #### 相关文档
 
-- [Plugins](https://developers.openai.com/codex/plugins) 说明如何安装和调用 Codex plugins。
-- [Codex app](https://developers.openai.com/codex/app) 介绍 app 导航和项目线程。
-- [审查并发布变更](https://developers.openai.com/codex/app/review) 说明如何在发布前检查 source changes。
+- [Plugins](zh/pages/78-plugins.md) 说明如何安装和调用 Codex plugins。
+- [Codex app](zh/pages/44-codex-app.md) 介绍 app 导航和项目线程。
+- [审查并发布变更](zh/pages/38-review.md) 说明如何在发布前检查 source changes。
 
 ### 子智能体
 
@@ -10247,7 +10254,7 @@ Codex 可以通过并行生成专门的 agents 来运行 subagent workflows，�
 
 借助 subagent workflows，你还可以根据任务定义具有不同模型配置和说明的自定义 agents。
 
-有关 subagent workflows 背后的概念和权衡，包括上下文污染、上下文劣化和模型选择指导，请参阅 [Subagent concepts](https://developers.openai.com/codex/concepts/subagents)。
+有关 subagent workflows 背后的概念和权衡，包括上下文污染、上下文劣化和模型选择指导，请参阅 [Subagent concepts](zh/pages/68-subagents.md)。
 
 #### 可用性
 
@@ -10316,7 +10323,7 @@ Codex 随附内置 agents：
 
 #### 全局设置
 
-全局 subagent 设置仍位于你的 [configuration](https://developers.openai.com/codex/config-basic#configuration-precedence) 中的 `[agents]` 下。
+全局 subagent 设置仍位于你的 [configuration](zh/pages/19-config-basics.md#configuration-precedence) 中的 `[agents]` 下。
 
 | 字段                             | 类型   | 必填     | 用途                                                       |
 | -------------------------------- | ------ | :------: | ---------------------------------------------------------- |
@@ -10491,7 +10498,7 @@ Fast Mode 不适用于 Amazon Bedrock。Fast Mode 使用优先处理，而初始
 
 Source: [Windows](https://developers.openai.com/codex/windows.md)
 
-在 Windows 上使用 Codex，可通过原生 [Codex app](https://developers.openai.com/codex/app/windows)、[CLI](https://developers.openai.com/codex/cli) 或 [IDE extension](https://developers.openai.com/codex/ide)。
+在 Windows 上使用 Codex，可通过原生 [Codex app](zh/pages/41-windows-app.md)、[CLI](zh/pages/45-codex-cli.md) 或 [IDE extension](zh/pages/46-codex-ide-extension.md)。
 
 Windows 上的 Codex app 支持核心工作流，例如并行 agent 线程、worktrees、automations、Git 功能、in-app browser、artifact previews、plugins 和 skills。
 
@@ -10518,20 +10525,20 @@ sandbox = "elevated" # or "unelevated"
 
 如果两种模式都可用，请使用 `elevated`。如果默认原生 sandbox 在你的环境中无法工作，请在排查设置时使用 `unelevated` 作为 fallback。
 
-企业管理员可以通过 [`requirements.toml`](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml) 约束 Codex 可以使用哪些原生 sandbox 实现：
+企业管理员可以通过 [`requirements.toml`](zh/pages/67-managed-configuration.md#admin-enforced-requirements-requirementstoml) 约束 Codex 可以使用哪些原生 sandbox 实现：
 
 ```toml
 [windows]
 allowed_sandbox_implementations = ["elevated"]
 ```
 
-此示例要求使用 `elevated` sandbox，并阻止用户回退到 `unelevated`。若要允许任一实现，请包含两个值；当未选择模式时，Codex 偏好 `elevated`。有关支持的值，请参阅 [`requirements.toml` 参考](https://developers.openai.com/codex/config-reference#requirementstoml)。
+此示例要求使用 `elevated` sandbox，并阻止用户回退到 `unelevated`。若要允许任一实现，请包含两个值；当未选择模式时，Codex 偏好 `elevated`。有关支持的值，请参阅 [`requirements.toml` 参考](zh/pages/16-configuration-reference.md#requirementstoml)。
 
 默认情况下，两种 sandbox modes 也会使用 private desktop，以提供更强的 UI 隔离。仅当你因兼容性需要旧的 `Winsta0\\Default` 行为时，才设置 `windows.sandbox_private_desktop = false`。
 
 #### 沙盒权限
 
-以 full access mode 运行 Codex 意味着 Codex 不受项目目录限制，并且可能执行会导致数据丢失的意外破坏性操作。为了更安全地自动化，请保留 sandbox boundaries，并为特定例外使用 [rules](https://developers.openai.com/codex/rules)，或将你的 [approval policy 设置为 never](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts)，让 Codex 根据你的 [审批与安全设置](https://developers.openai.com/codex/agent-approvals-security) 尝试在不请求 escalated permissions 的情况下解决问题。
+以 full access mode 运行 Codex 意味着 Codex 不受项目目录限制，并且可能执行会导致数据丢失的意外破坏性操作。为了更安全地自动化，请保留 sandbox boundaries，并为特定例外使用 [rules](zh/pages/54-rules.md)，或将你的 [approval policy 设置为 never](zh/pages/13-agent-approvals-security.md#run-without-approval-prompts)，让 Codex 根据你的 [审批与安全设置](zh/pages/13-agent-approvals-security.md) 尝试在不请求 escalated permissions 的情况下解决问题。
 
 #### Windows 版本矩阵
 
@@ -10629,3 +10636,449 @@ codex
   cd repo
   ```
 - 如果需要从 Windows 访问文件，它们位于 Explorer 中的 \\wsl$\Ubuntu\home\&lt;user&gt; 下。
+
+### 在 CI/CD 中维护 Codex 账户认证（高级）
+
+Source: [Maintain Codex account auth in CI/CD (advanced)](https://developers.openai.com/codex/auth/ci-cd-auth.md)
+
+本指南说明如何在可信 CI/CD runner 上保持 ChatGPT 托管的 Codex 认证可用，而不需要你自己调用 OAuth token endpoint。
+
+自动化认证的推荐方式是 API key。只有当你明确需要让工作流以你的 Codex 账户身份运行时，才使用本指南。
+
+整体模式如下：
+
+1. 在可信机器上运行一次 `codex login`，创建 `auth.json`。
+2. 将该文件放到 runner 上。
+3. 正常运行 Codex。
+4. 当 session 变旧时，让 Codex 刷新 session。
+5. 保留刷新后的 `auth.json`，供下一次运行使用。
+
+这是面向企业和其它可信私有自动化场景的高级工作流。对大多数 CI/CD job 来说，API key 仍然是推荐选项。
+
+请像对待密码一样对待 `~/.codex/auth.json`：它包含 access token。不要提交它、粘贴到 ticket 中，或在聊天中共享。不要在公开或开源仓库中使用此工作流。
+
+#### 为什么这样可行
+
+Codex 已经知道如何刷新 ChatGPT 托管的 session。
+
+以当前开源客户端为准：
+
+- Codex 会从 `auth.json` 加载本地认证缓存
+- 如果 `last_refresh` 早于约 8 天，Codex 会在继续运行前刷新 token bundle
+- 刷新成功后，Codex 会把新 token 和新的 `last_refresh` 写回 `auth.json`
+- 如果某个请求收到 `401`，Codex 也内置了刷新并重试的路径
+
+这意味着受支持的 CI/CD 策略不是“自己调用 refresh API”，而是“运行 Codex，并持久化更新后的 `auth.json`”。
+
+#### 何时使用
+
+仅当以下条件全部成立时，才使用本指南：
+
+- 你需要 ChatGPT 托管的 Codex 认证，而不是 API key
+- 远程 runner 无法运行 `codex login`
+- runner 是可信的私有基础设施
+- 你可以在多次运行之间保留刷新后的 `auth.json`
+- 某个 `auth.json` 副本只会由一台机器或一个串行化的 job 流使用
+
+本指南适用于 Codex 托管的 ChatGPT auth（`auth_mode: "chatgpt"`）。
+
+它不适用于：
+
+- API key auth
+- 外部 token host integration（`auth_mode: "chatgptAuthTokens"`）
+- Codex 之外的通用 OAuth client
+
+如果你的凭据存储在操作系统 keyring 中，请先切换到文件后端存储。参见 [Credential storage](zh/pages/18-authentication-and-sessions.md#credential-storage)。
+
+#### 一次性生成 `auth.json`
+
+在可以使用浏览器登录的可信机器上：
+
+1. 配置 Codex，把凭据存入文件：
+
+```toml
+cli_auth_credentials_store = "file"
+```
+
+2. 运行：
+
+```bash
+codex login
+```
+
+3. 验证该文件看起来像托管 ChatGPT auth：
+
+```bash
+AUTH_FILE="${CODEX_HOME:-$HOME/.codex}/auth.json"
+
+jq '{
+  auth_mode,
+  has_tokens: (.tokens != null),
+  has_refresh_token: ((.tokens.refresh_token // "") != ""),
+  last_refresh
+}' "$AUTH_FILE"
+```
+
+仅当以下条件成立时继续：
+
+- `auth_mode` 是 `"chatgpt"`
+- `has_refresh_token` 是 `true`
+
+然后将 `auth.json` 的内容放入你的 CI/CD secret manager，或复制到可信的持久 runner。
+
+#### 推荐模式：在自托管 runner 上使用 GitHub Actions
+
+最简单的全自动设置，是使用带有持久 `CODEX_HOME` 的自托管 GitHub Actions runner。
+
+这个模式效果好的原因：
+
+- runner 可以在多次 job 之间把 `auth.json` 保留在磁盘上
+- Codex 可以原地刷新该文件
+- 后续 job 会自动使用刷新后的 token
+- 原始 secret 只需要用于 bootstrap 或重新播种
+
+关键细节是：只在 `auth.json` 缺失时才播种。如果你每次运行都用原始 secret 覆盖文件，就会丢弃 Codex 刚写入的刷新后 token。
+
+示例定时 workflow：
+
+```yaml
+name: Keep Codex auth fresh
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  keep-codex-auth-fresh:
+    runs-on: self-hosted
+    steps:
+      - name: Bootstrap auth.json if needed
+        shell: bash
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+          mkdir -p "$CODEX_HOME"
+          chmod 700 "$CODEX_HOME"
+
+          if [ ! -f "$CODEX_HOME/auth.json" ]; then
+            printf '%s' "$CODEX_AUTH_JSON" > "$CODEX_HOME/auth.json"
+            chmod 600 "$CODEX_HOME/auth.json"
+          fi
+
+      - name: Run Codex
+        shell: bash
+        run: |
+          codex exec --json "Reply with the single word OK." >/dev/null
+```
+
+这会做到：
+
+- 第一次运行播种 `auth.json`
+- 后续运行复用同一个文件
+- 一旦缓存 session 足够旧，Codex 会在正常的 `codex exec` 步骤中刷新它
+- 刷新后的文件保留在磁盘上，供下一个 workflow run 使用
+
+在当前开源客户端中，Codex 大约会在 8 天后把 session 视为 stale，因此每周一次的 schedule 通常足够。
+
+#### 短生命周期 runner：恢复、运行 Codex、持久化更新后的文件
+
+如果你使用 GitHub-hosted runner、GitLab shared runner 或任何其它短生命周期环境，runner 文件系统会在每个 job 后消失。在这种设置中，你需要一个往返流程：
+
+1. 从安全存储恢复当前 `auth.json`
+2. 运行 Codex
+3. 将更新后的 `auth.json` 写回安全存储
+
+通用 GitHub Actions 形状：
+
+```yaml
+name: Run Codex with managed auth
+
+on:
+  workflow_dispatch:
+
+jobs:
+  codex-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore auth.json
+        shell: bash
+        run: |
+          export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+          mkdir -p "$CODEX_HOME"
+          chmod 700 "$CODEX_HOME"
+
+          # Replace this with your secret manager or secure storage command.
+          my-secret-cli read codex-auth-json > "$CODEX_HOME/auth.json"
+          chmod 600 "$CODEX_HOME/auth.json"
+
+      - name: Run Codex
+        shell: bash
+        run: |
+          codex exec --json "summarize the failing tests"
+
+      - name: Persist refreshed auth.json
+        if: always()
+        shell: bash
+        run: |
+          # Replace this with your secret manager or secure storage command.
+          my-secret-cli write codex-auth-json < "$CODEX_HOME/auth.json"
+```
+
+关键要求是：写回步骤存储的是 Codex 在本次运行中产生的刷新后文件，而不是原始 seed。
+
+#### 你不需要单独的刷新命令
+
+任何正常的 Codex 运行都可以刷新 session。
+
+这意味着你有两个好选项：
+
+- 让现有 CI/CD Codex job 自然刷新该文件
+- 如果真实 job 运行得不够频繁，则添加一个轻量的定时维护 job，例如上面的 GitHub Actions 示例
+
+session 变 stale 后的第一次 Codex 运行，就是刷新 `auth.json` 的那次运行。
+
+#### 重要运行规则
+
+- 每个 runner 或每个串行化 workflow 流使用一个 `auth.json`。
+- 不要在并发 job 或多台机器之间共享同一个文件。
+- 不要在每次运行时用原始 seed 覆盖持久 runner 上已刷新的文件。
+- 不要把 `auth.json` 存在仓库、日志或公开 artifact storage 中。
+- 如果内置刷新停止工作，请从可信机器重新播种。
+
+#### 刷新停止工作时怎么办
+
+此流程可以减少人工操作，但不能保证同一个 session 永久有效。
+
+如果出现以下情况，请用新的 `auth.json` 重新播种 runner：
+
+- Codex 开始返回 `401`，且 runner 已无法刷新
+- refresh token 被撤销或过期
+- 另一台机器或并发 job 先轮换了 token
+- 安全存储往返失败，恢复了旧文件
+
+重新播种：
+
+1. 在可信机器上运行 `codex login`。
+2. 替换 CI/CD 中存储的 `auth.json` 副本。
+3. 让下一个 runner job 继续使用 Codex 的内置刷新流程。
+
+#### 验证 runner 正在维护 session
+
+检查 runner 是否仍有托管 auth token，以及 `last_refresh` 是否存在：
+
+```bash
+AUTH_FILE="${CODEX_HOME:-$HOME/.codex}/auth.json"
+
+jq '{
+  auth_mode,
+  last_refresh,
+  has_access_token: ((.tokens.access_token // "") != ""),
+  has_id_token: ((.tokens.id_token // "") != ""),
+  has_refresh_token: ((.tokens.refresh_token // "") != "")
+}' "$AUTH_FILE"
+```
+
+如果 runner 是持久的，你应该看到同一个文件在多次运行之间持续存在。如果 runner 是短生命周期的，请确认写回步骤保存的是上一个 job 更新后的文件。
+
+#### 源码参考
+
+如果你想在开源客户端中验证此行为：
+
+- [`codex-rs/core/src/auth.rs`](https://github.com/openai/codex/blob/main/codex-rs/core/src/auth.rs) 涵盖 stale-token 检测、自动刷新、401 后刷新重试恢复，以及刷新后 token 的持久化
+- [`codex-rs/core/src/auth/storage.rs`](https://github.com/openai/codex/blob/main/codex-rs/core/src/auth/storage.rs) 涵盖文件后端的 `auth.json` 存储
+
+### 运行深度安全扫描
+
+Source: [Run a deep security scan](https://developers.openai.com/codex/use-cases/deep-security-scan.md)
+
+在已授权的仓库中深入搜索可信的漏洞。
+
+#### 概览
+
+使用 Codex Security plugin 运行召回率更高的全仓库审计。该流程会重复发现候选问题、验证候选项，并生成可审查的报告 artifact。
+
+适合：
+
+- 对你拥有或被授权评估的完整仓库进行应用安全审查。
+- 需要更高召回率，并愿意投入更多运行时间和 token 来发现更多候选问题的审查。
+- 安全团队在决定修复内容之前，需要可追溯的发现证据。
+
+相关 skill：
+
+- `$codex-security:deep-security-scan`：运行重复的全仓库安全发现 pass，验证存活的发现，分析攻击路径，并创建可审查报告。
+
+#### 起始提示
+
+```text
+/goal 对此仓库运行一次深度安全扫描。在所有必需步骤完成且最终报告准备好之前不要停止。
+
+范围和规则：
+- 我已获得评估此仓库的授权。
+- 将整个仓库视为范围内。
+- 使用 Codex Security plugin 的 deep scan 工作流；不要把它扩展为 diff 审查或限定路径审查。
+- 保持扫描只读；不要修改代码、打开 pull request，或测试外部目标。
+
+返回最终 Markdown 和 HTML 报告路径，并优先总结需要人工审查的发现。
+```
+
+建议使用高推理强度。
+
+#### 选择深度仓库审查
+
+当你需要在完整仓库中进行高召回率漏洞发现，并且可以为更长运行时间留出预算时，请使用 deep scan。Codex Security plugin 会在验证和排序发现之前重复执行发现 pass，因此这个工作流比普通扫描花费更多时间和 token。
+
+Deep scan 面向整个仓库。若要审查某个 package 或目录，请使用 `$codex-security:security-scan`。若要审查 pull request、commit、branch diff 或 working-tree patch，请使用 [$codex-security:security-diff-scan](zh/pages/86-scan-code-changes-for-security.md)。
+
+#### 准备已授权扫描
+
+1. 在 Codex 中打开仓库，并安装 [Codex Security plugin](zh/pages/10-codex-security-plugin.md)。
+2. 确认你拥有该仓库，或已获得评估授权。
+3. 如果能提升审查质量，请在 `AGENTS.md` 中添加仓库特定的架构、信任边界、构建、测试和验证指导。
+4. 运行起始提示，并让扫描完成重复发现、验证、攻击路径分析和最终报告阶段。
+5. 在要求 Codex 修改代码或进一步复现某个发现之前，先审查最终报告。
+
+#### 修复前审查证据
+
+最终结果应识别受影响位置、行为为何可达、Codex 执行了哪些验证、仍有哪些证明缺口，以及有边界的修复方向。请区分没有验证证据的发现和已验证的发现。
+
+仅针对你已选择并审查过的发现开始修复。使用 [修复漏洞积压项](zh/pages/87-remediate-vulnerability-backlog.md)，一次修复一个发现，并进行聚焦的回归验证。
+
+#### 相关链接
+
+- [Codex Security plugin](zh/pages/10-codex-security-plugin.md)
+- [代理审批和安全](zh/pages/13-agent-approvals-security.md)
+- [Codex 网络安全](zh/pages/14-cyber-safety.md)
+
+### 扫描代码变更中的安全问题
+
+Source: [Scan code changes for security](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security.md)
+
+审查 pull request 或本地 diff 是否引入安全回归。
+
+#### 概览
+
+使用 Codex Security plugin 检查基于 Git 的变更集、验证可信的安全回归，并在合并前生成基于证据的报告。
+
+适合：
+
+- 触及认证、授权、解析、文件访问、secret 或特权工作流的 pull request。
+- 合并前需要安全聚焦检查的 release branch 或本地 patch。
+- 需要把发现锚定到变更代码和直接支持文件的审查者。
+
+相关 skill：
+
+- `$codex-security:security-diff-scan`：审查 pull request、commit、branch diff 或 working-tree patch 中的安全回归，并提供验证和攻击路径证据。
+
+#### 起始提示
+
+```text
+/goal 扫描此 PR、commit、branch diff 或 working-tree patch 中的安全回归。在所有范围内变更文件覆盖完毕且所有必需步骤完成之前不要停止。
+
+范围和规则：
+- 目标：[此 pull request / commit SHA / 从 BASE 到 HEAD 的 branch diff / 当前 working-tree patch]
+- 我已获得评估此仓库和变更集的授权。
+- 请特别关注 [auth、input handling、secrets、filesystem、network、dependencies 或其它敏感面]。
+- 保持本轮只读；不要修改代码或打开 pull request。
+
+返回最终 Markdown 报告，以及需要人工审查的发现对应的 Codex app review directive。
+```
+
+建议使用高推理强度。
+
+#### 审查变更，而不是整个仓库
+
+当 pull request、commit、branch 或本地 patch 修改敏感代码路径时，请使用 security diff scan。Codex Security plugin 会使用仓库上下文理解变更，然后把发现和验证聚焦在 diff 及直接支持代码上。
+
+这个工作流是普通代码审查的补充。请在你需要安全回归证据，而不是一般风格或测试审查时使用它。
+
+#### 运行聚焦检查
+
+1. 打开仓库，并检出或描述要审查的确切 Git 变更集。
+2. 安装 [Codex Security plugin](zh/pages/10-codex-security-plugin.md)，并在起始提示中指定 pull request、commit、branch diff 或 working-tree patch。
+3. 指明变更中的高风险表面，例如认证、解析器、文件路径、网络请求或凭据处理。
+4. 运行提示时不要请求修复，让第一个结果保持为审查 artifact。
+5. 在决定是否修复之前，检查每个报告的受影响行、验证结果和证明缺口。
+
+#### 跟进发现
+
+有用的报告应区分可达且有支撑的安全发现，以及仍需确认的怀疑项，并可为受影响行包含 Codex app review directive。对于可行动结果，请使用发现 identifier 或相关报告章节打开一个新的有边界修复任务。
+
+修复和验证循环请参阅 [修复漏洞积压项](zh/pages/87-remediate-vulnerability-backlog.md)。
+
+#### 相关链接
+
+- [Codex Security plugin](zh/pages/10-codex-security-plugin.md)
+- [代理审批和安全](zh/pages/13-agent-approvals-security.md)
+
+### 修复漏洞积压项
+
+Source: [Remediate a vulnerability backlog](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog.md)
+
+把已审查的发现转化为最小修复，并附带回归证据。
+
+#### 概览
+
+从 ticket 工具或漏洞报告系统带入已批准发现，然后使用 Codex Security plugin 一次验证并处理一个发现，产出有边界的 patch 和回归证据。
+
+适合：
+
+- 已有来自 Codex Security、Linear 或 Jira ticket、GitHub Security Advisory、HackerOne 或 Bugcrowd report、渗透测试或内部安全审查的已审查发现的团队。
+- 每个 patch 都需要最小 diff 和可重复验证的漏洞积压。
+- 希望把安全修复与更广泛重构或清理分开的维护者。
+
+相关 skill：
+
+- `$codex-security:fix-finding`：用聚焦测试或复现证据修复并验证一个已验证或可信的安全发现。
+
+#### 起始提示
+
+```text
+使用 $codex-security:fix-finding 修复此安全发现，并验证问题不再复现。
+
+来源：[Codex Security report / Linear 或 Jira ticket / GitHub Security Advisory / HackerOne 或 Bugcrowd report / 其它已授权来源]
+标题和受影响组件：[finding title and component]
+易受攻击的 source、sink 或失效控制：[known path or unknown]
+攻击者可控输入和影响：[input, prerequisites, and impact]
+预期安全不变量：[behavior the fix must enforce]
+现有证明：[report path, PoC, reproducer, test, or validation notes]
+受影响文件和行：[paths and lines, or unknown]
+约束：[supported behavior to preserve, test command, rollout requirement, or none]
+
+要求：
+- 可行时，先确认问题仍然存在，再修改代码。
+- 做出能执行预期安全不变量的最小变更。
+- 添加聚焦回归覆盖，或可获得的最强可重复验证 artifact。
+- 验证合法行为仍然有效，且原始问题不再复现。
+- 不要把无关积压发现和重构带入此变更。
+
+报告变更文件、测试或验证 artifact、确切命令和结果、原始问题不再复现的证明，以及剩余不确定性。如果问题已经修复，请展示证据，不要修改代码。
+```
+
+建议使用高推理强度。
+
+#### 一次修复一个已审查发现
+
+当某个安全发现已有足够证据支持有边界的修复决策后，请使用此工作流。发现可以来自 Codex Security plugin、Linear 或 Jira 等 issue tracker、GitHub Security Advisory、HackerOne 或 Bugcrowd 等 disclosure platform、内部审查，或其它已授权来源。尽可能连接支持的来源，或提供包含受影响代码和证据的报告、ticket 或 advisory。
+
+不要把一整个大 backlog 交给 Codex 并要求它一次性全部修改。单发现循环能让安全不变量、patch 和验证证据保持可审查。
+
+#### 带着证据关闭一个条目
+
+1. 从 Codex Security、ticket 系统、安全 advisory、disclosure platform 或团队授权的其它来源中选择一个发现。
+2. 提供或检索其来源引用、source 或失效控制、攻击者可控输入、受影响文件、复现证据和预期安全行为。
+3. 要求 `$codex-security:fix-finding` 在做最小 patch 前先复现或验证问题；如果问题已经修复，则报告不需要代码变更。
+4. 与 patch 一起审查回归测试或验证 artifact。
+5. 确认合法行为仍受支持，且原始 vulnerable path 不再复现。
+6. 在选择下一项之前记录剩余不确定性。
+
+#### 保持 backlog 可审计
+
+对于每个完成项，请保留原始 ticket、advisory 或报告引用、确切代码变更、已运行检查和任何证明缺口。如果 Codex 发现问题已经修复，或无法复现该问题，请记录证据，而不是强行做不必要的代码变更。
+
+#### 相关链接
+
+- [Codex Security plugin](zh/pages/10-codex-security-plugin.md)
+- [运行深度安全扫描](zh/pages/85-run-a-deep-security-scan.md)
+- [扫描代码变更中的安全问题](zh/pages/86-scan-code-changes-for-security.md)

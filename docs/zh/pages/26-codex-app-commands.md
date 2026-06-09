@@ -46,7 +46,7 @@ Slash commands 让你无需离开线程输入框即可控制 Codex。可用命�
 1. 在线程输入框中输入 `/`。
 2. 从列表中选择命令，或继续输入以过滤（例如 `/status`）。
 
-你也可以通过在线程输入框中输入 `$` 显式调用 skills。请参阅 [Skills](https://developers.openai.com/codex/skills)。
+你也可以通过在线程输入框中输入 `$` 显式调用 skills。请参阅 [Skills](48-agent-skills.md)。
 
 已启用的 skills 也会出现在 slash command 列表中。
 
@@ -76,7 +76,7 @@ goals = true
 
 当 goal 处于活动状态时，app 会在输入框上方显示进度。使用该进度行中的按钮暂停或恢复目标、编辑目标文本，或清除目标，而不是输入另一个 slash command。Goal 运行时，你仍可以用后续消息继续引导 Codex。
 
-有关编写有效目标的指导，请参阅 [Goal mode](https://developers.openai.com/codex/prompting#goal-mode)。
+有关编写有效目标的指导，请参阅 [目标模式](07-prompting.md#goal-mode)。
 
 #### 深度链接
 
@@ -142,7 +142,7 @@ Codex app 注册了 `codex://` URL scheme，因此链接可以直接打开 app �
 
 #### 插件
 
-Plugin links 会根据你是在打开插件、从 marketplace 安装，还是使用本地 `marketplace.json` 而采用不同形式。有关插件基础，请参阅 [Plugins](https://developers.openai.com/codex/plugins)。有关本地或仓库 marketplace 设置，请参阅 [Build plugins](https://developers.openai.com/codex/plugins/build#build-your-own-curated-plugin-list)。
+Plugin links 会根据你是在打开插件、从 marketplace 安装，还是使用本地 `marketplace.json` 而采用不同形式。有关插件基础，请参阅 [Plugins](78-plugins.md)。有关本地或仓库 marketplace 设置，请参阅 [Build plugins](69-build-plugins.md#build-your-own-curated-plugin-list)。
 
 #### 插件详情
 
@@ -163,7 +163,7 @@ Codex 生成的 plugin links 也可以包含这些查询参数。手写链接时
 
 #### 本地插件
 
-有关本地或仓库 marketplace 设置，请参阅 [Build plugins](https://developers.openai.com/codex/plugins/build#build-your-own-curated-plugin-list)。
+有关本地或仓库 marketplace 设置，请参阅 [Build plugins](69-build-plugins.md#build-your-own-curated-plugin-list)。
 
 | Deep link                           | 打开                                                 |
 | ----------------------------------- | ---------------------------------------------------- |
@@ -190,5 +190,5 @@ Codex 生成的 plugin links 也可以包含这些查询参数。手写链接时
 
 #### App 命令参考
 
-- [Features](https://developers.openai.com/codex/app/features)
-- [Settings](https://developers.openai.com/codex/app/settings)
+- [Features](27-codex-app-features.md)
+- [Settings](28-codex-app-settings.md)

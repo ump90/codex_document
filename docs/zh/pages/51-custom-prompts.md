@@ -2,11 +2,11 @@
 
 Source: [Custom Prompts](https://developers.openai.com/codex/custom-prompts.md)
 
-Custom prompts 已弃用。请使用 [skills](https://developers.openai.com/codex/skills) 来提供可复用说明，Codex 可以显式或隐式调用这些说明。
+Custom prompts 已弃用。请使用 [skills](48-agent-skills.md) 来提供可复用说明，Codex 可以显式或隐式调用这些说明。
 
 Custom prompts（已弃用）可让你把 Markdown 文件转换为可复用提示，并在 Codex CLI 和 Codex IDE 扩展中作为斜杠命令调用。
 
-Custom prompts 需要显式调用，并位于你的本地 Codex home 目录（例如 `~/.codex`），因此不会通过仓库共享。如果你想共享一个提示（或希望 Codex 隐式调用它），请[使用 skills](https://developers.openai.com/codex/skills)。
+Custom prompts 需要显式调用，并位于你的本地 Codex home 目录（例如 `~/.codex`），因此不会通过仓库共享。如果你想共享一个提示（或希望 Codex 隐式调用它），请[使用 skills](48-agent-skills.md)。
 
 1. 创建 prompts 目录：
 

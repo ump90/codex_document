@@ -85,7 +85,7 @@ export CODEX_REMOTE_TOKEN="$(cat "$TOKEN_FILE")"
 codex --remote wss://remote-host:4500 --remote-auth-token-env CODEX_REMOTE_TOKEN
 ```
 
-对于 Codex app 中的 SSH 远程项目，请使用 [Remote connections](https://developers.openai.com/codex/remote-connections)。对于托管的远程控制客户端，`codex remote-control` 会启动启用了远程控制支持的 app-server 进程。
+对于 Codex app 中的 SSH 远程项目，请使用 [Remote connections](79-remote-connections.md)。对于托管的远程控制客户端，`codex remote-control` 会启动启用了远程控制支持的 app-server 进程。
 
 #### 模型和推理
 
@@ -97,7 +97,7 @@ codex --remote wss://remote-host:4500 --remote-auth-token-env CODEX_REMOTE_TOKEN
 codex --model gpt-5.5
 ```
 
-[了解 Codex 中可用的模型](https://developers.openai.com/codex/models)。
+[了解 Codex 中可用的模型](20-model-selection.md)。
 
 #### 功能标志
 
@@ -113,7 +113,7 @@ codex features disable shell_snapshot
 
 #### 子智能体
 
-使用 Codex subagent workflows 来并行化更大的任务。关于设置、角色配置（`config.toml` 中的 `[agents]`）和示例，请参阅 [Subagents](https://developers.openai.com/codex/subagents)。
+使用 Codex subagent workflows 来并行化更大的任务。关于设置、角色配置（`config.toml` 中的 `[agents]`）和示例，请参阅 [Subagents](81-subagents-2.md)。
 
 只有在你明确要求时，Codex 才会生成 subagent。由于每个 subagent 都会执行自己的模型和工具工作，subagent 工作流会比可比的单智能体运行消耗更多 token。
 
@@ -137,7 +137,7 @@ Codex 接受 PNG 和 JPEG 等常见格式。对于两张或更多图片，请使
 
 你可以使用自然语言请求，也可以在提示中包含 `$imagegen` 来显式调用图片生成技能。
 
-内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](https://developers.openai.com/codex/pricing#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](02-codex-pricing.md#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图片生成，请在环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图片，这样会适用 API 价格。
 
@@ -160,7 +160,7 @@ TUI 会对带围栏的 Markdown 代码块和文件 diff 做语法高亮，让代
 
 #### 网页搜索
 
-Codex 随附第一方网页搜索工具。对于 Codex CLI 中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你使用 `--yolo` 或其他[完全访问沙盒设置](https://developers.openai.com/codex/agent-approvals-security)，网页搜索默认使用实时结果。要获取最新数据，请为单次运行传递 `--search`，或在 [Config basics](https://developers.openai.com/codex/config-basic) 中设置 `web_search = "live"`。你也可以设置 `web_search = "disabled"` 来关闭该工具。
+Codex 随附第一方网页搜索工具。对于 Codex CLI 中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你使用 `--yolo` 或其他[完全访问沙盒设置](13-agent-approvals-security.md)，网页搜索默认使用实时结果。要获取最新数据，请为单次运行传递 `--search`，或在 [Config basics](19-config-basics.md) 中设置 `web_search = "live"`。你也可以设置 `web_search = "disabled"` 来关闭该工具。
 
 每当 Codex 查找内容时，你会在转录记录或 `codex exec --json` 输出中看到 `web_search` 项。
 
@@ -215,7 +215,7 @@ codex exec "fix the CI failure"
 
 #### 使用 Codex 云
 
-`codex cloud` 命令让你无需离开终端即可分流并启动 [Codex cloud 任务](https://developers.openai.com/codex/cloud)。不带参数运行它可打开交互式选择器，浏览活动或已完成的任务，并将变更应用到你的本地项目。
+`codex cloud` 命令让你无需离开终端即可分流并启动 [Codex cloud 任务](47-codex-web.md)。不带参数运行它可打开交互式选择器，浏览活动或已完成的任务，并将变更应用到你的本地项目。
 
 你也可以直接从终端启动任务：
 
@@ -231,7 +231,7 @@ codex cloud exec --env ENV_ID "Summarize open bugs"
 
 斜杠命令让你可以快速访问专用工作流，例如 `/review`、`/fork`、`/side`，或你自己的可复用提示。Codex 随附一组精选内置命令，你也可以为团队特定任务或个人快捷方式创建自定义命令。
 
-请参阅 [slash commands guide](https://developers.openai.com/codex/guides/slash-commands)，浏览内置命令目录、了解如何编写自定义命令，以及它们在磁盘上的位置。
+请参阅 [slash commands guide](39-slash-commands-in-codex-cli.md)，浏览内置命令目录、了解如何编写自定义命令，以及它们在磁盘上的位置。
 
 #### 提示编辑器
 
@@ -243,4 +243,4 @@ codex cloud exec --env ENV_ID "Summarize open bugs"
 
 通过配置 Model Context Protocol server，将 Codex 连接到更多工具。可在 `~/.codex/config.toml` 中添加 STDIO 或 streaming HTTP server，或使用 `codex mcp` CLI 命令管理它们；Codex 会在会话开始时自动启动它们，并把它们的工具与内置工具一起暴露出来。当你需要在另一个智能体内使用 Codex 时，甚至可以将 Codex 本身作为 MCP server 运行。
 
-请参阅 [Model Context Protocol](https://developers.openai.com/codex/mcp)，了解示例配置、支持的 auth flows 和更详细指南。
+请参阅 [Model Context Protocol](53-model-context-protocol.md)，了解示例配置、支持的 auth flows 和更详细指南。

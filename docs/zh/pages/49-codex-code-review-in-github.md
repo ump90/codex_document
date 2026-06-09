@@ -8,13 +8,13 @@ Source: [Codex code review in GitHub](https://developers.openai.com/codex/integr
 
 请确保你具备：
 
-- 为要审查的仓库设置了 [Codex cloud](https://developers.openai.com/codex/cloud)。
+- 为要审查的仓库设置了 [Codex cloud](47-codex-web.md)。
 - 能够访问 [Codex code review settings](https://chatgpt.com/codex/settings/code-review)。
 - 如果你希望 Codex 遵循仓库特定的审查指南，请准备一个 `AGENTS.md` 文件。
 
 #### 设置 Codex 代码审查
 
-1. 设置 [Codex cloud](https://developers.openai.com/codex/cloud)。
+1. 设置 [Codex cloud](47-codex-web.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/code-review)。
 3. 为你的仓库开启 **Code review**。
 
@@ -63,7 +63,7 @@ Codex 会以该 pull request 作为上下文启动一个云端任务，并且在
 
 #### 给 Codex 其他任务
 
-如果你在评论中提及 `@codex`，但内容不是 `review`，Codex 会使用你的 pull request 作为上下文启动一个[云端任务](https://developers.openai.com/codex/cloud)。
+如果你在评论中提及 `@codex`，但内容不是 `review`，Codex 会使用你的 pull request 作为上下文启动一个[云端任务](47-codex-web.md)。
 
 ```md
 @codex fix the CI failures
@@ -74,6 +74,6 @@ Codex 会以该 pull request 作为上下文启动一个云端任务，并且在
 如果 Codex 没有反应或没有发布审查：
 
 - 确认你已在 [Codex settings](https://chatgpt.com/codex/settings/code-review) 中为该仓库开启 **Code review**。
-- 确认该 pull request 属于已设置 [Codex cloud](https://developers.openai.com/codex/cloud) 的仓库。
+- 确认该 pull request 属于已设置 [Codex cloud](47-codex-web.md) 的仓库。
 - 在 pull request 评论中使用准确触发语 `@codex review`。
 - 对于 automatic reviews，请检查你已开启 **Automatic reviews**，并且 pull request 事件与你的审查触发设置匹配。

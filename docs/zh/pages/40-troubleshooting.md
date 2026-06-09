@@ -12,7 +12,7 @@ Source: [Troubleshooting](https://developers.openai.com/codex/app/troubleshootin
 
 如果你只想查看上一次 Codex 回合的变更，请将 diff 窗格切换到 "Last turn changes" 视图。
 
-[进一步了解如何使用复查窗格](https://developers.openai.com/codex/app/review)。
+[进一步了解如何使用复查窗格](38-review.md)。
 
 #### 从侧边栏移除项目
 
@@ -28,7 +28,7 @@ Source: [Troubleshooting](https://developers.openai.com/codex/app/troubleshootin
 
 #### 代码无法在工作树上运行
 
-工作树会在不同目录中创建，并且只继承签入 Git 的文件。根据你管理项目依赖和工具链的方式，你可能必须使用 [本地环境](https://developers.openai.com/codex/app/local-environments) 在工作树上运行一些设置脚本。或者，你也可以在常规本地项目中检出这些变更。查看 [工作树文档](https://developers.openai.com/codex/app/worktrees) 了解更多信息。
+工作树会在不同目录中创建，并且只继承签入 Git 的文件。根据你管理项目依赖和工具链的方式，你可能必须使用 [本地环境](37-local-environments.md) 在工作树上运行一些设置脚本。或者，你也可以在常规本地项目中检出这些变更。查看 [工作树文档](42-worktrees.md) 了解更多信息。
 
 #### 应用没有识别队友共享的本地环境
 

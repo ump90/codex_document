@@ -31,13 +31,13 @@ Source: [Computer Use](https://developers.openai.com/codex/app/computer-use.md)
 - 在 macOS 上，在你继续处理其他事情时，在后台运行范围明确的任务。
 - 执行跨多个应用的工作流。
 
-对于你在本地构建的 Web 应用，请优先使用 [应用内浏览器](https://developers.openai.com/codex/app/browser)。
+对于你在本地构建的 Web 应用，请优先使用 [应用内浏览器](36-in-app-browser.md)。
 
 #### Windows 前台使用
 
 在 Windows 上，计算机使用运行在活动桌面上。它无法在你继续使用同一个 Windows 会话时在后台操作，因此在任务运行时，预计 Codex 会移动指针、输入并接管前台。
 
-对于你离开后仍应继续的 Windows 任务，请保持 Windows 设备解锁并连接互联网。使用手机上的 [远程控制](https://developers.openai.com/codex/remote-connections) 查看进度或发送后续指令，或在 Windows 虚拟机中运行 Codex app，这样计算机使用会接管 VM 而不是你的主桌面。
+对于你离开后仍应继续的 Windows 任务，请保持 Windows 设备解锁并连接互联网。使用手机上的 [远程控制](79-remote-connections.md) 查看进度或发送后续指令，或在 Windows 虚拟机中运行 Codex app，这样计算机使用会接管 VM 而不是你的主桌面。
 
 #### 启动计算机使用任务
 

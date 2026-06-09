@@ -7,12 +7,12 @@ Source: [Customization](https://developers.openai.com/codex/concepts/customizati
 在 Codex 中，customization 来自几个协同工作的层：
 
 - 用于持久说明的**项目指南（`AGENTS.md`）**
-- 用于保存从以往工作中学到的有用上下文的 **[Memories](https://developers.openai.com/codex/memories)**
+- 用于保存从以往工作中学到的有用上下文的 **[Memories](74-memories.md)**
 - 用于可复用工作流和领域专业知识的 **Skills**
-- 用于访问外部工具和共享系统的 **[MCP](https://developers.openai.com/codex/mcp)**
-- 用于把工作委派给专门 subagents 的 **[Subagents](https://developers.openai.com/codex/concepts/subagents)**
+- 用于访问外部工具和共享系统的 **[MCP](53-model-context-protocol.md)**
+- 用于把工作委派给专门 subagents 的 **[Subagents](68-subagents.md)**
 
-这些层是互补的，而不是相互竞争的。`AGENTS.md` 塑造行为，memories 延续本地上下文，skills 打包可重复流程，[MCP](https://developers.openai.com/codex/mcp) 将 Codex 连接到本地工作区之外的系统。
+这些层是互补的，而不是相互竞争的。`AGENTS.md` 塑造行为，memories 延续本地上下文，skills 打包可重复流程，[MCP](53-model-context-protocol.md) 将 Codex 连接到本地工作区之外的系统。
 
 #### AGENTS 指南
 
@@ -35,14 +35,14 @@ Source: [Customization](https://developers.openai.com/codex/concepts/customizati
 - **阅读过多**：如果它找到了正确文件，但读取了太多文档，请添加路由指南（优先查看哪些目录/文件）。
 - **重复出现的 PR 反馈**：如果你不止一次留下相同反馈，请将其固化。
 - **在 GitHub 中**：在 pull request 评论中，用请求标记 `@codex`（例如 `@codex add this to AGENTS.md`），把更新委派给云端任务。
-- **自动化漂移检查**：使用 [automations](https://developers.openai.com/codex/app/automations) 运行重复检查（例如每天），查找指南缺口，并建议要添加到 `AGENTS.md` 的内容。
+- **自动化漂移检查**：使用 [automations](24-automations.md) 运行重复检查（例如每天），查找指南缺口，并建议要添加到 `AGENTS.md` 的内容。
 
 将 `AGENTS.md` 与执行这些规则的基础设施搭配使用：pre-commit hooks、linters 和 type checkers 会在你看到问题之前捕获它们，因此系统会更善于防止重复错误。
 
 Codex 可以从多个位置加载指南：Codex home 目录中的全局文件（面向你作为开发者）以及团队可以签入的仓库特定文件。离工作目录更近的文件优先级更高。
 使用全局文件来塑造 Codex 与你的沟通方式（例如审查风格、详细程度和默认值），并让仓库文件专注于团队和代码库规则。
 
-[Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md)
+[Custom instructions with AGENTS.md](50-custom-instructions-with-agents-md.md)
 
 #### 技能
 
@@ -50,11 +50,11 @@ Skills 为 Codex 提供可复用能力，用于可重复工作流。
 Skills 通常最适合可复用工作流，因为它们支持更丰富的说明、脚本和参考资料，同时能跨任务复用。
 Skills 会被加载并对代理可见（至少其元数据可见），因此 Codex 可以发现并隐式选择它们。这让丰富工作流可用，同时不会在一开始就膨胀上下文。
 
-使用 skill 文件夹在本地创作和迭代工作流。如果该工作流已有 plugin，请优先安装它，以复用经过验证的设置。当你想在团队之间分发自己的工作流，或把它与 app 集成捆绑时，请将其打包为 [plugin](https://developers.openai.com/codex/plugins/build)。Skills 仍是创作格式；plugins 是可安装的分发单元。
+使用 skill 文件夹在本地创作和迭代工作流。如果该工作流已有 plugin，请优先安装它，以复用经过验证的设置。当你想在团队之间分发自己的工作流，或把它与 app 集成捆绑时，请将其打包为 [plugin](69-build-plugins.md)。Skills 仍是创作格式；plugins 是可安装的分发单元。
 
 一个 skill 通常是一个 `SKILL.md` 文件，加上可选脚本、参考资料和资源。
 
-skill 目录可以包含一个 `scripts/` 文件夹，其中放置 Codex 作为工作流一部分调用的 CLI 脚本（例如为数据设定初始值或运行校验）。当工作流需要外部系统（issue tracker、设计工具、文档服务器）时，请将 skill 与 [MCP](https://developers.openai.com/codex/mcp) 搭配使用。
+skill 目录可以包含一个 `scripts/` 文件夹，其中放置 Codex 作为工作流一部分调用的 CLI 脚本（例如为数据设定初始值或运行校验）。当工作流需要外部系统（issue tracker、设计工具、文档服务器）时，请将 skill 与 [MCP](53-model-context-protocol.md) 搭配使用。
 
 示例 `SKILL.md`：
 
@@ -91,7 +91,7 @@ Codex 对 skills 使用渐进式披露：
 
 Skills 可以被显式调用；当任务匹配 skill 描述时，Codex 也可以隐式选择它们。清晰的 skill 描述会提高触发可靠性。
 
-[Agent Skills](https://developers.openai.com/codex/skills)
+[Agent Skills](48-agent-skills.md)
 
 #### MCP
 
@@ -118,24 +118,24 @@ MCP servers 可以暴露：
 
 - skill 定义工作流，并指定要使用的 MCP 工具
 
-[Model Context Protocol](https://developers.openai.com/codex/mcp)
+[Model Context Protocol](53-model-context-protocol.md)
 
 #### 子智能体
 
 你可以创建具有不同角色的不同 agents，并提示它们以不同方式使用工具。例如，一个 agent 可能运行特定测试命令和配置，而另一个 agent 拥有用于获取生产日志进行调试的 MCP servers。每个 subagent 都保持专注，并使用适合其工作的工具。
 
-[Subagent concepts](https://developers.openai.com/codex/concepts/subagents)
+[Subagent concepts](68-subagents.md)
 
 #### 技能与 MCP 配合使用
 
 Skills 加 MCP 是这些能力组合在一起的地方：skills 定义可重复工作流，MCP 将它们连接到外部工具和系统。
-如果某个 skill 依赖 MCP，请在 `agents/openai.yaml` 中声明该依赖，以便 Codex 能自动安装和连接它（参见 [Agent Skills](https://developers.openai.com/codex/skills)）。
+如果某个 skill 依赖 MCP，请在 `agents/openai.yaml` 中声明该依赖，以便 Codex 能自动安装和连接它（参见 [Agent Skills](48-agent-skills.md)）。
 
 #### 后续步骤
 
 按以下顺序构建：
 
-1. 使用 [Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md)，让 Codex 遵循你的仓库约定。添加 pre-commit hooks 和 linters 来执行这些规则。
-2. 当已有可复用工作流时，安装一个 [plugin](https://developers.openai.com/codex/plugins)。否则，创建一个 [skill](https://developers.openai.com/codex/skills)，并在想共享时把它打包为 plugin。
-3. 当工作流需要外部系统（Linear、GitHub、文档服务器、设计工具）时，使用 [MCP](https://developers.openai.com/codex/mcp)。
-4. 当你准备把嘈杂或专门任务委派给 subagents 时，使用 [Subagents](https://developers.openai.com/codex/subagents)。
+1. 使用 [Custom instructions with AGENTS.md](50-custom-instructions-with-agents-md.md)，让 Codex 遵循你的仓库约定。添加 pre-commit hooks 和 linters 来执行这些规则。
+2. 当已有可复用工作流时，安装一个 [plugin](78-plugins.md)。否则，创建一个 [skill](48-agent-skills.md)，并在想共享时把它打包为 plugin。
+3. 当工作流需要外部系统（Linear、GitHub、文档服务器、设计工具）时，使用 [MCP](53-model-context-protocol.md)。
+4. 当你准备把嘈杂或专门任务委派给 subagents 时，使用 [Subagents](81-subagents-2.md)。

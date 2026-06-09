@@ -6,7 +6,7 @@ Codex 可以通过并行生成专门的 agents 来运行 subagent workflows，�
 
 借助 subagent workflows，你还可以根据任务定义具有不同模型配置和说明的自定义 agents。
 
-有关 subagent workflows 背后的概念和权衡，包括上下文污染、上下文劣化和模型选择指导，请参阅 [Subagent concepts](https://developers.openai.com/codex/concepts/subagents)。
+有关 subagent workflows 背后的概念和权衡，包括上下文污染、上下文劣化和模型选择指导，请参阅 [Subagent concepts](68-subagents.md)。
 
 #### 可用性
 
@@ -75,7 +75,7 @@ Codex 随附内置 agents：
 
 #### 全局设置
 
-全局 subagent 设置仍位于你的 [configuration](https://developers.openai.com/codex/config-basic#configuration-precedence) 中的 `[agents]` 下。
+全局 subagent 设置仍位于你的 [configuration](19-config-basics.md#configuration-precedence) 中的 `[agents]` 下。
 
 | 字段                             | 类型   | 必填     | 用途                                                       |
 | -------------------------------- | ------ | :------: | ---------------------------------------------------------- |

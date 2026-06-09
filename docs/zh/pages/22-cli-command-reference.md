@@ -6,7 +6,7 @@ Source: [Command line options](https://developers.openai.com/codex/cli/reference
 
 本页列出每个已记录的 Codex CLI 命令和标志。使用交互式表格按键或说明搜索。每个部分都会指出该选项是 stable 还是 experimental，并标出有风险的组合。
 
-CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传入的任何 `-c key=value` 覆盖都会在该次调用中优先。更多信息请参阅 [Config basics](https://developers.openai.com/codex/config-basic#configuration-precedence)。
+CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传入的任何 `-c key=value` 覆盖都会在该次调用中优先。更多信息请参阅 [Config basics](19-config-basics.md#configuration-precedence)。
 
 #### 全局标志
 
@@ -36,32 +36,32 @@ CLI 会从 `~/.codex/config.toml` 继承大多数默认值。你在命令行传�
 
 #### 命令概览
 
-Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](https://developers.openai.com/codex/feature-maturity) 了解如何解释这些标签。
+Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](03-feature-maturity.md) 了解如何解释这些标签。
 
 | Key                                                                                                     | Maturity       | Default | Details                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------- | -------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [`codex`](https://developers.openai.com/codex/cli/reference#codex-interactive)                                                       | `stable`       |         | 启动 terminal UI。接受上面的全局标志，以及可选提示词或图像附件。                                    |
-| [`codex app`](https://developers.openai.com/codex/cli/reference#codex-app)                                                           | `stable`       |         | 在 macOS 或 Windows 上启动 Codex desktop app。在 macOS 上，Codex 可以打开工作区路径；在 Windows 上，Codex 会打印要打开的路径。 |
-| [`codex app-server`](https://developers.openai.com/codex/cli/reference#codex-app-server)                                             | `experimental` |         | 启动 Codex app server，用于通过 stdio、WebSocket 或 Unix socket 进行本地开发或调试。                                 |
-| [`codex apply`](https://developers.openai.com/codex/cli/reference#codex-apply)                                                       | `stable`       |         | 将 Codex Cloud task 生成的最新 diff 应用到你的本地 working tree。Alias：`codex a`。                                     |
-| [`codex cloud`](https://developers.openai.com/codex/cli/reference#codex-cloud)                                                       | `experimental` |         | 从终端浏览或执行 Codex Cloud tasks，而不打开 TUI。Alias：`codex cloud-tasks`。                              |
-| [`codex completion`](https://developers.openai.com/codex/cli/reference#codex-completion)                                             | `stable`       |         | 为 Bash、Zsh、Fish 或 PowerShell 生成 shell completion scripts。                                                                   |
-| [`codex debug app-server send-message-v2`](https://developers.openai.com/codex/cli/reference#codex-debug-app-server-send-message-v2) | `experimental` |         | 通过内置 test client 发送单条 V2 message 来调试 app-server。                                                       |
-| [`codex debug models`](https://developers.openai.com/codex/cli/reference#codex-debug-models)                                         | `experimental` |         | 打印 Codex 看到的原始 model catalog，包括只检查捆绑 catalog 的选项。                                        |
-| [`codex doctor`](https://developers.openai.com/codex/cli/reference#codex-doctor)                                                     | `stable`       |         | 为本地安装、配置、身份验证、运行时、Git、终端、app-server 和线程清单问题生成诊断报告。                 |
-| [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)                                                         | `stable`       |         | 非交互式运行 Codex。Alias：`codex e`。将结果流式输出到 stdout 或 JSONL，并可选择恢复之前的会话。               |
-| [`codex execpolicy`](https://developers.openai.com/codex/cli/reference#codex-execpolicy)                                             | `experimental` |         | 评估 execpolicy rule files，并查看某个命令会被允许、提示还是阻止。                                        |
-| [`codex features`](https://developers.openai.com/codex/cli/reference#codex-features)                                                 | `stable`       |         | 列出 feature flags，并在 `config.toml` 中持久启用或禁用它们。                                                            |
-| [`codex fork`](https://developers.openai.com/codex/cli/reference#codex-fork)                                                         | `stable`       |         | 将之前的交互式会话 fork 为新的线程，同时保留原 transcript。                                              |
-| [`codex login`](https://developers.openai.com/codex/cli/reference#codex-login)                                                       | `stable`       |         | 使用 ChatGPT OAuth、device auth、API key 或通过 stdin 管道传入的 access token 对 Codex 进行身份验证。                                   |
-| [`codex logout`](https://developers.openai.com/codex/cli/reference#codex-logout)                                                     | `stable`       |         | 移除已存储的身份验证凭据。                                                                                               |
-| [`codex mcp`](https://developers.openai.com/codex/cli/reference#codex-mcp)                                                           | `experimental` |         | 管理 Model Context Protocol servers（list、add、remove、authenticate）。                                                                |
-| [`codex mcp-server`](https://developers.openai.com/codex/cli/reference#codex-mcp-server)                                             | `experimental` |         | 通过 stdio 将 Codex 本身作为 MCP server 运行。当另一个 agent 使用 Codex 时很有用。                                                 |
-| [`codex plugin marketplace`](https://developers.openai.com/codex/cli/reference#codex-plugin-marketplace)                             | `experimental` |         | 从 Git 或本地源 add、list、upgrade 或 remove plugin marketplaces。                                                            |
-| [`codex remote-control`](https://developers.openai.com/codex/cli/reference#codex-remote-control)                                     | `experimental` |         | 确保本地 app-server daemon 正在运行并启用了 remote-control 支持。                                                      |
-| [`codex resume`](https://developers.openai.com/codex/cli/reference#codex-resume)                                                     | `stable`       |         | 按 ID 继续之前的交互式会话，或恢复最近的对话。                                                   |
-| [`codex sandbox`](https://developers.openai.com/codex/cli/reference#codex-sandbox)                                                   | `experimental` |         | 在 Codex 提供的 macOS、Linux 或 Windows 沙盒中运行任意命令。                                                        |
-| [`codex update`](https://developers.openai.com/codex/cli/reference#codex-update)                                                     | `stable`       |         | 当已安装版本支持 self-update 时，检查并应用 Codex CLI update。                                                 |
+| [`codex`](22-cli-command-reference.md#codex-interactive)                                                       | `stable`       |         | 启动 terminal UI。接受上面的全局标志，以及可选提示词或图像附件。                                    |
+| [`codex app`](22-cli-command-reference.md#codex-app)                                                           | `stable`       |         | 在 macOS 或 Windows 上启动 Codex desktop app。在 macOS 上，Codex 可以打开工作区路径；在 Windows 上，Codex 会打印要打开的路径。 |
+| [`codex app-server`](22-cli-command-reference.md#codex-app-server)                                             | `experimental` |         | 启动 Codex app server，用于通过 stdio、WebSocket 或 Unix socket 进行本地开发或调试。                                 |
+| [`codex apply`](22-cli-command-reference.md#codex-apply)                                                       | `stable`       |         | 将 Codex Cloud task 生成的最新 diff 应用到你的本地 working tree。Alias：`codex a`。                                     |
+| [`codex cloud`](22-cli-command-reference.md#codex-cloud)                                                       | `experimental` |         | 从终端浏览或执行 Codex Cloud tasks，而不打开 TUI。Alias：`codex cloud-tasks`。                              |
+| [`codex completion`](22-cli-command-reference.md#codex-completion)                                             | `stable`       |         | 为 Bash、Zsh、Fish 或 PowerShell 生成 shell completion scripts。                                                                   |
+| [`codex debug app-server send-message-v2`](22-cli-command-reference.md#codex-debug-app-server-send-message-v2) | `experimental` |         | 通过内置 test client 发送单条 V2 message 来调试 app-server。                                                       |
+| [`codex debug models`](22-cli-command-reference.md#codex-debug-models)                                         | `experimental` |         | 打印 Codex 看到的原始 model catalog，包括只检查捆绑 catalog 的选项。                                        |
+| [`codex doctor`](22-cli-command-reference.md#codex-doctor)                                                     | `stable`       |         | 为本地安装、配置、身份验证、运行时、Git、终端、app-server 和线程清单问题生成诊断报告。                 |
+| [`codex exec`](22-cli-command-reference.md#codex-exec)                                                         | `stable`       |         | 非交互式运行 Codex。Alias：`codex e`。将结果流式输出到 stdout 或 JSONL，并可选择恢复之前的会话。               |
+| [`codex execpolicy`](22-cli-command-reference.md#codex-execpolicy)                                             | `experimental` |         | 评估 execpolicy rule files，并查看某个命令会被允许、提示还是阻止。                                        |
+| [`codex features`](22-cli-command-reference.md#codex-features)                                                 | `stable`       |         | 列出 feature flags，并在 `config.toml` 中持久启用或禁用它们。                                                            |
+| [`codex fork`](22-cli-command-reference.md#codex-fork)                                                         | `stable`       |         | 将之前的交互式会话 fork 为新的线程，同时保留原 transcript。                                              |
+| [`codex login`](22-cli-command-reference.md#codex-login)                                                       | `stable`       |         | 使用 ChatGPT OAuth、device auth、API key 或通过 stdin 管道传入的 access token 对 Codex 进行身份验证。                                   |
+| [`codex logout`](22-cli-command-reference.md#codex-logout)                                                     | `stable`       |         | 移除已存储的身份验证凭据。                                                                                               |
+| [`codex mcp`](22-cli-command-reference.md#codex-mcp)                                                           | `experimental` |         | 管理 Model Context Protocol servers（list、add、remove、authenticate）。                                                                |
+| [`codex mcp-server`](22-cli-command-reference.md#codex-mcp-server)                                             | `experimental` |         | 通过 stdio 将 Codex 本身作为 MCP server 运行。当另一个 agent 使用 Codex 时很有用。                                                 |
+| [`codex plugin marketplace`](22-cli-command-reference.md#codex-plugin-marketplace)                             | `experimental` |         | 从 Git 或本地源 add、list、upgrade 或 remove plugin marketplaces。                                                            |
+| [`codex remote-control`](22-cli-command-reference.md#codex-remote-control)                                     | `experimental` |         | 确保本地 app-server daemon 正在运行并启用了 remote-control 支持。                                                      |
+| [`codex resume`](22-cli-command-reference.md#codex-resume)                                                     | `stable`       |         | 按 ID 继续之前的交互式会话，或恢复最近的对话。                                                   |
+| [`codex sandbox`](22-cli-command-reference.md#codex-sandbox)                                                   | `experimental` |         | 在 Codex 提供的 macOS、Linux 或 Windows 沙盒中运行任意命令。                                                        |
+| [`codex update`](22-cli-command-reference.md#codex-update)                                                     | `stable`       |         | 当已安装版本支持 self-update 时，检查并应用 Codex CLI update。                                                 |
 
 #### 命令详情
 

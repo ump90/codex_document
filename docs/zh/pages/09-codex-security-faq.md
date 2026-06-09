@@ -57,7 +57,7 @@ Codex Security 与语言无关。实践中，性能取决于模型对仓库所�
 
 #### 项目需要构建后才能扫描吗？
 
-不需要。Codex Security 可以在没有编译步骤的情况下，基于仓库和提交上下文产生发现。在自动验证期间，如果这有助于复现问题，它可能会尝试在容器中构建项目。环境设置细节请参见 [Codex cloud 环境](https://developers.openai.com/codex/cloud/environments)。
+不需要。Codex Security 可以在没有编译步骤的情况下，基于仓库和提交上下文产生发现。在自动验证期间，如果这有助于复现问题，它可能会尝试在容器中构建项目。环境设置细节请参见 [Codex cloud 环境](25-cloud-environments.md)。
 
 #### Codex Security 如何减少误报并避免破坏性补丁？
 
@@ -69,7 +69,7 @@ Codex Security 使用两个阶段。首先，模型对可能的问题进行排�
 
 #### 什么是威胁模型？
 
-威胁模型是仓库在扫描时的安全上下文。它将简洁的项目概述与攻击面细节结合起来，例如入口点、信任边界、认证假设和高风险组件。更多细节请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+威胁模型是仓库在扫描时的安全上下文。它将简洁的项目概述与攻击面细节结合起来，例如入口点、信任边界、认证假设和高风险组件。更多细节请参见 [改进威胁模型](12-improving-the-threat-model.md)。
 
 #### 威胁模型如何生成？
 
@@ -81,4 +81,4 @@ Codex Security 会提示模型总结仓库架构和安全入口点、对仓库�
 
 #### 我可以编辑威胁模型吗？
 
-可以。Codex Security 会创建初始威胁模型，你可以随着架构、风险和业务上下文变化而更新它。编辑工作流请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+可以。Codex Security 会创建初始威胁模型，你可以随着架构、风险和业务上下文变化而更新它。编辑工作流请参见 [改进威胁模型](12-improving-the-threat-model.md)。

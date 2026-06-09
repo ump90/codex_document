@@ -2,7 +2,7 @@
 
 Source: [Codex App Server](https://developers.openai.com/codex/app-server.md)
 
-Codex app-server 是 Codex 用来驱动富客户端的接口（例如 Codex VS Code 扩展）。当你希望在自己的产品中进行深度集成时，可以使用它来处理身份验证、对话历史、审批以及流式代理事件。app-server 的实现已在 Codex GitHub 仓库中开源（[openai/codex/codex-rs/app-server](https://github.com/openai/codex/tree/main/codex-rs/app-server)）。开源 Codex 组件的完整列表请参阅 [Open Source](https://developers.openai.com/codex/open-source) 页面。
+Codex app-server 是 Codex 用来驱动富客户端的接口（例如 Codex VS Code 扩展）。当你希望在自己的产品中进行深度集成时，可以使用它来处理身份验证、对话历史、审批以及流式代理事件。app-server 的实现已在 Codex GitHub 仓库中开源（[openai/codex/codex-rs/app-server](https://github.com/openai/codex/tree/main/codex-rs/app-server)）。开源 Codex 组件的完整列表请参阅 [Open Source](76-open-source.md) 页面。
 
 如果你要自动化作业或在 CI 中运行 Codex，请改用
 Codex SDK。

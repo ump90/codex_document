@@ -36,7 +36,7 @@ Codex 会在活动配置层旁边发现以下任一形式的 hooks：
 - `hooks.json`
 - `config.toml` 中的内联 `[hooks]` 表
 
-已安装的插件也可以通过插件 manifest 或默认的 `hooks/hooks.json` 文件打包生命周期配置。有关插件打包规则，请参阅 [构建插件](https://developers.openai.com/codex/plugins/build#bundled-mcp-servers-and-lifecycle-config)。
+已安装的插件也可以通过插件 manifest 或默认的 `hooks/hooks.json` 文件打包生命周期配置。有关插件打包规则，请参阅 [构建插件](69-build-plugins.md#bundled-mcp-servers-and-lifecycle-config)。
 
 实际使用中，四个最有用的位置是：
 

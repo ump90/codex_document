@@ -2,13 +2,13 @@
 
 Source: [Windows](https://developers.openai.com/codex/app/windows.md)
 
-[Codex app for Windows](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 为跨项目工作、运行并行智能体线程和审查结果提供一个统一界面。Windows app 支持核心工作流，例如工作树、自动化、Git 功能、应用内浏览器、工件预览、插件和技能。它使用 PowerShell 和 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox) 在 Windows 上原生运行，或者你也可以将它配置为在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行。
+[Codex app for Windows](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 为跨项目工作、运行并行智能体线程和审查结果提供一个统一界面。Windows app 支持核心工作流，例如工作树、自动化、Git 功能、应用内浏览器、工件预览、插件和技能。它使用 PowerShell 和 [Windows 沙盒](83-windows-platform.md#windows-sandbox) 在 Windows 上原生运行，或者你也可以将它配置为在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行。
 
 #### 下载和更新 Codex app
 
 从 [Microsoft Store](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi) 下载 Codex app。
 
-然后按照 [快速入门](https://developers.openai.com/codex/quickstart?setup=app) 开始使用。
+然后按照 [快速入门](04-quickstart.md) 开始使用。
 
 要更新 app，请打开 Microsoft Store，前往 **Downloads**，并点击 **Check for updates**。之后 Store 会安装最新版本。
 
@@ -22,9 +22,9 @@ winget install Codex -s msstore
 
 #### 原生沙盒
 
-当智能体在 PowerShell 中运行时，Windows 上的 Codex app 支持原生 [Windows 沙盒](https://developers.openai.com/codex/windows#windows-sandbox)；当你在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行智能体时，则使用 Linux 沙盒。要在任一模式中应用沙盒保护，请在向 Codex 发送消息前，在 Composer 中将沙盒权限设置为 **Default permissions**。
+当智能体在 PowerShell 中运行时，Windows 上的 Codex app 支持原生 [Windows 沙盒](83-windows-platform.md#windows-sandbox)；当你在 [Windows Subsystem for Linux 2 (WSL2)](#windows-subsystem-for-linux-wsl) 中运行智能体时，则使用 Linux 沙盒。要在任一模式中应用沙盒保护，请在向 Codex 发送消息前，在 Composer 中将沙盒权限设置为 **Default permissions**。
 
-以完全访问模式运行 Codex 意味着 Codex 不受项目目录限制，并可能执行非预期的破坏性操作，从而导致数据丢失。请保留沙盒边界，并使用 [rules](https://developers.openai.com/codex/rules) 进行有针对性的例外设置，或根据你的 [批准和安全设置](https://developers.openai.com/codex/agent-approvals-security)，将 [批准策略设置为 never](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts)，让 Codex 尝试在不请求升级权限的情况下解决问题。
+以完全访问模式运行 Codex 意味着 Codex 不受项目目录限制，并可能执行非预期的破坏性操作，从而导致数据丢失。请保留沙盒边界，并使用 [rules](54-rules.md) 进行有针对性的例外设置，或根据你的 [批准和安全设置](13-agent-approvals-security.md)，将 [批准策略设置为 never](13-agent-approvals-security.md#run-without-approval-prompts)，让 Codex 尝试在不请求升级权限的情况下解决问题。
 
 #### 按你的开发设置自定义
 
@@ -67,7 +67,7 @@ Codex `0.114` 支持 WSL1。从 Codex `0.115` 开始，Linux 沙盒移至 `bubbl
 - **.NET SDK**：当你想构建原生 Windows 应用时很有用。
 - **GitHub CLI**：驱动 Codex app 中 GitHub 特定功能。
 
-使用默认 Windows 包管理器 `winget` 安装它们，方法是将以下内容粘贴到 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal)，或要求 Codex 安装它们：
+使用默认 Windows 包管理器 `winget` 安装它们，方法是将以下内容粘贴到 [集成终端](27-codex-app-features.md#integrated-terminal)，或要求 Codex 安装它们：
 
 ```powershell
 winget install --id Git.Git
@@ -109,7 +109,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 #### Windows 上的本地环境脚本
 
-如果你的 [本地环境](https://developers.openai.com/codex/app/local-environments) 使用跨平台命令，例如 `npm` 脚本，你可以为每个平台保留一个共享设置脚本或一组操作。
+如果你的 [本地环境](37-local-environments.md) 使用跨平台命令，例如 `npm` 脚本，你可以为每个平台保留一个共享设置脚本或一组操作。
 
 如果需要 Windows 特定行为，请创建 Windows 专用设置脚本或 Windows 专用操作。
 

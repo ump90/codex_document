@@ -5,15 +5,15 @@ Source: [Codex Security](https://developers.openai.com/codex/security/index.md)
 [在 Codex App 中安装插件](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 
 有关安装步骤、支持的技能和审查边界，请参阅
-[Codex Security 插件指南](https://developers.openai.com/codex/security/plugin)。
+[Codex Security 插件指南](10-codex-security-plugin.md)。
 
 #### 探索插件用例
 
-- [运行深度安全扫描](https://developers.openai.com/codex/use-cases/deep-security-scan)，执行召回率更高的全仓库审计。
-- [扫描代码变更的安全性](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security)，在合并拉取请求或分支前扫描代码变更。
-- [修复漏洞积压项](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)，针对已批准的发现进行有边界的修复。
+- [运行深度安全扫描](85-run-a-deep-security-scan.md)，执行召回率更高的全仓库审计。
+- [扫描代码变更的安全性](86-scan-code-changes-for-security.md)，在合并拉取请求或分支前扫描代码变更。
+- [修复漏洞积压项](87-remediate-vulnerability-backlog.md)，针对已批准的发现进行有边界的修复。
 
-该插件在你的 Codex 线程中运行。Codex Security 云端扫描会通过 Codex Web 扫描已连接的 GitHub 仓库。有关 Codex 沙箱、审批、网络控制和管理员设置，请参阅 [Agent 审批与安全](https://developers.openai.com/codex/agent-approvals-security)。
+该插件在你的 Codex 线程中运行。Codex Security 云端扫描会通过 Codex Web 扫描已连接的 GitHub 仓库。有关 Codex 沙箱、审批、网络控制和管理员设置，请参阅 [Agent 审批与安全](13-agent-approvals-security.md)。
 
 #### Codex Security 云
 
@@ -42,7 +42,7 @@ Codex Security 面向 ChatGPT Enterprise、Edu、Business 和 Pro 用户开放�
 
 #### 安全概览参考
 
-- [Codex Security 插件指南](https://developers.openai.com/codex/security/plugin) 介绍 Codex 中的本地仓库和差异审查工作流。
-- [Codex Security 云端设置](https://developers.openai.com/codex/security/setup) 介绍设置、扫描和发现审查。
-- [改进威胁模型](https://developers.openai.com/codex/security/threat-model) 说明如何调整范围、攻击面和关键性假设。
-- [FAQ](https://developers.openai.com/codex/security/faq) 涵盖常见产品问题。
+- [Codex Security 插件指南](10-codex-security-plugin.md) 介绍 Codex 中的本地仓库和差异审查工作流。
+- [Codex Security 云端设置](11-codex-security-setup.md) 介绍设置、扫描和发现审查。
+- [改进威胁模型](12-improving-the-threat-model.md) 说明如何调整范围、攻击面和关键性假设。
+- [FAQ](09-codex-security-faq.md) 涵盖常见产品问题。

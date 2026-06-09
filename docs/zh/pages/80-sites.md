@@ -73,7 +73,7 @@ showing me the current site and confirming the deployment URL.
 
 在部署或扩大访问范围前：
 
-- 在 Codex [review pane](https://developers.openai.com/codex/app/review) 中审查 source changes 和任何数据库迁移。
+- 在 Codex [review pane](38-review.md) 中审查 source changes 和任何数据库迁移。
 - 确认 build 成功，并确认所选 saved version 是你想发布的 version。
 - 检查只有预期受众可以访问该 site。
 - 确认你已通过 Sites 配置运行时 secret values，且没有将它们提交到 source files。
@@ -81,6 +81,6 @@ showing me the current site and confirming the deployment URL.
 
 #### 相关文档
 
-- [Plugins](https://developers.openai.com/codex/plugins) 说明如何安装和调用 Codex plugins。
-- [Codex app](https://developers.openai.com/codex/app) 介绍 app 导航和项目线程。
-- [审查并发布变更](https://developers.openai.com/codex/app/review) 说明如何在发布前检查 source changes。
+- [Plugins](78-plugins.md) 说明如何安装和调用 Codex plugins。
+- [Codex app](44-codex-app.md) 介绍 app 导航和项目线程。
+- [审查并发布变更](38-review.md) 说明如何在发布前检查 source changes。

@@ -4,7 +4,7 @@ Source: [Codex Chrome extension](https://developers.openai.com/codex/app/chrome-
 
 Codex Chrome 扩展让 Codex 可以使用 Chrome 来完成需要你已登录浏览器状态的浏览器任务。当 Codex 需要读取或操作 LinkedIn、Salesforce、Gmail 或内部工具等网站时，可以使用它。
 
-对于本地开发服务器、基于文件的预览，以及不需要登录的公开页面，请优先使用 [应用内浏览器](https://developers.openai.com/codex/app/browser)。应用内浏览器会把预览和验证工作保留在 Codex 内部，而不会使用你的 Chrome 个人资料。
+对于本地开发服务器、基于文件的预览，以及不需要登录的公开页面，请优先使用 [应用内浏览器](36-in-app-browser.md)。应用内浏览器会把预览和验证工作保留在 Codex 内部，而不会使用你的 Chrome 个人资料。
 
 Codex 也可以根据任务需要在工具之间切换：有专用集成时使用插件，需要已登录浏览器上下文时使用 Chrome，处理 localhost 时使用应用内浏览器。
 

@@ -8,7 +8,7 @@ Memories 让 Codex 能把早期线程中的有用上下文带入未来工作。�
 
 请将必需的团队指导放在 `AGENTS.md` 或已检入的文档中。把 memories 视为有帮助的本地记忆层，而不是必须始终适用的规则的唯一来源。
 
-[Chronicle](https://developers.openai.com/codex/memories/chronicle) 可以帮助 Codex 从你的屏幕恢复最近的工作上下文，以逐步构建记忆。
+[Chronicle](70-chronicle.md) 可以帮助 Codex 从你的屏幕恢复最近的工作上下文，以逐步构建记忆。
 
 #### 启用记忆
 
@@ -21,7 +21,7 @@ Memories 让 Codex 能把早期线程中的有用上下文带入未来工作。�
 memories = true
 ```
 
-有关 Codex 存储用户级配置的位置以及 Codex 如何加载 `~/.codex/config.toml`，请参阅 [配置基础](https://developers.openai.com/codex/config-basic)。
+有关 Codex 存储用户级配置的位置以及 Codex 如何加载 `~/.codex/config.toml`，请参阅 [配置基础](19-config-basics.md)。
 
 #### 记忆如何工作
 
@@ -33,7 +33,7 @@ memories = true
 
 #### 记忆存储
 
-Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~/.codex`。有关 Codex 如何使用 `CODEX_HOME`，请参阅 [配置和状态位置](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~/.codex`。有关 Codex 如何使用 `CODEX_HOME`，请参阅 [配置和状态位置](17-advanced-configuration.md#config-and-state-locations)。
 
 主要 memory 文件位于 `~/.codex/memories/` 下，包含来自先前线程的摘要、持久条目、最近输入和支持证据。
 
@@ -49,7 +49,7 @@ Codex 会将 memories 存储在你的 Codex 主目录下。默认情况下是 `~
 
 在 Codex app 设置中启用 memories，或在 `config.toml` 的 `[features]` 部分设置 `memories = true`。
 
-有关配置文件位置和 memory 相关设置的完整列表，请参阅 [配置参考](https://developers.openai.com/codex/config-reference)。
+有关配置文件位置和 memory 相关设置的完整列表，请参阅 [配置参考](16-configuration-reference.md)。
 
 常见的 memory 专用设置包括：
 

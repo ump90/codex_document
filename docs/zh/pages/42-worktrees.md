@@ -2,7 +2,7 @@
 
 Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 
-在 Codex app 中，工作树让 Codex 可以在同一项目中运行多个相互独立的任务，而不会彼此干扰。对于 Git 仓库，[自动化](https://developers.openai.com/codex/app/automations) 会在专用后台工作树上运行，因此不会与你正在进行的工作冲突。在未使用版本控制的项目中，自动化会直接在项目目录中运行。你也可以手动在工作树上启动线程，并使用 Handoff 在线程的 Local 和 Worktree 之间移动。
+在 Codex app 中，工作树让 Codex 可以在同一项目中运行多个相互独立的任务，而不会彼此干扰。对于 Git 仓库，[自动化](24-automations.md) 会在专用后台工作树上运行，因此不会与你正在进行的工作冲突。在未使用版本控制的项目中，自动化会直接在项目目录中运行。你也可以手动在工作树上启动线程，并使用 Handoff 在线程的 Local 和 Worktree 之间移动。
 
 #### 什么是工作树
 
@@ -27,7 +27,7 @@ Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 1.  选择 "Worktree"
 
     在新线程视图中，在输入区下方选择 **Worktree**。
-    也可以选择一个 [本地环境](https://developers.openai.com/codex/app/local-environments)，为工作树运行设置脚本。
+    也可以选择一个 [本地环境](37-local-environments.md)，为工作树运行设置脚本。
 
 2.  选择起始分支
 
@@ -49,7 +49,7 @@ Source: [Worktrees](https://developers.openai.com/codex/app/worktrees.md)
 
 实践中有两种常见路径：
 
-1. [只在工作树上工作](#option-1-working-on-the-worktree)。当你可以直接在工作树上验证变更时，这条路径最合适，例如你已经使用 [本地环境设置脚本](https://developers.openai.com/codex/app/local-environments) 安装了依赖和工具。
+1. [只在工作树上工作](#option-1-working-on-the-worktree)。当你可以直接在工作树上验证变更时，这条路径最合适，例如你已经使用 [本地环境设置脚本](37-local-environments.md) 安装了依赖和工具。
 2. [将线程 hand off 到 Local](#option-2-handing-a-thread-off-to-local)。当你希望把线程带到前台时使用，例如你想在常用 IDE 中检查变更，或只能运行一个应用实例。
 
 #### 选项 1：在工作树上工作

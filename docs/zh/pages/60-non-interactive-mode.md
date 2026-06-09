@@ -5,7 +5,7 @@ Source: [Non-interactive mode](https://developers.openai.com/codex/noninteractiv
 非交互模式允许你从脚本中运行 Codex（例如持续集成 (CI) 作业），而无需打开交互式 TUI。
 你可以用 `codex exec` 调用它。
 
-有关各个标志的详细信息，请参阅 [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)。
+有关各个标志的详细信息，请参阅 [`codex exec`](22-cli-command-reference.md#codex-exec)。
 
 #### 何时使用 `codex exec`
 
@@ -85,7 +85,7 @@ Item 类型包括代理消息、推理、命令执行、文件变更、MCP 工�
 {"type":"turn.completed","usage":{"input_tokens":24763,"cached_input_tokens":24448,"output_tokens":122,"reasoning_output_tokens":0}}
 ```
 
-如果你只需要最终消息，请使用 `-o`/`--output-last-message` 将其写入文件。这会把最终消息写入文件，同时仍然打印到 `stdout`（详情见 [`codex exec`](https://developers.openai.com/codex/cli/reference#codex-exec)）。
+如果你只需要最终消息，请使用 `-o`/`--output-last-message` 将其写入文件。这会把最终消息写入文件，同时仍然打印到 `stdout`（详情见 [`codex exec`](22-cli-command-reference.md#codex-exec)）。
 
 #### 使用 schema 创建结构化输出
 
@@ -132,7 +132,7 @@ codex exec "Extract project metadata" \
 
 #### 使用 API key 身份验证
 
-对于 GitHub Actions，请使用 [Codex GitHub Action](https://developers.openai.com/codex/github-action)，而不是自行安装和验证 CLI。该 action 通过安装 Codex、启动 Responses API 代理，并用可配置的安全策略运行 Codex，来减少 API key 暴露。
+对于 GitHub Actions，请使用 [Codex GitHub Action](58-codex-github-action.md)，而不是自行安装和验证 CLI。该 action 通过安装 Codex、启动 Responses API 代理，并用可配置的安全策略运行 Codex，来减少 API key 暴露。
 
 不要在会 checkout 或运行仓库控制代码的工作流中，把 `OPENAI_API_KEY` 或 `CODEX_API_KEY` 设置为作业级环境变量。构建脚本、测试、依赖生命周期钩子，或同一作业中被攻陷的 action，都可以读取这些环境变量。
 
@@ -163,7 +163,7 @@ API key 是自动化的合适默认选择，因为它们更容易
 请通过安全存储注入 `auth.json`，在运行器上运行
 Codex，使 Codex 就地刷新它，并在运行之间持久化更新后的文件。
 
-请参阅 [Maintain Codex account auth in CI/CD (advanced)](https://developers.openai.com/codex/auth/ci-cd-auth)。
+请参阅 [在 CI/CD 中维护 Codex 账户认证（高级）](84-ci-cd-auth.md)。
 
 #### 恢复非交互会话
 

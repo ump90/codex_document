@@ -4,13 +4,13 @@ Source: [Use Codex in Linear](https://developers.openai.com/codex/integrations/l
 
 使用 Linear 中的 Codex，可以从 issue 委派工作。将 issue 分配给 Codex，或在评论中提及 `@Codex`，Codex 会创建云端任务，并回复进度和结果。
 
-Linear 中的 Codex 可在付费计划中使用（参见 [Pricing](https://developers.openai.com/codex/pricing)）。
+Linear 中的 Codex 可在付费计划中使用（参见 [Pricing](02-codex-pricing.md)）。
 
 如果你使用 Enterprise 计划，请让你的 ChatGPT 工作区管理员在 [workspace settings](https://chatgpt.com/admin/settings) 中开启 Codex 云端任务，并在 [connector settings](https://chatgpt.com/admin/ca) 中启用 **Codex for Linear**。
 
 #### 设置 Linear 集成
 
-1. 在 [Codex](https://chatgpt.com/codex) 中连接 GitHub，并为你希望 Codex 处理的仓库创建一个[环境](https://developers.openai.com/codex/cloud/environments)，以设置 [Codex cloud tasks](https://developers.openai.com/codex/cloud)。
+1. 在 [Codex](https://chatgpt.com/codex) 中连接 GitHub，并为你希望 Codex 处理的仓库创建一个[环境](25-cloud-environments.md)，以设置 [Codex cloud tasks](47-codex-web.md)。
 2. 前往 [Codex settings](https://chatgpt.com/codex/settings/connectors)，为你的工作区安装 **Codex for Linear**。
 3. 通过在 Linear issue 的评论线程中提及 `@Codex` 来关联你的 Linear 账户。
 
@@ -60,7 +60,7 @@ Linear 会自动把进入 triage 的新 issue 分配给 Codex。
 
 当你提及 `@Codex` 或将 issue 分配给它时，Codex 会接收你的 issue 内容，以理解请求并创建任务。
 数据处理遵循 OpenAI 的 [Privacy Policy](https://openai.com/privacy)、[Terms of Use](https://openai.com/terms/) 和其他适用的 [policies](https://openai.com/policies)。
-有关安全的更多信息，请参阅 [Codex security documentation](https://developers.openai.com/codex/agent-approvals-security)。
+有关安全的更多信息，请参阅 [Codex security documentation](13-agent-approvals-security.md)。
 
 Codex 使用大语言模型，可能会出错。请始终审查答案和 diff。
 

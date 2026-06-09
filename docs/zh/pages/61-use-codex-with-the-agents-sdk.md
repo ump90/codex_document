@@ -71,7 +71,7 @@ Codex CLI 远不止可以运行临时任务。通过将 CLI 作为 [Model Contex
 
 开始之前，请确保你具备：
 
-- 本地已安装 [Codex CLI](https://developers.openai.com/codex/cli)，因此 `codex` 命令可用。
+- 本地已安装 [Codex CLI](45-codex-cli.md)，因此 `codex` 命令可用。
 - Python 3.10+ 和 `pip`。
 - 如果你想运行上面的 MCP Inspector 示例，需要 Node.js 18+。
 - 本地已保存 OpenAI API key。你可以在 [OpenAI dashboard](https://platform.openai.com/account/api-keys) 中创建或管理 key。

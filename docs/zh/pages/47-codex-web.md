@@ -6,7 +6,7 @@ Source: [Codex web](https://developers.openai.com/codex/cloud.md)
 
 前往 [Codex](https://chatgpt.com/codex) 并连接你的 GitHub 账户。这会让 Codex 能够处理你仓库中的代码，并基于它的工作创建 pull request。
 
-你的 Plus、Pro、Business、Edu 或 Enterprise 计划包含 Codex。了解更多关于[包含内容](https://developers.openai.com/codex/pricing)的信息。某些 Enterprise 工作区可能需要先完成[管理员设置](https://developers.openai.com/codex/enterprise/admin-setup)，然后你才能访问 Codex。
+你的 Plus、Pro、Business、Edu 或 Enterprise 计划包含 Codex。了解更多关于[包含内容](02-codex-pricing.md)的信息。某些 Enterprise 工作区可能需要先完成[管理员设置](64-admin-setup.md)，然后你才能访问 Codex。
 
 ---
 

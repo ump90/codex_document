@@ -2,11 +2,11 @@
 
 Source: [Automations](https://developers.openai.com/codex/app/automations.md)
 
-在后台自动执行重复任务。Codex 会将发现添加到收件箱；如果没有要报告的内容，则自动归档任务。你可以将自动化与 [skills](https://developers.openai.com/codex/skills) 结合，用于更复杂的任务。
+在后台自动执行重复任务。Codex 会将发现添加到收件箱；如果没有要报告的内容，则自动归档任务。你可以将自动化与 [skills](48-agent-skills.md) 结合，用于更复杂的任务。
 
 对于限定到项目的自动化，运行本地 Codex app 的机器必须开机，Codex 必须正在运行，并且在自动化计划运行时，所选项目仍必须在磁盘上可用。
 
-在 Git 仓库中，你可以选择自动化在你的本地项目中运行，还是在新的 [worktree](https://developers.openai.com/codex/app/worktrees) 上运行。两种选项都会在后台运行。Worktree 会将自动化更改与未完成的本地工作分开，而在本地项目中运行可能会修改你仍在处理的文件。在非版本控制项目中，自动化会直接在项目目录中运行。
+在 Git 仓库中，你可以选择自动化在你的本地项目中运行，还是在新的 [worktree](42-worktrees.md) 上运行。两种选项都会在后台运行。Worktree 会将自动化更改与未完成的本地工作分开，而在本地项目中运行可能会修改你仍在处理的文件。在非版本控制项目中，自动化会直接在项目目录中运行。
 
 你也可以将模型和推理强度保持为默认设置，或者在想要更精确控制自动化运行方式时显式选择它们。
 
@@ -18,11 +18,11 @@ Source: [Automations](https://developers.openai.com/codex/app/automations.md)
 
 独立自动化会按计划启动新的运行，并在 Triage 中报告结果。当每次运行应保持独立，或一个自动化应跨一个或多个项目运行时，请使用它们。如果需要自定义节奏，请选择自定义计划并输入 cron 语法。
 
-对于 Git 仓库，每个自动化可以在你的本地项目中运行，也可以在专用后台 [worktree](https://developers.openai.com/codex/app/features#worktree-support) 上运行。当你想把自动化更改与未完成的本地工作隔离时，请使用 worktree。当你希望自动化直接在主 checkout 中工作时，请使用本地模式，但要记住它可能会更改你正在主动编辑的文件。在非版本控制项目中，自动化直接在项目目录中运行。你可以让同一个自动化在多个项目上运行。
+对于 Git 仓库，每个自动化可以在你的本地项目中运行，也可以在专用后台 [worktree](27-codex-app-features.md#worktree-support) 上运行。当你想把自动化更改与未完成的本地工作隔离时，请使用 worktree。当你希望自动化直接在主 checkout 中工作时，请使用本地模式，但要记住它可能会更改你正在主动编辑的文件。在非版本控制项目中，自动化直接在项目目录中运行。你可以让同一个自动化在多个项目上运行。
 
-自动化使用你的默认沙盒设置。在 read-only 模式下，如果工具调用需要修改文件、访问网络或使用你计算机上的应用，则会失败。启用 full access 时，后台自动化会带来更高风险。你可以在 [设置](https://developers.openai.com/codex/app/settings) 中调整沙盒设置，并使用 [规则](https://developers.openai.com/codex/rules) 有选择地将命令加入允许列表。
+自动化使用你的默认沙盒设置。在 read-only 模式下，如果工具调用需要修改文件、访问网络或使用你计算机上的应用，则会失败。启用 full access 时，后台自动化会带来更高风险。你可以在 [设置](28-codex-app-settings.md) 中调整沙盒设置，并使用 [规则](54-rules.md) 有选择地将命令加入允许列表。
 
-自动化可以使用 Codex 可用的相同插件和 skills。为使自动化易于维护并可在团队间共享，请使用 [skills](https://developers.openai.com/codex/skills) 定义动作，并提供工具和上下文。你可以在自动化中使用 `$skill-name` 显式触发某个 skill。
+自动化可以使用 Codex 可用的相同插件和 skills。为使自动化易于维护并可在团队间共享，请使用 [skills](48-agent-skills.md) 定义动作，并提供工具和上下文。你可以在自动化中使用 `$skill-name` 显式触发某个 skill。
 
 #### 让 Codex 创建或更新自动化
 
@@ -71,9 +71,9 @@ Skills 也可以创建或更新自动化。例如，用于看护 pull request �
 自动化会无人值守运行，并使用你的默认沙盒设置。
 
 - 如果你的沙盒模式是 **read-only**，当工具调用需要修改文件、访问网络，或使用你计算机上的应用时会失败。请考虑将沙盒设置更新为 workspace write。
-- 如果你的沙盒模式是 **workspace-write**，当工具调用需要修改工作区外部的文件、访问网络，或使用你计算机上的应用时会失败。你可以使用 [规则](https://developers.openai.com/codex/rules) 有选择地将命令加入允许列表，使其在沙盒外运行。
-- 如果你的沙盒模式是 **full access**，后台自动化会带来更高风险，因为 Codex 可能在不询问的情况下更改文件、运行命令并访问网络。请考虑将沙盒设置更新为 workspace write，并使用 [规则](https://developers.openai.com/codex/rules) 有选择地定义智能体可以用 full access 运行哪些命令。
+- 如果你的沙盒模式是 **workspace-write**，当工具调用需要修改工作区外部的文件、访问网络，或使用你计算机上的应用时会失败。你可以使用 [规则](54-rules.md) 有选择地将命令加入允许列表，使其在沙盒外运行。
+- 如果你的沙盒模式是 **full access**，后台自动化会带来更高风险，因为 Codex 可能在不询问的情况下更改文件、运行命令并访问网络。请考虑将沙盒设置更新为 workspace write，并使用 [规则](54-rules.md) 有选择地定义智能体可以用 full access 运行哪些命令。
 
-如果你处于托管环境，管理员可以使用管理员强制要求限制这些行为。例如，他们可以禁止 `approval_policy = "never"`，或约束允许的沙盒模式。请参阅 [管理员强制要求 (`requirements.toml`)](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml)。
+如果你处于托管环境，管理员可以使用管理员强制要求限制这些行为。例如，他们可以禁止 `approval_policy = "never"`，或约束允许的沙盒模式。请参阅 [管理员强制要求 (`requirements.toml`)](67-managed-configuration.md#admin-enforced-requirements-requirementstoml)。
 
 当你的组织策略允许时，自动化使用 `approval_policy = "never"`。如果管理员要求不允许 `approval_policy = "never"`，自动化会回退到你所选模式的审批行为。

@@ -5,11 +5,11 @@ Source: [Codex Security setup](https://developers.openai.com/codex/security/setu
 本页会带你完成从初始访问到在 Codex Security 中审查发现并创建修复 pull request 的流程。
 
 请先确认你已经设置 Codex Cloud。如果还没有，请参见 [Codex
-Cloud](https://developers.openai.com/codex/cloud) 开始。
+Cloud](47-codex-web.md) 开始。
 
 #### 1. 访问和环境
 
-Codex Security 会扫描通过 [Codex Cloud](https://developers.openai.com/codex/cloud) 连接的 GitHub 仓库。
+Codex Security 会扫描通过 [Codex Cloud](47-codex-web.md) 连接的 GitHub 仓库。
 
 - 确认你的工作区有权访问 Codex Security。
 - 确认你要扫描的仓库在 Codex Cloud 中可用。
@@ -57,7 +57,7 @@ Codex Security 会先从最新提交向后扫描仓库。它使用这种方式�
 初始发现出现后，重新查看该模型，使扫描指导始终与当前优先事项一致。
 保持其最新有助于 Codex Security 产生更好的建议。
 
-关于威胁模型及其如何影响严重性和分诊的更深入解释，请参见 [改进威胁模型](https://developers.openai.com/codex/security/threat-model)。
+关于威胁模型及其如何影响严重性和分诊的更深入解释，请参见 [改进威胁模型](12-improving-the-threat-model.md)。
 
 #### 5. 审查发现并打补丁
 
@@ -85,6 +85,6 @@ Codex Security 会先从最新提交向后扫描仓库。它使用这种方式�
 
 #### 安全设置参考
 
-- [Codex Security](https://developers.openai.com/codex/security) 提供产品概览。
-- [FAQ](https://developers.openai.com/codex/security/faq) 覆盖常见问题。
-- [改进威胁模型](https://developers.openai.com/codex/security/threat-model) 解释如何改进扫描上下文和发现优先级。
+- [Codex Security](71-codex-security.md) 提供产品概览。
+- [FAQ](09-codex-security-faq.md) 覆盖常见问题。
+- [改进威胁模型](12-improving-the-threat-model.md) 解释如何改进扫描上下文和发现优先级。

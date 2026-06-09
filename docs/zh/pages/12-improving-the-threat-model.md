@@ -37,6 +37,6 @@ Codex Security 会根据代码创建第一版草稿。如果发现结果感觉�
 
 #### 威胁模型参考
 
-- [Codex Security 设置](https://developers.openai.com/codex/security/setup) 覆盖仓库设置和发现审查。
-- [Codex Security](https://developers.openai.com/codex/security) 提供产品概览。
-- [FAQ](https://developers.openai.com/codex/security/faq) 覆盖常见问题。
+- [Codex Security 设置](11-codex-security-setup.md) 覆盖仓库设置和发现审查。
+- [Codex Security](71-codex-security.md) 提供产品概览。
+- [FAQ](09-codex-security-faq.md) 覆盖常见问题。

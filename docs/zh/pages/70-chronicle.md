@@ -65,7 +65,7 @@ Codex 作为上下文使用的敏感内容时，请暂停
 Chronicle。要禁用 Chronicle，请返回 **Settings &gt;
 Personalization &gt; Memories** 并关闭 **Chronicle**。
 
-你还可以控制是否在某个线程中使用记忆。[了解更多](https://developers.openai.com/codex/memories#control-memories-per-thread)。
+你还可以控制是否在某个线程中使用记忆。[了解更多](74-memories.md#control-memories-per-thread)。
 
 #### 速率限制
 

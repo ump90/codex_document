@@ -6,7 +6,7 @@ Codex Security 插件为 Codex 添加安全审查工作流，用于你有授权�
 
 本页介绍在你的 Codex 线程中运行的可安装插件。对于
 通过 Codex Web 扫描已连接 GitHub 仓库的研究预览版产品，
-请参见 [Codex Security](https://developers.openai.com/codex/security)。
+请参见 [Codex Security](71-codex-security.md)。
 
 #### 安装插件
 
@@ -104,10 +104,10 @@ Codex Security 插件为 Codex 添加安全审查工作流，用于你有授权�
   尤其是在陌生仓库中。
 - 合并前审查每个建议补丁和验证结果。
 - 使用插件时，保留仓库说明和审批策略。
-  详情请参见 [代理审批和安全](https://developers.openai.com/codex/agent-approvals-security)。
+  详情请参见 [代理审批和安全](13-agent-approvals-security.md)。
 
 #### 探索安全用例
 
-- [运行深度安全扫描](https://developers.openai.com/codex/use-cases/deep-security-scan)
-- [扫描代码变更中的安全问题](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security)
-- [修复漏洞积压](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)
+- [运行深度安全扫描](85-run-a-deep-security-scan.md)
+- [扫描代码变更中的安全问题](86-scan-code-changes-for-security.md)
+- [修复漏洞积压](87-remediate-vulnerability-backlog.md)

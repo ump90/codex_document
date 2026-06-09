@@ -51,7 +51,7 @@ Codex 扩展让预览云端变更变得直接。你可以要求后续任务在�
 
 #### 网页搜索
 
-Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你将沙盒配置为 [full access](https://developers.openai.com/codex/agent-approvals-security)，网页搜索默认使用实时结果。请参阅 [Config basics](https://developers.openai.com/codex/config-basic)，了解如何禁用网页搜索或切换到会抓取最新数据的实时结果。
+Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任务，Codex 默认启用网页搜索，并从网页搜索缓存提供结果。该缓存是 OpenAI 维护的网页结果索引，因此缓存模式会返回预索引结果，而不是抓取实时页面。这减少了暴露于任意实时内容中提示注入的风险，但你仍应将网页结果视为不可信。如果你将沙盒配置为 [full access](13-agent-approvals-security.md)，网页搜索默认使用实时结果。请参阅 [Config basics](19-config-basics.md)，了解如何禁用网页搜索或切换到会抓取最新数据的实时结果。
 
 每当 Codex 查找内容时，你会在转录记录或 `codex exec --json` 输出中看到 `web_search` 项。
 
@@ -67,10 +67,10 @@ Codex 随附第一方网页搜索工具。对于 Codex IDE 扩展中的本地任
 
 你可以用自然语言请求，也可以在提示中包含 `$imagegen` 来显式调用图片生成技能。
 
-内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](https://developers.openai.com/codex/pricing#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图片生成使用 `gpt-image-2`，计入你的常规 Codex 使用限制，并且根据图片质量和尺寸，平均消耗包含额度的速度比没有图片生成的类似回合快 3-5 倍。详情请参阅 [定价](02-codex-pricing.md#image-generation-usage-limits)。提示技巧和模型详情请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图片生成，请在环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图片，这样会适用 API 价格。
 
 #### IDE 功能参考
 
-- [Codex IDE extension settings](https://developers.openai.com/codex/ide/settings)
+- [Codex IDE extension settings](33-codex-ide-extension-settings.md)

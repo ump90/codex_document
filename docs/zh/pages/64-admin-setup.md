@@ -4,7 +4,7 @@ Source: [Admin Setup](https://developers.openai.com/codex/enterprise/admin-setup
 
 本指南面向希望为其工作区设置 Codex 的 ChatGPT Enterprise 管理员。
 
-请将本页用作逐步推出指南。有关详细的策略、配置、自动化和监控信息，请使用链接页面：[Authentication](https://developers.openai.com/codex/auth)、[Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)、[Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)、[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Governance](https://developers.openai.com/codex/enterprise/governance)。
+请将本页用作逐步推出指南。有关详细的策略、配置、自动化和监控信息，请使用链接页面：[Authentication](18-authentication-and-sessions.md)、[Agent approvals & security](13-agent-approvals-security.md)、[Access tokens](63-access-tokens.md)、[Managed configuration](67-managed-configuration.md) 和 [Governance](66-governance.md)。
 
 #### 企业级安全和隐私
 
@@ -17,7 +17,7 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 - 静态数据加密 (AES-256) 和传输中加密 (TLS 1.2+)
 - 通过 ChatGPT Compliance API 进行审计日志记录
 
-安全控制和运行时保护请参阅 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。更多详情请参考 [Zero Data Retention (ZDR)](https://platform.openai.com/docs/guides/your-data#zero-data-retention)。
+安全控制和运行时保护请参阅 [Agent approvals & security](13-agent-approvals-security.md)。更多详情请参考 [Zero Data Retention (ZDR)](https://platform.openai.com/docs/guides/your-data#zero-data-retention)。
 更广泛的企业安全概览请参阅 [Codex security white paper](https://trust.openai.com/?itemUid=382f924d-54f3-43a8-a9df-c39e6c959958&source=click)。
 
 #### 前提条件：确定负责人和推出策略
@@ -31,7 +31,7 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 决定你将使用哪些 Codex 使用界面：
 
 - **Codex local:** 包括 Codex app、CLI 和 IDE extension。代理在开发者电脑上的沙箱中运行。
-- **Codex cloud:** 包括托管 Codex 功能（包括 Codex cloud、iOS、Code Review，以及由 [Slack integration](https://developers.openai.com/codex/integrations/slack) 或 [Linear integration](https://developers.openai.com/codex/integrations/linear) 创建的任务）。代理在托管容器中远程运行，并访问你的代码库。
+- **Codex cloud:** 包括托管 Codex 功能（包括 Codex cloud、iOS、Code Review，以及由 [Slack integration](56-use-codex-in-slack.md) 或 [Linear integration](55-use-codex-in-linear.md) 创建的任务）。代理在托管容器中远程运行，并访问你的代码库。
 - **Both:** 同时使用 local + cloud。
 
 你可以启用 local、cloud 或两者，并通过工作区设置和基于角色的访问控制 (RBAC) 控制访问。
@@ -46,19 +46,19 @@ Codex 支持 ChatGPT Enterprise 安全功能，包括：
 
 对于新的 ChatGPT Enterprise 工作区，Codex local 默认启用。如果
 你不是 ChatGPT 工作区所有者，可以通过
-[安装 Codex](https://developers.openai.com/codex/quickstart) 并使用工作邮箱登录来测试自己是否有访问权限。
+[安装 Codex](04-quickstart.md) 并使用工作邮箱登录来测试自己是否有访问权限。
 
 开启 **Allow members to use Codex Local**。
 
 这将为允许的用户启用 Codex app、CLI 和 IDE extension。
 
-如果成员需要程序化的 Codex local 工作流，也请开启 **Allow members to use Codex access tokens**，或通过自定义角色授予访问令牌权限。工作区所有者和管理员可以使用 **Access token expiration limit** 设置成员为新令牌可选择的最长过期时间。设置和权限详情请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+如果成员需要程序化的 Codex local 工作流，也请开启 **Allow members to use Codex access tokens**，或通过自定义角色授予访问令牌权限。工作区所有者和管理员可以使用 **Access token expiration limit** 设置成员为新令牌可选择的最长过期时间。设置和权限详情请参阅 [Access tokens](63-access-tokens.md)。
 
 如果 Codex Local 开关关闭，尝试使用 Codex app、CLI 或 IDE 的用户会看到以下错误：“403 - Unauthorized. Contact your ChatGPT administrator for access.”
 
 #### 为 Codex CLI 启用设备码身份验证
 
-允许开发者在非交互环境中使用 Codex CLI 时通过设备码登录（例如远程开发机器）。更多详情见 [authentication](https://developers.openai.com/codex/auth/)。
+允许开发者在非交互环境中使用 Codex CLI 时通过设备码登录（例如远程开发机器）。更多详情见 [authentication](18-authentication-and-sessions.md)。
 
 #### Codex 云
 
@@ -81,7 +81,7 @@ Codex cloud 需要 **GitHub (cloud-hosted) repositories**。如果你的代码�
 
 Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会发布任务链接。
 
-了解更多请参阅 [Codex in Slack](https://developers.openai.com/codex/integrations/slack)。
+了解更多请参阅 [Codex in Slack](56-use-codex-in-slack.md)。
 
 #### 启用 Codex 代理访问互联网
 
@@ -89,7 +89,7 @@ Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会�
 
 此设置允许用户为常见软件依赖域使用允许列表、添加域和受信任站点，并指定允许的 HTTP 方法。
 
-有关互联网访问和运行时控制的安全影响，请参阅 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。
+有关互联网访问和运行时控制的安全影响，请参阅 [Agent approvals & security](13-agent-approvals-security.md)。
 
 #### 步骤 2：设置自定义角色 (RBAC)
 
@@ -134,7 +134,7 @@ Codex 会在任务完成时将完整答案发回 Slack。否则，Codex 只会�
 
 Codex Admin 可以从 Codex [Policies page](https://chatgpt.com/codex/settings/policies) 部署管理员强制执行的 `requirements.toml` 策略。
 
-当你希望对不同组应用不同的本地 Codex 约束，而不先分发设备级文件时，请使用此页面。托管策略使用 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 中描述的同一 `requirements.toml` 格式，因此你可以定义允许的审批策略、沙箱模式、网页搜索行为、网络访问要求、MCP 服务器允许列表、功能固定和限制性命令规则。要禁用 Browser Use、in-app browser 或 Computer Use，请参阅 [Pin feature flags](https://developers.openai.com/codex/enterprise/managed-configuration#pin-feature-flags)。
+当你希望对不同组应用不同的本地 Codex 约束，而不先分发设备级文件时，请使用此页面。托管策略使用 [Managed configuration](67-managed-configuration.md) 中描述的同一 `requirements.toml` 格式，因此你可以定义允许的审批策略、沙箱模式、网页搜索行为、网络访问要求、MCP 服务器允许列表、功能固定和限制性命令规则。要禁用 Browser Use、in-app browser 或 Computer Use，请参阅 [Pin feature flags](67-managed-configuration.md#pin-feature-flags)。
 
 推荐设置：
 
@@ -191,13 +191,13 @@ prefix_rules = [
 ]
 ```
 
-你可以单独使用任何示例，也可以将它们组合到某个组的单个托管策略中。确切 key、优先级和更多示例请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security)。
+你可以单独使用任何示例，也可以将它们组合到某个组的单个托管策略中。确切 key、优先级和更多示例请参阅 [Managed configuration](67-managed-configuration.md) 和 [Agent approvals & security](13-agent-approvals-security.md)。
 
 #### 检查用户策略
 
 使用工作流末尾的策略查询工具来确认哪个托管策略适用于用户。你可以按组检查策略分配，或输入用户 email 检查。
 
-如果你计划限制本地客户端的登录方法或工作区，请参阅 [Authentication](https://developers.openai.com/codex/auth) 中管理员托管的身份验证限制。
+如果你计划限制本地客户端的登录方法或工作区，请参阅 [Authentication](18-authentication-and-sessions.md) 中管理员托管的身份验证限制。
 
 #### 步骤 4：使用团队配置标准化本地配置
 
@@ -209,11 +209,11 @@ prefix_rules = [
 
 | Type                                 | Path          | Use it to                                                                    |
 | ------------------------------------ | ------------- | ---------------------------------------------------------------------------- |
-| [Config basics](https://developers.openai.com/codex/config-basic) | `config.toml` | 设置沙箱模式、审批、模型、推理强度等默认值。 |
-| [Rules](https://developers.openai.com/codex/rules)                | `rules/`      | 控制 Codex 可以在沙箱外运行哪些命令。                    |
-| [Skills](https://developers.openai.com/codex/skills)              | `skills/`     | 让你的团队可以使用共享技能。                                   |
+| [Config basics](19-config-basics.md) | `config.toml` | 设置沙箱模式、审批、模型、推理强度等默认值。 |
+| [Rules](54-rules.md)                | `rules/`      | 控制 Codex 可以在沙箱外运行哪些命令。                    |
+| [Skills](48-agent-skills.md)              | `skills/`     | 让你的团队可以使用共享技能。                                   |
 
-位置和优先级请参阅 [Config basics](https://developers.openai.com/codex/config-basic#configuration-precedence)。
+位置和优先级请参阅 [Config basics](19-config-basics.md#configuration-precedence)。
 
 #### 步骤 5：配置 Codex 云使用（如果已启用）
 
@@ -231,6 +231,6 @@ prefix_rules = [
 仓库之前，组织所有者必须先为该组织安装
 Codex GitHub App。
 
-更多信息请参阅 [Cloud environments](https://developers.openai.com/codex/cloud/environments)。
+更多信息请参阅 [Cloud environments](25-cloud-environments.md)。
 
 Codex 为每项操作使用短生命周期、最小权限的 GitHub App 安装令牌，并遵循用户现有的 GitHub 仓库权限和分支保护规则。

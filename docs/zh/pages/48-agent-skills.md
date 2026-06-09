@@ -4,7 +4,7 @@ Source: [Agent Skills](https://developers.openai.com/codex/skills.md)
 
 使用 agent skills 为 Codex 扩展特定任务能力。一个 skill 会打包说明、资源和可选脚本，使 Codex 能够可靠地遵循某个工作流。Skills 基于 [open agent skills standard](https://agentskills.io) 构建。
 
-Skills 是可复用工作流的创作格式。Plugins 是 Codex 中可复用 skills 和 app 的可安装分发单元。使用 skills 设计工作流本身；当你希望其他开发者安装它时，再将其打包为 [plugin](https://developers.openai.com/codex/plugins/build)。
+Skills 是可复用工作流的创作格式。Plugins 是 Codex 中可复用 skills 和 app 的可安装分发单元。使用 skills 设计工作流本身；当你希望其他开发者安装它时，再将其打包为 [plugin](69-build-plugins.md)。
 
 Skills 可在 Codex CLI、IDE 扩展和 Codex app 中使用。
 
@@ -68,11 +68,11 @@ Codex 会从仓库、用户、管理员和系统位置读取 skills。对于仓�
 
 Codex 支持符号链接的 skill 文件夹，并在扫描这些位置时跟随符号链接目标。
 
-这些位置用于创作和本地发现。当你想把可复用 skills 分发到单个仓库之外，或选择性地把它们与 app 集成捆绑时，请使用 [plugins](https://developers.openai.com/codex/plugins/build)。
+这些位置用于创作和本地发现。当你想把可复用 skills 分发到单个仓库之外，或选择性地把它们与 app 集成捆绑时，请使用 [plugins](69-build-plugins.md)。
 
 #### 使用插件分发技能
 
-直接使用 skill 文件夹最适合本地创作和仓库范围的工作流。如果你想分发一个可复用 skill、把两个或更多 skills 捆绑在一起，或将 skill 与 app 集成一起发布，请将它们打包为 [plugin](https://developers.openai.com/codex/plugins/build)。
+直接使用 skill 文件夹最适合本地创作和仓库范围的工作流。如果你想分发一个可复用 skill、把两个或更多 skills 捆绑在一起，或将 skill 与 app 集成一起发布，请将它们打包为 [plugin](69-build-plugins.md)。
 
 Plugins 可以包含一个或多个 skills。它们还可以选择性地把 app 映射、MCP server 配置和展示资源捆绑到一个包中。
 
@@ -102,7 +102,7 @@ enabled = false
 
 #### 可选元数据
 
-添加 `agents/openai.yaml` 可以在 [Codex app](https://developers.openai.com/codex/app) 中配置 UI 元数据、设置调用策略，并声明工具依赖，以便更顺畅地使用该 skill。
+添加 `agents/openai.yaml` 可以在 [Codex app](44-codex-app.md) 中配置 UI 元数据、设置调用策略，并声明工具依赖，以便更顺畅地使用该 skill。
 
 ```yaml
 interface:

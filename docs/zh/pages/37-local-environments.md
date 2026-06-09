@@ -25,7 +25,7 @@ npm run build
 
 #### 操作
 
-使用操作定义常见任务，例如启动应用的开发服务器或运行测试套件。这些操作会显示在 Codex app 顶栏中，便于快速访问。操作会在 app 的 [集成终端](https://developers.openai.com/codex/app/features#integrated-terminal) 中运行。
+使用操作定义常见任务，例如启动应用的开发服务器或运行测试套件。这些操作会显示在 Codex app 顶栏中，便于快速访问。操作会在 app 的 [集成终端](27-codex-app-features.md#integrated-terminal) 中运行。
 
 操作有助于避免重复输入常见命令，例如触发项目构建或启动开发服务器。对于一次性的快速调试，你可以直接使用集成终端。
 

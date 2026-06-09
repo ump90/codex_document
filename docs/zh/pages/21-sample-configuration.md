@@ -6,11 +6,11 @@ Source: [Sample Configuration](https://developers.openai.com/codex/config-sample
 
 有关解释和指导，请参阅：
 
-- [配置基础](https://developers.openai.com/codex/config-basic)
-- [高级配置](https://developers.openai.com/codex/config-advanced)
-- [配置参考](https://developers.openai.com/codex/config-reference)
-- [沙盒和审批](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)
-- [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration)
+- [配置基础](19-config-basics.md)
+- [高级配置](17-advanced-configuration.md)
+- [配置参考](16-configuration-reference.md)
+- [沙盒和审批](13-agent-approvals-security.md#sandbox-and-approvals)
+- [托管配置](67-managed-configuration.md)
 
 请将下面的片段用作参考。只将你需要的键和章节复制到 `~/.codex/config.toml`（或项目范围的 `.codex/config.toml`），然后根据你的设置调整值。
 

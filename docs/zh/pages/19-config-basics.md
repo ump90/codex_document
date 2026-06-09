@@ -13,8 +13,8 @@ Codex 将用户级配置存储在 `~/.codex/config.toml`。要将设置限定到
 CLI 和 IDE extension 共享相同的配置层。你可以使用这些配置来：
 
 - 设置默认模型和提供商。
-- 配置 [审批策略和沙盒设置](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)。
-- 配置 [MCP servers](https://developers.openai.com/codex/mcp)。
+- 配置 [审批策略和沙盒设置](13-agent-approvals-security.md#sandbox-and-approvals)。
+- 配置 [MCP servers](53-model-context-protocol.md)。
 
 #### 配置优先级
 
@@ -22,18 +22,18 @@ Codex 按以下顺序解析值（优先级从高到低）：
 
 1. CLI 标志和 `--config` 覆盖
 2. 项目配置文件：`.codex/config.toml`，按从项目根目录到当前工作目录的顺序排列（最近者优先；仅限可信项目）
-3. 使用 `--profile profile-name` 选择的 [Profile](https://developers.openai.com/codex/config-advanced#profiles) 文件（`~/.codex/profile-name.config.toml`）
+3. 使用 `--profile profile-name` 选择的 [Profile](17-advanced-configuration.md#profiles) 文件（`~/.codex/profile-name.config.toml`）
 4. 用户配置：`~/.codex/config.toml`
 5. 系统配置（如果存在）：Unix 上的 `/etc/codex/config.toml`
 6. 内置默认值
 
-使用该优先级在 `config.toml` 中设置共享默认值，并让 [profile 文件](https://developers.openai.com/codex/config-advanced#profiles) 专注于不同的值。
+使用该优先级在 `config.toml` 中设置共享默认值，并让 [profile 文件](17-advanced-configuration.md#profiles) 专注于不同的值。
 
 如果你将项目标记为 untrusted，Codex 会跳过项目范围 `.codex/` 层，包括项目本地配置、hooks 和 rules。用户和系统配置仍会加载，包括用户/全局 hooks 和 rules。
 
-有关通过 `-c`/`--config` 进行一次性覆盖（包括 TOML 引号规则），请参阅 [高级配置](https://developers.openai.com/codex/config-advanced#one-off-overrides-from-the-cli)。
+有关通过 `-c`/`--config` 进行一次性覆盖（包括 TOML 引号规则），请参阅 [高级配置](17-advanced-configuration.md#one-off-overrides-from-the-cli)。
 
-在托管机器上，你的组织还可以通过 `requirements.toml` 强制执行约束（例如，不允许 `approval_policy = "never"` 或 `sandbox_mode = "danger-full-access"`）。请参阅 [Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration) 和 [Admin-enforced requirements](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml)。
+在托管机器上，你的组织还可以通过 `requirements.toml` 强制执行约束（例如，不允许 `approval_policy = "never"` 或 `sandbox_mode = "danger-full-access"`）。请参阅 [Managed configuration](67-managed-configuration.md) 和 [Admin-enforced requirements](67-managed-configuration.md#admin-enforced-requirements-requirementstoml)。
 
 #### 常见配置选项
 
@@ -55,7 +55,7 @@ model = "gpt-5.5"
 approval_policy = "on-request"
 ```
 
-有关 `untrusted`、`on-request` 和 `never` 的行为差异，请参阅 [不显示审批提示运行](https://developers.openai.com/codex/agent-approvals-security#run-without-approval-prompts) 和 [常见沙盒和审批组合](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)。
+有关 `untrusted`、`on-request` 和 `never` 的行为差异，请参阅 [不显示审批提示运行](13-agent-approvals-security.md#run-without-approval-prompts) 和 [常见沙盒和审批组合](13-agent-approvals-security.md#common-sandbox-and-approval-combinations)。
 
 #### 沙盒级别
 
@@ -65,11 +65,11 @@ approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 ```
 
-有关逐模式行为（包括受保护的 `.git`/`.codex` 路径和网络默认值），请参阅 [沙盒和审批](https://developers.openai.com/codex/agent-approvals-security#sandbox-and-approvals)、[可写根目录中的受保护路径](https://developers.openai.com/codex/agent-approvals-security#protected-paths-in-writable-roots) 和 [网络访问](https://developers.openai.com/codex/agent-approvals-security#network-access)。
+有关逐模式行为（包括受保护的 `.git`/`.codex` 路径和网络默认值），请参阅 [沙盒和审批](13-agent-approvals-security.md#sandbox-and-approvals)、[可写根目录中的受保护路径](13-agent-approvals-security.md#protected-paths-in-writable-roots) 和 [网络访问](13-agent-approvals-security.md#network-access)。
 
 #### 权限配置档
 
-Codex 还支持用于可复用文件系统和网络策略的命名权限 profiles。内置 profiles 为 `:read-only`、`:workspace` 和 `:danger-full-access`。自定义 profiles 使用 `[permissions.]` 表和匹配的 `default_permissions` 值。请参阅 [Permissions](https://developers.openai.com/codex/permissions)。
+Codex 还支持用于可复用文件系统和网络策略的命名权限 profiles。内置 profiles 为 `:read-only`、`:workspace` 和 `:danger-full-access`。自定义 profiles 使用 `[permissions.]` 表和匹配的 `default_permissions` 值。请参阅 [Permissions](77-permissions.md)。
 
 #### Windows 沙盒模式
 
@@ -83,7 +83,7 @@ sandbox = "elevated"   # Recommended
 
 #### 网页搜索模式
 
-Codex 默认为本地任务启用 web search，并从 web search cache 提供结果。该缓存是 OpenAI 维护的 Web 结果索引，因此 cached mode 会返回预先索引的结果，而不是抓取实时页面。这降低了暴露于任意实时内容中 prompt injection 的风险，但你仍应将 Web 结果视为不可信。如果你使用 `--yolo` 或其他 [full access 沙盒设置](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations)，web search 默认使用实时结果。使用 `web_search` 选择模式：
+Codex 默认为本地任务启用 web search，并从 web search cache 提供结果。该缓存是 OpenAI 维护的 Web 结果索引，因此 cached mode 会返回预先索引的结果，而不是抓取实时页面。这降低了暴露于任意实时内容中 prompt injection 的风险，但你仍应将 Web 结果视为不可信。如果你使用 `--yolo` 或其他 [full access 沙盒设置](13-agent-approvals-security.md#common-sandbox-and-approval-combinations)，web search 默认使用实时结果。使用 `web_search` 选择模式：
 
 - `"cached"`（默认）从 web search cache 提供结果。
 - `"live"` 从 Web 获取最新数据（等同于 `--search`）。
@@ -166,9 +166,9 @@ shell_snapshot = true           # Speed up repeated commands
 | -------------------- | :-------------------: | ------------ | ---------------------------------------------------------------------------------------- |
 | `apps`               |         false         | Experimental | 启用 ChatGPT Apps/connectors 支持                                                   |
 | `codex_git_commit`   |         false         | Experimental | 启用 Codex 生成的 git commits 和 commit attribution trailers                       |
-| `hooks`              |         true          | Stable       | 启用来自 `hooks.json` 或 inline `[hooks]` 的 lifecycle hooks。参见 [Hooks](https://developers.openai.com/codex/hooks)。 |
+| `hooks`              |         true          | Stable       | 启用来自 `hooks.json` 或 inline `[hooks]` 的 lifecycle hooks。参见 [Hooks](73-hooks.md)。 |
 | `fast_mode`          |         true          | Stable       | 启用 Fast mode 选择和 `service_tier = "fast"` 路径                          |
-| `memories`           |         false         | Stable       | 启用 [Memories](https://developers.openai.com/codex/memories)                                                       |
+| `memories`           |         false         | Stable       | 启用 [Memories](74-memories.md)                                                       |
 | `multi_agent`        |         true          | Stable       | 启用 subagent 协作工具                                                      |
 | `personality`        |         true          | Stable       | 启用 personality 选择控制                                                    |
 | `shell_snapshot`     |         true          | Stable       | 为你的 shell environment 创建快照，以加速重复命令                            |
@@ -179,11 +179,11 @@ shell_snapshot = true           # Speed up repeated commands
 | `web_search_cached`  |         false         | Deprecated   | 旧版开关，在未设置时映射到 `web_search = "cached"`                            |
 | `web_search_request` |         false         | Deprecated   | 旧版开关，在未设置时映射到 `web_search = "live"`                              |
 
-Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](https://developers.openai.com/codex/feature-maturity) 了解如何解释这些标签。
+Maturity 列使用 Experimental、Beta 和 Stable 等功能成熟度标签。请参阅 [Feature Maturity](03-feature-maturity.md) 了解如何解释这些标签。
 
 省略 feature keys 以保留其默认值。
 
-有关 lifecycle hook 配置，请参阅 [Hooks](https://developers.openai.com/codex/hooks)。
+有关 lifecycle hook 配置，请参阅 [Hooks](73-hooks.md)。
 
 #### 启用功能
 

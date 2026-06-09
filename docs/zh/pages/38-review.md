@@ -23,7 +23,7 @@ Source: [Review](https://developers.openai.com/codex/app/review.md)
 
 #### 浏览复查窗格
 
-- 点击文件名通常会在你选择的编辑器中打开该文件。你可以在 [settings](https://developers.openai.com/codex/app/settings) 中选择默认编辑器。
+- 点击文件名通常会在你选择的编辑器中打开该文件。你可以在 [settings](28-codex-app-settings.md) 中选择默认编辑器。
 - 点击文件名背景会展开或折叠 diff。
 - 按住 Cmd 时点击单行，会在你选择的编辑器中打开该行。
 - 如果你满意某项变更，可以[暂存变更或还原你不喜欢的变更](#staging-and-reverting-files)。
@@ -62,7 +62,7 @@ Codex 会将内联评论视为复查指导。留下评论后，发送一条后�
 4. 在复查窗格中检查生成的 diff。
 5. 准备好后，将变更暂存、提交并推送到 PR 分支。
 
-对于 GitHub 触发的审查，请参阅 [Use Codex in GitHub](https://developers.openai.com/codex/integrations/github)。
+对于 GitHub 触发的审查，请参阅 [Use Codex in GitHub](49-codex-code-review-in-github.md)。
 
 #### 暂存和还原文件
 

@@ -3,7 +3,7 @@
 Source: [Build plugins](https://developers.openai.com/codex/plugins/build.md)
 
 本页面面向插件作者。如果你想在 Codex 中浏览、安装和使用
-插件，请参阅 [Plugins](https://developers.openai.com/codex/plugins)。如果你仍在迭代
+插件，请参阅 [Plugins](78-plugins.md)。如果你仍在迭代
 一个仓库或一个个人工作流，请从本地技能开始。当你想跨团队共享该工作流、捆绑 app 集成或
 MCP 配置、打包生命周期钩子，或发布稳定包时，再构建插件。
 

@@ -11723,3 +11723,575 @@ codex
   cd repo
   ```
 - If you need Windows access to files, they're under \\wsl$\Ubuntu\home\&lt;user&gt; in Explorer.
+
+## Supplemental Official Linked Pages
+
+<a id="supplemental-official-linked-pages"></a>
+
+Official Codex pages linked from the manual snapshot that were not included in the original aggregate manual.
+
+### Maintain Codex account auth in CI/CD (advanced)
+
+Source: [Maintain Codex account auth in CI/CD (advanced)](/codex/auth/ci-cd-auth.md)
+
+This guide shows how to keep ChatGPT-managed Codex auth working on a trusted
+CI/CD runner without calling the OAuth token endpoint yourself.
+
+The right way to authenticate automation is with an API key. Use this guide
+only if you specifically need to run the workflow as your Codex account.
+
+The pattern is:
+
+1. Create `auth.json` once on a trusted machine with `codex login`.
+2. Put that file on the runner.
+3. Run Codex normally.
+4. Let Codex refresh the session when it becomes stale.
+5. Keep the refreshed `auth.json` for the next run.
+
+This is an advanced workflow for enterprise and other trusted private
+automation. API keys are still the recommended option for most CI/CD jobs.
+
+Treat `~/.codex/auth.json` like a password: it contains access tokens. Don't
+  commit it, paste it into tickets, or share it in chat. Do not use this
+  workflow for public or open-source repositories.
+
+## Why this works
+
+Codex already knows how to refresh a ChatGPT-managed session.
+
+As of the current open-source client:
+
+- Codex loads the local auth cache from `auth.json`
+- if `last_refresh` is older than about 8 days, Codex refreshes the token
+  bundle before the run continues
+- after a successful refresh, Codex writes the new tokens and a new
+  `last_refresh` back to `auth.json`
+- if a request gets a `401`, Codex also has a built-in refresh-and-retry path
+
+That means the supported CI/CD strategy is not "call the refresh API yourself."
+It is "run Codex and persist the updated `auth.json`."
+
+## When to use this
+
+Use this guide only when all of the following are true:
+
+- you need ChatGPT-managed Codex auth rather than an API key
+- `codex login` cannot run on the remote runner
+- the runner is trusted private infrastructure
+- you can preserve the refreshed `auth.json` between runs
+- only one machine or serialized job stream will use a given `auth.json` copy
+
+This guide applies to Codex-managed ChatGPT auth (`auth_mode: "chatgpt"`).
+
+It does not apply to:
+
+- API key auth
+- external-token host integrations (`auth_mode: "chatgptAuthTokens"`)
+- generic OAuth clients outside Codex
+
+If your credentials are stored in the OS keyring, switch to file-backed storage
+first. See [Credential storage](https://developers.openai.com/codex/auth#credential-storage).
+
+## Seed `auth.json` once
+
+On a trusted machine where browser login is possible:
+
+1. Configure Codex to store credentials in a file:
+
+```toml
+cli_auth_credentials_store = "file"
+```
+
+2. Run:
+
+```bash
+codex login
+```
+
+3. Verify the file looks like managed ChatGPT auth:
+
+```bash
+AUTH_FILE="${CODEX_HOME:-$HOME/.codex}/auth.json"
+
+jq '{
+  auth_mode,
+  has_tokens: (.tokens != null),
+  has_refresh_token: ((.tokens.refresh_token // "") != ""),
+  last_refresh
+}' "$AUTH_FILE"
+```
+
+Continue only if:
+
+- `auth_mode` is `"chatgpt"`
+- `has_refresh_token` is `true`
+
+Then place the contents of `auth.json` into your CI/CD secret manager or copy
+it to a trusted persistent runner.
+
+## Recommended pattern: GitHub Actions on a self-hosted runner
+
+The simplest fully automated setup is a self-hosted GitHub Actions runner with a
+persistent `CODEX_HOME`.
+
+Why this pattern works well:
+
+- the runner can keep `auth.json` on disk between jobs
+- Codex can refresh the file in place
+- later jobs automatically pick up the refreshed tokens
+- you only need the original secret for bootstrap or reseeding
+
+The critical detail is to seed `auth.json` only if it is missing. If you
+rewrite the file from the original secret on every run, you throw away the
+refreshed tokens that Codex just wrote.
+
+Example scheduled workflow:
+
+```yaml
+name: Keep Codex auth fresh
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  keep-codex-auth-fresh:
+    runs-on: self-hosted
+    steps:
+      - name: Bootstrap auth.json if needed
+        shell: bash
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+          mkdir -p "$CODEX_HOME"
+          chmod 700 "$CODEX_HOME"
+
+          if [ ! -f "$CODEX_HOME/auth.json" ]; then
+            printf '%s' "$CODEX_AUTH_JSON" > "$CODEX_HOME/auth.json"
+            chmod 600 "$CODEX_HOME/auth.json"
+          fi
+
+      - name: Run Codex
+        shell: bash
+        run: |
+          codex exec --json "Reply with the single word OK." >/dev/null
+```
+
+What this does:
+
+- the first run seeds `auth.json`
+- later runs reuse the same file
+- once the cached session is old enough, Codex refreshes it during the normal
+  `codex exec` step
+- the refreshed file remains on disk for the next workflow run
+
+A weekly schedule is usually enough because Codex treats the session as stale
+after roughly 8 days in the current open-source client.
+
+## Ephemeral runners: restore, run Codex, persist the updated file
+
+If you use GitHub-hosted runners, GitLab shared runners, or any other ephemeral
+environment, the runner filesystem disappears after each job. In that setup,
+you need a round-trip:
+
+1. restore the current `auth.json` from secure storage
+2. run Codex
+3. write the updated `auth.json` back to secure storage
+
+Generic GitHub Actions shape:
+
+```yaml
+name: Run Codex with managed auth
+
+on:
+  workflow_dispatch:
+
+jobs:
+  codex-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore auth.json
+        shell: bash
+        run: |
+          export CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+          mkdir -p "$CODEX_HOME"
+          chmod 700 "$CODEX_HOME"
+
+          # Replace this with your secret manager or secure storage command.
+          my-secret-cli read codex-auth-json > "$CODEX_HOME/auth.json"
+          chmod 600 "$CODEX_HOME/auth.json"
+
+      - name: Run Codex
+        shell: bash
+        run: |
+          codex exec --json "summarize the failing tests"
+
+      - name: Persist refreshed auth.json
+        if: always()
+        shell: bash
+        run: |
+          # Replace this with your secret manager or secure storage command.
+          my-secret-cli write codex-auth-json < "$CODEX_HOME/auth.json"
+```
+
+The key requirement is that the write-back step stores the refreshed file that
+Codex produced during the run, not the original seed.
+
+## You do not need a separate refresh command
+
+Any normal Codex run can refresh the session.
+
+That means you have two good options:
+
+- let your existing CI/CD Codex job refresh the file naturally
+- add a lightweight scheduled maintenance job, like the GitHub Actions example
+  above, if your real jobs do not run often enough
+
+The first Codex run after the session becomes stale is the one that refreshes
+`auth.json`.
+
+## Operational rules that matter
+
+- Use one `auth.json` per runner or per serialized workflow stream.
+- Do not share the same file across concurrent jobs or multiple machines.
+- Do not overwrite a persistent runner's refreshed file from the original seed
+  on every run.
+- Do not store `auth.json` in the repository, logs, or public artifact storage.
+- Reseed from a trusted machine if built-in refresh stops working.
+
+## What to do when refresh stops working
+
+This flow reduces manual work, but it does not guarantee the same session lasts
+forever.
+
+Reseed the runner with a fresh `auth.json` if:
+
+- Codex starts returning `401` and the runner can no longer refresh
+- the refresh token was revoked or expired
+- another machine or concurrent job rotated the token first
+- your secure-storage round trip failed and an old file was restored
+
+To reseed:
+
+1. Run `codex login` on a trusted machine.
+2. Replace the stored CI/CD copy of `auth.json`.
+3. Let the next runner job continue using Codex's built-in refresh flow.
+
+## Verify that the runner is maintaining the session
+
+Check that the runner still has managed auth tokens and that `last_refresh`
+exists:
+
+```bash
+AUTH_FILE="${CODEX_HOME:-$HOME/.codex}/auth.json"
+
+jq '{
+  auth_mode,
+  last_refresh,
+  has_access_token: ((.tokens.access_token // "") != ""),
+  has_id_token: ((.tokens.id_token // "") != ""),
+  has_refresh_token: ((.tokens.refresh_token // "") != "")
+}' "$AUTH_FILE"
+```
+
+If your runner is persistent, you should see the same file continue to exist
+between runs. If your runner is ephemeral, confirm that your write-back step is
+storing the updated file from the last job.
+
+## Source references
+
+If you want to verify this behavior in the open-source client:
+
+- [`codex-rs/core/src/auth.rs`](https://github.com/openai/codex/blob/main/codex-rs/core/src/auth.rs)
+  covers stale-token detection, automatic refresh, refresh-on-401 recovery, and
+  persistence of refreshed tokens
+- [`codex-rs/core/src/auth/storage.rs`](https://github.com/openai/codex/blob/main/codex-rs/core/src/auth/storage.rs)
+  covers file-backed `auth.json` storage
+
+### Run a deep security scan
+
+Source: [Run a deep security scan](/codex/use-cases/deep-security-scan.md)
+
+---
+name: Run a deep security scan
+tagline: Search an authorized repository deeply for plausible vulnerabilities.
+summary: Use the Codex Security plugin to run a higher-recall, repository-wide
+  audit that repeats discovery, validates candidates, and produces reviewable
+  report artifacts.
+skills:
+  - token: $codex-security:deep-security-scan
+    url: /codex/security/plugin
+    description: Run repeated repository-wide security discovery passes, validate
+      surviving findings, analyze attack paths, and create reviewable reports.
+bestFor:
+  - Application security reviews of a complete repository that you own or are
+    authorized to assess.
+  - High-recall reviews where additional runtime and token use are appropriate
+    for finding more candidate issues.
+  - Security teams that need traceable finding evidence before deciding what to
+    remediate.
+starterPrompt:
+  title: Run a Deep Security Scan
+  body: >-
+    /goal Run a deep security scan on this repository. Do not stop until all
+    required steps are complete and the final report is ready.
+
+
+    Scope and rules:
+
+    - I am authorized to assess this repository.
+
+    - Treat the entire repository as in scope.
+
+    - Use the Codex Security plugin's deep scan workflow; do not broaden this
+    into a diff or scoped-path review.
+
+    - Keep the scan read-only; do not modify code, open pull requests, or test
+    external targets.
+
+
+    Return the final Markdown and HTML report paths and summarize the findings
+    that require human review first.
+  suggestedEffort: high
+relatedLinks:
+  - label: Codex Security plugin
+    url: /codex/security/plugin
+  - label: Agent approvals and security
+    url: /codex/agent-approvals-security
+  - label: Codex cyber safety
+    url: /codex/concepts/cyber-safety
+---
+
+## Choose a deep repository review
+
+Use a deep scan when you need high-recall vulnerability discovery across a
+complete repository and can budget for a longer run. The Codex Security plugin
+repeats discovery passes before validating and prioritizing findings, so this
+workflow takes more time and tokens than an ordinary scan.
+
+A deep scan is for an entire repository. To review one package or directory,
+use `$codex-security:security-scan`. To review a pull request, commit, branch
+diff, or working-tree patch, use
+[$codex-security:security-diff-scan](https://developers.openai.com/codex/use-cases/scan-code-changes-for-security).
+
+## Prepare an authorized scan
+
+
+
+1. Open the repository in Codex and install the [Codex Security plugin](https://developers.openai.com/codex/security/plugin).
+2. Confirm that you own the repository or have authorization to assess it.
+3. Add repository-specific architecture, trust-boundary, build, test, and validation guidance in `AGENTS.md` when it will improve the review.
+4. Run the starter prompt and let the scan complete its repeated discovery, validation, attack-path analysis, and final reporting stages.
+5. Review the final reports before asking Codex to change code or reproduce a finding further.
+
+
+
+## Review evidence before remediation
+
+The final result should identify affected locations, why the behavior is
+reachable, what validation Codex performed, any remaining proof gaps, and a
+bounded remediation direction. Distinguish findings without validation evidence
+from validated findings.
+
+Start remediation only for a finding you have selected and reviewed. Use
+[Remediate a vulnerability backlog](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)
+to fix findings one at a time with focused regression validation.
+
+### Scan code changes for security
+
+Source: [Scan code changes for security](/codex/use-cases/scan-code-changes-for-security.md)
+
+---
+name: Scan code changes for security
+tagline: Review a pull request or local diff for security regressions.
+summary: Use the Codex Security plugin to examine a Git-backed change set,
+  validate plausible security regressions, and produce an evidence-based report
+  before merge.
+skills:
+  - token: $codex-security:security-diff-scan
+    url: /codex/security/plugin
+    description: Review a pull request, commit, branch diff, or working-tree patch
+      for security regressions with validation and attack-path evidence.
+bestFor:
+  - Pull requests that touch authentication, authorization, parsing, file
+    access, secrets, or privileged workflows.
+  - Release branches or local patches that need a security-focused check before
+    merge.
+  - Reviewers who need findings anchored to changed code and directly supporting
+    files.
+starterPrompt:
+  title: Review a Change for Security Regressions
+  body: >-
+    /goal Scan this PR, commit, branch diff, or working-tree patch for security
+    regressions. Do not stop until all in-scope changed files are covered and
+    all required steps are complete.
+
+
+    Scope and rules:
+
+    - Target: [this pull request / commit SHA / branch diff from BASE to HEAD /
+    the current working-tree patch]
+
+    - I am authorized to assess this repository and change set.
+
+    - Pay particular attention to [auth, input handling, secrets, filesystem,
+    network, dependencies, or other sensitive surface].
+
+    - Keep this pass read-only; do not modify code or open a pull request.
+
+
+    Return the final Markdown report and any Codex app review directives for
+    findings that require human review.
+  suggestedEffort: high
+relatedLinks:
+  - label: Codex Security plugin
+    url: /codex/security/plugin
+  - label: Review GitHub pull requests
+    url: /codex/use-cases/github-code-reviews
+  - label: Agent approvals and security
+    url: /codex/agent-approvals-security
+---
+
+## Review the change instead of the whole repository
+
+Use a security diff scan when a pull request, commit, branch, or local patch
+changes a sensitive code path. The Codex Security plugin uses repository
+context to understand the change, then keeps finding discovery and validation
+focused on the diff and directly supporting code.
+
+This workflow complements ordinary code review. Use it when you want evidence
+about security regressions, not a general style or test review.
+
+## Run a focused pass
+
+
+
+1. Open the repository and check out or describe the exact Git-backed change set to review.
+2. Install the [Codex Security plugin](https://developers.openai.com/codex/security/plugin) and specify the pull request, commit, branch diff, or working-tree patch in the starter prompt.
+3. Name high-risk surfaces in the change, such as authentication, parsers, file paths, network requests, or credential handling.
+4. Run the prompt without requesting a fix so the first result remains a review artifact.
+5. Check each reported affected line, validation result, and stated proof gap before deciding whether to remediate.
+
+
+
+## Follow through on a finding
+
+A useful report distinguishes a reachable, supported security finding from a
+suspicion that still needs confirmation and can include Codex app review
+directives for affected lines. For an actionable result, open a new bounded
+fix task with the finding identifier or the relevant report section.
+See [Remediate a vulnerability backlog](https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog)
+for the fix-and-validation loop.
+
+### Remediate a vulnerability backlog
+
+Source: [Remediate a vulnerability backlog](/codex/use-cases/remediate-vulnerability-backlog.md)
+
+---
+name: Remediate a vulnerability backlog
+tagline: Turn reviewed findings into minimal fixes with regression evidence.
+summary: Bring in approved findings from ticketing tools or vulnerability
+  reporting systems, then use the Codex Security plugin to validate and address
+  them one at a time with bounded patches and regression evidence.
+skills:
+  - token: $codex-security:fix-finding
+    url: /codex/security/plugin
+    description: Fix and verify one validated or plausible security finding with
+      focused tests or reproduction evidence.
+bestFor:
+  - Teams with reviewed findings from Codex Security, Linear or Jira tickets,
+    GitHub Security Advisories, HackerOne or Bugcrowd reports, penetration
+    tests, or internal security reviews.
+  - Vulnerability backlogs where every patch needs a minimal diff and repeatable
+    validation.
+  - Maintainers who want to separate security remediation from broader refactors
+    or cleanup.
+starterPrompt:
+  title: Fix One Reviewed Finding
+  body: >-
+    Use $codex-security:fix-finding to fix this security finding and verify the
+    issue no longer reproduces.
+
+
+    Source: [Codex Security report / Linear or Jira ticket / GitHub Security
+    Advisory / HackerOne or Bugcrowd report / other authorized source]
+
+    Title and affected component: [finding title and component]
+
+    Vulnerable source, sink, or broken control: [known path or unknown]
+
+    Attacker-controlled input and impact: [input, prerequisites, and impact]
+
+    Expected security invariant: [behavior the fix must enforce]
+
+    Existing proof: [report path, PoC, reproducer, test, or validation notes]
+
+    Affected files and lines: [paths and lines, or unknown]
+
+    Constraints: [supported behavior to preserve, test command, rollout
+    requirement, or none]
+
+
+    Requirements:
+
+    - Confirm that the issue still exists before changing code when feasible.
+
+    - Make the smallest change that enforces the intended security invariant.
+
+    - Add focused regression coverage or the strongest repeatable validation
+    artifact available.
+
+    - Verify legitimate behavior still works and the original issue no longer
+    reproduces.
+
+    - Keep unrelated backlog findings and refactors out of this change.
+
+
+    Report the changed files, tests or validation artifacts, exact commands and
+    results, proof that the original issue no longer reproduces, and remaining
+    uncertainty. If the issue is already fixed, show the evidence and do not
+    change code.
+  suggestedEffort: high
+relatedLinks:
+  - label: Codex Security plugin
+    url: /codex/security/plugin
+  - label: Run a deep security scan
+    url: /codex/use-cases/deep-security-scan
+  - label: Scan code changes for security
+    url: /codex/use-cases/scan-code-changes-for-security
+---
+
+## Fix reviewed findings one at a time
+
+Use this workflow after a security finding has enough evidence for a bounded
+remediation decision. The finding can come from the Codex Security plugin, an
+issue tracker such as Linear or Jira, GitHub Security Advisories, a disclosure
+platform such as HackerOne or Bugcrowd, an internal review, or another
+authorized source. Connect the source where supported, or provide the report,
+ticket, or advisory with affected code and evidence whenever possible.
+
+Don't hand Codex a broad backlog and ask it to change everything at once. A
+single-finding loop keeps the security invariant, patch, and validation
+evidence reviewable.
+
+## Close one item with evidence
+
+
+
+1. Select a finding from Codex Security, a ticketing system, a security advisory, a disclosure platform, or another source your team authorizes for remediation.
+2. Provide or retrieve its source reference, source or broken control, attacker-controlled input, affected files, reproduction evidence, and intended secure behavior.
+3. Ask `$codex-security:fix-finding` to reproduce or validate the issue before making a minimal patch, or to report that no code change is needed if it is already fixed.
+4. Review the regression test or validation artifact alongside the patch.
+5. Confirm that legitimate behavior remains supported and that the original vulnerable path no longer reproduces.
+6. Record remaining uncertainty before selecting the next item.
+
+
+
+## Keep the backlog auditable
+
+For each completed item, keep the original ticket, advisory, or report
+reference; the exact code change; the checks run; and any proof gap. If Codex
+finds that the issue is already fixed or it can't reproduce it, record that
+evidence instead of forcing an unnecessary code change.

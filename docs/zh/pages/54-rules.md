@@ -39,13 +39,13 @@ Rules 是实验性的，可能会变化。
 
 3. 重启 Codex。
 
-Codex 会在启动时扫描每个活动配置层下的 `rules/`，包括 [Team Config](https://developers.openai.com/codex/enterprise/admin-setup#team-config) 位置，以及位于 `~/.codex/rules/` 的用户层。项目本地 `/.codex/rules/` 只有在项目 `.codex/` 层受信任时才会加载。
+Codex 会在启动时扫描每个活动配置层下的 `rules/`，包括 [Team Config](64-admin-setup.md#team-config) 位置，以及位于 `~/.codex/rules/` 的用户层。项目本地 `/.codex/rules/` 只有在项目 `.codex/` 层受信任时才会加载。
 
 当你在 TUI 中把命令添加到允许列表时，Codex 会写入用户层的 `~/.codex/rules/default.rules`，使未来运行可以跳过提示。
 
 启用 Smart approvals（默认）时，Codex 可能会在升级权限请求期间为你提出 `prefix_rule`。接受前请仔细审查建议的 prefix。
 
-管理员还可以从 [`requirements.toml`](https://developers.openai.com/codex/enterprise/managed-configuration#admin-enforced-requirements-requirementstoml) 强制执行限制性 `prefix_rule` 条目。
+管理员还可以从 [`requirements.toml`](67-managed-configuration.md#admin-enforced-requirements-requirementstoml) 强制执行限制性 `prefix_rule` 条目。
 
 #### 理解规则字段
 

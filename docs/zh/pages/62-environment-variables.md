@@ -7,7 +7,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 
 本页列出 Codex 会直接读取的稳定公开环境变量。
 它不列出内部开发变量、测试变量，或你通过
-[`env_key`](https://developers.openai.com/codex/config-advanced#custom-model-providers)
+[`env_key`](17-advanced-configuration.md#custom-model-providers)
 自行选择的提供商专用密钥名称。
 
 #### 核心位置
@@ -18,7 +18,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 | `CODEX_SQLITE_HOME` | CLI and app-server state                   | `CODEX_HOME` | 设置 SQLite 后端状态的存储位置。`sqlite_home` 配置选项优先级更高。相对路径会从当前工作目录解析。           |
 
 有关 `CODEX_HOME` 下存储文件的更多信息，请参阅
-[Config and state locations](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+[Config and state locations](17-advanced-configuration.md#config-and-state-locations)。
 
 #### 安装器变量
 
@@ -51,13 +51,13 @@ $env:CODEX_NON_INTERACTIVE=1; irm https://chatgpt.com/codex/install.ps1 | iex
 | `SSL_CERT_FILE`        | HTTPS, login, and WebSocket clients | 当未设置 `CODEX_CA_CERTIFICATE` 时的备用 PEM CA 包路径。                                                                                                         |
 
 对于提供商 API key，请在模型提供商
-配置中设置 [`env_key`](https://developers.openai.com/codex/config-advanced#custom-model-providers)。
+配置中设置 [`env_key`](17-advanced-configuration.md#custom-model-providers)。
 Codex 会读取该配置指定名称的变量，因此变量
 名称本身并不是固定的 Codex 环境变量。
 
 有关自动化密钥处理，请参阅
-[Use API key auth](https://developers.openai.com/codex/noninteractive#use-api-key-auth)。
-有关访问令牌设置，请参阅 [Access tokens](https://developers.openai.com/codex/enterprise/access-tokens)。
+[Use API key auth](60-non-interactive-mode.md#use-api-key-auth)。
+有关访问令牌设置，请参阅 [Access tokens](63-access-tokens.md)。
 
 #### 诊断
 

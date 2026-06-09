@@ -6,12 +6,12 @@ Codex 帮助保护你的代码和数据，并降低滥用风险。
 
 本页介绍如何安全地操作 Codex，包括沙箱、审批
 和网络访问。如果你正在寻找 Codex Security，即用于
-扫描已连接 GitHub 仓库的产品，请参见 [Codex Security](https://developers.openai.com/codex/security)。
+扫描已连接 GitHub 仓库的产品，请参见 [Codex Security](71-codex-security.md)。
 
 默认情况下，代理运行时会关闭网络访问。在本地，Codex 使用由操作系统强制执行的沙箱，限制它可以接触的内容（通常限于当前工作区），并配合审批策略来控制它在执行操作前何时必须停下来询问你。
 
 关于沙箱如何在 Codex app、IDE
-扩展和 CLI 中工作的高层解释，请参见 [沙箱](https://developers.openai.com/codex/concepts/sandboxing)。
+扩展和 CLI 中工作的高层解释，请参见 [沙箱](15-sandbox.md)。
 如需更广泛的企业安全概览，请参见 [Codex 安全白皮书](https://trust.openai.com/?itemUid=382f924d-54f3-43a8-a9df-c39e6c959958&source=click)。
 
 #### 沙箱和审批
@@ -79,7 +79,7 @@ codex \
 管理员管理的 `experimental_network` requirements 独立于用户
 功能开关。它们可以配置并启动沙箱网络，而无需
 `features.network_proxy`，但当活动
-沙箱保持网络关闭时，它们不会开启网络访问。参见 [托管配置](https://developers.openai.com/codex/enterprise/managed-configuration#configure-network-access-requirements)
+沙箱保持网络关闭时，它们不会开启网络访问。参见 [托管配置](67-managed-configuration.md#configure-network-access-requirements)
 了解管理员侧 `requirements.toml` 的形状。
 
 #### 网络策略
@@ -204,7 +204,7 @@ approvals_reviewer = "auto_review"
 
 完整审查器生命周期、触发条件、配置优先级
 和失败行为请参见
-[Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review)。
+[Auto-review](65-auto-review.md)。
 
 审查器只评估已经需要审批的动作，例如沙箱
 提权、被阻止的网络请求、`request_permissions` 提示，或
@@ -223,7 +223,7 @@ approvals_reviewer = "auto_review"
 租户特定部分。
 本地 `[auto_review].policy` 文本也受支持，但托管 requirements
 优先。设置细节请参见
-[托管配置](https://developers.openai.com/codex/enterprise/managed-configuration#configure-automatic-review-policy)。
+[托管配置](67-managed-configuration.md#configure-automatic-review-policy)。
 
 在 Codex app 中，这些审查会显示为自动审查项，其状态
 例如 Reviewing、Approved、Denied、Aborted 或 Timed out。它们还可以

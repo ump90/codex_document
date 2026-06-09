@@ -12,7 +12,7 @@ PAGES_DIR = ROOT / "docs" / "zh" / "pages"
 SOURCE_DIR = ROOT / "docs" / "source" / "pages"
 BUNDLE = ROOT / "docs" / "codex-manual.zh.md"
 INDEX = ROOT / "docs" / "zh" / "README.md"
-DOCS_INDEX = ROOT / "docs" / "README.md"
+SITE_INDEX = ROOT / "docs" / "index.md"
 
 SECTIONS = [
     ("界面与模式", 1, 4),
@@ -86,16 +86,21 @@ def main() -> int:
 
     INDEX.write_text("".join(index_lines), encoding="utf-8")
     BUNDLE.write_text("".join(bundle_parts).rstrip() + "\n", encoding="utf-8")
-    DOCS_INDEX.write_text(
-        "# Codex 文档\n\n"
-        "本目录包含 OpenAI Codex 官方文档英文快照和简体中文译文。\n\n"
-        "- [中文分页目录](zh/README.md)\n"
-        "- [中文合订版](codex-manual.zh.md)\n"
-        "- [英文官方快照](source/codex-manual.en.md)\n"
-        "- [官方快照目录轮廓](source/codex-manual.outline.md)\n",
+    SITE_INDEX.write_text(
+        "# Codex 官方文档中文翻译\n\n"
+        "这里是 OpenAI Codex 官方文档的简体中文翻译站点。\n\n"
+        "## 阅读入口\n\n"
+        "- [中文分页目录](zh/README.md)：按官方章节分组，适合逐页阅读。\n"
+        "- [中文合订版](codex-manual.zh.md)：单文件完整译文，适合全文搜索。\n"
+        "- [英文官方快照](source/codex-manual.en.md)：翻译所依据的官方 Codex manual 聚合快照。\n"
+        "- [官方快照目录轮廓](source/codex-manual.outline.md)：英文快照的章节索引。\n\n"
+        "## 说明\n\n"
+        "中文译文保留产品名、命令、配置键、模型名和必要 UI 标签的英文写法；"
+        "说明性正文和章节标题尽量使用自然中文。产品价格、模型名称、功能可用性"
+        "和企业策略可能变化，需要最新信息时请以官方文档为准。\n",
         encoding="utf-8",
     )
-    print(f"wrote {DOCS_INDEX}")
+    print(f"wrote {SITE_INDEX}")
     print(f"wrote {INDEX}")
     print(f"wrote {BUNDLE}")
     return 0

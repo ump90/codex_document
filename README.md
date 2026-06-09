@@ -8,6 +8,17 @@
 - [中文合订版](docs/codex-manual.zh.md)：单文件完整译文，适合搜索。
 - [英文官方快照](docs/source/codex-manual.en.md)：翻译所依据的官方 Codex manual 聚合快照。
 
+## GitHub Pages
+
+本仓库已包含 GitHub Pages 发布配置：
+
+- `mkdocs.yml`：MkDocs 站点配置。
+- `.github/workflows/pages.yml`：使用 GitHub Actions 构建并部署到 GitHub Pages。
+- `docs/index.md`：站点首页。
+
+手工启用时，在 GitHub 仓库设置中将 Pages 的构建来源设为 **GitHub Actions**，
+然后运行或等待 `Deploy documentation to GitHub Pages` workflow。
+
 ## 内容结构
 
 - `docs/source/codex-manual.en.md`：官方 Codex manual 英文聚合快照。
@@ -16,7 +27,7 @@
 - `docs/zh/pages/`：按页面拆分的中文译文。
 - `docs/zh/README.md`：中文页面目录。
 - `docs/codex-manual.zh.md`：中文合订版。
-- `docs/README.md`：GitHub `docs/` 目录入口。
+- `docs/index.md`：GitHub Pages 站点首页和 `docs/` 目录入口。
 
 ## 来源
 
@@ -32,6 +43,13 @@
 
 ```bash
 python3 scripts/build_codex_zh_bundle.py
+```
+
+本地构建 Pages 站点：
+
+```bash
+python3 -m pip install mkdocs
+mkdocs build
 ```
 
 产品价格、模型名称、功能可用性和企业策略可能变化。更新时应先重新拉取官方

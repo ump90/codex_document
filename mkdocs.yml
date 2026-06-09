@@ -1,0 +1,32 @@
+site_name: Codex 官方文档中文翻译
+site_description: OpenAI Codex 官方文档中文翻译与英文快照
+repo_url: https://github.com/ump90/codex_document
+repo_name: ump90/codex_document
+docs_dir: docs
+site_dir: site
+not_in_nav: |
+  source/pages/**
+  zh/pages/**
+validation:
+  nav:
+    omitted_files: ignore
+  links:
+    absolute_links: ignore
+    anchors: ignore
+theme:
+  name: mkdocs
+  locale: zh_CN
+nav:
+  - 首页: index.md
+  - 中文分页目录: zh/README.md
+  - 中文合订版: codex-manual.zh.md
+  - 英文官方快照: source/codex-manual.en.md
+  - 官方快照目录轮廓: source/codex-manual.outline.md
+plugins:
+  - search
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - sane_lists

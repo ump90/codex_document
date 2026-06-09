@@ -30,8 +30,8 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Install MkDocs
-        run: python -m pip install mkdocs
+      - name: Install MkDocs Material
+        run: python -m pip install mkdocs-material
 
       - name: Build site
         run: mkdocs build

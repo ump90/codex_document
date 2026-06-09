@@ -1,0 +1,95 @@
+### 提示
+
+Source: [Prompting](https://developers.openai.com/codex/prompting.md)
+
+#### 提示
+
+你通过发送提示（用户消息）与 Codex 交互，描述你希望它做什么。
+
+示例提示：
+
+```text
+解释 transform 模块如何工作，以及其它模块如何使用它。
+```
+
+```text
+添加一个新的命令行选项 `--json`，用于输出 JSON。
+```
+
+当你提交一个提示时，Codex 会循环工作：它调用模型，然后执行模型输出指示的操作，例如读取文件、编辑文件和调用工具。此过程会在任务完成或你取消任务时结束。
+
+和 ChatGPT 一样，Codex 的效果取决于你给它的指令。下面是一些我们认为在提示 Codex 时很有帮助的建议：
+
+- 当 Codex 能够验证自己的工作时，它会产出更高质量的结果。请包含复现问题、验证功能，以及运行 lint 和 pre-commit 检查的步骤。
+- 当你把复杂工作拆成更小、更聚焦的步骤时，Codex 处理得更好。更小的任务更容易让 Codex 测试，也更容易让你审查。如果你不确定如何拆分任务，请让 Codex 提出计划。
+
+有关提示 Codex 的更多想法，请参阅 [工作流](https://developers.openai.com/codex/workflows)。
+
+#### 线程模型
+
+线程是一个单独会话：你的提示，以及随后产生的模型输出和工具调用。一个线程可以包含多个提示。例如，你的第一个提示可能要求 Codex 实现某个功能，后续提示可能要求它添加测试。
+
+当 Codex 正在主动处理某个线程时，该线程被称为正在“运行”。你可以同时运行多个线程，但应避免让两个线程修改同一批文件。你也可以稍后通过另一个提示继续某个线程。
+
+线程可以在本地运行，也可以在云端运行：
+
+- **本地线程** 在你的机器上运行。Codex 可以读取和编辑你的文件并运行命令，因此你可以看到发生了什么变化，并使用现有工具。为了降低工作区外意外变更的风险，本地线程会在 [沙箱](https://developers.openai.com/codex/agent-approvals-security) 中运行。
+- **云端线程** 在隔离的 [环境](https://developers.openai.com/codex/cloud/environments) 中运行。Codex 会克隆你的仓库，并检出它正在处理的分支。当你想并行运行工作，或从另一台设备委派任务时，云端线程很有用。若要让云端线程使用你的仓库，请先将代码推送到 GitHub。你也可以 [从本地机器委派任务](https://developers.openai.com/codex/ide/cloud-tasks)，其中会包含你当前的工作状态。
+
+在 Codex app 中，你也可以在不选择项目的情况下开始聊天。聊天不会
+绑定到已保存的仓库或项目文件夹。它们适合用于研究、规划、已连接工具的工作流，或其它 Codex 不应从代码库开始的工作。聊天使用 Codex 管理的 `threads` 目录作为其工作位置，该目录位于你的 Codex
+主目录下。默认位置是 `~/.codex/threads`。
+要更改此状态的基础位置，请设置 `CODEX_HOME`；参见
+[配置和状态位置](https://developers.openai.com/codex/config-advanced#config-and-state-locations)。
+
+#### 上下文
+
+提交提示时，请包含 Codex 可以使用的上下文，例如相关文件和图片的引用。Codex IDE 扩展会自动把打开文件列表和选中的文本范围作为上下文包含进来。
+
+代理工作时，也会从文件内容、工具输出，以及它已经完成和仍需完成事项的持续记录中收集上下文。
+
+线程中的所有信息都必须放入模型的 **上下文窗口**，其大小因模型而异。Codex 会监控并报告剩余空间。对于更长的任务，Codex 可能会通过总结相关信息并丢弃不太相关的细节来自动 **压缩** 上下文。通过重复压缩，Codex 可以在许多步骤中持续处理复杂任务。
+
+#### 目标模式
+
+Goal mode 为 Codex 提供一个持久目标，使其能够跨越更长的
+任务持续推进。当工作可能需要许多步骤，或 Codex 需要清楚的
+完成定义并在工作过程中持续检查时使用它。
+
+设置目标后，目标文本既是起始提示，也是
+完成标准。Codex 使用它决定下一步做什么，以及
+任务是否完成。可在 [Codex
+app](https://developers.openai.com/codex/app/commands#set-or-manage-a-goal-with-goal)、[IDE
+扩展](https://developers.openai.com/codex/ide/slash-commands) 或 [CLI](https://developers.openai.com/codex/cli/slash-commands#set-or-view-a-task-goal-with-goal) 中使用 `/goal` 启动 Goal mode。
+
+如果 `/goal` 没有出现在斜杠命令列表中，请在 `config.toml` 中启用 `features.goals`：
+
+```toml
+[features]
+goals = true
+```
+
+你也可以从 CLI 运行 `codex features enable goals`，或让 Codex 运行它。
+在 Codex app 中，进度会显示在输入框上方，并带有暂停、恢复、编辑或清除目标的控件。
+
+编写目标时，要让 Codex 能判断自己是否已经成功。好的目标包含
+具体结果、可衡量目标或测试标准。例如：
+
+```text
+将此代码库从 JavaScript 迁移到 TypeScript。应用应能在 strict mode
+下编译，且没有显式的 `any` 类型定义。
+```
+
+```text
+将首页的可交互时间降到 1 秒以内。
+```
+
+如果目标很难预先定义，请从 `/plan` 开始，并让 Codex 在实现前
+梳理它。你也可以让 Codex 访谈你，并
+起草一个具有清晰成功标准的目标。
+
+目标开始后，你仍然可以继续引导 Codex。发送后续消息
+来调整约束，例如要求 Codex 使用特定库，或
+避免某种具体方法。当你想要状态回顾或
+解释且不想中断主任务时，请使用旁路聊天。对于长期运行的工作，在失去连接前暂停
+目标，然后在准备继续时恢复或编辑它。

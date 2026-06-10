@@ -40,6 +40,8 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: 切换到浅色模式
+extra_css:
+  - stylesheets/openai-codex.css
 nav:
   - 首页: index.md
   - 中文分页目录: zh/README.md

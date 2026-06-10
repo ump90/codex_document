@@ -1,20 +1,60 @@
-### Codex CLI
+---
+title: Codex CLI
+---
 
-Source: [Codex CLI](https://developers.openai.com/codex/cli.md)
+## CLI setup { .codex-visually-hidden }
 
-Codex CLI 是 OpenAI 的编程代理，你可以在本地终端中运行它。它可以在所选目录中读取、修改并运行你机器上的代码。
-它是[开源的](https://github.com/openai/codex)，并使用 Rust 构建，以获得速度和效率。
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">1</span><h3>Install</h3></div>
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](02-codex-pricing.md)的信息。
+使用 macOS 和 Linux 的独立安装器安装 Codex CLI。
 
-#### CLI 设置
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
 
-Codex CLI 可在 macOS、Windows 和 Linux 上使用。在 Windows 上，可以在 PowerShell 中配合 Windows 沙箱原生运行 Codex；当你需要 Linux 原生环境时，也可以使用 WSL2。有关设置详情，请参阅 Windows 设置指南。
+对于无人值守安装，请在运行下载 installer 的 shell 中设置 `CODEX_NON_INTERACTIVE=1`。详情请参阅 [环境变量](62-environment-variables.md)。
+
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+```
+</div>
+
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">2</span><h3>Run</h3></div>
+
+在终端中运行 Codex。它可以检查你的 repository、编辑文件并运行命令。
+
+```text
+codex
+```
+
+第一次运行 Codex 时，系统会提示你登录。请使用你的 ChatGPT 账户或 API key 进行身份验证。
+
+如果不确定哪些计划包含 Codex 访问权限，请查看 [pricing page](02-codex-pricing.md)。
+</div>
+
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">3</span><h3>Upgrade</h3></div>
+
+Codex CLI 会定期发布新版本。请查看 [changelog](88-changelog.md) 了解 release notes。要升级独立安装版本，请重新运行 installer：
+
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+</div>
+
+<div class="codex-info-card" markdown="1">
+<span class="codex-info-icon">i</span>
+<div>
+Codex CLI 可在 macOS、Windows 和 Linux 上使用。在 Windows 上，可以在 PowerShell 中配合 Windows sandbox 原生运行 Codex；当你需要 Linux 原生环境时，也可以使用 WSL2。设置详情请参阅 <a href="../41-windows-app/">Windows setup guide</a>。
+</div>
+</div>
 
 ---
 
-#### 使用 Codex CLI 工作
+## Work with the Codex CLI
 
-#### 运行本地代码审查
+### 运行本地代码审查
 
 在提交或推送变更之前，让一个独立的 Codex 代理审查你的代码。

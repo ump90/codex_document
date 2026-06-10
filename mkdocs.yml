@@ -15,6 +15,7 @@ validation:
     anchors: ignore
 theme:
   name: material
+  custom_dir: docs/overrides
   language: zh
   icon:
     repo: fontawesome/brands/github
@@ -51,6 +52,8 @@ nav:
 plugins:
   - search
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - toc:
       permalink: true
   - tables
@@ -60,3 +63,58 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.superfences
+extra:
+  codex_nav:
+    - title: Getting Started
+      items:
+        - title: Overview
+          url: zh/pages/01-codex/
+        - title: Quickstart
+          url: zh/pages/04-quickstart/
+        - title: Explore use cases
+          url: zh/pages/97-use-cases/
+        - title: Migrate
+          url: zh/pages/75-migrate-to-codex/
+        - title: Pricing
+          url: zh/pages/02-codex-pricing/
+        - title: Concepts
+          url: zh/pages/05-best-practices/
+    - title: Using Codex
+      items:
+        - title: App
+          url: zh/pages/44-codex-app/
+        - title: IDE Extension
+          url: zh/pages/46-codex-ide-extension/
+        - title: CLI
+          url: zh/pages/45-codex-cli/
+          children:
+            - title: Overview
+              url: zh/pages/45-codex-cli/
+            - title: Features
+              url: zh/pages/30-codex-cli-features/
+            - title: Command Line Options
+              url: zh/pages/22-cli-command-reference/
+            - title: Slash commands
+              url: zh/pages/39-slash-commands-in-codex-cli/
+        - title: Web
+          url: zh/pages/47-codex-web/
+        - title: Integrations
+          url: zh/pages/53-model-context-protocol/
+        - title: Codex Security
+          url: zh/pages/71-codex-security/
+    - title: Configuration
+      items:
+        - title: Config File
+          url: zh/pages/19-config-basics/
+        - title: Permissions
+          url: zh/pages/77-permissions/
+        - title: Speed
+          url: zh/pages/08-speed/
+        - title: Rules
+          url: zh/pages/54-rules/
+        - title: Hooks
+          url: zh/pages/73-hooks/
+        - title: AGENTS.md
+          url: zh/pages/50-custom-instructions-with-agents-md/
+        - title: MCP
+          url: zh/pages/53-model-context-protocol/

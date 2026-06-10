@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% macro codex_nav_link(item, depth=0) %}
+  {% set active = page.url == item.url %}
+  {% if item.children %}
+    {% set child_state = namespace(active=false) %}
+    {% for child in item.children %}
+      {% if page.url == child.url %}
+        {% set child_state.active = true %}
+      {% endif %}
+    {% endfor %}
+    <li class="codex-dev-nav-item codex-dev-nav-item--nested {{ 'is-active' if active or child_state.active }}">
+      <a class="codex-dev-nav-link {{ 'is-active' if active }}" href="{{ item.url | url }}">
+        <span>{{ item.title }}</span>
+        <span class="codex-dev-nav-chevron">⌄</span>
+      </a>
+      <ul class="codex-dev-nav-children">
+        {% for child in item.children %}
+          {{ codex_nav_link(child, depth + 1) }}
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+    <li class="codex-dev-nav-item">
+      <a class="codex-dev-nav-link {{ 'is-active' if active }}" href="{{ item.url | url }}">
+        {{ item.title }}
+      </a>
+    </li>
+  {% endif %}
+{% endmacro %}
+
+{% block header %}
+  <header class="codex-dev-header" data-md-component="header">
+    <div class="codex-dev-header-inner">
+      <div class="codex-dev-header-left">
+        <label class="codex-dev-menu-button" for="__drawer" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <a class="codex-dev-brand" href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}">OpenAI Developers</a>
+      </div>
+
+      <nav class="codex-dev-topnav" aria-label="Primary">
+        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}">Home</a>
+        <a href="https://developers.openai.com/api">API <span>⌄</span></a>
+        <a class="is-active" href="{{ 'zh/pages/01-codex/' | url }}">Codex <span>⌄</span></a>
+        <a href="https://developers.openai.com/apps-sdk">ChatGPT <span>⌄</span></a>
+        <a href="https://developers.openai.com/resources">Resources <span>⌄</span></a>
+      </nav>
+
+      <div class="codex-dev-header-actions">
+        {% if "material/search" in config.plugins %}
+          {% set search = config.plugins["material/search"] | attr("config") %}
+          {% if search.enabled %}
+            <label class="codex-dev-search-trigger" for="__search">
+              <span>Start searching</span>
+              {% set icon = config.theme.icon.search or "material/magnify" %}
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </label>
+            {% include "partials/search.html" %}
+          {% endif %}
+        {% endif %}
+        <a class="codex-dev-dashboard" href="https://platform.openai.com/" rel="noopener">API Dashboard ↗</a>
+        {% if config.theme.palette %}
+          {% if not config.theme.palette is mapping %}
+            {% include "partials/palette.html" %}
+            {% include "partials/javascripts/palette.html" %}
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block tabs %}{% endblock %}
+
+{% block site_nav %}
+  <aside class="md-sidebar md-sidebar--primary codex-dev-sidebar" data-md-component="sidebar" data-md-type="navigation">
+    <div class="md-sidebar__scrollwrap">
+      <nav class="codex-dev-sidebar-inner" aria-label="Codex documentation">
+        {% for group in config.extra.codex_nav %}
+          <section class="codex-dev-nav-section">
+            <h2>{{ group["title"] }}</h2>
+            <ul>
+              {% for item in group["items"] %}
+                {{ codex_nav_link(item) }}
+              {% endfor %}
+            </ul>
+          </section>
+        {% endfor %}
+      </nav>
+    </div>
+  </aside>
+{% endblock %}
+
+{% block container %}
+  <div class="codex-dev-content" data-md-component="content">
+    {% if "navigation.path" in features %}
+      {% include "partials/path.html" %}
+    {% endif %}
+    <article class="codex-dev-article md-content__inner md-typeset">
+      {% block content %}
+        {{ page.content }}
+      {% endblock %}
+    </article>
+  </div>
+
+  <aside class="codex-dev-toc" aria-label="On this page">
+    <div class="codex-dev-toc-inner">
+      {% include "partials/toc.html" %}
+    </div>
+  </aside>
+{% endblock %}

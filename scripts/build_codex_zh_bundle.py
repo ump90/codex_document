@@ -15,24 +15,28 @@ SOURCE_DIR = ROOT / "docs" / "source" / "pages"
 BUNDLE = ROOT / "docs" / "codex-manual.zh.md"
 INDEX = ROOT / "docs" / "zh" / "README.md"
 SITE_INDEX = ROOT / "docs" / "index.md"
+EN_BUNDLE = ROOT / "docs" / "source" / "codex-manual.en.md"
+OUTLINE = ROOT / "docs" / "source" / "codex-manual.outline.md"
 
 LINK_RE = re.compile(r"(?<!!)\[((?:[^\]\\]|\\.)+?)\]\(([^)\s]+)([^)]*)\)", re.DOTALL)
 SOURCE_RE = re.compile(r"^Source:\s+\[[^\]]+\]\(([^)]+)\)", re.MULTILINE)
 CODEX_ALIASES = {
     "guides/slash-commands": "39-slash-commands-in-codex-cli.md",
     "ide/cloud-tasks": "32-codex-ide-extension-features.md",
+    "skills/create-skill": "48-agent-skills.md",
 }
 
 SECTIONS = [
-    ("界面与模式", 1, 4),
-    ("执行模型与工作流", 5, 8),
-    ("审批、沙盒与安全", 9, 15),
-    ("配置、认证与模型", 16, 21),
-    ("CLI、IDE、应用与云行为", 22, 47),
-    ("自定义、技能、规则、MCP 与集成", 48, 56),
-    ("非交互和编程接口", 57, 61),
-    ("平台、企业与注意事项", 62, 83),
-    ("补充官方链接页面", 84, 87),
+    ("界面与模式", "Surfaces and Modes", 1, 4),
+    ("执行模型与工作流", "Execution Model and Workflows", 5, 8),
+    ("审批、沙盒与安全", "Approvals, Sandboxing, and Security", 9, 15),
+    ("配置、认证与模型", "Configuration, Authentication, and Models", 16, 21),
+    ("CLI、IDE、应用与云行为", "CLI, IDE, App, and Cloud Behavior", 22, 47),
+    ("自定义、技能、规则、MCP 与集成", "Customization, Skills, Rules, MCP, and Integrations", 48, 56),
+    ("非交互和编程接口", "Noninteractive and Programmatic Interfaces", 57, 61),
+    ("平台、企业与注意事项", "Platform, Enterprise, and Caveats", 62, 83),
+    ("补充官方链接页面", "Supplemental Official Linked Pages", 84, 87),
+    ("官方站点、用例、集合与路线", "Official Site, Use Cases, Collections, and Tracks", 88, 164),
 ]
 
 
@@ -110,6 +114,8 @@ def localize_codex_links(text: str, current_file: Path, link_map: dict[str, Path
             if local_target:
                 replacement = relative_link(local_target, current_file, parsed.fragment)
                 return f"[{label}]({replacement}{title})"
+        if not parsed.scheme and not parsed.netloc and parsed.path.startswith("/"):
+            return f"[{label}](https://developers.openai.com{target}{title})"
         return match.group(0)
 
     return LINK_RE.sub(replace_link, text)
@@ -139,6 +145,79 @@ def retarget_local_page_links(text: str, source_file: Path, output_file: Path) -
     return LINK_RE.sub(replace_link, text)
 
 
+def line_number(lines: list[str], needle: str, start: int = 0) -> int:
+    for index in range(start, len(lines)):
+        if lines[index] == needle:
+            return index + 1
+    raise ValueError(f"cannot find line: {needle}")
+
+
+def write_english_bundle(source_pages: list[Path]) -> None:
+    sectioned_pages = []
+    for _section_zh, section_en, start, end in SECTIONS:
+        section_pages = [p for p in source_pages if start <= page_number(p) <= end]
+        sectioned_pages.append((section_en, section_pages))
+
+    parts = [
+        "# Codex Official Documentation English Snapshot\n\n",
+        "> Generated from `docs/source/pages/`. Chinese translations live in `docs/zh/pages/`.\n\n",
+        "## Contents\n\n",
+    ]
+    for section, section_pages in sectioned_pages:
+        parts.append(f"### {section}\n\n")
+        for page in section_pages:
+            title = title_from_page(page)
+            rel = page.relative_to(EN_BUNDLE.parent)
+            parts.append(f"- [{title}]({rel.as_posix()})\n")
+        parts.append("\n")
+
+    parts.append("---\n\n")
+    for section, section_pages in sectioned_pages:
+        parts.append(f"## {section}\n\n")
+        for page in section_pages:
+            parts.append(page.read_text(encoding="utf-8").strip())
+            parts.append("\n\n")
+
+    text = "".join(parts).rstrip() + "\n"
+    EN_BUNDLE.write_text(text, encoding="utf-8")
+    write_outline(text, sectioned_pages)
+
+
+def write_outline(bundle_text: str, sectioned_pages: list[tuple[str, list[Path]]]) -> None:
+    lines = bundle_text.splitlines()
+    outline_lines = ["# Codex Official Documentation Outline\n"]
+    cursor = 0
+    for index, (section, section_pages) in enumerate(sectioned_pages):
+        if not section_pages:
+            continue
+        section_start = line_number(lines, f"## {section}", cursor) 
+        next_section_start = None
+        for later_section, later_pages in sectioned_pages[index + 1 :]:
+            if later_pages:
+                next_section_start = line_number(lines, f"## {later_section}", section_start)
+                break
+        section_end = (next_section_start - 1) if next_section_start else len(lines)
+        outline_lines.append(f"- {section} (lines {section_start}-{section_end})\n")
+
+        page_cursor = section_start
+        page_starts = []
+        for page in section_pages:
+            title = title_from_page(page)
+            page_start = line_number(lines, f"### {title}", page_cursor)
+            page_starts.append((title, page_start))
+            page_cursor = page_start
+        for page_index, (title, page_start) in enumerate(page_starts):
+            page_end = (
+                page_starts[page_index + 1][1] - 1
+                if page_index + 1 < len(page_starts)
+                else section_end
+            )
+            outline_lines.append(f"  - {title} (lines {page_start}-{page_end})\n")
+        cursor = section_end
+
+    OUTLINE.write_text("".join(outline_lines), encoding="utf-8")
+
+
 def main() -> int:
     pages = sorted(PAGES_DIR.glob("*.md"), key=page_number)
     source_pages = sorted(SOURCE_DIR.glob("*.md"), key=page_number)
@@ -156,9 +235,9 @@ def main() -> int:
             normalized_count += 1
 
     sectioned_pages = []
-    for section, start, end in SECTIONS:
+    for section_zh, _section_en, start, end in SECTIONS:
         section_pages = [p for p in pages if start <= page_number(p) <= end]
-        sectioned_pages.append((section, section_pages))
+        sectioned_pages.append((section_zh, section_pages))
 
     bundle_parts = [
         "# Codex 官方文档中文翻译\n\n",
@@ -195,6 +274,7 @@ def main() -> int:
 
     INDEX.write_text("".join(index_lines), encoding="utf-8")
     BUNDLE.write_text("".join(bundle_parts).rstrip() + "\n", encoding="utf-8")
+    write_english_bundle(source_pages)
     SITE_INDEX.write_text(
         "# Codex 官方文档中文翻译\n\n"
         "这里是 OpenAI Codex 官方文档的简体中文翻译站点。\n\n"
@@ -212,6 +292,8 @@ def main() -> int:
     print(f"wrote {SITE_INDEX}")
     print(f"wrote {INDEX}")
     print(f"wrote {BUNDLE}")
+    print(f"wrote {EN_BUNDLE}")
+    print(f"wrote {OUTLINE}")
     if normalized_count:
         print(f"normalized local Codex links in {normalized_count} translated pages")
     return 0

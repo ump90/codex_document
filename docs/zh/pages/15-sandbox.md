@@ -32,9 +32,13 @@ Codex 会在每个操作系统上使用平台原生的强制执行机制。macOS
 
 在 **Linux 和 WSL2** 上，请先使用包管理器安装 `bubblewrap`：
 
+#### Ubuntu/Debian
+
 ```bash
 sudo apt install bubblewrap
 ```
+
+#### Fedora
 
 ```bash
 sudo dnf install bubblewrap

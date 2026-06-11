@@ -1,6 +1,7 @@
 ### Sandbox
 
-Source: [Sandbox](/codex/concepts/sandboxing.md)
+Source: [Sandbox](https://developers.openai.com/codex/concepts/sandboxing.md)
+
 
 The sandbox is the boundary that lets Codex act autonomously without giving it
 unrestricted access to your machine. When Codex runs local commands in the
@@ -13,10 +14,10 @@ those boundaries, Codex can keep moving without stopping for confirmation. When
 it needs to go beyond them, Codex falls back to the approval flow.
 
 Sandboxing and approvals are different controls that work together. The
-sandbox defines technical boundaries. The approval policy decides when Codex
-must stop and ask before crossing them.
+  sandbox defines technical boundaries. The approval policy decides when Codex
+  must stop and ask before crossing them.
 
-#### What the sandbox does
+## What the sandbox does
 
 The sandbox applies to spawned commands, not just to Codex's built-in file
 operations. If Codex runs tools like `git`, package managers, or test runners,
@@ -27,7 +28,7 @@ between macOS, Linux, WSL2, and native Windows, but the idea is the same across
 surfaces: give the agent a bounded place to work so routine tasks can run
 autonomously inside clear limits.
 
-#### Why it matters
+## Why it matters
 
 The sandbox reduces approval fatigue. Instead of asking you to confirm every
 low-risk command, Codex can read files, make edits, and run routine project
@@ -38,25 +39,29 @@ trusting the agent's intentions; you are trusting that the agent is operating
 inside enforced limits. That makes it easier to let Codex work independently
 while still knowing when it will stop and ask for help.
 
-#### Getting started
+## Getting started
 
 Codex applies sandboxing automatically when you use the default permissions
 mode.
 
-#### Prerequisites
+### Prerequisites
 
 On **macOS**, sandboxing works out of the box using the built-in Seatbelt
 framework.
 
 On **Windows**, Codex uses the native [Windows
-sandbox](/codex/windows#windows-sandbox) when you run in PowerShell and the
+sandbox](https://developers.openai.com/codex/windows#windows-sandbox) when you run in PowerShell and the
 Linux sandbox implementation when you run in WSL2.
 
 On **Linux and WSL2**, install `bubblewrap` with your package manager first:
 
+#### Ubuntu/Debian
+
 ```bash
 sudo apt install bubblewrap
 ```
+
+#### Fedora
 
 ```bash
 sudo dnf install bubblewrap
@@ -73,9 +78,9 @@ AppArmor setting, prefer loading the `bwrap` AppArmor profile so `bwrap` can
 keep working without disabling the restriction globally.
 
 **Ubuntu AppArmor note:** On Ubuntu 25.04, installing `bubblewrap` from
-Ubuntu's package repository should work without extra AppArmor setup. The
-`bwrap-userns-restrict` profile ships in the `apparmor` package at
-`/etc/apparmor.d/bwrap-userns-restrict`.
+  Ubuntu's package repository should work without extra AppArmor setup. The
+  `bwrap-userns-restrict` profile ships in the `apparmor` package at
+  `/etc/apparmor.d/bwrap-userns-restrict`.
 
 On Ubuntu 24.04, Codex may still warn that it can't create the needed user
 namespace after `bubblewrap` is installed. Copy and load the extra profile:
@@ -103,7 +108,7 @@ the AppArmor unprivileged user namespace restriction with:
 sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 ```
 
-#### How you control it
+## How you control it
 
 Most people start with the permissions controls in the product.
 
@@ -111,15 +116,16 @@ In the Codex app and IDE, you choose a mode from the permissions selector under
 the composer or chat input. That selector lets you rely on Codex's default
 permissions, switch to full access, or use your custom configuration.
 
-In the CLI, use [`/permissions`](/codex/cli/slash-commands#update-permissions-with-permissions)
+
+In the CLI, use [`/permissions`](https://developers.openai.com/codex/cli/slash-commands#update-permissions-with-permissions)
 to switch modes during a session.
 
-#### Configure defaults
+## Configure defaults
 
 If you want Codex to start with the same behavior every time, use a custom
 configuration. Codex stores those defaults in `config.toml`, its local settings
-file. [Config basics](/codex/config-basic) explains how it works, and the
-[Configuration reference](/codex/config-reference) documents the exact keys for
+file. [Config basics](https://developers.openai.com/codex/config-basic) explains how it works, and the
+[Configuration reference](https://developers.openai.com/codex/config-reference) documents the exact keys for
 `sandbox_mode`, `approval_policy`, `approvals_reviewer`, and
 `sandbox_workspace_write.writable_roots`. Use those settings to decide how much
 autonomy Codex gets by default, which directories it can write to, when it
@@ -149,7 +155,7 @@ When approvals are interactive, you can also choose who reviews them with
 
 - `user`: approval prompts surface to the user. This is the default.
 - `auto_review`: eligible approval prompts go to a reviewer agent (see
-  [Auto-review](/codex/concepts/sandboxing/auto-review)).
+  [Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review)).
 
 Full access means using `sandbox_mode = "danger-full-access"` together with
 `approval_policy = "never"`. By contrast, the lower-risk local automation
@@ -164,12 +170,12 @@ you extend the places it can modify without removing the sandbox entirely. If
 you need a broader or narrower trust boundary, adjust the default sandbox mode
 and approval policy instead of relying on one-off exceptions.
 
-When a workflow needs a specific exception, use [rules](/codex/rules). Rules
+When a workflow needs a specific exception, use [rules](https://developers.openai.com/codex/rules). Rules
 let you allow, prompt, or forbid command prefixes outside the sandbox, which is
 often a better fit than broadly expanding access. For a higher-level overview
 of approvals and sandbox behavior in the app, see
-[Codex app features](/codex/app/features#approvals-and-sandboxing), and for the
-IDE-specific settings entry points, see [Codex IDE extension settings](/codex/ide/settings).
+[Codex app features](https://developers.openai.com/codex/app/features#approvals-and-sandboxing), and for the
+IDE-specific settings entry points, see [Codex IDE extension settings](https://developers.openai.com/codex/ide/settings).
 
 Automatic review, when available, does not change the sandbox boundary. It is
 one possible `approvals_reviewer` for approval requests at that boundary, such
@@ -177,16 +183,9 @@ as sandbox escalations, blocked network access, or side-effecting tool calls
 that still need approval. Actions already allowed inside the sandbox run
 without extra review. For the reviewer lifecycle, trigger types, denial
 semantics, and configuration details, see
-[Auto-review](/codex/concepts/sandboxing/auto-review).
+[Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review).
 
 Platform details live in the platform-specific docs. For native Windows setup,
-behavior, and troubleshooting, see [Windows](/codex/windows). For admin
+behavior, and troubleshooting, see [Windows](https://developers.openai.com/codex/windows). For admin
 requirements and organization-level constraints on sandboxing and approvals, see
-[Agent approvals & security](/codex/agent-approvals-security).
-
-## Configuration, Authentication, and Models
-
-<a id="configuration-auth-and-models"></a>
-
-Config files, auth flows, model selection, and configuration reference material.
-
+[Agent approvals & security](https://developers.openai.com/codex/agent-approvals-security).

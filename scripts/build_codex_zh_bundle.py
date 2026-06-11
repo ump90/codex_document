@@ -100,7 +100,7 @@ def codex_keys(url: str) -> list[str]:
         keys.append(rest.removesuffix("/index"))
     if rest == "overview":
         keys.append("")
-    return [key for key in keys if key]
+    return keys
 
 
 def relative_link(target: Path, current_file: Path, fragment: str = "") -> str:
@@ -109,7 +109,7 @@ def relative_link(target: Path, current_file: Path, fragment: str = "") -> str:
 
 
 def build_codex_link_map(source_pages: list[Path]) -> dict[str, Path]:
-    link_map: dict[str, Path] = {}
+    link_map: dict[str, Path] = {"": PAGES_DIR / "01-codex.md"}
     for source_page in source_pages:
         match = SOURCE_RE.search(source_page.read_text(encoding="utf-8"))
         if not match:

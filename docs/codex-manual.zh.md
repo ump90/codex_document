@@ -1470,6 +1470,8 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
 平台细节位于特定平台文档中。有关原生 Windows 设置、行为和故障排除，请参阅 [Windows](zh/pages/83-windows-platform.md)。有关沙盒和审批的管理员要求及组织级约束，请参阅 [智能体审批与安全](zh/pages/13-agent-approvals-security.md)。
 
+### 配置参考
+
 ## 配置、身份验证和模型
 
 <a id="configuration-auth-and-models"></a>
@@ -5863,22 +5865,59 @@ Codex app 可在 macOS 和 Windows 上使用。
 
 ### Codex CLI
 
-Source: [Codex CLI](https://developers.openai.com/codex/cli.md)
+## CLI setup { .codex-visually-hidden }
 
-Codex CLI 是 OpenAI 的编程代理，你可以在本地终端中运行它。它可以在所选目录中读取、修改并运行你机器上的代码。
-它是[开源的](https://github.com/openai/codex)，并使用 Rust 构建，以获得速度和效率。
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">1</span><h3>Install</h3></div>
 
-ChatGPT Plus、Pro、Business、Edu 和 Enterprise 计划包含 Codex。了解更多关于[包含内容](zh/pages/02-codex-pricing.md)的信息。
+使用 macOS 和 Linux 的独立安装器安装 Codex CLI。
 
-#### CLI 设置
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
 
-Codex CLI 可在 macOS、Windows 和 Linux 上使用。在 Windows 上，可以在 PowerShell 中配合 Windows 沙箱原生运行 Codex；当你需要 Linux 原生环境时，也可以使用 WSL2。有关设置详情，请参阅 Windows 设置指南。
+对于无人值守安装，请在运行已下载安装器的 shell 中设置 `CODEX_NON_INTERACTIVE=1`。详情请参阅 [环境变量](zh/pages/62-environment-variables.md)。
+
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
+```
+</div>
+
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">2</span><h3>Run</h3></div>
+
+在终端中运行 Codex。它可以检查你的仓库、编辑文件并运行命令。
+
+```text
+codex
+```
+
+第一次运行 Codex 时，系统会提示你登录。请使用你的 ChatGPT 账户或 API key 进行身份验证。
+
+如果不确定哪些计划包含 Codex 访问权限，请查看 [定价页面](zh/pages/02-codex-pricing.md)。
+</div>
+
+<div class="codex-step-card" markdown="1">
+<div class="codex-step-heading"><span class="codex-step-number">3</span><h3>Upgrade</h3></div>
+
+Codex CLI 会定期发布新版本。请查看 [更新日志](zh/pages/88-changelog.md) 了解发布说明。要升级独立安装版本，请重新运行安装器：
+
+```text
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+</div>
+
+<div class="codex-info-card" markdown="1">
+<span class="codex-info-icon">i</span>
+
+Codex CLI 可在 macOS、Windows 和 Linux 上使用。在 Windows 上，可以在 PowerShell 中配合 Windows 沙箱原生运行 Codex；当你需要 Linux 原生环境时，也可以使用 WSL2。设置详情请参阅 [Windows 设置指南](zh/pages/41-windows-app.md)。
+</div>
 
 ---
 
-#### 使用 Codex CLI 工作
+## Work with the Codex CLI
 
-#### 运行本地代码审查
+### 运行本地代码审查
 
 在提交或推送变更之前，让一个独立的 Codex 代理审查你的代码。
 
@@ -8021,7 +8060,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 | `CODEX_SQLITE_HOME` | CLI and app-server state                   | `CODEX_HOME` | 设置 SQLite 后端状态的存储位置。`sqlite_home` 配置选项优先级更高。相对路径会从当前工作目录解析。           |
 
 有关 `CODEX_HOME` 下存储文件的更多信息，请参阅
-[Config and state locations](zh/pages/17-advanced-configuration.md#config-and-state-locations)。
+[配置和状态位置](zh/pages/17-advanced-configuration.md#config-and-state-locations)。
 
 #### 安装器变量
 
@@ -8059,7 +8098,7 @@ Codex 会读取该配置指定名称的变量，因此变量
 名称本身并不是固定的 Codex 环境变量。
 
 有关自动化密钥处理，请参阅
-[Use API key auth](zh/pages/60-non-interactive-mode.md#use-api-key-auth)。
+[使用 API key 身份验证](zh/pages/60-non-interactive-mode.md#use-api-key-auth)。
 有关访问令牌设置，请参阅 [Access tokens](zh/pages/63-access-tokens.md)。
 
 #### 诊断
@@ -8559,7 +8598,7 @@ Codex 会为该确切操作注入开发者作用域的审批标记。
 #### 配置
 
 设置详情请参阅
-[Managed configuration](zh/pages/67-managed-configuration.md#configure-automatic-review-policy)。
+[托管配置](zh/pages/67-managed-configuration.md#configure-automatic-review-policy)。
 
 默认审查策略位于开源 Codex 仓库：
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
@@ -9322,7 +9361,7 @@ cp -R /absolute/path/to/my-plugin ~/.codex/plugins/my-plugin
 Marketplace 文件指向插件位置，因此这些目录是
 示例，而不是固定要求。Codex 会相对于 marketplace 根目录解析 `source.path`，
 而不是相对于 `.agents/plugins/` 文件夹。文件格式请参阅
-[Marketplace metadata](#marketplace-metadata)。
+[Marketplace 元数据](#marketplace-metadata)。
 
 更改插件后，请更新 marketplace
 条目指向的插件目录，并重启 Codex，使本地安装获取新文件。
@@ -9476,7 +9515,7 @@ Chronicle 在本地捕获屏幕上下文，然后周期性使用 Codex 将
 
 ### Codex 安全
 
-Source: [Codex Security](https://developers.openai.com/codex/security/index.md)
+Source: [Codex Security](https://developers.openai.com/codex/security.md)
 
 [在 Codex App 中安装插件](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 
@@ -10101,12 +10140,6 @@ enabled = false
 
 Source: [Remote connections](https://developers.openai.com/codex/remote-connections.md)
 
-import {
-Desktop,
-Storage,
-Terminal,
-} from "@components/react/oai/platform/ui/Icon.react";
-
 远程连接让你可以从另一台设备或另一台机器使用 Codex。你可以在 ChatGPT mobile app 中使用 Codex，在已连接的 Mac 或 Windows 设备上工作；也可以从另一台受支持的 Codex App 设备继续工作；还可以将 Codex App 连接到 SSH host 上的项目。
 
 远程访问会使用已连接 host 的项目、线程、文件、凭据、权限、plugins、Computer Use、浏览器设置和本地工具。
@@ -10521,7 +10554,7 @@ export AWS_REGION=us-east-2
    export AWS_SESSION_TOKEN=
    ```
 
-3. AWS Management Console credentials。
+3. AWS Management Console 凭据。
 
    ```shell
    aws login
@@ -12760,31 +12793,31 @@ Codex 与图像生成结合后，特别适合创建基于浏览器的游戏以�
 
 让 Codex 把游戏简述转换成一个浏览器构建，包含资产、控制方式和可测试的循环。
 
-- https://developers.openai.com/codex/use-cases/browser-games
+- [创建基于浏览器的游戏](zh/pages/103-use-cases-browser-games.md)
 
 ## 调整 UI 和控制
 
 在游戏已经运行后，使用 Codex 调整 HUD 细节、菜单、控制和小型交互问题。
 
-- https://developers.openai.com/codex/use-cases/make-granular-ui-changes
+- [进行细粒度 UI 修改](zh/pages/143-use-cases-make-granular-ui-changes.md)
 
 ## 处理困难的游戏逻辑
 
 借助 Codex 通过自评估循环迭代复杂的游戏算法。
 
-- https://developers.openai.com/codex/use-cases/iterate-on-difficult-problems
+- [迭代解决困难问题](zh/pages/139-use-cases-iterate-on-difficult-problems.md)
 
 ## 根据真实信号分流 bug
 
 在 Codex 修补游戏之前，让它把 bug 报告、失败检查、日志和复现说明汇总成优先级列表。
 
-- https://developers.openai.com/codex/use-cases/automation-bug-triage
+- [自动化 bug 分诊](zh/pages/102-use-cases-automation-bug-triage.md)
 
 ## 合并前审查
 
 让 GitHub 中的 Codex 自动审查 PR，捕获回归和缺失测试，从而更快部署。
 
-- https://developers.openai.com/codex/use-cases/github-code-reviews
+- [审查 GitHub pull requests](zh/pages/133-use-cases-github-code-reviews.md)
 
 ### 生命科学
 
@@ -12798,9 +12831,9 @@ GPT-Rosalind 是我们的前沿推理模型，旨在支持生物学、药物发�
 
 使用 Codex 将测序数据转化为可执行的生物学洞察，覆盖 bulk RNA-seq、single-cell RNA-seq 分析以及多来源靶点优先级排序。
 
-- https://developers.openai.com/codex/use-cases/target-prioritization
-- https://developers.openai.com/codex/use-cases/bulk-rna-seq-fastq-qc
-- https://developers.openai.com/codex/use-cases/scrna-seq-post-count-qc
+- [排定药物靶点优先级](zh/pages/157-use-cases-target-prioritization.md)
+- [验证 bulk RNA-seq 输入](zh/pages/106-use-cases-bulk-rna-seq-fastq-qc.md)
+- [注释 scRNA-seq 数据](zh/pages/154-use-cases-scrna-seq-post-count-qc.md)
 
 ## 蛋白质折叠研究与架构搜索
 
@@ -12821,29 +12854,29 @@ Source: [Native development](https://developers.openai.com/codex/use-cases/colle
 
 让 Codex 搭建带有可重复构建循环的 iOS 和 macOS 应用。Mac 壳应用用例会更深入地介绍 sidebar-detail-inspector 布局、命令、设置和其他桌面原生结构。
 
-- https://developers.openai.com/codex/use-cases/native-ios-apps
-- https://developers.openai.com/codex/use-cases/native-macos-apps
-- https://developers.openai.com/codex/use-cases/macos-sidebar-detail-inspector
+- [构建 iOS app](zh/pages/146-use-cases-native-ios-apps.md)
+- [构建 macOS app](zh/pages/147-use-cases-native-macos-apps.md)
+- [构建 Mac app 外壳](zh/pages/141-use-cases-macos-sidebar-detail-inspector.md)
 
 ## 重构 iOS SwiftUI 屏幕
 
 使用 Codex 在不改变行为的前提下拆分大型 SwiftUI 视图，然后在应用准备好时，把选定的 iOS 流程迁移到 Liquid Glass。
 
-- https://developers.openai.com/codex/use-cases/ios-swiftui-view-refactor
-- https://developers.openai.com/codex/use-cases/ios-liquid-glass
+- [重构 SwiftUI 屏幕](zh/pages/138-use-cases-ios-swiftui-view-refactor.md)
+- [采用 Liquid Glass](zh/pages/136-use-cases-ios-liquid-glass.md)
 
 ## 将 iOS 动作暴露给系统
 
 借助 Codex 识别应用应通过 App Intents 暴露的动作和实体，让用户可以从系统界面访问应用行为。
 
-- https://developers.openai.com/codex/use-cases/ios-app-intents
+- [添加 iOS App Intents](zh/pages/135-use-cases-ios-app-intents.md)
 
 ## 调试应用
 
 让 Codex 在 Simulator 中复现 bug，或为你的 macOS 应用添加遥测，帮助你调试和修复问题。
 
-- https://developers.openai.com/codex/use-cases/ios-simulator-bug-debugging
-- https://developers.openai.com/codex/use-cases/macos-telemetry-logs
+- [在 iOS Simulator 中调试](zh/pages/137-use-cases-ios-simulator-bug-debugging.md)
+- [添加 Mac telemetry](zh/pages/142-use-cases-macos-telemetry-logs.md)
 
 ### 生产系统
 
@@ -12859,41 +12892,41 @@ Codex 特别擅长浏览复杂代码库，包括拥有大量不同服务和依�
 
 使用 Codex 熟悉复杂代码库；在加入生产软件仓库时尤其有用。
 
-- https://developers.openai.com/codex/use-cases/codebase-onboarding
+- [理解大型代码库](zh/pages/111-use-cases-codebase-onboarding.md)
 
 ## 现代化代码库
 
 借助 Codex 规划技术栈迁移，在适用时把集成升级到最新模型，并重构代码库以提升可读性和可维护性。
 
-- https://developers.openai.com/codex/use-cases/api-integration-migrations
-- https://developers.openai.com/codex/use-cases/refactor-your-codebase
-- https://developers.openai.com/codex/use-cases/code-migrations
+- [升级 API 集成](zh/pages/101-use-cases-api-integration-migrations.md)
+- [重构你的代码库](zh/pages/152-use-cases-refactor-your-codebase.md)
+- [运行代码迁移](zh/pages/110-use-cases-code-migrations.md)
 
 ## 固化可重复工作
 
 让 Codex 把仓库特定的工作流或检查清单转换成 skill，让所有仓库贡献者都能受益于标准化流程。
 
-- https://developers.openai.com/codex/use-cases/reusable-codex-skills
+- [把工作流保存为 skills](zh/pages/153-use-cases-reusable-codex-skills.md)
 
 ## 保持文档更新
 
 让 Codex 比较源码变更和现有文档，更新最小且有用的文档表面，并验证变更。
 
-- https://developers.openai.com/codex/use-cases/update-documentation
+- [保持文档更新](zh/pages/159-use-cases-update-documentation.md)
 
 ## 维护系统健康
 
 通过在 Slack 中使用 Codex，并将其连接到告警、issue 跟踪和每日 bug 扫描，让 Codex 自动接手功能请求和 bug 修复。
 
-- https://developers.openai.com/codex/use-cases/slack-coding-tasks
-- https://developers.openai.com/codex/use-cases/automation-bug-triage
+- [从 Slack 启动编码任务](zh/pages/156-use-cases-slack-coding-tasks.md)
+- [自动化 bug 分诊](zh/pages/102-use-cases-automation-bug-triage.md)
 
 ## 避免审查瓶颈
 
 使用 Codex 自动审查 PR，并对关键流程运行聚焦 QA pass，帮助你快速捕获问题并有信心地发布更新。
 
-- https://developers.openai.com/codex/use-cases/github-code-reviews
-- https://developers.openai.com/codex/use-cases/qa-your-app-with-computer-use
+- [审查 GitHub pull requests](zh/pages/133-use-cases-github-code-reviews.md)
+- [使用 Computer Use 对 app 做 QA](zh/pages/150-use-cases-qa-your-app-with-computer-use.md)
 
 ### 生产力与协作
 
@@ -12908,37 +12941,37 @@ Codex 可以帮助你管理分布在多个应用和文件中的工作，并协�
 
 让 Codex 把密集的论文、规格或技术指南转换成可复习的定义、示例和问题。
 
-- https://developers.openai.com/codex/use-cases/learn-a-new-concept
+- [学习一个新概念](zh/pages/140-use-cases-learn-a-new-concept.md)
 
 ## 委派多步骤工作流
 
 使用 Codex 从多个应用收集已批准的输入并准备新工作流，或让它控制你的电脑，在多个应用之间完成任务。
 
-- https://developers.openai.com/codex/use-cases/new-hire-onboarding
-- https://developers.openai.com/codex/use-cases/use-your-computer-with-codex
+- [协调新员工入职](zh/pages/148-use-cases-new-hire-onboarding.md)
+- [让 Codex 使用你的电脑](zh/pages/160-use-cases-use-your-computer-with-codex.md)
 
 ## 推动工作持续前进
 
 让 Codex 检查你批准的来源，只返回需要注意的项目：真实请求、已变更 artifact、受阻交接、回复草稿和决策。
 
-- https://developers.openai.com/codex/use-cases/proactive-teammate
-- https://developers.openai.com/codex/use-cases/manage-your-inbox
-- https://developers.openai.com/codex/use-cases/complete-tasks-from-messages
+- [设置一个队友](zh/pages/149-use-cases-proactive-teammate.md)
+- [管理收件箱](zh/pages/144-use-cases-manage-your-inbox.md)
+- [完成消息中的任务](zh/pages/120-use-cases-complete-tasks-from-messages.md)
 
 ## 处理数据
 
 使用 Codex 探索数据集或清理电子表格、探索假设、提出问题或创建可视化。
 
-- https://developers.openai.com/codex/use-cases/clean-messy-data
-- https://developers.openai.com/codex/use-cases/analyze-data-export
-- https://developers.openai.com/codex/use-cases/datasets-and-reports
+- [清理和准备杂乱数据](zh/pages/109-use-cases-clean-messy-data.md)
+- [查询表格数据](zh/pages/100-use-cases-analyze-data-export.md)
+- [分析数据集并交付报告](zh/pages/121-use-cases-datasets-and-reports.md)
 
 ## 将分析打包成可审查 artifact
 
 让 Codex 把已批准输入转换成可分享的输出：幻灯片、消息，以及其他已准备好审查的 artifact。
 
-- https://developers.openai.com/codex/use-cases/feedback-synthesis
-- https://developers.openai.com/codex/use-cases/generate-slide-decks
+- [将反馈转化为行动](zh/pages/128-use-cases-feedback-synthesis.md)
+- [生成幻灯片 Deck](zh/pages/132-use-cases-generate-slide-decks.md)
 
 ### 安全
 
@@ -12952,25 +12985,25 @@ Codex 可以帮助工程和安全团队评估已授权代码、收集证据，�
 
 使用 Codex Security plugin 对已授权仓库运行召回率更高的扫描，审查可信发现，并生成支持人工分流的报告。
 
-- https://developers.openai.com/codex/use-cases/deep-security-scan
+- [运行深度安全扫描](zh/pages/85-run-a-deep-security-scan.md)
 
 ## 合并前审查变更
 
 让 Codex 检查 pull request、branch、commit 或 working-tree diff 中的安全回归，并返回与变更代码绑定的证据。
 
-- https://developers.openai.com/codex/use-cases/scan-code-changes-for-security
+- [扫描代码变更中的安全问题](zh/pages/86-scan-code-changes-for-security.md)
 
 ## 审计依赖事件
 
 把公开 package 或供应链 advisory 转化为只读仓库审计，覆盖 manifests、lock files、scripts、workflows 和暴露路径。
 
-- https://developers.openai.com/codex/use-cases/dependency-incident-audits
+- [审计依赖事件](zh/pages/123-use-cases-dependency-incident-audits.md)
 
 ## 修复已审查发现
 
 把安全报告、advisory 或 ticket 中的已批准发现交给 Codex，然后让它做最小修复，并验证易受攻击行为不再复现。
 
-- https://developers.openai.com/codex/use-cases/remediate-vulnerability-backlog
+- [修复漏洞积压项](zh/pages/87-remediate-vulnerability-backlog.md)
 
 ### Web 开发
 
@@ -12985,38 +13018,38 @@ Codex 能很好地配合现有设计系统，在考虑约束和视觉输入的�
 
 使用 Codex 把粗略想法转化为视觉方向，并实现第一个原型。
 
-- https://developers.openai.com/codex/use-cases/idea-to-proof-of-concept
+- [从想法到概念验证](zh/pages/134-use-cases-idea-to-proof-of-concept.md)
 
 ## 从 Figma 构建
 
 使用 Codex 从 Figma 提取设计上下文，并将其转换成遵循仓库组件、样式和设计系统的代码。
 
-- https://developers.openai.com/codex/use-cases/figma-designs-to-code
+- [将 Figma 设计转化为代码](zh/pages/129-use-cases-figma-designs-to-code.md)
 
 ## 迭代 UI
 
 借助 Codex 根据视觉输入或提示进行定向变更，并让它在浏览器中验证自己的工作。
 
-- https://developers.openai.com/codex/use-cases/frontend-designs
-- https://developers.openai.com/codex/use-cases/make-granular-ui-changes
+- [构建响应式前端设计](zh/pages/131-use-cases-frontend-designs.md)
+- [进行细粒度 UI 修改](zh/pages/143-use-cases-make-granular-ui-changes.md)
 
 ## 接手有边界的 Slack 任务
 
 当 Slack 中出现功能请求或问题报告时标记 Codex，让它接手任务并在后台处理。
 
-- https://developers.openai.com/codex/use-cases/slack-coding-tasks
+- [从 Slack 启动编码任务](zh/pages/156-use-cases-slack-coding-tasks.md)
 
 ## 部署预览
 
 使用 Codex 构建或更新 Web 应用，用 Vercel 部署，并返回一个你可以分享的 live URL。
 
-- https://developers.openai.com/codex/use-cases/deploy-app-or-website
+- [部署应用或网站](zh/pages/124-use-cases-deploy-app-or-website.md)
 
 ## 更快发布变更
 
 在 GitHub 中使用 Codex 确保变更可以安全合并，从而获得更快的开发循环。
 
-- https://developers.openai.com/codex/use-cases/github-code-reviews
+- [审查 GitHub pull requests](zh/pages/133-use-cases-github-code-reviews.md)
 
 ### 完成消息中的任务
 

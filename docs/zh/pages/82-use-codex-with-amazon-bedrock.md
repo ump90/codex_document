@@ -62,7 +62,7 @@ export AWS_REGION=us-east-2
    export AWS_SESSION_TOKEN=
    ```
 
-3. AWS Management Console credentials。
+3. AWS Management Console 凭据。
 
    ```shell
    aws login

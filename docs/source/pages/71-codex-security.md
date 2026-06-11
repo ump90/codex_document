@@ -1,6 +1,6 @@
 ### Codex Security
 
-Source: [Codex Security](/codex/security/index.md)
+Source: [Codex Security](/codex/security.md)
 
 [Install plugin in Codex App](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 
@@ -50,4 +50,3 @@ Codex Security is available for ChatGPT Enterprise, Edu, Business, and Pro users
 - [Codex Security cloud setup](/codex/security/setup) covers setup, scanning, and findings review.
 - [Improving the threat model](/codex/security/threat-model) explains how to tune scope, attack surface, and criticality assumptions.
 - [FAQ](/codex/security/faq) covers common product questions.
-

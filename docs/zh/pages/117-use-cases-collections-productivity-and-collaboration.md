@@ -11,34 +11,34 @@ Codex 可以帮助你管理分布在多个应用和文件中的工作，并协�
 
 让 Codex 把密集的论文、规格或技术指南转换成可复习的定义、示例和问题。
 
-- https://developers.openai.com/codex/use-cases/learn-a-new-concept
+- [学习一个新概念](140-use-cases-learn-a-new-concept.md)
 
 ## 委派多步骤工作流
 
 使用 Codex 从多个应用收集已批准的输入并准备新工作流，或让它控制你的电脑，在多个应用之间完成任务。
 
-- https://developers.openai.com/codex/use-cases/new-hire-onboarding
-- https://developers.openai.com/codex/use-cases/use-your-computer-with-codex
+- [协调新员工入职](148-use-cases-new-hire-onboarding.md)
+- [让 Codex 使用你的电脑](160-use-cases-use-your-computer-with-codex.md)
 
 ## 推动工作持续前进
 
 让 Codex 检查你批准的来源，只返回需要注意的项目：真实请求、已变更 artifact、受阻交接、回复草稿和决策。
 
-- https://developers.openai.com/codex/use-cases/proactive-teammate
-- https://developers.openai.com/codex/use-cases/manage-your-inbox
-- https://developers.openai.com/codex/use-cases/complete-tasks-from-messages
+- [设置一个队友](149-use-cases-proactive-teammate.md)
+- [管理收件箱](144-use-cases-manage-your-inbox.md)
+- [完成消息中的任务](120-use-cases-complete-tasks-from-messages.md)
 
 ## 处理数据
 
 使用 Codex 探索数据集或清理电子表格、探索假设、提出问题或创建可视化。
 
-- https://developers.openai.com/codex/use-cases/clean-messy-data
-- https://developers.openai.com/codex/use-cases/analyze-data-export
-- https://developers.openai.com/codex/use-cases/datasets-and-reports
+- [清理和准备杂乱数据](109-use-cases-clean-messy-data.md)
+- [查询表格数据](100-use-cases-analyze-data-export.md)
+- [分析数据集并交付报告](121-use-cases-datasets-and-reports.md)
 
 ## 将分析打包成可审查 artifact
 
 让 Codex 把已批准输入转换成可分享的输出：幻灯片、消息，以及其他已准备好审查的 artifact。
 
-- https://developers.openai.com/codex/use-cases/feedback-synthesis
-- https://developers.openai.com/codex/use-cases/generate-slide-decks
+- [将反馈转化为行动](128-use-cases-feedback-synthesis.md)
+- [生成幻灯片 Deck](132-use-cases-generate-slide-decks.md)

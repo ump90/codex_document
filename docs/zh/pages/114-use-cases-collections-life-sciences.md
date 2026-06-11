@@ -10,9 +10,9 @@ GPT-Rosalind 是我们的前沿推理模型，旨在支持生物学、药物发�
 
 使用 Codex 将测序数据转化为可执行的生物学洞察，覆盖 bulk RNA-seq、single-cell RNA-seq 分析以及多来源靶点优先级排序。
 
-- https://developers.openai.com/codex/use-cases/target-prioritization
-- https://developers.openai.com/codex/use-cases/bulk-rna-seq-fastq-qc
-- https://developers.openai.com/codex/use-cases/scrna-seq-post-count-qc
+- [排定药物靶点优先级](157-use-cases-target-prioritization.md)
+- [验证 bulk RNA-seq 输入](106-use-cases-bulk-rna-seq-fastq-qc.md)
+- [注释 scRNA-seq 数据](154-use-cases-scrna-seq-post-count-qc.md)
 
 ## 蛋白质折叠研究与架构搜索
 

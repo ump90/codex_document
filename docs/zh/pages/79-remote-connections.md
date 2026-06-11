@@ -2,12 +2,6 @@
 
 Source: [Remote connections](https://developers.openai.com/codex/remote-connections.md)
 
-import {
-Desktop,
-Storage,
-Terminal,
-} from "@components/react/oai/platform/ui/Icon.react";
-
 远程连接让你可以从另一台设备或另一台机器使用 Codex。你可以在 ChatGPT mobile app 中使用 Codex，在已连接的 Mac 或 Windows 设备上工作；也可以从另一台受支持的 Codex App 设备继续工作；还可以将 Codex App 连接到 SSH host 上的项目。
 
 远程访问会使用已连接 host 的项目、线程、文件、凭据、权限、plugins、Computer Use、浏览器设置和本地工具。

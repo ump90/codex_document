@@ -10337,7 +10337,7 @@ follow those instructions.
 
 ### Codex Security
 
-Source: [Codex Security](/codex/security/index.md)
+Source: [Codex Security](/codex/security.md)
 
 [Install plugin in Codex App](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 
@@ -11103,12 +11103,6 @@ guidance.
 ### Remote connections
 
 Source: [Remote connections](/codex/remote-connections.md)
-
-import {
-Desktop,
-Storage,
-Terminal,
-} from "@components/react/oai/platform/ui/Icon.react";
 
 Remote connections let you use Codex from another device or another machine.
 Use Codex in the ChatGPT mobile app to work with Codex on a connected Mac or

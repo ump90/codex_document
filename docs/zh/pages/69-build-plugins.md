@@ -175,7 +175,7 @@ cp -R /absolute/path/to/my-plugin ~/.codex/plugins/my-plugin
 Marketplace 文件指向插件位置，因此这些目录是
 示例，而不是固定要求。Codex 会相对于 marketplace 根目录解析 `source.path`，
 而不是相对于 `.agents/plugins/` 文件夹。文件格式请参阅
-[Marketplace metadata](#marketplace-metadata)。
+[Marketplace 元数据](#marketplace-metadata)。
 
 更改插件后，请更新 marketplace
 条目指向的插件目录，并重启 Codex，使本地安装获取新文件。

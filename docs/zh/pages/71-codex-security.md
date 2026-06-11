@@ -1,6 +1,6 @@
 ### Codex 安全
 
-Source: [Codex Security](https://developers.openai.com/codex/security/index.md)
+Source: [Codex Security](https://developers.openai.com/codex/security.md)
 
 [在 Codex App 中安装插件](https://chatgpt.com/plugins/share/676aca3811d54fa7bcdef5255236b3c4)
 

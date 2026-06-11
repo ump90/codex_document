@@ -578,6 +578,10 @@ body,
   width: 22px;
 }
 
+.codex-info-card p {
+  margin: 0;
+}
+
 .codex-home {
   max-width: 880px;
 }

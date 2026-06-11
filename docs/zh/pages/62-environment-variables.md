@@ -18,7 +18,7 @@ shell 作用域的覆盖、自动化密钥、安装器行为或诊断。
 | `CODEX_SQLITE_HOME` | CLI and app-server state                   | `CODEX_HOME` | 设置 SQLite 后端状态的存储位置。`sqlite_home` 配置选项优先级更高。相对路径会从当前工作目录解析。           |
 
 有关 `CODEX_HOME` 下存储文件的更多信息，请参阅
-[Config and state locations](17-advanced-configuration.md#config-and-state-locations)。
+[配置和状态位置](17-advanced-configuration.md#config-and-state-locations)。
 
 #### 安装器变量
 
@@ -56,7 +56,7 @@ Codex 会读取该配置指定名称的变量，因此变量
 名称本身并不是固定的 Codex 环境变量。
 
 有关自动化密钥处理，请参阅
-[Use API key auth](60-non-interactive-mode.md#use-api-key-auth)。
+[使用 API key 身份验证](60-non-interactive-mode.md#use-api-key-auth)。
 有关访问令牌设置，请参阅 [Access tokens](63-access-tokens.md)。
 
 #### 诊断

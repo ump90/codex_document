@@ -107,7 +107,7 @@ Codex 会为该确切操作注入开发者作用域的审批标记。
 #### 配置
 
 设置详情请参阅
-[Managed configuration](67-managed-configuration.md#configure-automatic-review-policy)。
+[托管配置](67-managed-configuration.md#configure-automatic-review-policy)。
 
 默认审查策略位于开源 Codex 仓库：
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。

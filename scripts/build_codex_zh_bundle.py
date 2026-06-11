@@ -19,6 +19,9 @@ EN_BUNDLE = ROOT / "docs" / "source" / "codex-manual.en.md"
 OUTLINE = ROOT / "docs" / "source" / "codex-manual.outline.md"
 
 LINK_RE = re.compile(r"(?<!!)\[((?:[^\]\\]|\\.)+?)\]\(([^)\s]+)([^)]*)\)", re.DOTALL)
+BARE_CODEX_URL_RE = re.compile(
+    r"(?<![\(])https://developers\.openai\.com/codex/[^\s<>)\"']+"
+)
 SOURCE_RE = re.compile(r"^Source:\s+\[[^\]]+\]\(([^)]+)\)", re.MULTILINE)
 CODEX_ALIASES = {
     "guides/slash-commands": "39-slash-commands-in-codex-cli.md",
@@ -40,8 +43,30 @@ SECTIONS = [
 ]
 
 
+def split_front_matter(text: str) -> tuple[dict[str, str], str]:
+    if not text.startswith("---\n"):
+        return {}, text
+
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}, text
+
+    meta: dict[str, str] = {}
+    for line in text[4:end].splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        meta[key.strip()] = value.strip().strip("\"'")
+    return meta, text[end + 5 :]
+
+
 def title_from_page(path: Path) -> str:
-    for line in path.read_text(encoding="utf-8").splitlines():
+    text = path.read_text(encoding="utf-8")
+    meta, body = split_front_matter(text)
+    if meta.get("title"):
+        return meta["title"]
+
+    for line in body.splitlines():
         if line.startswith("### "):
             return line[4:].strip()
     return path.stem
@@ -119,6 +144,24 @@ def localize_codex_links(text: str, current_file: Path, link_map: dict[str, Path
         return match.group(0)
 
     return LINK_RE.sub(replace_link, text)
+
+
+def localize_bare_codex_urls(text: str, current_file: Path, link_map: dict[str, Path]) -> str:
+    def replace_url(match: re.Match[str]) -> str:
+        if starts_on_source_line(text, match.start()):
+            return match.group(0)
+
+        target = match.group(0)
+        parsed = urlsplit(target)
+        for key in codex_keys(target):
+            local_target = link_map.get(key)
+            if local_target:
+                title = title_from_page(local_target)
+                replacement = relative_link(local_target, current_file, parsed.fragment)
+                return f"[{title}]({replacement})"
+        return target
+
+    return BARE_CODEX_URL_RE.sub(replace_url, text)
 
 
 def retarget_local_page_links(text: str, source_file: Path, output_file: Path) -> str:
@@ -230,6 +273,7 @@ def main() -> int:
     for page in pages:
         text = page.read_text(encoding="utf-8")
         localized = localize_codex_links(text, page, link_map)
+        localized = localize_bare_codex_urls(localized, page, link_map)
         if localized != text:
             page.write_text(localized, encoding="utf-8")
             normalized_count += 1
@@ -268,7 +312,11 @@ def main() -> int:
 
     for page in pages:
         text = page.read_text(encoding="utf-8").strip()
+        _meta, text = split_front_matter(text)
+        text = text.strip()
         text = retarget_local_page_links(text, page, BUNDLE)
+        if not text.startswith("### "):
+            text = f"### {title_from_page(page)}\n\n{text}"
         bundle_parts.append(text)
         bundle_parts.append("\n\n")
 

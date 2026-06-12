@@ -6,39 +6,49 @@ Codex app 是专注于并行处理 Codex 线程的桌面体验，内置 worktree
 
 大多数 Codex app 功能同时适用于 macOS 和 Windows。以下各节会注明特定平台例外。
 
+[观看 Introducing the Codex app 视频](https://www.youtube.com/watch?v=HFM3se4lNiw)。
+
 ---
 
-#### 跨项目多任务处理
+#### 跨项目多任务处理 { #multitask-across-projects }
 
 使用一个 Codex app 窗口跨项目运行任务。为每个代码库添加一个项目，并按需在它们之间切换。
 
-当你的 Codex 桌面 app 中可用时，你可以要求 Codex 管理本地项目或 worktree 中的线程。例如，要求它查找相关线程、继续现有线程，或固定或归档一个线程。要创建独立的后台线程，请明确提出该请求：`Create a separate background thread in a worktree for this project to update the tests.`
+当你的 Codex desktop app 中可用时，你可以要求 Codex 管理本地项目或 worktree 中的线程。例如，要求它查找相关线程、继续现有线程，或固定或归档一个线程。要创建独立的后台线程，请明确提出该请求：`Create a separate background thread in a worktree for this project to update the tests.`
 
 如果你使用过 [Codex CLI](45-codex-cli.md)，项目就像是在特定目录中启动会话。
 
-如果你在包含两个或更多应用或软件包的单个仓库中工作，请将不同项目拆分为单独的 app 项目，使 [沙盒](13-agent-approvals-security.md) 只包含该项目的文件。
+如果你在包含两个或更多应用或软件包的单个仓库中工作，请将不同项目拆分为单独的 app 项目，使[沙盒](13-agent-approvals-security.md)只包含该项目的文件。
 
-#### 技能支持
+![Codex app 显示侧边栏中的多个项目和主面板中的线程](https://developers.openai.com/images/codex/app/multitask-light.webp)
+
+#### 技能支持 { #skills-support }
 
 Codex app 支持与 CLI 和 IDE Extension 相同的 [agent skills](48-agent-skills.md)。你也可以点击侧边栏中的 Skills，查看和探索团队在不同项目中创建的新 skills。
 
-#### 自动化
+![Codex app 中显示可用 skills 的 Skills picker](https://developers.openai.com/images/codex/app/skill-selector-light.webp)
 
-你还可以将 skills 与 [自动化](24-automations.md) 结合，以执行日常任务，例如评估遥测中的错误并提交修复，或创建近期代码库变更报告。对于应保持在一个线程中的持续工作，请使用 [线程自动化](24-automations.md#thread-automations)。
+#### 自动化 { #automations }
 
-#### 模式
+你还可以将 skills 与[自动化](24-automations.md)结合，以执行日常任务，例如评估遥测中的错误并提交修复，或创建近期代码库变更报告。对于应保持在一个线程中的持续工作，请使用[线程自动化](24-automations.md)。
+
+![带有 schedule 和 prompt 字段的 automation 创建表单](https://developers.openai.com/images/codex/app/create-automation-light.webp)
+
+#### 模式 { #modes }
 
 每个线程都在所选模式中运行。启动线程时，你可以选择：
 
 - **Local**：直接在当前项目目录中工作。
-- **Worktree**：在 Git worktree 中隔离更改。[Learn more](42-worktrees.md)。
+- **Worktree**：在 Git worktree 中隔离更改。[了解更多](42-worktrees.md)。
 - **Cloud**：在已配置的云环境中远程运行。
 
 **Local** 和 **Worktree** 线程都会在你的计算机上运行。
 
-有关完整术语表和概念，请浏览 [概念部分](07-prompting.md)。
+有关完整术语表和概念，请浏览[概念部分](07-prompting.md)。
 
-#### 内置 Git 工具
+![带有 Local、Worktree 和 Cloud 模式选项的新线程输入框](https://developers.openai.com/images/codex/app/modes-light.webp)
+
+#### 内置 Git 工具 { #built-in-git-tools }
 
 Codex app 在 app 内直接提供常见 Git 功能。
 
@@ -46,9 +56,11 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 你还可以直接从 Codex app 内为本地任务和 worktree 任务提交、推送，并创建 pull request。
 
-对于更高级的 Git 任务，请使用 [集成终端](#integrated-terminal)。
+对于更高级的 Git 任务，请使用[集成终端](#integrated-terminal)。
 
-#### 工作树支持
+![带有 commit message 字段的 Git diff 和 commit 面板](https://developers.openai.com/images/codex/app/git-commit-light.webp)
+
+#### 工作树支持 { #worktree-support }
 
 创建新线程时，选择 **Local** 或 **Worktree**。**Local** 直接在你的项目中工作。**Worktree** 会创建新的 [Git worktree](https://git-scm.com/docs/git-worktree)，使更改与你的常规项目隔离。
 
@@ -58,9 +70,11 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 [了解如何在 Codex app 中使用 worktrees。](42-worktrees.md)
 
-#### 集成终端
+![显示 branch actions 和 worktree details 的 Worktree 线程视图](https://developers.openai.com/images/codex/app/worktree-light.webp)
 
-每个线程都包含一个内置终端，作用域限定到当前项目或 worktree。使用 app 右上角的终端图标或按 Cmd+J 来切换它。
+#### 集成终端 { #integrated-terminal }
+
+每个线程都包含一个内置终端，作用域限定到当前项目或 worktree。使用 app 右上角的终端图标，或按 `Cmd+J` 来切换它。
 
 使用终端验证更改、运行脚本，并执行 Git 操作，而无需离开 app。Codex 也可以读取当前终端输出，因此它可以检查正在运行的开发服务器状态，或在与你协作时引用失败的构建。
 
@@ -71,37 +85,47 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 - `pnpm test` 或 `npm test`
 - `pnpm run lint` 或类似项目命令
 
-如果你定期运行某个任务，可以在 [本地环境](37-local-environments.md) 中定义一个 **action**，以向 Codex app 窗口顶部添加快捷按钮。
+如果你定期运行某个任务，可以在[本地环境](37-local-environments.md)中定义一个 **action**，以向 Codex app 窗口顶部添加快捷按钮。
 
-请注意，Cmd+K 会在 Codex app 中打开命令面板。它不会清空终端。要清空终端，请使用 Ctrl+L。
+请注意，`Cmd+K` 会在 Codex app 中打开命令面板。它不会清空终端。要清空终端，请使用 `Ctrl+L`。
 
-#### 原生 Windows 沙盒
+![在 Codex 线程下方打开的集成终端抽屉](https://developers.openai.com/images/codex/app/integrated-terminal-light.webp)
+
+#### 原生 Windows 沙盒 { #native-windows-sandbox }
 
 在 Windows 上，Codex 可以在 PowerShell 中原生运行并使用原生 Windows 沙盒，而不要求 WSL 或虚拟机。这让你可以继续使用 Windows 原生工作流，同时保留有边界的权限。
 
 [了解更多 Windows 设置和沙盒信息](41-windows-app.md)。
 
-#### 语音听写
+![Codex app Windows sandbox setup prompt above the message composer](https://developers.openai.com/images/codex/windows/windows-sandbox-setup.webp)
 
-使用语音提示 Codex。当输入框可见时按住 Ctrl+M 并开始说话。你的语音会被转写。编辑转写后的提示词，或点击发送让 Codex 开始工作。
+#### 语音听写 { #voice-dictation }
 
-#### 浮动弹出窗口
+使用语音提示 Codex。当输入框可见时按住 `Ctrl+M` 并开始说话。你的语音会被转写。编辑转写后的提示词，或点击发送让 Codex 开始工作。
+
+![输入框中的语音听写指示器和已转写 prompt](https://developers.openai.com/images/codex/app/voice-dictation-light.webp)
+
+#### 浮动弹出窗口 { #floating-pop-out-window }
 
 将活动对话线程弹出到单独窗口，并移动到你正在工作的地方。这非常适合前端工作，因为你可以在快速迭代时将线程放在浏览器、编辑器或设计预览附近。
 
 当你希望它在整个工作流中保持可见时，也可以将弹出窗口切换为置顶显示。
 
-#### 应用内浏览器
+![浅色模式下的 pop-out window preview](https://developers.openai.com/images/codex/app/popover-light.webp)
 
-使用 [应用内浏览器](36-in-app-browser.md) 在迭代 Web app 时预览、审查和评论本地开发服务器、基于文件的预览，以及不需要登录的公开页面。
+#### 应用内浏览器 { #in-app-browser }
 
-应用内浏览器不支持身份验证流程、已登录页面、你的常规浏览器 profile、cookies、扩展或现有标签页。
+使用[应用内浏览器](36-in-app-browser.md)在迭代 web app 时预览、审查和评论本地开发服务器、基于文件的预览，以及不需要登录的公开页面。
+
+应用内浏览器不支持身份验证流程、已登录页面、你的常规浏览器 profile、cookies、extensions 或现有 tabs。
 
 使用浏览器评论标记页面上的特定元素或区域，然后要求 Codex 处理该反馈。
 
-当你希望 Codex 直接操作页面时，请对本地开发服务器和基于文件的页面使用 [browser use](36-in-app-browser.md#browser-use)。你可以从设置管理 Browser plugin、允许的网站和阻止的网站。
+当你希望 Codex 直接操作页面时，请对本地开发服务器和基于文件的页面使用 [browser use](36-in-app-browser.md)。你可以从设置管理 Browser plugin、允许的网站和阻止的网站。
 
-#### 计算机使用
+![Codex app 在本地 web app preview 上显示 browser comment](https://developers.openai.com/images/codex/app/in-app-browser-light.webp)
+
+#### 计算机使用 { #computer-use }
 
 [Computer use](35-computer-use.md) 通过查看、点击和输入，帮助 Codex 操作 macOS 或 Windows 应用。这对于测试桌面应用、检查浏览器或模拟器流程、处理无法作为插件使用的数据源、更改 app 设置，以及复现仅 GUI 可见的 bug 很有用。
 
@@ -109,61 +133,106 @@ Diff 面板会显示本地项目或 worktree checkout 中更改的 Git diff。�
 
 该功能发布时不适用于 European Economic Area、United Kingdom 或 Switzerland。
 
-#### 处理非代码产物
+![Codex app 请求使用 Calculator 的 computer use 权限](https://developers.openai.com/images/codex/app/computer-use-approval-light.webp)
+
+<a id="task-sidebar"></a>
+<a id="artifact-viewer"></a>
+
+#### 处理非代码产物 { #richer-outputs-and-artifacts }
 
 当任务产生非代码产物时，侧边栏可以预览 PDF 文件、电子表格、文档和演示文稿。向 Codex 提供源数据、预期文件类型、结构，以及你关心的审查标准。
 
 对于电子表格和演示文稿，请描述工作表、列、图表、幻灯片部分和重要检查。要求 Codex 说明它将输出保存在哪里，以及如何检查结果。
 
-使用任务侧边栏跟踪 Codex 在线程运行期间正在做什么。它可以展示智能体的计划、来源、生成产物和任务摘要，使你能够引导工作、检查生成文件，并决定哪些地方需要再处理。
+使用任务侧边栏跟踪 Codex 在线程运行期间正在做什么。它可以展示 agent 的计划、来源、生成 artifacts 和任务摘要，使你能够引导工作、检查生成文件，并决定哪些地方需要再处理。
+
+![Codex app 在 artifact viewer 中显示生成的 presentation](https://developers.openai.com/images/codex/app/artifact-viewer-light.webp)
 
 ---
 
-#### 与 IDE 扩展同步
+#### 与 IDE 扩展同步 { #sync-with-the-ide-extension }
 
 如果你已在编辑器中安装 [Codex IDE Extension](46-codex-ide-extension.md)，当 Codex app 和 IDE Extension 位于同一项目时，它们会自动同步。
 
-同步后，你会在 Codex app 输入框中看到 **IDE context** 选项。启用 "Auto context" 后，Codex app 会跟踪你正在查看的文件，因此你可以间接引用它们（例如，“What's this file about?”）。你也可以在 IDE Extension 中看到 Codex app 中运行的线程，反之亦然。
+同步后，你会在 Codex app 输入框中看到 **IDE context** 选项。启用 "Auto context" 后，Codex app 会跟踪你正在查看的文件，因此你可以间接引用它们，例如 “What's this file about?”。你也可以在 IDE Extension 中看到 Codex app 中运行的线程，反之亦然。
 
 如果你不确定 app 是否包含上下文，请将其关闭，并再次询问同一问题以比较结果。
 
-#### 线程自动化
+#### 线程自动化 { #thread-automations }
 
 自动化也可以附加到单个线程。这些线程自动化是周期性唤醒，会保留线程上下文，使 Codex 可以检查长时间运行的工作、轮询来源获取新信息，或继续跟进循环。将它们用于应按计划持续回到同一对话的心跳式自动化。
 
-当下一次运行依赖当前对话时，请使用线程自动化。当你希望 Codex 为一个或多个项目启动新的周期性任务时，请使用独立自动化或项目 [自动化](24-automations.md)。
+当下一次运行依赖当前对话时，请使用线程自动化。当你希望 Codex 为一个或多个项目启动新的周期性任务时，请使用独立自动化或项目[自动化](24-automations.md)。
 
-#### 审批和沙盒
+#### 审批和沙盒 { #approvals-and-sandboxing }
 
 你的审批和沙盒设置会约束 Codex 的操作。
 
 - 审批决定 Codex 何时在运行命令前暂停请求权限。
 - 沙盒控制 Codex 可以使用哪些目录和网络访问权限。
 
-当你看到 “approve once” 或 “approve for this session” 等提示时，你正在为工具执行授予不同范围的权限。如果不确定，请批准最窄的选项并继续迭代。
+当你看到 "approve once" 或 "approve for this session" 等提示时，你正在为工具执行授予不同范围的权限。如果不确定，请批准最窄的选项并继续迭代。
 
 默认情况下，Codex 将工作限定到当前项目。在大多数情况下，这是正确的约束。
 
 如果你的任务需要跨多个仓库或目录工作，优先打开单独项目或使用 worktree，而不是要求 Codex 在项目根目录外四处操作。
 
-如果你的工作区中可用 [自动审核](13-agent-approvals-security.md#automatic-approval-reviews)，你可以从权限选择器中选择它。它保持相同的沙盒边界，但会通过已配置的审核策略路由符合条件的审批请求，而不是等待你。
+如果你的 workspace 中可用[自动审核](13-agent-approvals-security.md)，你可以从权限选择器中选择它。它保持相同的沙盒边界，但会通过已配置的审核策略路由符合条件的审批请求，而不是等待你。
 
-有关高层概览，请参阅 [沙盒](15-sandbox.md)。有关配置细节，请参阅 [智能体审批与安全文档](13-agent-approvals-security.md)。
+有关高层概览，请参阅[沙盒](15-sandbox.md)。有关配置细节，请参阅[智能体审批与安全文档](13-agent-approvals-security.md)。
 
-#### MCP 支持
+#### MCP 支持 { #mcp-support }
 
-Codex app、CLI 和 IDE Extension 共享 [Model Context Protocol (MCP)](53-model-context-protocol.md) 设置。如果你已经在其中一个界面配置了 MCP 服务器，其它界面会自动采用这些配置。要配置新服务器，请打开 app 设置中的 MCP 部分，并启用推荐服务器或向配置添加新服务器。
+Codex app、CLI 和 IDE Extension 共享 [Model Context Protocol (MCP)](53-model-context-protocol.md) 设置。如果你已经在其中一个界面配置了 MCP servers，其它界面会自动采用这些配置。要配置新服务器，请打开 app 设置中的 MCP 部分，并启用推荐服务器或向配置添加新服务器。
 
-#### 网页搜索
+#### Web search { #web-search }
 
-Codex 自带第一方 web search 工具。对于 Codex app 中的本地任务，Codex 默认启用 web search，并从 web search cache 提供结果。如果你将沙盒配置为 [full access](13-agent-approvals-security.md)，web search 默认使用实时结果。请参阅 [配置基础](19-config-basics.md)，了解如何禁用 web search 或切换到获取最新数据的实时结果。
+Codex 自带第一方 web search 工具。对于 Codex app 中的本地任务，Codex 默认启用 web search，并从 web search cache 提供结果。如果你将沙盒配置为 [full access](13-agent-approvals-security.md)，web search 默认使用实时结果。请参阅[配置基础](19-config-basics.md)，了解如何禁用 web search 或切换到获取最新数据的实时结果。
 
-#### 图像生成
+#### 图像生成 { #image-generation }
 
-直接在线程中要求 Codex 生成或编辑图像。这适用于 UI 资产、横幅、背景、插图、精灵图表，以及你希望与代码一起创建的占位图。当你希望 Codex 转换或扩展现有资产时，请添加参考图像。
+直接在线程中要求 Codex 生成或编辑图像。这适用于 UI assets、banners、backgrounds、illustrations、sprite sheets，以及你希望与代码一起创建的 placeholders。当你希望 Codex 转换或扩展现有资产时，请添加参考图像。
 
 你可以用自然语言提出请求，也可以通过在提示词中包含 `$imagegen` 来显式调用图像生成 skill。
 
-内置图像生成使用 `gpt-image-2`，计入你的通用 Codex 用量限制，并且平均消耗包含额度的速度比不带图像生成的类似轮次快 3-5 倍，具体取决于图像质量和尺寸。详情请参阅 [定价](02-codex-pricing.md#image-generation-usage-limits)。有关提示技巧和模型细节，请参阅 [图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
+内置图像生成使用 `gpt-image-2`，计入你的通用 Codex 用量限制，并且平均消耗包含额度的速度比不带图像生成的类似轮次快 3-5 倍，具体取决于图像质量和尺寸。详情请参阅[定价](02-codex-pricing.md)。有关提示技巧和模型细节，请参阅[图像生成指南](https://developers.openai.com/api/docs/guides/image-generation)。
 
 对于更大批量的图像生成，请在你的环境变量中设置 `OPENAI_API_KEY`，并要求 Codex 通过 API 生成图像，这样将按 API 定价计费。
+
+#### 图片输入 { #image-input }
+
+你可以将图片拖放到 prompt composer 中，把它们作为上下文。拖放图片时按住 `Shift` 可将图片添加到上下文中。
+
+你也可以要求 Codex 查看系统上的图片。通过给 Codex 提供对你正在处理的 app 截图的工具，Codex 可以验证它正在做的工作。
+
+<a id="projectless-threads"></a>
+
+#### Chats { #chats }
+
+Chats 是在任务不需要特定项目文件夹或 Git 仓库时可以启动的线程。它们适用于 research、triage、planning、plugin-heavy workflows，以及其他希望 Codex 使用已连接工具而不是编辑代码库的对话。
+
+Chats 使用 Codex 管理的 `threads` 目录作为工作位置，该目录位于你的 Codex home 下。默认位置是 `~/.codex/threads`。
+
+#### Memories { #memories }
+
+[Memories](74-memories.md) 在可用时让 Codex 将过去任务中的有用上下文带入未来线程。它们最适合稳定偏好、项目约定、重复工作模式，以及否则需要反复说明的已知陷阱。
+
+#### 通知 { #notifications }
+
+默认情况下，当任务完成或 app 在后台时需要审批，Codex app 会发送通知。
+
+在 Codex app 设置中，你可以选择永不发送通知，或即使 app 处于焦点中也始终发送通知。
+
+#### 保持电脑唤醒 { #keep-your-computer-awake }
+
+由于你的任务可能需要一段时间才能完成，你可以在 app 设置中启用 "Prevent sleep while running" 开关，让 Codex app 防止电脑进入睡眠。
+
+#### 另请参阅 { #see-also }
+
+- [Settings](28-codex-app-settings.md)
+- [Automations](24-automations.md)
+- [In-app browser](36-in-app-browser.md)
+- [Computer use](35-computer-use.md)
+- [Review pane](38-review.md)
+- [Local environments](37-local-environments.md)
+- [Worktrees](42-worktrees.md)

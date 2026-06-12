@@ -97,21 +97,21 @@ Output:
 
 #### 使用 Codex app 工作
 
-- [跨项目多任务](27-codex-app-features.md)：并排运行项目线程，并在它们之间快速切换。
+- [跨项目多任务](27-codex-app-features.md#multitask-across-projects)：并排运行项目线程，并在它们之间快速切换。
 - [Worktrees](42-worktrees.md)：使用内置 Git worktree 支持，让并行代码变更保持隔离。
 - [远程连接](79-remote-connections.md)：使用 ChatGPT mobile app 在已连接主机上启动、引导、审批并审查 Codex 工作。
 - [Computer use](35-computer-use.md)：让 Codex 使用 macOS app 完成 GUI 任务、浏览器流程和原生 app 测试。
 - [Appshots](43-appshots.md)：把最前方的 Mac app 窗口连同截图和可用文本发送给 Codex。
 - [审查并发布变更](38-review.md)：检查 diff、处理 PR 反馈、暂存文件、提交并推送。
-- [终端和 actions](27-codex-app-features.md)：在每个线程中运行命令，并启动可重复的项目 actions。
+- [终端和 actions](27-codex-app-features.md#integrated-terminal)：在每个线程中运行命令，并启动可重复的项目 actions。
 - [In-app browser](36-in-app-browser.md)：打开渲染后的页面、留下评论，或让 Codex 操作本地浏览器流程。
 - [Chrome extension](29-codex-chrome-extension.md)：添加 Chrome plugin，让 Codex 可以使用 Chrome 执行已登录的浏览器任务，同时由你管理网站审批。
-- [图片生成](27-codex-app-features.md)：在线程中生成或编辑图片，同时处理周边代码和素材。
+- [图片生成](27-codex-app-features.md#image-generation)：在线程中生成或编辑图片，同时处理周边代码和素材。
 - [自动化](24-automations.md)：排定 recurring tasks，或唤醒同一线程进行持续检查。
-- [Skills](27-codex-app-features.md)：在 app、CLI 和 IDE Extension 中复用说明和工作流。
-- [侧边栏和 artifacts](27-codex-app-features.md)：跟踪计划、来源、任务摘要和生成文件预览。
+- [Skills](27-codex-app-features.md#skills-support)：在 app、CLI 和 IDE Extension 中复用说明和工作流。
+- [侧边栏和 artifacts](27-codex-app-features.md#richer-outputs-and-artifacts)：跟踪计划、来源、任务摘要和生成文件预览。
 - [Plugins](78-plugins.md)：连接 apps、skills 和 MCP servers，扩展 Codex 能做的事。
 - [Sites](80-sites.md)：使用 Sites plugin 构建和部署托管网站、web apps 和游戏。
-- [IDE Extension sync](27-codex-app-features.md)：在 app 和 IDE 会话之间共享 Auto Context 和活动线程。
+- [IDE Extension sync](27-codex-app-features.md#sync-with-the-ide-extension)：在 app 和 IDE 会话之间共享 Auto Context 和活动线程。
 
 需要帮助？请访问[故障排除指南](40-troubleshooting.md)。

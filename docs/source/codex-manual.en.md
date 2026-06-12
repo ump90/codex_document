@@ -538,7 +538,7 @@ Some Codex features ship behind a maturity label so you can understand how relia
 
 ### Quickstart
 
-Source: [Quickstart](/codex/quickstart.md)
+Source: [Quickstart](https://developers.openai.com/codex/quickstart.md)
 
 Every ChatGPT plan includes Codex.
 
@@ -546,44 +546,35 @@ You can also use Codex with API credits by signing in with an OpenAI API key.
 
 #### Setup
 
+The official page presents setup paths as tabs. This Markdown snapshot keeps the same paths as sections so the content renders in static documentation.
+
 ##### App
 
-The Codex app is available on macOS and Windows. Most Codex app features are
-available on both platforms. Platform-specific exceptions are noted in the
-relevant docs.
+The Codex app is available on macOS and Windows. Most Codex app features are available on both platforms. Platform-specific exceptions are noted in the relevant docs.
 
 1. Download and install the Codex app.
 
-   Download the Codex app for macOS or Windows. Choose the Intel build if
-   you're using an Intel-based Mac. Linux users can sign up to get notified
-   when the app is available.
+   Download the Codex app for macOS or Windows. Choose the Intel build if you're using an Intel-based Mac. Linux users can [get notified when the app is available](https://openai.com/form/codex-app/).
 
 2. Open Codex and sign in.
 
-   After downloading and installing the Codex app, open it and sign in with
-   your ChatGPT account or an OpenAI API key. If you sign in with an OpenAI API
-   key, some functionality might not be available.
+   Once you downloaded and installed the Codex app, open it and sign in with your ChatGPT account or an OpenAI API key.
+
+   If you sign in with an OpenAI API key, [some functionality might not be available](https://developers.openai.com/codex/pricing#feature-availability).
 
 3. Select a project.
 
-   Choose a project folder that you want Codex to work in. If you used the
-   Codex app, CLI, or IDE extension before, you'll see past projects that you
-   worked on.
+   Choose a project folder that you want Codex to work in.
+
+   If you used the Codex app, CLI, or IDE Extension before, you'll see past projects that you worked on.
 
 4. Send your first message.
 
-   After choosing the project, make sure **Local** is selected to have Codex
-   work on your machine, then send your first message. You can ask Codex
-   anything about the project or your computer.
+   After choosing the project, make sure **Local** is selected to have Codex work on your machine and send your first message to Codex.
 
-   Useful first prompts include:
+   You can ask Codex anything about the project or your computer in general. For example, try one of the first-task prompts below.
 
-   - `Tell me about this project`
-   - `Build a classic Snake game in this repo.`
-   - `Find and fix bugs in my codebase with minimal, high-confidence changes.`
-
-   For more inspiration, explore [Codex use cases](/codex/use-cases). If
-   you're new to Codex, read the [best practices guide](/codex/learn/best-practices).
+If you need more inspiration, explore [Codex use cases](https://developers.openai.com/codex/use-cases). If you're new to Codex, read the [best practices guide](https://developers.openai.com/codex/learn/best-practices).
 
 ##### IDE extension
 
@@ -600,23 +591,21 @@ Install the Codex extension for your IDE.
 
 2. Open the Codex panel.
 
-   Once installed, the Codex extension appears in the sidebar alongside your
-   other extensions. It may be hidden in the collapsed section. You can move the
-   Codex panel to the right side of the editor if you prefer.
+   Once installed, the Codex extension appears in the sidebar alongside your other extensions. It may be hidden in the collapsed section. You can move the Codex panel to the right side of the editor if you prefer.
 
 3. Sign in and start your first task.
 
-   Sign in with your ChatGPT account or an API key to get started. Codex starts
-   in Agent mode by default, which lets it read files, run commands, and write
-   changes in your project directory.
+   Sign in with your ChatGPT account or an API key to get started.
+
+   Codex starts in Agent mode by default, which lets it read files, run commands, and write changes in your project directory.
 
 4. Use Git checkpoints.
 
-   Codex can modify your codebase, so consider creating Git checkpoints before
-   and after each task so you can easily revert changes if needed. If you're new
-   to Codex, read the [best practices guide](/codex/learn/best-practices).
+   Codex can modify your codebase, so consider creating Git checkpoints before and after each task so you can easily revert changes if needed.
 
-   See [Codex IDE extension](/codex/ide) for more.
+   If you're new to Codex, read the [best practices guide](https://developers.openai.com/codex/learn/best-practices).
+
+Learn more in [Codex IDE extension](https://developers.openai.com/codex/ide).
 
 ##### CLI
 
@@ -636,10 +625,7 @@ The Codex CLI is supported on macOS, Windows, and Linux.
    powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
    ```
 
-   For unattended installs, set `CODEX_NON_INTERACTIVE=1` on the shell that
-   runs the downloaded installer. See
-   [Environment variables](/codex/environment-variables#installer-variables)
-   for details.
+   For unattended installs, set `CODEX_NON_INTERACTIVE=1` on the shell that runs the downloaded installer. See [Environment variables](https://developers.openai.com/codex/environment-variables#installer-variables) for details.
 
    ```bash
    curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
@@ -661,20 +647,19 @@ The Codex CLI is supported on macOS, Windows, and Linux.
 
 2. Run `codex` and sign in.
 
-   Run `codex` in your terminal to get started. You'll be prompted to sign in
-   with your ChatGPT account or an API key.
+   Run `codex` in your terminal to get started. You'll be prompted to sign in with your ChatGPT account or an API key.
 
 3. Ask Codex to work in your current directory.
 
-   Once authenticated, you can ask Codex to perform tasks in the current
-   directory.
+   Once authenticated, you can ask Codex to perform tasks in the current directory.
 
 4. Use Git checkpoints.
 
-   Codex can modify your codebase, so consider creating Git checkpoints before
-   and after each task so you can easily revert changes if needed.
+   Codex can modify your codebase, so consider creating Git checkpoints before and after each task so you can easily revert changes if needed.
 
-   See [Codex CLI](/codex/cli) for more.
+   If you're new to Codex, read the [best practices guide](https://developers.openai.com/codex/learn/best-practices).
+
+Learn more in [Codex CLI](https://developers.openai.com/codex/cli).
 
 ##### Cloud
 
@@ -682,43 +667,103 @@ Use Codex in the cloud at [chatgpt.com/codex](https://chatgpt.com/codex).
 
 1. Open Codex in your browser.
 
-   Go to [chatgpt.com/codex](https://chatgpt.com/codex). You can also delegate
-   a task to Codex by tagging `@codex` in a GitHub pull request comment
-   (requires signing in to ChatGPT).
+   Go to [chatgpt.com/codex](https://chatgpt.com/codex). You can also delegate a task to Codex by tagging `@codex` in a GitHub pull request comment. This requires signing in to ChatGPT.
 
 2. Set up an environment.
 
-   Before starting your first task, set up an environment for Codex. Open the
-   environment settings at
-   [chatgpt.com/codex](https://chatgpt.com/codex/settings/environments) and
-   follow the steps to connect a GitHub repository.
+   Before starting your first task, set up an environment for Codex. Open the environment settings at [chatgpt.com/codex](https://chatgpt.com/codex/settings/environments) and follow the steps to connect a GitHub repository.
 
 3. Launch a task and monitor progress.
 
-   Once your environment is ready, launch coding tasks from the
-   [Codex interface](https://chatgpt.com/codex). You can monitor progress in
-   real time by viewing logs, or let tasks run in the background.
+   Once your environment is ready, launch coding tasks from the [Codex interface](https://chatgpt.com/codex). You can monitor progress in real time by viewing logs, or let tasks run in the background.
 
 4. Review changes and create a pull request.
 
-   When a task completes, review the proposed changes in the diff view. You can
-   iterate on the results or create a pull request directly in your GitHub
-   repository.
+   When a task completes, review the proposed changes in the diff view. You can iterate on the results or create a pull request directly in your GitHub repository.
 
-   Codex also provides a preview of the changes. You can accept the PR as is,
-   or check out the branch locally to test the changes:
+   Codex also provides a preview of the changes. You can accept the PR as is, or check out the branch locally to test the changes:
 
    ```bash
    git fetch
    git checkout <branch-name>
    ```
 
-   See [Codex cloud](/codex/cloud) for more.
+Learn more in [Codex cloud](https://developers.openai.com/codex/cloud).
+
+#### First-task prompts
+
+The official quickstart includes example task cards. The prompts below preserve the full prompt text from those cards in plain Markdown.
+
+##### Tell me about this project
+
+```text
+Tell me about this project
+```
+
+##### Build a classic Snake game in this repo
+
+```text
+Build a classic Snake game in this repo.
+
+Scope & constraints:
+- Implement ONLY the classic Snake loop: grid movement, growing snake, food spawn, score, game-over, restart.
+- Reuse existing project tooling/frameworks; do NOT add new dependencies unless truly required.
+- Keep UI minimal and consistent with the repo's existing styles (no new design systems, no extra animations).
+
+Implementation plan:
+1) Inspect the repo to find the right place to add a small interactive game (existing pages/routes/components).
+2) Implement game state (snake positions, direction, food, score, tick timer) with deterministic, testable logic.
+3) Render: simple grid + snake + food; support keyboard controls (arrow keys/WASD) and on-screen controls if mobile is present in the repo.
+4) Add basic tests for the core game logic (movement, collisions, growth, food placement) if the repo has a test runner.
+
+Deliverables:
+- A small set of files/changes with clear names.
+- Short run instructions (how to start dev server + where to navigate).
+- A brief checklist of what to manually verify (controls, pause/restart, boundaries).
+```
+
+##### Find and fix bugs in my codebase
+
+```text
+Find and fix bugs in my codebase with minimal, high-confidence changes.
+
+Method (grounded + disciplined):
+1) Reproduce: run tests/lint/build (or follow the existing repo scripts). If I provided an error, reproduce that exact failure.
+2) Localize: identify the smallest set of files/lines involved (stack traces, failing tests, logs).
+3) Fix: implement the minimal change that resolves the issue without refactors or unrelated cleanup.
+4) Prove: add/update a focused test (or a tight repro) that fails before and passes after.
+
+Constraints:
+- Do NOT invent errors or pretend to run commands you cannot run.
+- No scope drift: no new features, no UI embellishments, no style overhauls.
+- If information is missing, state what you can confirm from the repo and what remains unknown.
+
+Output:
+- Summary (3-6 sentences max): what was broken, why, and the fix.
+- Then <=5 bullets: What changed, Where (paths), Evidence (tests/logs), Risks, Next steps.
+```
+
+##### Explain the top failure modes of my application's architecture
+
+This example appears in the Cloud setup path.
+
+```text
+Explain the top failure modes of my application's architecture.
+
+Approach:
+- Derive the architecture from repo evidence (services, DBs, queues, network calls, critical paths).
+- Identify realistic failure modes (availability, data loss, latency, scaling, consistency, security, dependency outages).
+
+Output:
+- 1 short overview paragraph.
+- Then <=5 bullets: Failure mode, Trigger, Symptoms, Detection, Mitigation.
+- If key architecture details are missing, state what you inferred vs. what you confirmed.
+```
 
 #### Next steps
 
-- [Learn more about the Codex app](/codex/app)
-- [Migrate to Codex](/codex/migrate)
+- [Learn more about the Codex app](https://developers.openai.com/codex/app): use the Codex app to work with your local projects.
+- [Migrate to Codex](https://developers.openai.com/codex/migrate): move supported instruction files, MCP server configuration, skills, and subagents into Codex.
 
 ## Execution Model and Workflows
 

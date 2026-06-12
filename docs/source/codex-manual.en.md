@@ -10475,7 +10475,7 @@ Codex uses short-lived, least-privilege GitHub App installation tokens for each 
 
 ### Auto-review
 
-Source: [Auto-review](/codex/concepts/sandboxing/auto-review.md)
+Source: [Auto-review](https://developers.openai.com/codex/concepts/sandboxing/auto-review.md)
 
 Auto-review replaces manual approval at the sandbox boundary with a separate
 reviewer agent. The main Codex agent still runs inside the same sandbox, with
@@ -10537,7 +10537,7 @@ The exact policy lives in the open-source Codex repository:
 and
 [policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md).
 That policy can be customized per enterprise with `guardian_policy_config` or
-per user with local [`[auto_review].policy`](/codex/config-advanced#approval-policies-and-sandbox-modes).
+per user with local [`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes).
 
 #### What the reviewer sees
 
@@ -10588,14 +10588,14 @@ denial.
 #### Configuration
 
 For setup details, see
-[Managed configuration](/codex/enterprise/managed-configuration#configure-automatic-review-policy).
+[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration#configure-automatic-review-policy).
 
 The default reviewer policy is in the open-source Codex repository:
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md).
 Enterprises can replace its tenant-specific section with
 `guardian_policy_config` in managed requirements. Individual users can also set
 a local
-[`[auto_review].policy`](/codex/config-advanced#approval-policies-and-sandbox-modes)
+[`[auto_review].policy`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)
 in their `config.toml`, but managed requirements take precedence:
 
 ```toml
@@ -10617,9 +10617,9 @@ instead of teaching the reviewer to approve noisy escalations forever.
 In practice, the highest-leverage changes are:
 
 - Add narrow
-  [`writable_roots`](/codex/config-advanced#approval-policies-and-sandbox-modes)
+  [`writable_roots`](https://developers.openai.com/codex/config-advanced#approval-policies-and-sandbox-modes)
   for scratch directories or neighboring repos you intentionally use.
-- Add narrowly scoped [prefix rules](/codex/rules). Prefer precise command
+- Add narrowly scoped [prefix rules](https://developers.openai.com/codex/rules). Prefer precise command
   prefixes such as `["cargo", "test"]` or `["pnpm", "run", "lint"]` over broad
   patterns such as `["python"]` or `["curl"]`. Broad rules often erase the very
   boundary Auto-review is meant to guard.

@@ -35,7 +35,7 @@ Auto-review 会评估否则会暂停等待人工的审批请求。
 
 - 请求提权沙箱权限的 shell 或 exec 工具调用。
 - 被当前沙箱或策略阻止的网络请求。
-- 允许的 writable roots 之外的文件编辑。
+- 允许的可写根目录（`writable_roots`）之外的文件编辑。
 - 根据工具标注或配置的审批模式需要审批的 MCP 或 app 工具调用。
 - Browser Use 访问新网站或域。
 
@@ -58,8 +58,8 @@ Computer Use 是单独情况。Computer Use 的 app 审批仍会
 [policy_template.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy_template.md)
 和
 [policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
-该策略可按企业使用 `guardian_policy_config` 自定义，或
-按用户使用本地 [`\[auto_review\].policy`](17-advanced-configuration.md#approval-policies-and-sandbox-modes) 自定义。
+该策略可由企业通过 `guardian_policy_config` 自定义，也可由
+用户通过本地 `[auto_review].policy` 自定义；详见[高级配置](17-advanced-configuration.md#approval-policies-and-sandbox-modes)。
 
 #### 审查代理会看到什么
 
@@ -72,7 +72,7 @@ Computer Use 是单独情况。Computer Use 的 app 审批仍会
 执行只读检查以收集缺失上下文，但很少这样做。
 
 隐藏的 assistant 推理不包含在内。Auto-review 看到的是保留的
-对话 item 和工具证据，而不是私有思维链。
+对话项和工具证据，而不是私有思维链。
 
 #### 拒绝和失败行为
 
@@ -88,13 +88,13 @@ Codex 还会按轮次应用拒绝断路器。在当前
 次拒绝，或最近 `50` 次审查的滚动窗口中出现 `10` 次拒绝后中断该轮次。
 
 任何非拒绝都会重置连续拒绝计数器。当断路器触发时，
-Codex 会发出警告，并以 interrupt 中止当前轮次，而不是
+Codex 会发出警告，并以中断方式中止当前轮次，而不是
 让代理在更多提权尝试上循环。
 
 超时会与明确拒绝分开显示，主代理会
 被告知超时本身并不能证明该操作不安全。
 
-对于被拒绝的 action，也存在显式 override 路径。在当前
+对于被拒绝的操作，也存在显式覆盖路径。在当前
 开源 TUI 中，运行 `/approve` 打开 **Auto-review Denials** 选择器，然后
 选择一个最近被拒绝的操作，批准它重试一次。Codex 每个线程最多记录 10 个
 近期拒绝。该审批范围很窄：它适用于确切的
@@ -113,7 +113,7 @@ Codex 会为该确切操作注入开发者作用域的审批标记。
 [core/src/guardian/policy.md](https://github.com/openai/codex/blob/main/codex-rs/core/src/guardian/policy.md)。
 企业可以使用托管要求中的
 `guardian_policy_config` 替换其租户特定部分。个人用户也可以在其 `config.toml` 中设置本地
-[`\[auto_review\].policy`](17-advanced-configuration.md#approval-policies-and-sandbox-modes)，
+`[auto_review].policy`；详见[高级配置](17-advanced-configuration.md#approval-policies-and-sandbox-modes)，
 但托管要求优先级更高：
 
 ```toml
@@ -136,7 +136,7 @@ YOUR POLICY GOES HERE
 
 - 为你有意使用的临时目录或相邻仓库添加狭窄的
   [`writable_roots`](17-advanced-configuration.md#approval-policies-and-sandbox-modes)。
-- 添加窄作用域的 [prefix rules](54-rules.md)。相比 `["python"]` 或 `["curl"]` 等宽泛
+- 添加窄作用域的[前缀规则](54-rules.md)。相比 `["python"]` 或 `["curl"]` 等宽泛
   模式，优先选择精确命令
   前缀，例如 `["cargo", "test"]` 或 `["pnpm", "run", "lint"]`。宽泛规则往往会抹掉
   Auto-review 旨在守护的边界。

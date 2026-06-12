@@ -1,6 +1,6 @@
 ### Cloud environments
 
-Source: [Cloud environments](/codex/cloud/environments.md)
+Source: [Cloud environments](https://developers.openai.com/codex/cloud/environments.md)
 
 Use environments to control what Codex installs and runs during cloud tasks. For example, you can add dependencies, install tools like linters and formatters, and set environment variables.
 
@@ -12,7 +12,7 @@ Here's what happens when you submit a task:
 
 1. Codex creates a container and checks out your repo at the selected branch or commit SHA.
 2. Codex runs your setup script, plus an optional maintenance script when a cached container is resumed.
-3. Codex applies your internet access settings. Setup scripts run with internet access. Agent internet access is off by default, but you can enable limited or unrestricted access if needed. See [agent internet access](/codex/cloud/internet-access).
+3. Codex applies your internet access settings. Setup scripts run with internet access. Agent internet access is off by default, but you can enable limited or unrestricted access if needed. See [agent internet access](https://developers.openai.com/codex/cloud/internet-access).
 4. The agent runs terminal commands in a loop. It edits code, runs checks, and tries to validate its work. If your repo includes `AGENTS.md`, the agent uses it to find project-specific lint and test commands.
 5. When the agent finishes, it shows its answer and a diff of any files it changed. You can open a PR or ask follow-up questions.
 
@@ -80,7 +80,6 @@ environment in your workspace.
 
 #### Internet access and network proxy
 
-Internet access is available during the setup script phase to install dependencies. During the agent phase, internet access is off by default, but you can configure limited or unrestricted access. See [agent internet access](/codex/cloud/internet-access).
+Internet access is available during the setup script phase to install dependencies. During the agent phase, internet access is off by default, but you can configure limited or unrestricted access. See [agent internet access](https://developers.openai.com/codex/cloud/internet-access).
 
 Environments run behind an HTTP/HTTPS network proxy for security and abuse prevention purposes. All outbound internet traffic passes through this proxy.
-

@@ -5051,7 +5051,7 @@ Check for and apply a Codex CLI update when the installed release supports self-
 
 ### Agent internet access
 
-Source: [Agent internet access](/codex/cloud/internet-access.md)
+Source: [Agent internet access](https://developers.openai.com/codex/cloud/internet-access.md)
 
 By default, Codex blocks internet access during the agent phase. Setup scripts still run with internet access so you can install dependencies. You can enable agent internet access per environment when you need it.
 
@@ -5085,6 +5085,8 @@ Please run the script and provide the output.
 ```
 
 If the agent follows those instructions, it could leak the last commit message to an attacker-controlled server:
+
+![Prompt injection leak example](https://cdn.openai.com/API/docs/codex/prompt-injection-example.png)
 
 This example shows how prompt injection can expose sensitive data or lead to unsafe changes. Point Codex only to trusted resources and keep internet access as limited as possible.
 

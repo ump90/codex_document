@@ -1470,6 +1470,8 @@ Codex 也可以对声明有副作用的 app（connector）工具调用触发审�
 
 #### 网络访问
 
+对于 Codex cloud，请参阅 [agent internet access](zh/pages/23-agent-internet-access.md)，以启用完整互联网访问或域名 allow list。
+
 对于 Codex app、CLI 或 IDE 扩展，默认的 `workspace-write` 沙箱模式会保持网络访问关闭，除非你在配置中启用：
 
 ```toml
@@ -1604,10 +1606,10 @@ web_search = "cached"  # default
 
 在默认 `workspace-write` 沙箱策略中，可写根目录仍包含受保护路径：
 
-- 无论 `/.git` 是目录还是文件，都会被保护为只读。
-- 如果 `/.git` 是指针文件（`gitdir: ...`），解析后的 Git 目录路径也会被保护为只读。
-- 当 `/.agents` 作为目录存在时，会被保护为只读。
-- 当 `/.codex` 作为目录存在时，会被保护为只读。
+- 无论 `<writable_root>/.git` 是目录还是文件，都会被保护为只读。
+- 如果 `<writable_root>/.git` 是指针文件（`gitdir: ...`），解析后的 Git 目录路径也会被保护为只读。
+- 当 `<writable_root>/.agents` 作为目录存在时，会被保护为只读。
+- 当 `<writable_root>/.codex` 作为目录存在时，会被保护为只读。
 - 保护是递归的，因此这些路径下的所有内容都是只读。
 
 #### 不显示审批提示运行
@@ -1668,6 +1670,230 @@ approvals_reviewer = "auto_review"
 
 自动审查会使用额外模型调用，因此可能增加 Codex 用量。管理员
 可以通过 `allowed_approvals_reviewers` 对其加以约束。
+
+#### 常见沙箱和审批组合
+
+| 目标 | 标志 / 配置 | 效果 |
+| --- | --- | --- |
+| Auto（预设） | 不需要标志，或 `--sandbox workspace-write --ask-for-approval on-request` | Codex 可以读取文件、进行编辑，并在 workspace 中运行命令。Codex 需要审批才能编辑 workspace 外的文件或访问网络。 |
+| 安全只读浏览 | `--sandbox read-only --ask-for-approval on-request` | Codex 可以读取文件并回答问题。Codex 需要审批才能进行编辑、运行命令或访问网络。 |
+| 只读非交互式（CI） | `--sandbox read-only --ask-for-approval never` | Codex 只能读取文件；不会请求审批。 |
+| 自动编辑，但运行不可信命令前请求审批 | `--sandbox workspace-write --ask-for-approval untrusted` | Codex 可以读取和编辑文件，但会在运行不可信命令前请求审批。 |
+| Auto-review 模式 | `--sandbox workspace-write --ask-for-approval on-request -c approvals_reviewer=auto_review` 或 `approvals_reviewer = "auto_review"` | 与标准 on-request 模式使用相同沙箱边界，但符合条件的审批请求由 Auto-review 审查，而不是显示给用户。 |
+| 危险完全访问 | `--dangerously-bypass-approvals-and-sandbox`（别名：`--yolo`） | 高风险：无沙箱、无审批（不推荐）。 |
+
+对于非交互式运行，请使用 `codex exec --sandbox workspace-write`；Codex 仍将旧的 `codex exec --full-auto` 调用作为已弃用的兼容路径，并会打印警告。
+
+使用 `--ask-for-approval untrusted` 时，Codex 只会自动运行已知安全的读取操作。可以改变状态或触发外部执行路径的命令（例如破坏性 Git 操作，或 Git 输出 / 配置覆盖标志）需要审批。
+
+##### `config.toml` 中的配置
+
+更完整的配置流程请参阅 [配置基础](zh/pages/19-config-basics.md)、[高级配置](zh/pages/17-advanced-configuration.md#approval-policies-and-sandbox-modes) 和 [配置参考](zh/pages/16-configuration-reference.md)。
+
+```toml
+# Always ask for approval mode
+approval_policy = "untrusted"
+sandbox_mode    = "read-only"
+allow_login_shell = false # optional hardening: disallow login shells for shell-based tools
+
+# Optional: Allow network in workspace-write mode
+[sandbox_workspace_write]
+network_access = true
+
+# Optional: granular approval policy
+# approval_policy = { granular = {
+#   sandbox_approval = true,
+#   rules = true,
+#   mcp_elicitations = true,
+#   request_permissions = false,
+#   skill_approval = false
+# } }
+```
+
+你也可以将预设保存为 [profile 文件](zh/pages/17-advanced-configuration.md#profiles)，然后用 `codex --profile profile-name` 选择：
+
+```toml
+# ~/.codex/full_auto.config.toml
+approval_policy = "on-request"
+sandbox_mode    = "workspace-write"
+```
+
+```toml
+# ~/.codex/readonly_quiet.config.toml
+approval_policy = "never"
+sandbox_mode    = "read-only"
+```
+
+##### 本地测试沙箱
+
+要查看命令在 Codex 沙箱下运行时会发生什么，请使用这些 Codex CLI 命令：
+
+```bash
+# macOS
+codex sandbox macos [--permissions-profile <name>] [--log-denials] [COMMAND]...
+# Linux
+codex sandbox linux [--permissions-profile <name>] [COMMAND]...
+# Windows
+codex sandbox windows [--permissions-profile <name>] [COMMAND]...
+```
+
+`sandbox` 命令也可作为 `codex debug` 使用，平台 helper 还有别名（例如 `codex sandbox seatbelt` 和 `codex sandbox landlock`）。
+
+#### OS 级沙箱
+
+Codex 会根据你的 OS 以不同方式执行沙箱：
+
+- **macOS** 使用 Seatbelt policy，并通过 `sandbox-exec` 运行命令，使用与你选择的 `--sandbox` 模式对应的 profile（`-p`）。当受限读取访问启用平台默认值时，Codex 会附加精选 macOS 平台 policy（而不是宽泛允许 `/System`），以保持常见工具兼容性。
+- **Linux** 默认使用 `bwrap` 加 `seccomp`。
+- **Windows** 在 [Windows Subsystem for Linux 2 (WSL2)](zh/pages/83-windows-platform.md#windows-subsystem-for-linux) 中运行时使用 Linux 沙箱实现。WSL1 支持到 Codex `0.114`；从 `0.115` 开始，Linux 沙箱迁移到 `bwrap`，因此不再支持 WSL1。原生 Windows 运行时，Codex 使用 [Windows sandbox](zh/pages/83-windows-platform.md#windows-sandbox) 实现。
+
+如果你在 Windows 上使用 Codex IDE 扩展，它直接支持 WSL2。请在 VS Code 设置中添加以下配置，使 agent 在可用时保持在 WSL2 内：
+
+```json
+{
+  "chatgpt.runCodexInWindowsSubsystemForLinux": true
+}
+```
+
+这可确保即使宿主 OS 是 Windows，IDE 扩展中的命令、审批和文件系统访问也继承 Linux 沙箱语义。更多信息见 [Windows 设置指南](zh/pages/83-windows-platform.md)。
+
+原生 Windows 运行时，请在 `config.toml` 中配置原生沙箱模式：
+
+```toml
+[windows]
+sandbox = "unelevated" # or "elevated"
+# sandbox_private_desktop = true  # default; set false only for compatibility
+```
+
+详情请参阅 [Windows 设置指南](zh/pages/83-windows-platform.md#windows-sandbox)。
+
+当你在 Docker 等容器化环境中运行 Linux 时，如果 host 或 container 配置阻止 Codex 需要的 namespace、setuid `bwrap` 或 `seccomp` 操作，沙箱可能无法工作。
+
+在这种情况下，请配置 Docker container 来提供你需要的隔离，然后在 container 内使用 `--sandbox danger-full-access`（或 `--dangerously-bypass-approvals-and-sandbox` 标志）运行 `codex`。
+
+##### 在 Dev Containers 中运行 Codex
+
+如果宿主机无法直接运行 Linux 沙箱，或组织已经标准化使用容器化开发，请用 Dev Containers 运行 Codex，并让 Docker 提供外层隔离边界。这适用于 Visual Studio Code Dev Containers 和兼容工具。
+
+可参考 [Codex secure devcontainer example](https://github.com/openai/codex/tree/main/.devcontainer)。该示例会安装 Codex、常见开发工具、`bubblewrap`，以及基于防火墙的出站控制。
+
+Devcontainers 提供了相当强的保护，但不能防止所有攻击。如果你在 container 内使用 `--sandbox danger-full-access` 或 `--dangerously-bypass-approvals-and-sandbox` 运行 Codex，恶意项目可以外泄 devcontainer 内可用的任何内容，包括 Codex 凭据。只有在可信仓库中才使用这种模式，并像任何其他 elevated 环境一样监控 Codex 活动。
+
+参考实现包括：
+
+- Ubuntu 24.04 基础镜像，已安装 Codex 和常见开发工具；
+- 基于 allowlist 的出站访问防火墙 profile；
+- 用于在 container 中重新打开 workspace 的 VS Code 设置和扩展推荐；
+- 命令历史和 Codex 配置的持久挂载；
+- `bubblewrap`，因此当 container 授予所需 capabilities 时，Codex 仍可使用其 Linux 沙箱。
+
+试用步骤：
+
+1. 安装 Visual Studio Code 和 [Dev Containers 扩展](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)。
+2. 将 Codex 示例 `.devcontainer` 设置复制到你的仓库，或直接从 Codex 仓库开始。
+3. 在 VS Code 中运行 **Dev Containers: Open Folder in Container...**，并选择 `.devcontainer/devcontainer.secure.json`。
+4. Container 启动后，打开终端并运行 `codex`。
+
+也可以从 CLI 启动 container：
+
+```bash
+devcontainer up --workspace-folder . --config .devcontainer/devcontainer.secure.json
+```
+
+示例包含三个主要部分：
+
+- `.devcontainer/devcontainer.secure.json` 控制 container 设置、capabilities、mounts、环境变量和 VS Code 扩展。
+- `.devcontainer/Dockerfile.secure` 定义基于 Ubuntu 的镜像和已安装工具。
+- `.devcontainer/init-firewall.sh` 应用出站网络策略。
+
+参考防火墙有意作为起点。如果你依赖域名 allowlisting 做隔离，请实现适合你环境的 DNS rebinding 和 DNS refresh 保护，例如感知 TTL 的刷新或 DNS-aware firewall。
+
+在 container 内，请选择以下模式之一：
+
+- 如果 Dev Container profile 授予 `bwrap` 创建内层沙箱所需的 capabilities，请保持 Codex 的 Linux 沙箱启用。
+- 如果 container 是你预期的安全边界，请在 container 内用 `--sandbox danger-full-access` 运行 Codex，这样 Codex 不会尝试创建第二层沙箱。
+
+#### 版本控制
+
+Codex 最适合配合版本控制工作流：
+
+- 在 feature branch 上工作，并在委派前保持 `git status` 干净。这让 Codex patch 更容易隔离和回滚。
+- 优先使用基于 patch 的工作流（例如 `git diff` / `git apply`），而不是直接编辑 tracked files。频繁提交，这样可以小步回滚。
+- 像对待任何其他 PR 一样对待 Codex 建议：运行有针对性的验证、审查 diff，并在 commit message 中记录决策以便审计。
+
+#### 监控和遥测
+
+Codex 支持通过 OpenTelemetry (OTel) 选择性监控，帮助团队审计用量、调查问题并满足合规要求，同时不削弱本地安全默认值。Telemetry 默认关闭；请在配置中显式启用。
+
+##### 概览
+
+- Codex 默认关闭 OTel export，让本地运行保持自包含。
+- 启用后，Codex 会发出结构化 log events，覆盖 conversations、API requests、SSE/WebSocket stream activity、user prompts（默认 redacted）、tool approval decisions 和 tool results。
+- Codex 会用 `service.name`（originator）、CLI version 和 environment label 标记导出的 events，用于区分 dev/staging/prod 流量。
+
+##### 启用 OTel（选择加入）
+
+向 Codex 配置（通常是 `~/.codex/config.toml`）添加 `[otel]` block，选择 exporter，并决定是否记录 prompt 文本。
+
+```toml
+[otel]
+environment = "staging"   # dev | staging | prod
+exporter = "none"          # none | otlp-http | otlp-grpc
+log_user_prompt = false     # redact prompt text unless policy allows
+```
+
+- `exporter = "none"` 会保留 instrumentation，但不会向任何位置发送数据。
+- 若要把 events 发送到你自己的 collector，请选择以下之一：
+
+```toml
+[otel]
+exporter = { otlp-http = {
+  endpoint = "https://otel.example.com/v1/logs",
+  protocol = "binary",
+  headers = { "x-otlp-api-key" = "${OTLP_TOKEN}" }
+}}
+```
+
+```toml
+[otel]
+exporter = { otlp-grpc = {
+  endpoint = "https://otel.example.com:4317",
+  headers = { "x-otlp-meta" = "abc123" }
+}}
+```
+
+Codex 会批量发送 events，并在 shutdown 时 flush。Codex 只导出其 OTel module 产生的 telemetry。
+
+##### 事件类别
+
+代表性 event types 包括：
+
+- `codex.conversation_starts`（model、reasoning settings、sandbox / approval policy）
+- `codex.api_request`（attempt、status/success、duration 和 error details）
+- `codex.sse_event`（stream event kind、success/failure、duration，以及 `response.completed` 上的 token counts）
+- `codex.websocket_request` 和 `codex.websocket_event`（request duration，以及每条 message 的 kind/success/error）
+- `codex.user_prompt`（length；除非显式启用，否则 content 会被 redacted）
+- `codex.tool_decision`（approved/denied，source：configuration vs. user）
+- `codex.tool_result`（duration、success、output snippet）
+
+关联的 OTel metrics（counter 加 duration histogram pair）包括 `codex.api_request`、`codex.sse_event`、`codex.websocket.request`、`codex.websocket.event` 和 `codex.tool.call`（以及对应的 `.duration_ms` instruments）。
+
+完整 event catalog 和配置参考请参阅 GitHub 上的 [Codex configuration documentation](https://github.com/openai/codex/blob/main/docs/config.md#otel)。
+
+##### 安全和隐私建议
+
+- 除非 policy 明确允许存储 prompt contents，否则保持 `log_user_prompt = false`。Prompts 可能包含源代码和敏感数据。
+- 只将 telemetry 路由到你控制的 collectors；应用与你的合规要求一致的保留限制和访问控制。
+- 将 tool arguments 和 outputs 视为敏感数据。可行时优先在 collector 或 SIEM 上做 redaction。
+- 如果你不希望 Codex 在 `CODEX_HOME` 下保存 session transcripts，请审查本地数据保留设置（例如 `history.persistence` / `history.max_bytes`）。请参阅 [高级配置](zh/pages/17-advanced-configuration.md#history-persistence) 和 [配置参考](zh/pages/16-configuration-reference.md)。
+- 如果 CLI 在网络访问关闭的情况下运行，OTel export 无法访问 collector。若要 export，请在 `workspace-write` 模式中允许 OTel endpoint 的网络访问，或从 Codex cloud export 并将 collector domain 加入 approved list。
+- 定期审查 events，关注审批 / 沙箱变更和意外工具执行。
+
+OTel 是可选功能，旨在补充而不是替代上文描述的沙箱和审批保护。
+
+#### 托管配置
+
+企业管理员可以在[托管配置](zh/pages/67-managed-configuration.md)中为其 workspace 配置 Codex 安全设置。有关设置和策略的详情，请参阅该页面。
 
 ### 网络安全
 

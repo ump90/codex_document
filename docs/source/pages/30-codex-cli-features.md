@@ -1,6 +1,6 @@
 ### Codex CLI features
 
-Source: [Codex CLI features](/codex/cli/features.md)
+Source: [Codex CLI features](https://developers.openai.com/codex/cli/features.md)
 
 Codex supports workflows beyond chat. Use this guide to learn what each one unlocks and when to use it.
 
@@ -23,18 +23,18 @@ Once the session is open, you can:
 - Send prompts, code snippets, or screenshots (see [image inputs](#image-inputs)) directly into the composer.
 - Watch Codex explain its plan before making a change, and approve or reject steps inline.
 - Read syntax-highlighted markdown code blocks and diffs in the TUI, then use `/theme` to preview and save a preferred theme.
-- Use `/clear` to wipe the terminal and start a fresh chat, or press Ctrl+L to clear the screen without starting a new conversation.
-- Use `/copy` or press Ctrl+O to copy the latest completed Codex output. If a turn is still running, Codex copies the most recent finished output instead of in-progress text.
-- Press Tab while Codex is running to queue follow-up text, slash commands, or `!` shell commands for the next turn.
-- Navigate draft history in the composer with Up/Down; Codex restores prior draft text and image placeholders.
-- Press Ctrl+R to search prompt history from the composer, then press Enter to accept a match or Esc to cancel.
-- Press Ctrl+C or use `/exit` to close the interactive session when you're done.
+- Use `/clear` to wipe the terminal and start a fresh chat, or press <kbd>Ctrl</kbd>+<kbd>L</kbd> to clear the screen without starting a new conversation.
+- Use `/copy` or press <kbd>Ctrl</kbd>+<kbd>O</kbd> to copy the latest completed Codex output. If a turn is still running, Codex copies the most recent finished output instead of in-progress text.
+- Press <kbd>Tab</kbd> while Codex is running to queue follow-up text, slash commands, or `!` shell commands for the next turn.
+- Navigate draft history in the composer with <kbd>Up</kbd>/<kbd>Down</kbd>; Codex restores prior draft text and image placeholders.
+- Press <kbd>Ctrl</kbd>+<kbd>R</kbd> to search prompt history from the composer, then press <kbd>Enter</kbd> to accept a match or <kbd>Esc</kbd> to cancel.
+- Press <kbd>Ctrl</kbd>+<kbd>C</kbd> or use `/exit` to close the interactive session when you're done.
 
 #### Resuming conversations
 
 Codex stores your transcripts locally so you can pick up where you left off instead of repeating context. Use the `resume` subcommand when you want to reopen an earlier thread with the same repository state and instructions.
 
-- `codex resume` launches a picker of recent interactive sessions. Highlight a run to see its summary and press Enter to reopen it.
+- `codex resume` launches a picker of recent interactive sessions. Highlight a run to see its summary and press <kbd>Enter</kbd> to reopen it.
 - `codex resume --all` shows sessions beyond the current working directory, so you can reopen any local run.
 - `codex resume --last` skips the picker and jumps straight to your most recent session from the current working directory (add `--all` to ignore the current working directory filter).
 - `codex resume <SESSION_ID>` targets a specific run. You can copy the ID from the picker, `/status`, or the files under `~/.codex/sessions/`.
@@ -88,7 +88,7 @@ Codex supports these WebSocket authentication modes:
   `--ws-auth signed-bearer-token --ws-shared-secret-file /absolute/path`, plus
   optional `--ws-issuer`, `--ws-audience`, and `--ws-max-clock-skew-seconds`.
 
-The TUI sends the remote auth token as an `Authorization: Bearer ` header
+The TUI sends the remote auth token as an `Authorization: Bearer <token>` header
 during the WebSocket handshake. Codex only accepts remote auth tokens over
 `wss://` URLs or local-only `ws://` URLs.
 
@@ -98,7 +98,7 @@ codex --remote wss://remote-host:4500 --remote-auth-token-env CODEX_REMOTE_TOKEN
 ```
 
 For SSH remote projects in the Codex app, use
-[Remote connections](/codex/remote-connections). For managed remote-control
+[Remote connections](https://developers.openai.com/codex/remote-connections). For managed remote-control
 clients, `codex remote-control` starts an app-server process with
 remote-control support enabled.
 
@@ -115,7 +115,7 @@ Switch models mid-session with the `/model` command, or specify one when launchi
 codex --model gpt-5.5
 ```
 
-[Learn more about the models available in Codex](/codex/models).
+[Learn more about the models available in Codex](https://developers.openai.com/codex/models).
 
 #### Feature flags
 
@@ -127,13 +127,13 @@ codex features enable unified_exec
 codex features disable shell_snapshot
 ```
 
-`codex features enable ` and `codex features disable ` write
+`codex features enable <feature>` and `codex features disable <feature>` write
 to `$CODEX_HOME/config.toml`. The `features` subcommand doesn't accept
 `--profile`.
 
 #### Subagents
 
-Use Codex subagent workflows to parallelize larger tasks. For setup, role configuration (`[agents]` in `config.toml`), and examples, see [Subagents](/codex/subagents).
+Use Codex subagent workflows to parallelize larger tasks. For setup, role configuration (`[agents]` in `config.toml`), and examples, see [Subagents](https://developers.openai.com/codex/subagents).
 
 Codex only spawns subagents when you explicitly ask it to. Because each
 subagent does its own model and tool work, subagent workflows consume more
@@ -159,7 +159,7 @@ Ask Codex to generate or edit images directly in the CLI. This works well for as
 
 You can ask in natural language or explicitly invoke the image generation skill by including `$imagegen` in your prompt.
 
-Built-in image generation uses `gpt-image-2`, counts toward your general Codex usage limits, and uses included limits 3-5x faster on average than similar turns without image generation, depending on image quality and size. For details, see [Pricing](/codex/pricing#image-generation-usage-limits). For prompting tips and model details, see the [image generation guide](/api/docs/guides/image-generation).
+Built-in image generation uses `gpt-image-2`, counts toward your general Codex usage limits, and uses included limits 3-5x faster on average than similar turns without image generation, depending on image quality and size. For details, see [Pricing](https://developers.openai.com/codex/pricing#image-generation-usage-limits). For prompting tips and model details, see the [image generation guide](https://developers.openai.com/api/docs/guides/image-generation).
 
 For larger batches of image generation, set `OPENAI_API_KEY` in your environment variables and ask Codex to generate images through the API so API pricing applies instead.
 
@@ -182,7 +182,7 @@ Each run shows up as its own turn in the transcript, so you can rerun reviews as
 
 #### Web search
 
-Codex ships with a first-party web search tool. For local tasks in the Codex CLI, Codex enables web search by default and serves results from a web search cache. The cache is an OpenAI-maintained index of web results, so cached mode returns pre-indexed results instead of fetching live pages. This reduces exposure to prompt injection from arbitrary live content, but you should still treat web results as untrusted. If you are using `--yolo` or another [full access sandbox setting](/codex/agent-approvals-security), web search defaults to live results. To fetch the most recent data, pass `--search` for a single run or set `web_search = "live"` in [Config basics](/codex/config-basic). You can also set `web_search = "disabled"` to turn the tool off.
+Codex ships with a first-party web search tool. For local tasks in the Codex CLI, Codex enables web search by default and serves results from a web search cache. The cache is an OpenAI-maintained index of web results, so cached mode returns pre-indexed results instead of fetching live pages. This reduces exposure to prompt injection from arbitrary live content, but you should still treat web results as untrusted. If you are using `--yolo` or another [full access sandbox setting](https://developers.openai.com/codex/agent-approvals-security), web search defaults to live results. To fetch the most recent data, pass `--search` for a single run or set `web_search = "live"` in [Config basics](https://developers.openai.com/codex/config-basic). You can also set `web_search = "disabled"` to turn the tool off.
 
 You'll see `web_search` items in the transcript or `codex exec --json` output whenever Codex looks something up.
 
@@ -213,7 +213,7 @@ Run the completion script in your shell configuration file to set up completions
 eval "$(codex completion zsh)"
 ```
 
-Start a new session, type `codex`, and press Tab to see the completions. If you see a `command not found: compdef` error, add `autoload -Uz compinit && compinit` to your `~/.zshrc` file before the `eval "$(codex completion zsh)"` line, then restart your shell.
+Start a new session, type `codex`, and press <kbd>Tab</kbd> to see the completions. If you see a `command not found: compdef` error, add `autoload -Uz compinit && compinit` to your `~/.zshrc` file before the `eval "$(codex completion zsh)"` line, then restart your shell.
 
 #### Approval modes
 
@@ -237,7 +237,7 @@ Combine `exec` with shell scripting to build custom workflows, such as automatic
 
 #### Working with Codex cloud
 
-The `codex cloud` command lets you triage and launch [Codex cloud tasks](/codex/cloud) without leaving the terminal. Run it with no arguments to open an interactive picker, browse active or finished tasks, and apply the changes to your local project.
+The `codex cloud` command lets you triage and launch [Codex cloud tasks](https://developers.openai.com/codex/cloud) without leaving the terminal. Run it with no arguments to open an interactive picker, browse active or finished tasks, and apply the changes to your local project.
 
 You can also start a task directly from the terminal:
 
@@ -247,23 +247,32 @@ codex cloud exec --env ENV_ID "Summarize open bugs"
 
 Add `--attempts` (1–4) to request best-of-N runs when you want Codex cloud to generate more than one solution. For example, `codex cloud exec --env ENV_ID --attempts 3 "Summarize open bugs"`.
 
-Environment IDs come from your Codex cloud configuration—use `codex cloud` and press Ctrl+O to choose an environment or the web dashboard to confirm the exact value. Authentication follows your existing CLI login, and the command exits non-zero if submission fails so you can wire it into scripts or CI.
+Environment IDs come from your Codex cloud configuration—use `codex cloud` and press <kbd>Ctrl</kbd>+<kbd>O</kbd> to choose an environment or the web dashboard to confirm the exact value. Authentication follows your existing CLI login, and the command exits non-zero if submission fails so you can wire it into scripts or CI.
 
 #### Slash commands
 
 Slash commands give you quick access to specialized workflows like `/review`, `/fork`, `/side`, or your own reusable prompts. Codex ships with a curated set of built-ins, and you can create custom ones for team-specific tasks or personal shortcuts.
 
-See the [slash commands guide](/codex/guides/slash-commands) to browse the catalog of built-ins, learn how to author custom commands, and understand where they live on disk.
+See the [slash commands guide](https://developers.openai.com/codex/guides/slash-commands) to browse the catalog of built-ins, learn how to author custom commands, and understand where they live on disk.
 
 #### Prompt editor
 
 When you're drafting a longer prompt, it can be easier to switch to a full editor and then send the result back to the composer.
 
-In the prompt input, press Ctrl+G to open the editor defined by the `VISUAL` environment variable (or `EDITOR` if `VISUAL` isn't set).
+In the prompt input, press <kbd>Ctrl</kbd>+<kbd>G</kbd> to open the editor defined by the `VISUAL` environment variable (or `EDITOR` if `VISUAL` isn't set).
 
 #### Model Context Protocol (MCP)
 
 Connect Codex to more tools by configuring Model Context Protocol servers. Add STDIO or streaming HTTP servers in `~/.codex/config.toml`, or manage them with the `codex mcp` CLI commands—Codex launches them automatically when a session starts and exposes their tools next to the built-ins. You can even run Codex itself as an MCP server when you need it inside another agent.
 
-See [Model Context Protocol](/codex/mcp) for example configurations, supported auth flows, and a more detailed guide.
+See [Model Context Protocol](https://developers.openai.com/codex/mcp) for example configurations, supported auth flows, and a more detailed guide.
 
+#### Tips and shortcuts
+
+- Type `@` in the composer to open a fuzzy file search over the workspace root; press <kbd>Tab</kbd> or <kbd>Enter</kbd> to drop the highlighted path into your message.
+- Press <kbd>Enter</kbd> while Codex is running to inject new instructions into the current turn, or press <kbd>Tab</kbd> to queue follow-up input for the next turn. Queued input can be a normal prompt, a slash command such as `/review`, or a `!` shell command. Codex parses queued slash commands when they run.
+- Prefix a line with `!` to run a local shell command (for example, `!ls`). Codex treats the output like a user-provided command result and still applies your approval and sandbox settings.
+- Tap <kbd>Esc</kbd> twice while the composer is empty to edit your previous user message. Continue pressing <kbd>Esc</kbd> to walk further back in the transcript, then hit <kbd>Enter</kbd> to fork from that point.
+- Launch Codex from any directory using `codex --cd <path>` to set the working root without running `cd` first. The active path appears in the TUI header.
+- Expose more writable roots with `--add-dir` (for example, `codex --cd apps/frontend --add-dir ../backend --add-dir ../shared`) when you need to coordinate changes across more than one project.
+- Make sure your environment is already set up before launching Codex so it doesn't spend tokens probing what to activate. For example, source your Python virtual environment (or other language environments), start any required daemons, and export the environment variables you expect to use ahead of time.

@@ -2616,11 +2616,11 @@ deployments, use `allowed_permission_profiles` with managed
 
 ### Advanced Configuration
 
-Source: [Advanced Configuration](/codex/config-advanced.md)
+Source: [Advanced Configuration](https://developers.openai.com/codex/config-advanced.md)
 
-Use these options when you need more control over providers, policies, and integrations. For a quick start, see [Config basics](/codex/config-basic).
+Use these options when you need more control over providers, policies, and integrations. For a quick start, see [Config basics](https://developers.openai.com/codex/config-basic).
 
-For background on project guidance, reusable capabilities, custom slash commands, subagent workflows, and integrations, see [Customization](/codex/concepts/customization). For configuration keys, see [Configuration Reference](/codex/config-reference).
+For background on project guidance, reusable capabilities, custom slash commands, subagent workflows, and integrations, see [Customization](https://developers.openai.com/codex/concepts/customization). For configuration keys, see [Configuration Reference](https://developers.openai.com/codex/config-reference).
 
 #### Profiles
 
@@ -2693,11 +2693,11 @@ Common files you may see there:
 - `history.jsonl` (if history persistence is enabled)
 - Other per-user state such as logs and caches
 
-For authentication details (including credential storage modes), see [Authentication](/codex/auth). For the full list of configuration keys, see [Configuration Reference](/codex/config-reference).
+For authentication details (including credential storage modes), see [Authentication](https://developers.openai.com/codex/auth). For the full list of configuration keys, see [Configuration Reference](https://developers.openai.com/codex/config-reference).
 
-For shared defaults, rules, and skills checked into repos or system paths, see [Team Config](/codex/enterprise/admin-setup#team-config).
+For shared defaults, rules, and skills checked into repos or system paths, see [Team Config](https://developers.openai.com/codex/enterprise/admin-setup#team-config).
 
-If you just need to point the built-in OpenAI provider at an LLM proxy, router, or data-residency enabled project, set `openai_base_url` in `config.toml` instead of defining a new provider. This changes the base URL for the built-in `openai` provider without requiring a separate `model_providers.` entry.
+If you just need to point the built-in OpenAI provider at an LLM proxy, router, or data-residency enabled project, set `openai_base_url` in `config.toml` instead of defining a new provider. This changes the base URL for the built-in `openai` provider without requiring a separate `model_providers.<id>` entry.
 
 ```toml
 openai_base_url = "https://us.api.openai.com/v1"
@@ -2731,8 +2731,8 @@ In practice, the four most useful locations are:
 
 - `~/.codex/hooks.json`
 - `~/.codex/config.toml`
-- `/.codex/hooks.json`
-- `/.codex/config.toml`
+- `<repo>/.codex/hooks.json`
+- `<repo>/.codex/config.toml`
 
 Project-local hooks load only when the project `.codex/` layer is trusted.
 User-level hooks remain independent of project trust.
@@ -2754,11 +2754,11 @@ If a single layer contains both `hooks.json` and inline `[hooks]`, Codex loads
 both and warns. Prefer one representation per layer.
 
 For the current event list, input fields, output behavior, and limitations, see
-[Hooks](/codex/hooks).
+[Hooks](https://developers.openai.com/codex/hooks).
 
 #### Agent roles (`[agents]` in `config.toml`)
 
-For subagent role configuration (`[agents]` in `config.toml`), see [Subagents](/codex/subagents).
+For subagent role configuration (`[agents]` in `config.toml`), see [Subagents](https://developers.openai.com/codex/subagents).
 
 #### Project root detection
 
@@ -2821,7 +2821,7 @@ timeout_ms = 5000
 refresh_interval_ms = 300000
 ```
 
-The auth command receives no `stdin` and must print the token to stdout. Codex trims surrounding whitespace, treats an empty token as an error, and refreshes proactively at `refresh_interval_ms`; set `refresh_interval_ms = 0` to refresh only after an authentication retry. Don't combine `[model_providers..auth]` with `env_key`, `experimental_bearer_token`, or `requires_openai_auth`.
+The auth command receives no `stdin` and must print the token to stdout. Codex trims surrounding whitespace, treats an empty token as an error, and refreshes proactively at `refresh_interval_ms`; set `refresh_interval_ms = 0` to refresh only after an authentication retry. Don't combine `[model_providers.<id>.auth]` with `env_key`, `experimental_bearer_token`, or `requires_openai_auth`.
 
 #### Amazon Bedrock provider
 
@@ -2831,7 +2831,7 @@ the nested AWS profile and region overrides.
 
 ```toml
 model_provider = "amazon-bedrock"
-model = ""
+model = "<bedrock-model-id>"
 
 [model_providers.amazon-bedrock.aws]
 profile = "default"
@@ -2842,7 +2842,7 @@ If you omit `profile`, Codex uses the standard AWS credential chain. Set
 `region` to the supported Bedrock region that should handle requests.
 
 For the full setup flow, authentication options, supported models, and feature
-availability, see [Use Codex with Amazon Bedrock](/codex/amazon-bedrock).
+availability, see [Use Codex with Amazon Bedrock](https://developers.openai.com/codex/amazon-bedrock).
 
 #### OSS mode (local providers)
 
@@ -2895,9 +2895,9 @@ model_context_window = 128000             # Context window size
 
 Pick approval strictness (affects when Codex pauses) and sandbox level (affects file/network access).
 
-For operational details to keep in mind while editing `config.toml`, see [Common sandbox and approval combinations](/codex/agent-approvals-security#common-sandbox-and-approval-combinations), [Protected paths in writable roots](/codex/agent-approvals-security#protected-paths-in-writable-roots), and [Network access](/codex/agent-approvals-security#network-access).
+For operational details to keep in mind while editing `config.toml`, see [Common sandbox and approval combinations](https://developers.openai.com/codex/agent-approvals-security#common-sandbox-and-approval-combinations), [Protected paths in writable roots](https://developers.openai.com/codex/agent-approvals-security#protected-paths-in-writable-roots), and [Network access](https://developers.openai.com/codex/agent-approvals-security#network-access).
 
-For beta permission profiles that configure filesystem and network access together, see [Permissions](/codex/permissions).
+For beta permission profiles that configure filesystem and network access together, see [Permissions](https://developers.openai.com/codex/permissions).
 
 You can also use a granular approval policy (`approval_policy = { granular = { ... } }`) to allow or auto-reject individual prompt categories. This is useful when you want normal interactive approvals for some cases but want others, such as `request_permissions` or skill-script prompts, to fail closed automatically.
 
@@ -2938,18 +2938,18 @@ Use your organization's automatic review policy.
 #### Named permission profiles
 
 For built-in profiles, custom profile syntax, and the full filesystem and
-network configuration model, see [Permissions](/codex/permissions).
+network configuration model, see [Permissions](https://developers.openai.com/codex/permissions).
 
 For the complete key list and requirements constraints, see
-[Configuration Reference](/codex/config-reference) and
-[Managed configuration](/codex/enterprise/managed-configuration).
+[Configuration Reference](https://developers.openai.com/codex/config-reference) and
+[Managed configuration](https://developers.openai.com/codex/enterprise/managed-configuration).
 
 In workspace-write mode, some environments keep `.git/` and `.codex/`
 read-only even when the rest of the workspace is writable. This is why
 commands like `git commit` may still require approval to run outside the
 sandbox. If you want Codex to skip specific commands (for example, block `git
   commit` outside the sandbox), use
-rules.
+[rules](https://developers.openai.com/codex/rules).
 
 Disable sandboxing entirely (use only if your environment already isolates processes):
 
@@ -2974,7 +2974,7 @@ Patterns are case-insensitive globs (`*`, `?`, `[A-Z]`); `ignore_default_exclude
 
 #### MCP servers
 
-See the dedicated [MCP documentation](/codex/mcp) for configuration details.
+See the dedicated [MCP documentation](https://developers.openai.com/codex/mcp) for configuration details.
 
 #### Observability and telemetry
 
@@ -3006,7 +3006,7 @@ exporter = { otlp-grpc = {
 }}
 ```
 
-If `exporter = "none"` Codex records events but sends nothing. Exporters batch asynchronously and flush on shutdown. Event metadata includes service name, CLI version, env tag, conversation id, model, sandbox/approval settings, and per-event fields (see [Config Reference](/codex/config-reference)).
+If `exporter = "none"` Codex records events but sends nothing. Exporters batch asynchronously and flush on shutdown. Event metadata includes service name, CLI version, env tag, conversation id, model, sandbox/approval settings, and per-event fields (see [Config Reference](https://developers.openai.com/codex/config-reference)).
 
 #### What gets emitted
 
@@ -3019,6 +3019,317 @@ Codex emits structured log events for runs and tool usage. Representative event 
 - `codex.user_prompt` (length; content redacted unless explicitly enabled)
 - `codex.tool_decision` (approved/denied and whether the decision came from config vs user)
 - `codex.tool_result` (duration, success, output snippet)
+
+#### OTel metrics emitted
+
+When the OTel metrics pipeline is enabled, Codex emits counters and duration histograms for API, stream, and tool activity.
+
+Each metric below also includes default metadata tags: `auth_mode`, `originator`, `session_source`, `model`, and `app.version`.
+
+| Metric                                | Type      | Fields              | Description                                                       |
+| ------------------------------------- | --------- | ------------------- | ----------------------------------------------------------------- |
+| `codex.api_request`                   | counter   | `status`, `success` | API request count by HTTP status and success/failure.             |
+| `codex.api_request.duration_ms`       | histogram | `status`, `success` | API request duration in milliseconds.                             |
+| `codex.sse_event`                     | counter   | `kind`, `success`   | SSE event count by event kind and success/failure.                |
+| `codex.sse_event.duration_ms`         | histogram | `kind`, `success`   | SSE event processing duration in milliseconds.                    |
+| `codex.websocket.request`             | counter   | `success`           | WebSocket request count by success/failure.                       |
+| `codex.websocket.request.duration_ms` | histogram | `success`           | WebSocket request duration in milliseconds.                       |
+| `codex.websocket.event`               | counter   | `kind`, `success`   | WebSocket message/event count by type and success/failure.        |
+| `codex.websocket.event.duration_ms`   | histogram | `kind`, `success`   | WebSocket message/event processing duration in milliseconds.      |
+| `codex.tool.call`                     | counter   | `tool`, `success`   | Tool invocation count by tool name and success/failure.           |
+| `codex.tool.call.duration_ms`         | histogram | `tool`, `success`   | Tool execution duration in milliseconds by tool name and outcome. |
+
+For more security and privacy guidance around telemetry, see [Security](https://developers.openai.com/codex/agent-approvals-security#monitoring-and-telemetry).
+
+#### Metrics
+
+By default, Codex periodically sends a small amount of anonymous usage and health data back to OpenAI. This helps detect when Codex isn't working correctly and shows what features and configuration options are being used, so the Codex team can focus on what matters most. These metrics don't contain any personally identifiable information (PII). Metrics collection is independent of OTel log/trace export.
+
+If you want to disable metrics collection entirely across Codex surfaces on a machine, set the analytics flag in your config:
+
+```toml
+[analytics]
+enabled = false
+```
+
+Each metric includes its own fields plus the default context fields below.
+
+##### Default context fields (applies to every event/metric)
+
+- `auth_mode`: `swic` | `api` | `unknown`.
+- `model`: name of the model used.
+- `app.version`: Codex version.
+
+##### Metrics catalog
+
+Each metric includes the required fields plus the default context fields above. Metric names below omit the `codex.` prefix.
+Most metric names are centralized in `codex-rs/otel/src/metrics/names.rs`; feature-specific metrics emitted outside that file are included here too.
+If a metric includes the `tool` field, it reflects the internal tool used (for example, `apply_patch` or `shell`) and doesn't contain the actual shell command or patch `codex` is trying to apply.
+
+##### Runtime and model transport
+
+| Metric                                          | Type      | Fields               | Description                                                  |
+| ----------------------------------------------- | --------- | -------------------- | ------------------------------------------------------------ |
+| `api_request`                                   | counter   | `status`, `success`  | API request count by HTTP status and success/failure.        |
+| `api_request.duration_ms`                       | histogram | `status`, `success`  | API request duration in milliseconds.                        |
+| `sse_event`                                     | counter   | `kind`, `success`    | SSE event count by event kind and success/failure.           |
+| `sse_event.duration_ms`                         | histogram | `kind`, `success`    | SSE event processing duration in milliseconds.               |
+| `websocket.request`                             | counter   | `success`            | WebSocket request count by success/failure.                  |
+| `websocket.request.duration_ms`                 | histogram | `success`            | WebSocket request duration in milliseconds.                  |
+| `websocket.event`                               | counter   | `kind`, `success`    | WebSocket message/event count by type and success/failure.   |
+| `websocket.event.duration_ms`                   | histogram | `kind`, `success`    | WebSocket message/event processing duration in milliseconds. |
+| `responses_api_overhead.duration_ms`            | histogram |                      | Responses API overhead timing from WebSocket responses.      |
+| `responses_api_inference_time.duration_ms`      | histogram |                      | Responses API inference timing from WebSocket responses.     |
+| `responses_api_engine_iapi_ttft.duration_ms`    | histogram |                      | Responses API engine IAPI time-to-first-token timing.        |
+| `responses_api_engine_service_ttft.duration_ms` | histogram |                      | Responses API engine service time-to-first-token timing.     |
+| `responses_api_engine_iapi_tbt.duration_ms`     | histogram |                      | Responses API engine IAPI time-between-token timing.         |
+| `responses_api_engine_service_tbt.duration_ms`  | histogram |                      | Responses API engine service time-between-token timing.      |
+| `transport.fallback_to_http`                    | counter   | `from_wire_api`      | WebSocket-to-HTTP fallback count.                            |
+| `remote_models.fetch_update.duration_ms`        | histogram |                      | Time to fetch remote model definitions.                      |
+| `remote_models.load_cache.duration_ms`          | histogram |                      | Time to load the remote model cache.                         |
+| `startup_prewarm.duration_ms`                   | histogram | `status`             | Startup prewarm duration by outcome.                         |
+| `startup_prewarm.age_at_first_turn_ms`          | histogram | `status`             | Startup prewarm age when the first real turn resolves it.    |
+| `cloud_requirements.fetch.duration_ms`          | histogram |                      | Workspace-managed cloud requirements fetch duration.         |
+| `cloud_requirements.fetch_attempt`              | counter   | See note             | Workspace-managed cloud requirements fetch attempts.         |
+| `cloud_requirements.fetch_final`                | counter   | See note             | Final workspace-managed cloud requirements fetch outcome.    |
+| `cloud_requirements.load`                       | counter   | `trigger`, `outcome` | Workspace-managed cloud requirements load outcome.           |
+
+The `cloud_requirements.fetch_attempt` metric includes `trigger`, `attempt`, `outcome`, and `status_code` fields. The `cloud_requirements.fetch_final` metric includes `trigger`, `outcome`, `reason`, `attempt_count`, and `status_code` fields.
+
+##### Turn and tool activity
+
+| Metric                                 | Type      | Fields                                                                    | Description                                                                                                      |
+| -------------------------------------- | --------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `turn.e2e_duration_ms`                 | histogram |                                                                           | End-to-end time for a full turn.                                                                                 |
+| `turn.ttft.duration_ms`                | histogram |                                                                           | Time to first token for a turn.                                                                                  |
+| `turn.ttfm.duration_ms`                | histogram |                                                                           | Time to first model output item for a turn.                                                                      |
+| `turn.network_proxy`                   | counter   | `active`, `tmp_mem_enabled`                                               | Whether the managed network proxy was active for the turn.                                                       |
+| `turn.memory`                          | counter   | `read_allowed`, `feature_enabled`, `config_use_memories`, `has_citations` | Per-turn memory read availability and memory citation usage.                                                     |
+| `turn.tool.call`                       | histogram | `tmp_mem_enabled`                                                         | Number of tool calls in the turn.                                                                                |
+| `turn.token_usage`                     | histogram | `token_type`, `tmp_mem_enabled`                                           | Per-turn token usage by token type (`total`, `input`, `cached_input`, `output`, or `reasoning_output`).          |
+| `tool.call`                            | counter   | `tool`, `success`                                                         | Tool invocation count by tool name and success/failure.                                                          |
+| `tool.call.duration_ms`                | histogram | `tool`, `success`                                                         | Tool execution duration in milliseconds by tool name and outcome.                                                |
+| `tool.unified_exec`                    | counter   | `tty`                                                                     | Unified exec tool calls by TTY mode.                                                                             |
+| `approval.requested`                   | counter   | `tool`, `approved`                                                        | Tool approval request result (`approved`, `approved_with_amendment`, `approved_for_session`, `denied`, `abort`). |
+| `mcp.call`                             | counter   | See note                                                                  | MCP tool invocation result.                                                                                      |
+| `mcp.call.duration_ms`                 | histogram | See note                                                                  | MCP tool invocation duration.                                                                                    |
+| `mcp.tools.list.duration_ms`           | histogram | `cache`                                                                   | MCP tool-list duration, including cache hit/miss state.                                                          |
+| `mcp.tools.fetch_uncached.duration_ms` | histogram |                                                                           | Duration of MCP tool fetches that miss the cache.                                                                |
+| `mcp.tools.cache_write.duration_ms`    | histogram |                                                                           | Duration of Codex Apps MCP tool-cache writes.                                                                    |
+| `hooks.run`                            | counter   | `hook_name`, `source`, `status`                                           | Hook run count by hook name, source, and status.                                                                 |
+| `hooks.run.duration_ms`                | histogram | `hook_name`, `source`, `status`                                           | Hook run duration in milliseconds.                                                                               |
+
+The `mcp.call` and `mcp.call.duration_ms` metrics include `status`; normal tool-call emissions also include `tool`, plus `connector_id` and `connector_name` when available. Blocked Codex Apps MCP calls may emit `mcp.call` with only `status`.
+
+##### Threads, tasks, and features
+
+| Metric                            | Type      | Fields                | Description                                                                      |
+| --------------------------------- | --------- | --------------------- | -------------------------------------------------------------------------------- |
+| `feature.state`                   | counter   | `feature`, `value`    | Feature values that differ from defaults (emit one row per non-default).         |
+| `status_line`                     | counter   |                       | Session started with a configured status line.                                   |
+| `model_warning`                   | counter   |                       | Warning sent to the model.                                                       |
+| `thread.started`                  | counter   | `is_git`              | New thread created, tagged by whether the working directory is in a Git repo.    |
+| `conversation.turn.count`         | counter   |                       | User/assistant turns per thread, recorded at the end of the thread.              |
+| `thread.fork`                     | counter   | `source`              | New thread created by forking an existing thread.                                |
+| `thread.rename`                   | counter   |                       | Thread renamed.                                                                  |
+| `thread.side`                     | counter   | `source`              | Side conversation created.                                                       |
+| `thread.skills.enabled_total`     | histogram |                       | Number of skills enabled for a new thread.                                       |
+| `thread.skills.kept_total`        | histogram |                       | Number of enabled skills kept after prompt rendering.                            |
+| `thread.skills.truncated`         | histogram |                       | Whether skill rendering truncated the enabled skills list (`1` or `0`).          |
+| `task.compact`                    | counter   | `type`                | Number of compactions per type (`remote` or `local`), including manual and auto. |
+| `task.review`                     | counter   |                       | Number of reviews triggered.                                                     |
+| `task.undo`                       | counter   |                       | Number of undo actions triggered.                                                |
+| `task.user_shell`                 | counter   |                       | Number of user shell actions (`!` in the TUI for example).                       |
+| `shell_snapshot`                  | counter   | See note              | Whether taking a shell snapshot succeeded.                                       |
+| `shell_snapshot.duration_ms`      | histogram | `success`             | Time to take a shell snapshot.                                                   |
+| `skill.injected`                  | counter   | `status`, `skill`     | Skill injection outcomes by skill.                                               |
+| `plugins.startup_sync`            | counter   | `transport`, `status` | Curated plugin startup sync attempts.                                            |
+| `plugins.startup_sync.final`      | counter   | `transport`, `status` | Final curated plugin startup sync outcome.                                       |
+| `multi_agent.spawn`               | counter   | `role`                | Agent spawns by role.                                                            |
+| `multi_agent.resume`              | counter   |                       | Agent resumes.                                                                   |
+| `multi_agent.nickname_pool_reset` | counter   |                       | Agent nickname pool resets.                                                      |
+
+The `shell_snapshot` metric includes `success` and, on failures, `failure_reason`.
+
+##### Memory and local state
+
+| Metric                         | Type      | Fields                    | Description                                               |
+| ------------------------------ | --------- | ------------------------- | --------------------------------------------------------- |
+| `memory.phase1`                | counter   | `status`                  | Memory phase 1 job counts by status.                      |
+| `memory.phase1.e2e_ms`         | histogram |                           | End-to-end duration for memory phase 1.                   |
+| `memory.phase1.output`         | counter   |                           | Memory phase 1 outputs written.                           |
+| `memory.phase1.token_usage`    | histogram | `token_type`              | Memory phase 1 token usage by token type.                 |
+| `memory.phase2`                | counter   | `status`                  | Memory phase 2 job counts by status.                      |
+| `memory.phase2.e2e_ms`         | histogram |                           | End-to-end duration for memory phase 2.                   |
+| `memory.phase2.input`          | counter   |                           | Memory phase 2 input count.                               |
+| `memory.phase2.token_usage`    | histogram | `token_type`              | Memory phase 2 token usage by token type.                 |
+| `memories.usage`               | counter   | `kind`, `tool`, `success` | Memory usage by kind, tool, and success/failure.          |
+| `external_agent_config.detect` | counter   | See note                  | External agent config detections by migration item type.  |
+| `external_agent_config.import` | counter   | See note                  | External agent config imports by migration item type.     |
+| `db.backfill`                  | counter   | `status`                  | Initial state DB backfill results (`upserted`, `failed`). |
+| `db.backfill.duration_ms`      | histogram | `status`                  | Duration of the initial state DB backfill.                |
+| `db.error`                     | counter   | `stage`                   | Errors during state DB operations.                        |
+
+The `external_agent_config.detect` and `external_agent_config.import` metrics include `migration_type`; skills migrations also include `skills_count`.
+
+##### Windows sandbox
+
+| Metric                                           | Type      | Fields                                    | Description                                           |
+| ------------------------------------------------ | --------- | ----------------------------------------- | ----------------------------------------------------- |
+| `windows_sandbox.setup_success`                  | counter   | `originator`, `mode`                      | Windows sandbox setup successes.                      |
+| `windows_sandbox.setup_failure`                  | counter   | `originator`, `mode`                      | Windows sandbox setup failures.                       |
+| `windows_sandbox.setup_duration_ms`              | histogram | `result`, `originator`, `mode`            | Windows sandbox setup duration.                       |
+| `windows_sandbox.elevated_setup_success`         | counter   |                                           | Elevated Windows sandbox setup successes.             |
+| `windows_sandbox.elevated_setup_failure`         | counter   | See note                                  | Elevated Windows sandbox setup failures.              |
+| `windows_sandbox.elevated_setup_canceled`        | counter   | See note                                  | Canceled elevated Windows sandbox setup attempts.     |
+| `windows_sandbox.elevated_setup_duration_ms`     | histogram | `result`                                  | Elevated Windows sandbox setup duration.              |
+| `windows_sandbox.elevated_prompt_shown`          | counter   |                                           | Elevated sandbox setup prompt shown.                  |
+| `windows_sandbox.elevated_prompt_accept`         | counter   |                                           | Elevated sandbox setup prompt accepted.               |
+| `windows_sandbox.elevated_prompt_use_legacy`     | counter   |                                           | User chose legacy sandbox from the elevated prompt.   |
+| `windows_sandbox.elevated_prompt_quit`           | counter   |                                           | User quit from the elevated prompt.                   |
+| `windows_sandbox.fallback_prompt_shown`          | counter   |                                           | Fallback sandbox prompt shown.                        |
+| `windows_sandbox.fallback_retry_elevated`        | counter   |                                           | User retried elevated setup from the fallback prompt. |
+| `windows_sandbox.fallback_use_legacy`            | counter   |                                           | User chose legacy sandbox from the fallback prompt.   |
+| `windows_sandbox.fallback_prompt_quit`           | counter   |                                           | User quit from the fallback prompt.                   |
+| `windows_sandbox.legacy_setup_preflight_failed`  | counter   | See note                                  | Legacy Windows sandbox setup preflight failure.       |
+| `windows_sandbox.setup_elevated_sandbox_command` | counter   |                                           | Elevated sandbox setup command invoked.               |
+| `windows_sandbox.createprocessasuserw_failed`    | counter   | `error_code`, `path_kind`, `exe`, `level` | Windows `CreateProcessAsUserW` failures.              |
+
+The elevated setup failure metrics include `code` and `message` when Windows setup failure details are available, and may include `originator` when emitted from the shared setup path. The `windows_sandbox.legacy_setup_preflight_failed` metric includes `originator` when emitted from the shared setup path, but fallback-prompt preflight failures may not include any fields.
+
+#### Feedback controls
+
+By default, Codex lets users send feedback from `/feedback`. To disable feedback collection across Codex surfaces on a machine, update your config:
+
+```toml
+[feedback]
+enabled = false
+```
+
+When disabled, `/feedback` shows a disabled message and Codex rejects feedback submissions.
+
+#### Hide or surface reasoning events
+
+If you want to reduce noisy "reasoning" output (for example in CI logs), you can suppress it:
+
+```toml
+hide_agent_reasoning = true
+```
+
+If you want to surface raw reasoning content when a model emits it:
+
+```toml
+show_raw_agent_reasoning = true
+```
+
+Enable raw reasoning only if it's acceptable for your workflow. Some models/providers (like `gpt-oss`) don't emit raw reasoning; in that case, this setting has no visible effect.
+
+#### Notifications
+
+Use `notify` to trigger an external program whenever Codex emits supported events (currently only `agent-turn-complete`). This is handy for desktop toasts, chat webhooks, CI updates, or any side-channel alerting that the built-in TUI notifications don't cover.
+
+```toml
+notify = ["python3", "/path/to/notify.py"]
+```
+
+Example `notify.py` (truncated) that reacts to `agent-turn-complete`:
+
+```python
+#!/usr/bin/env python3
+import json, subprocess, sys
+
+def main() -> int:
+    notification = json.loads(sys.argv[1])
+    if notification.get("type") != "agent-turn-complete":
+        return 0
+    title = f"Codex: {notification.get('last-assistant-message', 'Turn Complete!')}"
+    message = " ".join(notification.get("input-messages", []))
+    subprocess.check_output([
+        "terminal-notifier",
+        "-title", title,
+        "-message", message,
+        "-group", "codex-" + notification.get("thread-id", ""),
+        "-activate", "com.googlecode.iterm2",
+    ])
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+The script receives a single JSON argument. Common fields include:
+
+- `type` (currently `agent-turn-complete`)
+- `thread-id` (session identifier)
+- `turn-id` (turn identifier)
+- `cwd` (working directory)
+- `input-messages` (user messages that led to the turn)
+- `last-assistant-message` (last assistant message text)
+
+Place the script somewhere on disk and point `notify` to it.
+
+##### `notify` vs `tui.notifications`
+
+- `notify` runs an external program (good for webhooks, desktop notifiers, CI hooks).
+- `tui.notifications` is built in to the TUI and can optionally filter by event type (for example, `agent-turn-complete` and `approval-requested`).
+- `tui.notification_method` controls how the TUI emits terminal notifications (`auto`, `osc9`, or `bel`).
+- `tui.notification_condition` controls whether TUI notifications fire only when
+  the terminal is `unfocused` or `always`.
+
+In `auto` mode, Codex prefers OSC 9 notifications (a terminal escape sequence some terminals interpret as a desktop notification) and falls back to BEL (`\x07`) otherwise.
+
+See [Configuration Reference](https://developers.openai.com/codex/config-reference) for the exact keys.
+
+#### History persistence
+
+By default, Codex saves local session transcripts under `CODEX_HOME` (for example, `~/.codex/history.jsonl`). To disable local history persistence:
+
+```toml
+[history]
+persistence = "none"
+```
+
+To cap the history file size, set `history.max_bytes`. When the file exceeds the cap, Codex drops the oldest entries and compacts the file while keeping the newest records.
+
+```toml
+[history]
+max_bytes = 104857600 # 100 MiB
+```
+
+#### Clickable citations
+
+If you use a terminal/editor integration that supports it, Codex can render file citations as clickable links. Configure `file_opener` to pick the URI scheme Codex uses:
+
+```toml
+file_opener = "vscode" # or cursor, windsurf, vscode-insiders, none
+```
+
+Example: a citation like `/home/user/project/main.py:42` can be rewritten into a clickable `vscode://file/...:42` link.
+
+#### Project instructions discovery
+
+Codex reads `AGENTS.md` (and related files) and includes a limited amount of project guidance in the first turn of a session. Two knobs control how this works:
+
+- `project_doc_max_bytes`: how much to read from each `AGENTS.md` file
+- `project_doc_fallback_filenames`: additional filenames to try when `AGENTS.md` is missing at a directory level
+
+For a detailed walkthrough, see [Custom instructions with AGENTS.md](https://developers.openai.com/codex/guides/agents-md).
+
+#### TUI options
+
+Running `codex` with no subcommand launches the interactive terminal UI (TUI). Codex exposes some TUI-specific configuration under `[tui]`, including:
+
+- `tui.notifications`: enable/disable notifications (or restrict to specific types)
+- `tui.notification_method`: choose `auto`, `osc9`, or `bel` for terminal notifications
+- `tui.notification_condition`: choose `unfocused` or `always` for when
+  notifications fire
+- `tui.animations`: enable/disable ASCII animations and shimmer effects
+- `tui.alternate_screen`: control alternate screen usage (set to `never` to keep terminal scrollback)
+- `tui.show_tooltips`: show or hide onboarding tooltips on the welcome screen
+
+`tui.notification_method` defaults to `auto`. In `auto` mode, Codex prefers OSC 9 notifications (a terminal escape sequence some terminals interpret as a desktop notification) when the terminal appears to support them, and falls back to BEL (`\x07`) otherwise.
+
+See [Configuration Reference](https://developers.openai.com/codex/config-reference) for the full key list.
 
 ### Authentication and sessions
 

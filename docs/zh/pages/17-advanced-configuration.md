@@ -69,7 +69,7 @@ Codex 将本地状态存储在 `CODEX_HOME` 下（默认是 `~/.codex`）。
 
 有关签入仓库或系统路径的共享默认值、规则和 skills，请参阅 [团队配置](64-admin-setup.md#team-config)。
 
-如果你只需要将内置 OpenAI provider 指向 LLM 代理、路由器或启用了 data residency 的项目，请在 `config.toml` 中设置 `openai_base_url`，而不是定义新 provider。这会更改内置 `openai` provider 的 base URL，而不需要单独的 `model_providers.` 条目。
+如果你只需要将内置 OpenAI provider 指向 LLM 代理、路由器或启用了 data residency 的项目，请在 `config.toml` 中设置 `openai_base_url`，而不是定义新 provider。这会更改内置 `openai` provider 的 base URL，而不需要单独的 `model_providers.<id>` 条目。
 
 ```toml
 openai_base_url = "https://us.api.openai.com/v1"
@@ -93,8 +93,8 @@ Codex 还可以从 `hooks.json` 文件或位于活动配置层旁边的 `config.
 
 - `~/.codex/hooks.json`
 - `~/.codex/config.toml`
-- `/.codex/hooks.json`
-- `/.codex/config.toml`
+- `<repo>/.codex/hooks.json`
+- `<repo>/.codex/config.toml`
 
 项目本地 hooks 只会在项目 `.codex/` 层受信任时加载。用户级 hooks 与项目信任无关。
 
@@ -180,7 +180,7 @@ timeout_ms = 5000
 refresh_interval_ms = 300000
 ```
 
-Auth command 不接收 `stdin`，并且必须将 token 打印到 stdout。Codex 会修剪周围空白，将空 token 视为错误，并在 `refresh_interval_ms` 主动刷新；设置 `refresh_interval_ms = 0` 表示仅在身份验证重试后刷新。不要将 `[model_providers..auth]` 与 `env_key`、`experimental_bearer_token` 或 `requires_openai_auth` 组合使用。
+认证命令不接收 `stdin`，并且必须将 token 打印到 stdout。Codex 会修剪周围空白，将空 token 视为错误，并在 `refresh_interval_ms` 主动刷新；设置 `refresh_interval_ms = 0` 表示仅在身份验证重试后刷新。不要将 `[model_providers.<id>.auth]` 与 `env_key`、`experimental_bearer_token` 或 `requires_openai_auth` 组合使用。
 
 #### Amazon Bedrock 提供商
 
@@ -188,7 +188,7 @@ Codex 包含内置 `amazon-bedrock` 模型提供商。直接将其设置为 `mod
 
 ```toml
 model_provider = "amazon-bedrock"
-model = ""
+model = "<bedrock-model-id>"
 
 [model_providers.amazon-bedrock.aws]
 profile = "default"
@@ -293,7 +293,7 @@ Use your organization's automatic review policy.
 
 有关完整键列表和要求约束，请参阅 [配置参考](16-configuration-reference.md) 和 [托管配置](67-managed-configuration.md)。
 
-在 workspace-write 模式中，某些环境会让 `.git/` 和 `.codex/` 保持 read-only，即使工作区其余部分可写也是如此。这就是 `git commit` 等命令可能仍需要审批才能在沙盒外运行的原因。如果你希望 Codex 跳过特定命令（例如阻止沙盒外的 `git commit`），请使用 rules。
+在 workspace-write 模式中，某些环境会让 `.git/` 和 `.codex/` 保持只读，即使工作区其余部分可写也是如此。这就是 `git commit` 等命令可能仍需要审批才能在沙盒外运行的原因。如果你希望 Codex 跳过特定命令（例如阻止沙盒外的 `git commit`），请使用 [Rules](54-rules.md)。
 
 完全禁用沙盒（仅当你的环境已经隔离进程时使用）：
 
@@ -363,3 +363,312 @@ Codex 会为运行和工具使用发出结构化日志事件。代表性事件�
 - `codex.user_prompt`（length；除非显式启用，否则 content 会 redact）
 - `codex.tool_decision`（approved/denied，以及 decision 来自 config 还是 user）
 - `codex.tool_result`（duration、success、output snippet）
+
+#### 发出的 OTel 指标 { #otel-metrics-emitted }
+
+启用 OTel metrics pipeline 后，Codex 会为 API、stream 和工具活动发出计数器与时长直方图。
+
+下面每个指标还会包含默认元数据标签：`auth_mode`、`originator`、`session_source`、`model` 和 `app.version`。
+
+| Metric                                | Type      | Fields              | Description                                  |
+| ------------------------------------- | --------- | ------------------- | -------------------------------------------- |
+| `codex.api_request`                   | counter   | `status`, `success` | 按 HTTP 状态和成功/失败统计 API 请求次数。   |
+| `codex.api_request.duration_ms`       | histogram | `status`, `success` | API 请求时长（毫秒）。                       |
+| `codex.sse_event`                     | counter   | `kind`, `success`   | 按事件类型和成功/失败统计 SSE 事件次数。     |
+| `codex.sse_event.duration_ms`         | histogram | `kind`, `success`   | SSE 事件处理时长（毫秒）。                   |
+| `codex.websocket.request`             | counter   | `success`           | 按成功/失败统计 WebSocket 请求次数。         |
+| `codex.websocket.request.duration_ms` | histogram | `success`           | WebSocket 请求时长（毫秒）。                 |
+| `codex.websocket.event`               | counter   | `kind`, `success`   | 按类型和成功/失败统计 WebSocket 消息/事件。  |
+| `codex.websocket.event.duration_ms`   | histogram | `kind`, `success`   | WebSocket 消息/事件处理时长（毫秒）。        |
+| `codex.tool.call`                     | counter   | `tool`, `success`   | 按工具名和成功/失败统计工具调用次数。        |
+| `codex.tool.call.duration_ms`         | histogram | `tool`, `success`   | 按工具名和结果统计工具执行时长（毫秒）。     |
+
+有关遥测的更多安全与隐私指导，请参阅 [Security](13-agent-approvals-security.md#monitoring-and-telemetry)。
+
+#### Metrics { #metrics }
+
+默认情况下，Codex 会定期向 OpenAI 发送少量匿名使用情况和健康数据。这有助于检测 Codex 何时工作异常，也能显示正在使用哪些功能和配置选项，让 Codex 团队专注于最重要的事项。这些 metrics 不包含任何个人身份信息（PII）。Metrics 收集独立于 OTel log/trace 导出。
+
+如果你想在某台机器上完全禁用所有 Codex surface 的 metrics 收集，请在配置中设置 analytics flag：
+
+```toml
+[analytics]
+enabled = false
+```
+
+每个 metric 都包含自己的字段，以及下面列出的默认上下文字段。
+
+##### 默认上下文字段（适用于每个事件/metric） { #default-context-fields-applies-to-every-eventmetric }
+
+- `auth_mode`：`swic` | `api` | `unknown`。
+- `model`：使用的模型名称。
+- `app.version`：Codex 版本。
+
+##### Metrics catalog { #metrics-catalog }
+
+每个 metric 都包含必需字段和上面的默认上下文字段。下面的 metric 名省略了 `codex.` 前缀。
+大多数 metric 名集中定义在 `codex-rs/otel/src/metrics/names.rs`；这里也包含该文件之外发出的功能特定 metrics。
+如果 metric 包含 `tool` 字段，它表示所用的内部工具（例如 `apply_patch` 或 `shell`），不包含 Codex 实际尝试应用的 shell 命令或 patch。
+
+##### 运行时和模型传输 { #runtime-and-model-transport }
+
+| Metric                                          | Type      | Fields               | Description                                      |
+| ----------------------------------------------- | --------- | -------------------- | ------------------------------------------------ |
+| `api_request`                                   | counter   | `status`, `success`  | 按 HTTP 状态和成功/失败统计 API 请求次数。       |
+| `api_request.duration_ms`                       | histogram | `status`, `success`  | API 请求时长（毫秒）。                           |
+| `sse_event`                                     | counter   | `kind`, `success`    | 按事件类型和成功/失败统计 SSE 事件次数。         |
+| `sse_event.duration_ms`                         | histogram | `kind`, `success`    | SSE 事件处理时长（毫秒）。                       |
+| `websocket.request`                             | counter   | `success`            | 按成功/失败统计 WebSocket 请求次数。             |
+| `websocket.request.duration_ms`                 | histogram | `success`            | WebSocket 请求时长（毫秒）。                     |
+| `websocket.event`                               | counter   | `kind`, `success`    | 按类型和成功/失败统计 WebSocket 消息/事件。      |
+| `websocket.event.duration_ms`                   | histogram | `kind`, `success`    | WebSocket 消息/事件处理时长（毫秒）。            |
+| `responses_api_overhead.duration_ms`            | histogram |                      | WebSocket response 中 Responses API 开销计时。   |
+| `responses_api_inference_time.duration_ms`      | histogram |                      | WebSocket response 中 Responses API 推理计时。   |
+| `responses_api_engine_iapi_ttft.duration_ms`    | histogram |                      | Responses API engine IAPI 首 token 时间计时。    |
+| `responses_api_engine_service_ttft.duration_ms` | histogram |                      | Responses API engine service 首 token 时间计时。 |
+| `responses_api_engine_iapi_tbt.duration_ms`     | histogram |                      | Responses API engine IAPI token 间隔计时。       |
+| `responses_api_engine_service_tbt.duration_ms`  | histogram |                      | Responses API engine service token 间隔计时。    |
+| `transport.fallback_to_http`                    | counter   | `from_wire_api`      | WebSocket 回退到 HTTP 的次数。                   |
+| `remote_models.fetch_update.duration_ms`        | histogram |                      | 获取远程模型定义的耗时。                         |
+| `remote_models.load_cache.duration_ms`          | histogram |                      | 加载远程模型缓存的耗时。                         |
+| `startup_prewarm.duration_ms`                   | histogram | `status`             | 按结果统计启动预热时长。                         |
+| `startup_prewarm.age_at_first_turn_ms`          | histogram | `status`             | 第一轮真实 turn 解析预热时的预热年龄。           |
+| `cloud_requirements.fetch.duration_ms`          | histogram |                      | 工作区托管 cloud requirements 获取时长。         |
+| `cloud_requirements.fetch_attempt`              | counter   | See note             | 工作区托管 cloud requirements 获取尝试次数。     |
+| `cloud_requirements.fetch_final`                | counter   | See note             | 最终 cloud requirements 获取结果。               |
+| `cloud_requirements.load`                       | counter   | `trigger`, `outcome` | 工作区托管 cloud requirements 加载结果。         |
+
+`cloud_requirements.fetch_attempt` metric 包含 `trigger`、`attempt`、`outcome` 和 `status_code` 字段。`cloud_requirements.fetch_final` metric 包含 `trigger`、`outcome`、`reason`、`attempt_count` 和 `status_code` 字段。
+
+##### Turn 和工具活动 { #turn-and-tool-activity }
+
+| Metric                                 | Type      | Fields                                                                    | Description                                                                                 |
+| -------------------------------------- | --------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `turn.e2e_duration_ms`                 | histogram |                                                                           | 完整 turn 的端到端耗时。                                                                    |
+| `turn.ttft.duration_ms`                | histogram |                                                                           | turn 的首 token 时间。                                                                      |
+| `turn.ttfm.duration_ms`                | histogram |                                                                           | turn 的首个模型输出项时间。                                                                |
+| `turn.network_proxy`                   | counter   | `active`, `tmp_mem_enabled`                                               | 该 turn 是否启用了托管网络代理。                                                           |
+| `turn.memory`                          | counter   | `read_allowed`, `feature_enabled`, `config_use_memories`, `has_citations` | 每个 turn 的 memory 读取可用性和 memory citation 使用情况。                                 |
+| `turn.tool.call`                       | histogram | `tmp_mem_enabled`                                                         | turn 中的工具调用数量。                                                                     |
+| `turn.token_usage`                     | histogram | `token_type`, `tmp_mem_enabled`                                           | 按 token 类型统计 turn token 使用量（`total`、`input`、`cached_input`、`output` 或 `reasoning_output`）。 |
+| `tool.call`                            | counter   | `tool`, `success`                                                         | 按工具名和成功/失败统计工具调用次数。                                                       |
+| `tool.call.duration_ms`                | histogram | `tool`, `success`                                                         | 按工具名和结果统计工具执行时长（毫秒）。                                                    |
+| `tool.unified_exec`                    | counter   | `tty`                                                                     | 按 TTY 模式统计 unified exec 工具调用。                                                     |
+| `approval.requested`                   | counter   | `tool`, `approved`                                                        | 工具审批请求结果（`approved`、`approved_with_amendment`、`approved_for_session`、`denied`、`abort`）。 |
+| `mcp.call`                             | counter   | See note                                                                  | MCP 工具调用结果。                                                                          |
+| `mcp.call.duration_ms`                 | histogram | See note                                                                  | MCP 工具调用时长。                                                                          |
+| `mcp.tools.list.duration_ms`           | histogram | `cache`                                                                   | MCP 工具列表耗时，包括缓存命中/未命中状态。                                                 |
+| `mcp.tools.fetch_uncached.duration_ms` | histogram |                                                                           | 未命中缓存的 MCP 工具获取耗时。                                                            |
+| `mcp.tools.cache_write.duration_ms`    | histogram |                                                                           | Codex Apps MCP 工具缓存写入耗时。                                                          |
+| `hooks.run`                            | counter   | `hook_name`, `source`, `status`                                           | 按 hook 名称、来源和状态统计 hook 运行次数。                                                |
+| `hooks.run.duration_ms`                | histogram | `hook_name`, `source`, `status`                                           | Hook 运行时长（毫秒）。                                                                     |
+
+`mcp.call` 和 `mcp.call.duration_ms` metrics 包含 `status`；普通工具调用发出项还包含 `tool`，并在可用时包含 `connector_id` 和 `connector_name`。被阻止的 Codex Apps MCP 调用可能只带 `status` 发出 `mcp.call`。
+
+##### Threads、tasks 和 features { #threads-tasks-and-features }
+
+| Metric                            | Type      | Fields                | Description                                                    |
+| --------------------------------- | --------- | --------------------- | -------------------------------------------------------------- |
+| `feature.state`                   | counter   | `feature`, `value`    | 与默认值不同的 feature 值（每个非默认值发出一行）。            |
+| `status_line`                     | counter   |                       | 会话使用了配置的 status line 启动。                            |
+| `model_warning`                   | counter   |                       | 发送给模型的警告。                                             |
+| `thread.started`                  | counter   | `is_git`              | 新 thread 创建，并标注工作目录是否在 Git 仓库中。              |
+| `conversation.turn.count`         | counter   |                       | 每个 thread 的用户/assistant turn 数，在 thread 结束时记录。   |
+| `thread.fork`                     | counter   | `source`              | 通过 fork 现有 thread 创建的新 thread。                        |
+| `thread.rename`                   | counter   |                       | Thread 被重命名。                                              |
+| `thread.side`                     | counter   | `source`              | 创建了 side conversation。                                     |
+| `thread.skills.enabled_total`     | histogram |                       | 新 thread 启用的 skill 数量。                                  |
+| `thread.skills.kept_total`        | histogram |                       | prompt rendering 后保留的已启用 skill 数量。                   |
+| `thread.skills.truncated`         | histogram |                       | skill rendering 是否截断了已启用 skill 列表（`1` 或 `0`）。    |
+| `task.compact`                    | counter   | `type`                | 每种类型（`remote` 或 `local`）的 compaction 数量，包括手动和自动。 |
+| `task.review`                     | counter   |                       | 触发 review 的次数。                                           |
+| `task.undo`                       | counter   |                       | 触发 undo 的次数。                                             |
+| `task.user_shell`                 | counter   |                       | 用户 shell 操作次数（例如 TUI 中的 `!`）。                     |
+| `shell_snapshot`                  | counter   | See note              | shell snapshot 是否成功。                                      |
+| `shell_snapshot.duration_ms`      | histogram | `success`             | 获取 shell snapshot 的耗时。                                   |
+| `skill.injected`                  | counter   | `status`, `skill`     | 按 skill 统计 skill 注入结果。                                 |
+| `plugins.startup_sync`            | counter   | `transport`, `status` | Curated plugin startup sync 尝试。                             |
+| `plugins.startup_sync.final`      | counter   | `transport`, `status` | Curated plugin startup sync 最终结果。                         |
+| `multi_agent.spawn`               | counter   | `role`                | 按 role 统计 agent spawn。                                     |
+| `multi_agent.resume`              | counter   |                       | Agent resume 次数。                                            |
+| `multi_agent.nickname_pool_reset` | counter   |                       | Agent nickname pool reset 次数。                               |
+
+`shell_snapshot` metric 包含 `success`，失败时还包含 `failure_reason`。
+
+##### Memory 和本地状态 { #memory-and-local-state }
+
+| Metric                         | Type      | Fields                    | Description                                |
+| ------------------------------ | --------- | ------------------------- | ------------------------------------------ |
+| `memory.phase1`                | counter   | `status`                  | 按状态统计 memory phase 1 job 数量。       |
+| `memory.phase1.e2e_ms`         | histogram |                           | Memory phase 1 的端到端耗时。              |
+| `memory.phase1.output`         | counter   |                           | Memory phase 1 写出的输出数。              |
+| `memory.phase1.token_usage`    | histogram | `token_type`              | 按 token 类型统计 memory phase 1 token 使用量。 |
+| `memory.phase2`                | counter   | `status`                  | 按状态统计 memory phase 2 job 数量。       |
+| `memory.phase2.e2e_ms`         | histogram |                           | Memory phase 2 的端到端耗时。              |
+| `memory.phase2.input`          | counter   |                           | Memory phase 2 输入数量。                  |
+| `memory.phase2.token_usage`    | histogram | `token_type`              | 按 token 类型统计 memory phase 2 token 使用量。 |
+| `memories.usage`               | counter   | `kind`, `tool`, `success` | 按 kind、tool 和成功/失败统计 memory 使用。 |
+| `external_agent_config.detect` | counter   | See note                  | 按 migration item 类型统计外部 agent config 检测。 |
+| `external_agent_config.import` | counter   | See note                  | 按 migration item 类型统计外部 agent config 导入。 |
+| `db.backfill`                  | counter   | `status`                  | 初始状态 DB backfill 结果（`upserted`、`failed`）。 |
+| `db.backfill.duration_ms`      | histogram | `status`                  | 初始状态 DB backfill 的耗时。              |
+| `db.error`                     | counter   | `stage`                   | 状态 DB 操作期间的错误。                   |
+
+`external_agent_config.detect` 和 `external_agent_config.import` metrics 包含 `migration_type`；skills migration 还包含 `skills_count`。
+
+##### Windows 沙盒 { #windows-sandbox }
+
+| Metric                                           | Type      | Fields                                    | Description                                  |
+| ------------------------------------------------ | --------- | ----------------------------------------- | -------------------------------------------- |
+| `windows_sandbox.setup_success`                  | counter   | `originator`, `mode`                      | Windows sandbox setup 成功次数。             |
+| `windows_sandbox.setup_failure`                  | counter   | `originator`, `mode`                      | Windows sandbox setup 失败次数。             |
+| `windows_sandbox.setup_duration_ms`              | histogram | `result`, `originator`, `mode`            | Windows sandbox setup 耗时。                 |
+| `windows_sandbox.elevated_setup_success`         | counter   |                                           | 提权 Windows sandbox setup 成功次数。        |
+| `windows_sandbox.elevated_setup_failure`         | counter   | See note                                  | 提权 Windows sandbox setup 失败次数。        |
+| `windows_sandbox.elevated_setup_canceled`        | counter   | See note                                  | 已取消的提权 Windows sandbox setup 尝试。    |
+| `windows_sandbox.elevated_setup_duration_ms`     | histogram | `result`                                  | 提权 Windows sandbox setup 耗时。            |
+| `windows_sandbox.elevated_prompt_shown`          | counter   |                                           | 显示提权 sandbox setup 提示的次数。          |
+| `windows_sandbox.elevated_prompt_accept`         | counter   |                                           | 接受提权 sandbox setup 提示的次数。          |
+| `windows_sandbox.elevated_prompt_use_legacy`     | counter   |                                           | 用户在提权提示中选择 legacy sandbox 的次数。 |
+| `windows_sandbox.elevated_prompt_quit`           | counter   |                                           | 用户从提权提示退出的次数。                   |
+| `windows_sandbox.fallback_prompt_shown`          | counter   |                                           | 显示 fallback sandbox 提示的次数。           |
+| `windows_sandbox.fallback_retry_elevated`        | counter   |                                           | 用户从 fallback 提示重试提权 setup 的次数。  |
+| `windows_sandbox.fallback_use_legacy`            | counter   |                                           | 用户从 fallback 提示选择 legacy sandbox 的次数。 |
+| `windows_sandbox.fallback_prompt_quit`           | counter   |                                           | 用户从 fallback 提示退出的次数。             |
+| `windows_sandbox.legacy_setup_preflight_failed`  | counter   | See note                                  | Legacy Windows sandbox setup 预检失败。      |
+| `windows_sandbox.setup_elevated_sandbox_command` | counter   |                                           | 调用了提权 sandbox setup 命令。              |
+| `windows_sandbox.createprocessasuserw_failed`    | counter   | `error_code`, `path_kind`, `exe`, `level` | Windows `CreateProcessAsUserW` 失败。        |
+
+当有 Windows setup failure 详情可用时，提权 setup failure metrics 会包含 `code` 和 `message`，从共享 setup 路径发出时也可能包含 `originator`。`windows_sandbox.legacy_setup_preflight_failed` 从共享 setup 路径发出时包含 `originator`，但 fallback-prompt 预检失败可能不包含任何字段。
+
+#### Feedback controls { #feedback-controls }
+
+默认情况下，Codex 允许用户通过 `/feedback` 发送反馈。要在某台机器上的所有 Codex surface 中禁用反馈收集，请更新配置：
+
+```toml
+[feedback]
+enabled = false
+```
+
+禁用后，`/feedback` 会显示禁用消息，并且 Codex 会拒绝反馈提交。
+
+#### 隐藏或显示 reasoning events { #hide-or-surface-reasoning-events }
+
+如果你想减少嘈杂的 "reasoning" 输出（例如 CI 日志中），可以将其抑制：
+
+```toml
+hide_agent_reasoning = true
+```
+
+如果你想在模型发出 raw reasoning content 时显示它：
+
+```toml
+show_raw_agent_reasoning = true
+```
+
+只有当 raw reasoning 适合你的工作流时才启用它。有些模型/provider（例如 `gpt-oss`）不会发出 raw reasoning；这种情况下，该设置没有可见效果。
+
+#### 通知 { #notifications }
+
+使用 `notify` 可在 Codex 发出受支持事件时触发外部程序（目前仅支持 `agent-turn-complete`）。这适合桌面 toast、聊天 webhook、CI 更新，或任何内置 TUI 通知无法覆盖的旁路提醒。
+
+```toml
+notify = ["python3", "/path/to/notify.py"]
+```
+
+响应 `agent-turn-complete` 的 `notify.py` 示例（已截断）：
+
+```python
+#!/usr/bin/env python3
+import json, subprocess, sys
+
+def main() -> int:
+    notification = json.loads(sys.argv[1])
+    if notification.get("type") != "agent-turn-complete":
+        return 0
+    title = f"Codex: {notification.get('last-assistant-message', 'Turn Complete!')}"
+    message = " ".join(notification.get("input-messages", []))
+    subprocess.check_output([
+        "terminal-notifier",
+        "-title", title,
+        "-message", message,
+        "-group", "codex-" + notification.get("thread-id", ""),
+        "-activate", "com.googlecode.iterm2",
+    ])
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+脚本会接收一个 JSON 参数。常见字段包括：
+
+- `type`（目前为 `agent-turn-complete`）
+- `thread-id`（会话标识符）
+- `turn-id`（turn 标识符）
+- `cwd`（工作目录）
+- `input-messages`（导致该 turn 的用户消息）
+- `last-assistant-message`（最后一条 assistant 消息文本）
+
+将脚本放在磁盘某处，并让 `notify` 指向它。
+
+##### `notify` 与 `tui.notifications` { #notify-vs-tuinotifications }
+
+- `notify` 会运行外部程序（适合 webhook、桌面通知器、CI hook）。
+- `tui.notifications` 内置于 TUI，并且可以选择按事件类型过滤（例如 `agent-turn-complete` 和 `approval-requested`）。
+- `tui.notification_method` 控制 TUI 如何发出终端通知（`auto`、`osc9` 或 `bel`）。
+- `tui.notification_condition` 控制 TUI 通知只在终端 `unfocused` 时触发，还是 `always` 触发。
+
+在 `auto` 模式中，Codex 优先使用 OSC 9 通知（一些终端会将这种终端转义序列解释为桌面通知），否则回退到 BEL（`\x07`）。
+
+确切键名请参阅 [配置参考](16-configuration-reference.md)。
+
+#### 历史持久化 { #history-persistence }
+
+默认情况下，Codex 会将本地会话转录记录保存在 `CODEX_HOME` 下（例如 `~/.codex/history.jsonl`）。要禁用本地历史持久化：
+
+```toml
+[history]
+persistence = "none"
+```
+
+要限制 history 文件大小，请设置 `history.max_bytes`。当文件超过上限时，Codex 会丢弃最旧条目，并在保留最新记录的同时压缩文件。
+
+```toml
+[history]
+max_bytes = 104857600 # 100 MiB
+```
+
+#### 可点击引用 { #clickable-citations }
+
+如果你使用的终端/编辑器集成支持，Codex 可以将文件引用渲染为可点击链接。配置 `file_opener` 来选择 Codex 使用的 URI scheme：
+
+```toml
+file_opener = "vscode" # or cursor, windsurf, vscode-insiders, none
+```
+
+例如，类似 `/home/user/project/main.py:42` 的引用可被重写为可点击的 `vscode://file/...:42` 链接。
+
+#### 项目指令发现 { #project-instructions-discovery }
+
+Codex 会读取 `AGENTS.md`（以及相关文件），并在会话第一轮包含有限数量的项目指导。两个旋钮控制此行为：
+
+- `project_doc_max_bytes`：从每个 `AGENTS.md` 文件读取多少内容
+- `project_doc_fallback_filenames`：当某个目录层级缺少 `AGENTS.md` 时要尝试的其它文件名
+
+详细 walkthrough 请参阅 [Custom instructions with AGENTS.md](50-custom-instructions-with-agents-md.md)。
+
+#### TUI 选项 { #tui-options }
+
+不带子命令运行 `codex` 会启动交互式终端 UI（TUI）。Codex 在 `[tui]` 下暴露一些 TUI 专属配置，包括：
+
+- `tui.notifications`：启用/禁用通知（或限制为特定类型）
+- `tui.notification_method`：为终端通知选择 `auto`、`osc9` 或 `bel`
+- `tui.notification_condition`：选择通知在终端 `unfocused` 时触发，还是 `always` 触发
+- `tui.animations`：启用/禁用 ASCII 动画和 shimmer 效果
+- `tui.alternate_screen`：控制 alternate screen 使用（设置为 `never` 可保留终端 scrollback）
+- `tui.show_tooltips`：在欢迎屏幕上显示或隐藏 onboarding tooltips
+
+`tui.notification_method` 默认为 `auto`。在 `auto` 模式中，当终端看起来支持 OSC 9 通知时，Codex 优先使用 OSC 9（一种某些终端会解释为桌面通知的终端转义序列），否则回退到 BEL（`\x07`）。
+
+完整键列表请参阅 [配置参考](16-configuration-reference.md)。
